@@ -1,5 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Grote videobestanden (te groot voor GitHub — host via CDN)
+*.mov
+*.MOV
+
 # dependencies
 /node_modules
 /.pnp
