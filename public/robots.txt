@@ -1,0 +1,22 @@
+# Robots.txt for Dynique
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://dynique.nl/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
