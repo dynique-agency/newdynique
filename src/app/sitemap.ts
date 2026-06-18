@@ -1,81 +1,55 @@
 import { MetadataRoute } from 'next'
 
-// Required for static export
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://dynique.nl'
-  const currentDate = new Date()
-
-  const staticPages = [
-    { path: '', priority: 1.0, freq: 'weekly' as const },
-    { path: '/diensten', priority: 0.95, freq: 'monthly' as const },
-    { path: '/over-ons', priority: 0.8, freq: 'monthly' as const },
-    { path: '/contact', priority: 0.8, freq: 'monthly' as const },
-    { path: '/portfolio', priority: 0.9, freq: 'weekly' as const },
-    { path: '/vervanging', priority: 0.9, freq: 'monthly' as const },
-    { path: '/eerste-website', priority: 0.9, freq: 'monthly' as const },
-    { path: '/gratis-checklist', priority: 0.85, freq: 'monthly' as const },
-    { path: '/blog', priority: 0.85, freq: 'weekly' as const },
-    { path: '/diensten/processen/limburg', priority: 0.9, freq: 'monthly' as const },
-  ]
-
-  const portfolioCases = [
-    'chefs-connect',
-    'auwt-aelse',
-    'creemers-exclusive',
-    'ijssalon-italia',
-    'stacy-kohnen',
-  ]
-
-  const diensten = ['web', 'processen', 'marketing', 'drone']
-
-  const sectoren = ['bouw', 'installatiebedrijf', 'zorg', 'logistiek']
-
-  const locaties = ['maastricht', 'heerlen', 'sittard', 'aken', 'eindhoven']
-
-  const blogPosts = [
-    'wat-kost-een-website',
-    'n8n-make-zapier',
-    'website-laten-maken-limburg',
-  ]
+  const base = 'https://dynique.nl'
+  const now = new Date()
 
   return [
-    ...staticPages.map((p) => ({
-      url: `${baseUrl}${p.path}`,
-      lastModified: currentDate,
-      changeFrequency: p.freq,
-      priority: p.priority,
-    })),
-    ...portfolioCases.map((slug) => ({
-      url: `${baseUrl}/portfolio/${slug}`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    })),
-    ...diensten.map((slug) => ({
-      url: `${baseUrl}/diensten/${slug}`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.9,
-    })),
-    ...sectoren.map((slug) => ({
-      url: `${baseUrl}/maatwerk-software/${slug}`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-    })),
-    ...locaties.map((slug) => ({
-      url: `${baseUrl}/locaties/${slug}`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.85,
-    })),
-    ...blogPosts.map((slug) => ({
-      url: `${baseUrl}/blog/${slug}`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.75,
-    })),
+    // ── Kern (hoogste prioriteit — dit worden de sitelinks) ──
+    { url: `${base}/`,                 lastModified: now, changeFrequency: 'weekly',  priority: 1.0  },
+    { url: `${base}/portfolio`,        lastModified: now, changeFrequency: 'weekly',  priority: 0.95 },
+    { url: `${base}/diensten`,         lastModified: now, changeFrequency: 'monthly', priority: 0.95 },
+    { url: `${base}/contact`,          lastModified: now, changeFrequency: 'monthly', priority: 0.90 },
+    { url: `${base}/over-ons`,         lastModified: now, changeFrequency: 'monthly', priority: 0.88 },
+    { url: `${base}/blog`,             lastModified: now, changeFrequency: 'weekly',  priority: 0.85 },
+
+    // ── Diensten ──
+    { url: `${base}/diensten/web`,        lastModified: now, changeFrequency: 'monthly', priority: 0.88 },
+    { url: `${base}/diensten/processen`,  lastModified: now, changeFrequency: 'monthly', priority: 0.88 },
+    { url: `${base}/diensten/marketing`,  lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${base}/diensten/drone`,      lastModified: now, changeFrequency: 'monthly', priority: 0.82 },
+
+    // ── Portfolio cases ──
+    { url: `${base}/portfolio/chefs-connect`,      lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/portfolio/auwt-aelse`,         lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/portfolio/ijssalon-italia`,    lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/portfolio/stacy-kohnen`,       lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/portfolio/creemers-exclusive`, lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+
+    // ── Blog ──
+    { url: `${base}/blog/wat-kost-een-website`,          lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/blog/website-laten-maken-limburg`,   lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/blog/n8n-make-zapier`,               lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+
+    // ── SEO clusters — maatwerk software ──
+    { url: `${base}/diensten/processen/limburg`,           lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${base}/maatwerk-software/bouw`,               lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/maatwerk-software/installatiebedrijf`, lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/maatwerk-software/zorg`,               lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/maatwerk-software/logistiek`,          lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+
+    // ── Locatie landingspagina's ──
+    { url: `${base}/locaties/maastricht`, lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/locaties/heerlen`,    lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/locaties/sittard`,    lastModified: now, changeFrequency: 'monthly', priority: 0.72 },
+    { url: `${base}/locaties/aken`,       lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+    { url: `${base}/locaties/eindhoven`,  lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+
+    // ── Overige landingspagina's ──
+    { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/vervanging`,      lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/gratis-checklist`,lastModified: now, changeFrequency: 'monthly', priority: 0.72 },
   ]
 }
