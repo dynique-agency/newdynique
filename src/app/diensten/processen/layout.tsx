@@ -6,11 +6,12 @@ export const metadata: Metadata = {
     "Software moet vóór jouw bedrijf werken, niet andersom. Wij bouwen maatwerk software op code voor het MKB, gebouwd rondom hoe jullie écht werken. Gratis procesanalyse op locatie.",
   alternates: { canonical: "https://dynique.nl/diensten/processen" },
   openGraph: {
-    title: "Maatwerk software & digitale bedrijfsprocessen",
+    title: "Maatwerk software & digitale bedrijfsprocessen | Dynique",
     description:
       "Maatwerk software op code voor het MKB. Gratis en vrijblijvende procesanalyse op locatie.",
     url: "https://dynique.nl/diensten/processen",
     type: "website",
+    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "Maatwerk software — Dynique" }],
   },
 };
 

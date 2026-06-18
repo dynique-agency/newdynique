@@ -6,11 +6,12 @@ export const metadata: Metadata = {
     "AI-gedreven content, social media automatisering, SEO en e-mailmarketing. Meer bereik en betere vindbaarheid zonder dat het je dagen kost. Voor ZZP en MKB in Limburg.",
   alternates: { canonical: "https://dynique.nl/diensten/marketing" },
   openGraph: {
-    title: "AI Marketing & SEO",
+    title: "AI Marketing & SEO | Dynique",
     description:
       "AI-content, social media automatisering, SEO en e-mailmarketing voor meer bereik en vindbaarheid.",
     url: "https://dynique.nl/diensten/marketing",
     type: "website",
+    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "AI Marketing & SEO — Dynique" }],
   },
 };
 

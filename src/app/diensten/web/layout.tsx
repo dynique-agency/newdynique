@@ -6,11 +6,12 @@ export const metadata: Metadata = {
     "Professionele websites, webshops en web apps op maat. Mobile-first, razendsnel en SEO-ready, gebouwd in Next.js. Van portfolio tot e-commerce — binnen 7 tot 14 dagen live.",
   alternates: { canonical: "https://dynique.nl/diensten/web" },
   openGraph: {
-    title: "Website & Web App laten maken",
+    title: "Website & Web App laten maken | Dynique",
     description:
       "Professionele websites, webshops en web apps op maat. Mobile-first, snel en SEO-ready.",
     url: "https://dynique.nl/diensten/web",
     type: "website",
+    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "Website & Web App laten maken — Dynique" }],
   },
 };
 
