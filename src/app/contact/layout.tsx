@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://dynique.nl/rsc/og-home.jpg",
+        url: "https://dynique.nl/og.png",
         width: 1200,
         height: 630,
         alt: "Dynique — neem contact op",

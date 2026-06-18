@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Maatwerk software op code voor het MKB. Gratis en vrijblijvende procesanalyse op locatie.",
     url: "https://dynique.nl/diensten/processen",
     type: "website",
-    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "Maatwerk software — Dynique" }],
+    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "Maatwerk software — Dynique" }],
   },
 };
 

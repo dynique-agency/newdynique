@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Professionele websites, webshops en web apps op maat. Mobile-first, snel en SEO-ready.",
     url: "https://dynique.nl/diensten/web",
     type: "website",
-    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "Website & Web App laten maken — Dynique" }],
+    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "Website & Web App laten maken — Dynique" }],
   },
 };
 

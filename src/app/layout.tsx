@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     description: 'Websites, maatwerk software, AI marketing en drone videografie. Dynamisch in aanpak, uniek in resultaat.',
     images: [
       {
-        url: 'https://dynique.nl/rsc/og-home.jpg',
+        url: 'https://dynique.nl/og.png',
         width: 1200,
         height: 630,
         alt: 'Dynique — Full Creative Development Agency',
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: 'Dynique — Full Creative Development Agency',
     description: 'Websites, maatwerk software, AI marketing en drone videografie. Dynamisch in aanpak, uniek in resultaat.',
     creator: '@dynique',
-    images: ['https://dynique.nl/rsc/og-home.jpg'],
+    images: ['https://dynique.nl/og.png'],
   },
   alternates: {
     canonical: 'https://dynique.nl',

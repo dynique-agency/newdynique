@@ -1,9 +1,7 @@
 import { ImageResponse } from "next/og";
 
-// Required for static export
 export const dynamic = "force-static";
-
-export const alt = "Dynique · Full Creative Development Agency";
+export const alt = "Dynique — Full Creative Development Agency";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -17,32 +15,44 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#050505",
-          padding: "80px",
+          backgroundColor: "#070707",
+          padding: "72px 80px",
           position: "relative",
+          overflow: "hidden",
         }}
       >
-        {/* Ambient glow */}
+        {/* Ambient glow top-right */}
         <div
           style={{
             position: "absolute",
-            top: -200,
-            right: -200,
-            width: 700,
-            height: 700,
+            top: -180,
+            right: -180,
+            width: 620,
+            height: 620,
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(212,165,116,0.22) 0%, rgba(212,165,116,0) 65%)",
+            background: "radial-gradient(circle, rgba(251,191,36,0.22) 0%, transparent 65%)",
+          }}
+        />
+        {/* Ambient glow bottom-left */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -120,
+            left: -120,
+            width: 480,
+            height: 480,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 65%)",
           }}
         />
 
-        {/* Top: wordmark */}
+        {/* Top: wordmark (matches header style) */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             color: "#ffffff",
-            fontSize: 38,
+            fontSize: 40,
             fontWeight: 300,
             letterSpacing: "0.35em",
           }}
@@ -51,14 +61,15 @@ export default function OpengraphImage() {
         </div>
 
         {/* Middle: headline */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
           <div
             style={{
-              color: "#d4a574",
-              fontSize: 22,
-              letterSpacing: "0.45em",
+              color: "#fbbf24",
+              fontSize: 18,
+              fontWeight: 300,
+              letterSpacing: "0.55em",
               textTransform: "uppercase",
-              marginBottom: 28,
+              marginBottom: "28px",
             }}
           >
             Full Creative Development Agency
@@ -66,9 +77,9 @@ export default function OpengraphImage() {
           <div
             style={{
               color: "#ffffff",
-              fontSize: 76,
+              fontSize: 74,
               fontWeight: 300,
-              lineHeight: 1.05,
+              lineHeight: 1.06,
               letterSpacing: "-0.01em",
             }}
           >
@@ -76,28 +87,40 @@ export default function OpengraphImage() {
           </div>
           <div
             style={{
-              color: "rgba(255,255,255,0.5)",
-              fontSize: 76,
+              color: "rgba(255,255,255,0.42)",
+              fontSize: 74,
               fontWeight: 300,
               fontStyle: "italic",
-              lineHeight: 1.05,
+              lineHeight: 1.06,
             }}
           >
             uniek in resultaat.
           </div>
         </div>
 
-        {/* Bottom: meta line */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            color: "rgba(255,255,255,0.45)",
-            fontSize: 24,
-            letterSpacing: "0.2em",
-          }}
-        >
-          Websites · Web Apps · AI Marketing · Drone — Limburg & Nationaal
+        {/* Bottom: meta + thin rule */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div
+            style={{
+              width: "100%",
+              height: "1px",
+              background: "rgba(255,255,255,0.08)",
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              color: "rgba(255,255,255,0.32)",
+              fontSize: 20,
+              fontWeight: 300,
+              letterSpacing: "0.22em",
+            }}
+          >
+            <span>Websites · Maatwerk Software · AI Marketing · Drone</span>
+            <span>dynique.nl</span>
+          </div>
         </div>
       </div>
     ),

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "AI-content, social media automatisering, SEO en e-mailmarketing voor meer bereik en vindbaarheid.",
     url: "https://dynique.nl/diensten/marketing",
     type: "website",
-    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "AI Marketing & SEO — Dynique" }],
+    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "AI Marketing & SEO — Dynique" }],
   },
 };
 

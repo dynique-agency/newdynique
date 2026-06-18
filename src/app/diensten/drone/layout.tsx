@@ -11,7 +11,7 @@ export const metadata: Metadata = {
       "Cinematische aerial footage, bedrijfsfilms en social reels, geschoten met de DJI Mini 5 Pro.",
     url: "https://dynique.nl/diensten/drone",
     type: "website",
-    images: [{ url: "https://dynique.nl/rsc/og-home.jpg", width: 1200, height: 630, alt: "Drone Videografie — Dynique" }],
+    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "Drone Videografie — Dynique" }],
   },
 };
 
