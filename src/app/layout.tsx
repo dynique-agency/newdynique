@@ -8,8 +8,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dynique.nl"),
-  title: "Dynique — Full Creative Development Agency | Limburg & Nederland",
-  description: "Dynique bouwt websites, maatwerk software, AI marketing en drone videografie voor ambitieuze ondernemers. Dynamisch in aanpak, uniek in resultaat. Gevestigd in Limburg — actief nationaal.",
+  title: "Dynique — Full Creative Development Agency",
+  description: "Websites, maatwerk software, AI marketing en drone videografie voor ambitieuze ondernemers. Dynamisch in aanpak, uniek in resultaat. Limburg & nationaal.",
   keywords: [
     "creative development agency limburg",
     "website laten maken limburg",
