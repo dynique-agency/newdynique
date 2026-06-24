@@ -107,7 +107,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@graph": [
                 {
-                  "@type": "WebDesignAgency",
+                  "@type": ["LocalBusiness", "WebDesignAgency"],
                   "@id": "https://dynique.nl/#organization",
                   "name": "Dynique",
                   "url": "https://dynique.nl",
