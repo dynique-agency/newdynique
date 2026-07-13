@@ -12,6 +12,7 @@ const DETAILS = [
   { label: "E-MAIL", value: "info@dynique.nl", href: "mailto:info@dynique.nl" },
   { label: "REACTIETIJD", value: "Binnen 2 uur (ma–za, 9–20u)", href: null },
   { label: "WERKGEBIED", value: "Limburg · Nederland · Internationaal", href: null },
+  { label: "KVK", value: "90531264", href: null },
 ];
 
 const NEXT_STEPS = [
@@ -38,6 +39,7 @@ const JSON_LD = {
       email: "info@dynique.nl",
       telephone: "+31624572572",
       priceRange: "€€",
+      taxID: "90531264",
       address: { "@type": "PostalAddress", addressRegion: "Limburg", addressCountry: "NL" },
       areaServed: ["Limburg", "Nederland"],
     },
