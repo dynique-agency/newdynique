@@ -119,10 +119,14 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-center">
             <p className="text-black/40 text-xs tracking-[0.15em] font-light">
               © 2026 DYNIQUE. ALL RIGHTS RESERVED.
             </p>
+            <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
+            <Link href="/privacyverklaring" className="text-black/40 hover:text-black text-xs tracking-[0.15em] font-light transition-colors duration-300">
+              PRIVACYVERKLARING
+            </Link>
           </div>
         </div>
       </div>

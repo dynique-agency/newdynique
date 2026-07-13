@@ -51,5 +51,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
     { url: `${base}/vervanging`,      lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${base}/gratis-checklist`,lastModified: now, changeFrequency: 'monthly', priority: 0.72 },
+
+    // ── Juridisch ──
+    { url: `${base}/privacyverklaring`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ]
 }

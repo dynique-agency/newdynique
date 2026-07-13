@@ -147,7 +147,8 @@ export default function LeadMagnetPage() {
                   </button>
 
                   <p className="text-white/30 text-[10px] tracking-[0.2em] font-light text-center leading-relaxed">
-                    Door te downloaden ga je akkoord met onze privacyverklaring. Je e-mail wordt nooit verkocht.
+                    Door te downloaden ga je akkoord met onze{" "}
+                    <Link href="/privacyverklaring" className="underline hover:text-white/50 transition-colors">privacyverklaring</Link>. Je e-mail wordt nooit verkocht.
                   </p>
                 </form>
               </div>
