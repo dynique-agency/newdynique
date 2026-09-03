@@ -1,7 +1,6 @@
 # Robots.txt for Dynique
 User-agent: *
 Allow: /
-Disallow: /api/
 
 # Sitemaps
 Sitemap: https://dynique.nl/sitemap.xml

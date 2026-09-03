@@ -5,7 +5,6 @@
 Voer deze commando's uit (vervang USERNAME door je GitHub username):
 
 ```bash
-cd /Users/school/newdynique
 git remote add origin https://github.com/USERNAME/dynique.git
 git branch -M main
 git push -u origin main
@@ -38,7 +37,7 @@ Vul het volgende in:
 
 **Build command:** `npm run build`
 
-**Build output directory:** `.next`
+**Build output directory:** `out`
 
 **Environment variables (belangrijk!):**
 - Klik op **Add variable**
@@ -71,7 +70,7 @@ Als je later API keys nodig hebt:
 ### Google Search Console
 Na deploy:
 1. Claim je domein in Search Console
-2. Vervang `verification_token_here` in `src/app/layout.tsx` met je token
+2. Voeg je Search Console token toe als de `NEXT_PUBLIC_GSC_VERIFICATION` environment variable in de Cloudflare Pages project settings (of in `.env.local` voor lokale builds)
 3. Commit en push opnieuw
 
 ## Troubleshooting
