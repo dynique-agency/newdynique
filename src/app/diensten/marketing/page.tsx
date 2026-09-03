@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function MarketingDienst() {
@@ -69,12 +70,12 @@ export default function MarketingDienst() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
               style={{ animation: "fadeInUp 0.8s ease-out 0.8s both" }}
             >
-              <a
+              <Link
                 href="/#contact"
-                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 START CAMPAGNE
-              </a>
+              </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"
@@ -98,7 +99,7 @@ export default function MarketingDienst() {
               ].map((item, i) => (
                 <div key={i} className="bg-white p-10 text-center">
                   <div className="text-4xl font-extralight text-black tracking-wider mb-3">{item.label}</div>
-                  <p className="text-black/40 text-xs font-light leading-relaxed tracking-wide">{item.desc}</p>
+                  <p className="text-black/60 text-xs font-light leading-relaxed tracking-wide">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -119,7 +120,7 @@ export default function MarketingDienst() {
                   <span className="text-black/15 text-xs tracking-[0.3em] font-light">0{i + 1}</span>
                   <h3 className="text-black text-sm tracking-[0.2em] font-light mt-4 mb-3">{s.title.toUpperCase()}</h3>
                   <div className="w-8 h-px bg-black/20 mb-4"></div>
-                  <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
+                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -158,7 +159,7 @@ export default function MarketingDienst() {
                   <div>
                     <h3 className="text-black text-sm tracking-[0.2em] font-light mb-3">{p.title.toUpperCase()}</h3>
                     <div className="w-8 h-px bg-black/20 mb-4"></div>
-                    <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
+                    <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -176,12 +177,12 @@ export default function MarketingDienst() {
               Geen tijd voor marketing? Wij regelen het. Consistent, professioneel, resultaatgericht.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
-              <a
+              <Link
                 href="/#contact"
-                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 GRATIS STRATEGIE GESPREK
-              </a>
+              </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"

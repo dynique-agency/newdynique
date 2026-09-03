@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Premium webdesign in Maastricht. Snel, persoonlijk en met een vaste prijs.",
     url: "https://dynique.nl/locaties/maastricht",
     type: "website",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Maastricht" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Maastricht" }],
   },
 };
 
@@ -18,7 +22,7 @@ const data: CityData = {
   cityShort: "Maastricht",
   region: "Zuid-Limburg",
   tagline: "Premium webdesign in de hoofdstad van Limburg.",
-  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen websites die die elegantie vertalen naar het digitale. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
+  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen websites en maatwerk software die die elegantie vertalen naar het digitale. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
   vibe: "Maastricht heeft een internationale uitstraling die je website verdient. We snappen de Bourgondische cultuur, de drukke toeristische seizoenen, en de subtiele balans tussen traditie en vernieuwing. Of je nu een restaurant runt aan de Maas, een boutique in Wyck, een advocatenkantoor aan de Maaskade of een internationaal bedrijf in Randwyck: wij vertalen jouw merk naar een website die past bij de stad én converteert.",
   accent: "#d4a574",
   postal: "6211 — 6229",
@@ -34,7 +38,7 @@ const data: CityData = {
     { q: "Werken jullie ook fysiek vanuit Maastricht?", a: "We komen graag bij jou langs voor de intake. Maastricht is op slechts 20 minuten rijden vanuit onze basis in Zuid-Limburg. Of we ontmoeten elkaar op een terras aan het Vrijthof — wat jij prettig vindt." },
     { q: "Spreken jullie ook Engels, Duits of Frans?", a: "Ja. Maastricht is een internationale stad en wij bouwen regelmatig meertalige websites. We werken samen met native vertalers voor professioneel resultaat in elke taal." },
     { q: "Kennen jullie de Maastrichtse markt?", a: "We werken al jaren voor ondernemers in Zuid-Limburg en kennen de bezoekersstromen, het seizoenseffect en de internationale doelgroep. Dat zie je terug in keuzes voor structuur, content en functionaliteit." },
-    { q: "Hoe snel kan mijn website in Maastricht live?", a: "Voor een standaard website rekenen we 7–14 dagen. Voor complexere projecten (e-commerce, meertalig, koppelingen) plannen we 3–6 weken. Altijd met een vaste einddatum." },
+    { q: "Hoe snel kan mijn website in Maastricht live?", a: "Dat hangt af van de scope — een eenvoudige website vraagt minder tijd dan een meertalig platform met koppelingen. Bij de intake krijg je een realistische planning met een vaste einddatum, geen slag in de lucht." },
   ],
 };
 

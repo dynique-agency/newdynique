@@ -105,10 +105,7 @@ export default function BlogPost({ meta, children }: { meta: BlogMeta; children:
         <section className="relative py-24 lg:py-32 border-t border-white/5">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="flex items-center justify-center gap-3 mb-8 anim">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 10px #34d399" }}></span>
-                <p className="text-[#34d399] text-[10px] tracking-[0.4em] font-light uppercase">Klaar om te starten?</p>
-              </div>
+              <p className="text-xs tracking-[0.15em] italic font-light mb-8 anim" style={{ color: meta.accent }}>Klaar om te starten?</p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.15] anim delay-1">
                 Geïnspireerd?<br />
                 <span className="italic text-white/50">Laten we praten.</span>

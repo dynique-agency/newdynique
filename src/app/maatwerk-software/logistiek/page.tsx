@@ -2,7 +2,7 @@
 
 import SectorTemplate, { SectorData } from "@/components/SectorTemplate";
 
-const A = "#34d399";
+const A = "#d4a574";
 
 const data: SectorData = {
   slug: "logistiek",
@@ -27,7 +27,7 @@ const data: SectorData = {
   painParagraphs: [
     "Ritten en orders plan je handmatig in, telefonisch en in Excel. Gegevens worden overgetikt tussen systemen die niet koppelen, en klanten bellen omdat live status ontbreekt.",
     "Daardoor verlies je tijd aan overtikken en zoekwerk, en mis je het overzicht over voorraad en planning. Je werkt om je tools heen in plaats van ermee.",
-    "En dat kost niet alleen tijd, maar ook overzicht en marge.",
+    "En dat kost niet alleen tijd, maar ook betrouwbaarheid naar je klanten toe.",
   ],
   pains: [
     { k: "RITPLANNING", icon: "OVERZICHT", v: "Ritten en orders handmatig inplannen, telefonisch en in Excel." },

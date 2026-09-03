@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Jouw eerste website laten maken | Dynique",
   description:
-    "Voor het eerst een website nodig? We begeleiden je van eerste gesprek tot live site: branding, design, bouw en ondersteuning. Helder traject, vaste prijs, geen verrassingen.",
+    "Nog geen website voor je bedrijf? We bouwen een online fundament dat past bij hoe je werkt: van gesprek tot livegang, technisch onderbouwd en projectmatig opgeleverd. Vaste prijs, geen verrassingen.",
   alternates: { canonical: "https://dynique.nl/eerste-website" },
   openGraph: {
     title: "Jouw eerste website laten maken",
     description:
-      "Van eerste gesprek tot live site: branding, design, bouw en ondersteuning. Vaste prijs.",
+      "Een online fundament dat past bij hoe je bedrijf werkt: van gesprek tot livegang, technisch onderbouwd en projectmatig opgeleverd.",
     url: "https://dynique.nl/eerste-website",
     type: "website",
   },

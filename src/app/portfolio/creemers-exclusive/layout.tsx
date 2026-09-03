@@ -11,6 +11,24 @@ export const metadata: Metadata = {
       "Premium single-page website met AI-visuals en interactieve boekingstool.",
     url: "https://dynique.nl/portfolio/creemers-exclusive",
     type: "article",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Creemers Exclusive premium single-page website case study",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Creemers Exclusive premium single-page website case study",
+      },
+    ],
   },
 };
 

@@ -18,6 +18,24 @@ export const metadata: Metadata = {
     description: "Planning, werkbonnen en onderhoud in één systeem. Maatwerk software op code voor installatiebedrijven.",
     url: "https://dynique.nl/maatwerk-software/installatiebedrijf",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor installatiebedrijven",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor installatiebedrijven",
+      },
+    ],
   },
 };
 

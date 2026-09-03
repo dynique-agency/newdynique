@@ -1,11 +1,67 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Advisor from "@/components/Advisor";
+import {
+  BeforeScreen,
+  AfterScreen,
+  FlowDiagram,
+  ProcessStyles,
+  useBeforeAfterScrub,
+} from "@/components/processen/Visuals";
 
-const heroServices = ["WEBSITES", "WEB APPS", "AI MARKETING", "DRONE & VIDEO"];
+const heroServices = ["MAATWERK SOFTWARE", "WEB APPLICATIES", "DIGITALE SYSTEMEN", "PROCESSEN OP MAAT"];
+
+function PortfolioVideo({ src, className }: { src: string; className: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (inView) el.play().catch(() => {});
+    else el.pause();
+  }, [inView]);
+
+  return <video ref={ref} src={src} className={className} muted loop playsInline preload="metadata" />;
+}
+
+/** Small recurring corner-bracket accent — a quiet signature mark used at section edges. */
+function CornerMark({ position, delay }: { position: "top-right" | "bottom-left" | "bottom-right"; delay?: number }) {
+  const edge = {
+    "top-right": "top-6 right-6 lg:top-10 lg:right-10",
+    "bottom-left": "bottom-0 left-0",
+    "bottom-right": "bottom-0 right-0",
+  }[position];
+  const line = {
+    "top-right": "top-0 right-0",
+    "bottom-left": "bottom-0 left-0",
+    "bottom-right": "bottom-0 right-0",
+  }[position];
+  return (
+    <div
+      aria-hidden
+      className={`absolute ${edge} w-8 h-8 lg:w-10 lg:h-10 pointer-events-none z-10 ${delay !== undefined ? "corner-mark" : ""}`}
+      style={delay !== undefined ? ({ "--corner-delay": `${delay}s` } as React.CSSProperties) : undefined}
+    >
+      <div className={`absolute ${line} w-full h-px bg-[#d4a574]/40`} />
+      <div className={`absolute ${line} w-px h-full bg-[#d4a574]/40`} />
+    </div>
+  );
+}
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -14,6 +70,8 @@ export default function Home() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [svcIdx, setSvcIdx] = useState(0);
   const [reviewIdx, setReviewIdx] = useState(0);
+  const scrubRef = useRef<HTMLDivElement>(null);
+  useBeforeAfterScrub(scrubRef);
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -25,8 +83,16 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => setFadeOut(true), 3000);
-    const loadingTimer = setTimeout(() => setLoading(false), 4000);
+    const alreadySeen = sessionStorage.getItem("dq-intro-seen");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (alreadySeen || prefersReducedMotion) {
+      setFadeOut(true);
+      setLoading(false);
+      return;
+    }
+    sessionStorage.setItem("dq-intro-seen", "1");
+    const fadeTimer = setTimeout(() => setFadeOut(true), 1600);
+    const loadingTimer = setTimeout(() => setLoading(false), 2200);
     return () => { clearTimeout(fadeTimer); clearTimeout(loadingTimer); };
   }, []);
 
@@ -95,42 +161,26 @@ export default function Home() {
     window.open(`https://wa.me/31624572572?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  const diensten = [
+  const pijlers = [
     {
-      n: "01", title: "WEB & DESIGN", href: "/diensten/web",
-      tagline: "Jouw merk online, precies zoals het hoort.",
-      desc: "Een sterke digitale aanwezigheid die bezoekers overtuigt en resultaat oplevert. Wij ontwerpen en bouwen digitale producten die jouw merk vertegenwoordigen en groeien met jouw ambities.",
-      keys: ["Website", "Webshop", "Web applicatie", "Branding"],
-      color: "rgba(251,191,36,1)", glow: "rgba(251,191,36,0.09)",
+      n: "01", title: "MAATWERK SOFTWARE", href: "/diensten/processen",
+      desc: "Systemen op maat, gebouwd rondom hoe jouw bedrijf al werkt — geen pakket dat toevallig past.",
     },
     {
-      n: "02", title: "DIGITALISERING", href: "/diensten/processen",
-      tagline: "Slimmer werken. Meer ruimte voor groei.",
-      desc: "Tijd is je meest waardevolle bezit. Wij brengen jouw werkwijze in kaart en introduceren digitale oplossingen die je bedrijf efficiënter, professioneler en schaalbaarder maken.",
-      keys: ["Procesanalyse", "Workflow optimalisatie", "Digitale tools", "Koppelingen"],
-      color: "rgba(99,102,241,1)", glow: "rgba(99,102,241,0.09)",
+      n: "02", title: "WEB & PLATFORMEN", href: "/diensten/web",
+      desc: "Het fundament: snel, veilig en schaalbaar gebouwd — de basis waar elk systeem op draait.",
     },
     {
-      n: "03", title: "DIGITALE MARKETING", href: "/diensten/marketing",
-      tagline: "Zichtbaar. Relevant. Onvermijdelijk.",
-      desc: "Online zichtbaarheid is geen toeval. Wij bouwen een strategie die jouw doelgroep bereikt, jouw merk versterkt en groei stimuleert. Consistent op elk kanaal dat ertoe doet.",
-      keys: ["Social media", "Content strategie", "SEO", "Online adverteren"],
-      color: "rgba(244,63,94,1)", glow: "rgba(244,63,94,0.09)",
-    },
-    {
-      n: "04", title: "VIDEO & AERIAL", href: "/diensten/drone",
-      tagline: "Beelden die blijven hangen.",
-      desc: "Professionele video en unieke luchtopnames geven jouw merk een visuele identiteit die opvalt. Van bedrijfspresentatie tot social content: beeld communiceert wat woorden niet kunnen.",
-      keys: ["Bedrijfsfilm", "Aerial footage", "Social content", "Promotievideo"],
-      color: "rgba(20,184,166,1)", glow: "rgba(20,184,166,0.09)",
+      n: "03", title: "PROCESAUTOMATISERING", href: "/diensten/processen",
+      desc: "Koppelingen en workflows die handwerk overnemen en tijd teruggeven aan je team.",
     },
   ];
 
   const marqueeItems = [
-    "WEBSITES", "WEB APPS", "AI MARKETING", "DRONE & VIDEO",
-    "BEDRIJFSPROCESSEN", "LIMBURG", "NEDERLAND", "INTERNATIONAAL",
-    "WEBSITES", "WEB APPS", "AI MARKETING", "DRONE & VIDEO",
-    "BEDRIJFSPROCESSEN", "LIMBURG", "NEDERLAND", "INTERNATIONAAL",
+    "MAATWERK SOFTWARE", "WEB APPLICATIES", "DIGITALISERING", "BEDRIJFSPROCESSEN",
+    "NEDERLAND", "BELGIË", "INTERNATIONAAL",
+    "MAATWERK SOFTWARE", "WEB APPLICATIES", "DIGITALISERING", "BEDRIJFSPROCESSEN",
+    "NEDERLAND", "BELGIË", "INTERNATIONAAL",
   ];
 
   const projects = [
@@ -161,7 +211,7 @@ export default function Home() {
       title: "IJSSALON ITALIA",
       category: "FAMILIEBEDRIJF",
       summary: "Ambachtelijk ijs sinds 1969. Nu ook digitaal.",
-      image: "/rsc/ijssalon/hero.png",
+      image: "/rsc/ijssalon/hero.webp",
       video: "/rsc/ijssalon/preview.mp4",
       url: "ijssalonitaliavaals.nl",
       accent: "#fb923c",
@@ -172,7 +222,7 @@ export default function Home() {
       title: "STACY KOHNEN",
       category: "ARTIST PORTFOLIO",
       summary: "Viertalig. Eén stem. Eindeloze podia.",
-      image: "/rsc/stacykohnen/hero.png",
+      image: "/rsc/stacykohnen/hero.webp",
       video: "/rsc/stacykohnen/preview.mp4",
       url: "stacykohnen.de",
       accent: "#a78bfa",
@@ -181,14 +231,14 @@ export default function Home() {
   ];
 
   const faqs = [
-    { q: "Hoe lang duurt het voordat mijn project live staat?", a: "Gemiddeld 7–14 dagen van eerste gesprek tot live. Simpele sites eerder, complexe web apps iets langer. We werken razendsnel zonder in te boeten op kwaliteit." },
-    { q: "Krijg ik ook branding en design?", a: "Ja. We verzorgen het volledige pakket: logo, kleurenpalet, typografie en AI-visuals. Van nul tot complete merkidentiteit." },
-    { q: "Wat als ik aanpassingen wil na oplevering?", a: "Stuur een berichtje via WhatsApp: we passen het direct aan. Onderhoud, updates en uitbreidingen zijn altijd beschikbaar." },
-    { q: "Zijn de websites geschikt voor mobiel?", a: "100%. Mobile-first is onze standaard. We testen op alle devices en browsers voor oplevering." },
-    { q: "Doen jullie ook SEO?", a: "Ja. Elk project wordt SEO-ready opgeleverd: snelle laadtijd, schema markup, sitemap en correcte structuur. Actieve SEO-campagnes zijn ook beschikbaar." },
-    { q: "Hoe zit het met hosting en onderhoud?", a: "Wij regelen alles: hosting, updates, security en back-ups. Jij hoeft er niet aan te denken." },
-    { q: "Wat kunnen jullie automatiseren in mijn bedrijf?", a: "Offertes, facturen, e-mail flows, CRM-koppelingen, rapportages: alles wat je nu handmatig doet. We analyseren gratis welke processen tijd kosten." },
-    { q: "Wat als ik niet tevreden ben?", a: "We werken met 3 revisierondes. 98% van onze klanten is na de eerste al tevreden. Mocht het niet klikken: geld-terug-garantie binnen de eerste week." },
+    { q: "Hoe lang duurt een maatwerk software traject?", a: "Dat hangt echt af van de scope — een gekoppeld formulier is iets anders dan een compleet bedrijfssysteem. Bij de intake krijg je een concreet plan met fases en een reële planning, geen slag in de lucht." },
+    { q: "Werken jullie ook met bedrijven buiten Limburg?", a: "Ja. We werken met bedrijven door heel Nederland en België, grotendeels op afstand met heldere check-ins, en op locatie waar dat waarde toevoegt." },
+    { q: "Hoe ga je te werk bij een bestaand systeem of team?", a: "Ik sluit aan op wat er al is — bestaande tools, data en workflows — in plaats van alles te vervangen. Waar het beter kan, zeg ik dat, maar de keuze blijft aan jou." },
+    { q: "Hoe zit het met beveiliging en dataeigendom?", a: "Je data en code blijven van jou. Ik werk projectmatig en veilig volgens vaste standaarden, en leg vooraf uit hoe gegevens worden opgeslagen en verwerkt." },
+    { q: "Wat als de scope tijdens het project verandert?", a: "Dat gebeurt vaker dan je denkt, en is geen probleem. We bespreken de impact op planning en prijs zodra het zich voordoet — geen verrassingen achteraf." },
+    { q: "Bouwen jullie ook de website of het platform eromheen?", a: "Ja — webontwikkeling is het fundament van elk systeem dat ik bouw. Los, of geïntegreerd in een groter maatwerktraject." },
+    { q: "Wat gebeurt er na oplevering?", a: "Ik blijf bereikbaar voor updates, uitbreidingen en beheer. Geen los bureau na livegang — hetzelfde aanspreekpunt van dag één." },
+    { q: "Wat als ik niet tevreden ben?", a: "We werken met meerdere revisierondes en stemmen continu af tijdens het traject. Mocht het echt niet klikken: dat bespreken we eerlijk, in plaats van een project door te duwen." },
   ];
 
   return (
@@ -199,16 +249,11 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
-              { "@type": "Question", name: "Hoe lang duurt het voordat mijn website live staat?", acceptedAnswer: { "@type": "Answer", text: "Gemiddeld 7-14 dagen van eerste gesprek tot live website. Simpele portfolio sites kunnen binnen 3-5 dagen, complexere projecten met webshops of custom functionaliteiten nemen 10-14 dagen. We werken razendsnel zonder in te boeten op kwaliteit." } },
-              { "@type": "Question", name: "Krijg ik ook branding en design?", acceptedAnswer: { "@type": "Answer", text: "Ja, absoluut. We verzorgen het volledige pakket: logo design, kleurenschema, typography, AI-gegenereerde visuals en video's. Van nul tot complete merkidentiteit — inclusief stijlgids voor consistent gebruik." } },
-              { "@type": "Question", name: "Wat als ik aanpassingen wil na oplevering?", acceptedAnswer: { "@type": "Answer", text: "Wij passen alles razendsnel voor jou aan. Dit valt binnen onze onderhoudsservice. Stuur gewoon een berichtje via WhatsApp en we regelen het direct. Van teksten tot foto's, nieuwe features tot updates - wij doen het voor je." } },
-              { "@type": "Question", name: "Zijn de websites geschikt voor mobiel?", acceptedAnswer: { "@type": "Answer", text: "100%. Alle websites zijn volledig responsive en geoptimaliseerd voor mobiel, tablet en desktop. We testen op alle devices en browsers. Mobile-first design is onze standaard - de meeste bezoekers komen immers vanaf hun telefoon." } },
-              { "@type": "Question", name: "Doen jullie ook SEO en Google ranking?", acceptedAnswer: { "@type": "Answer", text: "Ja, alle websites worden SEO-ready opgeleverd: snelle laadtijd, schema markup, sitemap, goede structuur. Voor actieve SEO-campagnes (linkbuilding, content marketing, local SEO) bieden we losse pakketten aan." } },
-              { "@type": "Question", name: "Hoe zit het met hosting en onderhoud?", acceptedAnswer: { "@type": "Answer", text: "Wij regelen alles voor je. Hosting, updates, security patches en dagelijkse back-ups zitten allemaal binnen de maandelijkse onderhoudsservice. Jij hoeft nergens aan te denken - wij houden alles draaiend." } },
-              { "@type": "Question", name: "Werken jullie ook met bestaande websites?", acceptedAnswer: { "@type": "Answer", text: "Ja, we doen ook redesigns en migraties. We kunnen je bestaande site moderniseren, sneller maken, of volledig opnieuw bouwen. SEO en content blijven behouden tijdens de migratie." } },
-              { "@type": "Question", name: "Wat gebeurt er als ik niet tevreden ben?", acceptedAnswer: { "@type": "Answer", text: "We werken met maximaal 3 revisierondes om je website perfect te krijgen. Tijdens het proces stemmen we regelmatig af. 98% van onze klanten is na de eerste revisie al tevreden. Mocht het echt niet klikken: geld terug garantie binnen de eerste week." } },
-            ],
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.q,
+              acceptedAnswer: { "@type": "Answer", text: faq.a },
+            })),
           }),
         }}
       />
@@ -219,11 +264,11 @@ export default function Home() {
           {/* Orbs — same vibe as hero */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="load-orb-1 absolute rounded-full"
-              style={{ background: "radial-gradient(circle, rgba(251,191,36,0.75) 0%, rgba(245,158,11,0.3) 40%, transparent 65%)", filter: "blur(60px)", width: "500px", height: "500px", top: "-10%", right: "0%" }} />
+              style={{ background: "radial-gradient(circle, rgba(230,180,110,0.8) 0%, rgba(212,165,116,0.32) 40%, transparent 65%)", filter: "blur(60px)", width: "500px", height: "500px", top: "-10%", right: "0%" }} />
             <div className="load-orb-2 absolute rounded-full"
-              style={{ background: "radial-gradient(circle, rgba(99,102,241,0.7) 0%, rgba(79,70,229,0.28) 40%, transparent 65%)", filter: "blur(70px)", width: "550px", height: "550px", bottom: "-15%", left: "-5%" }} />
+              style={{ background: "radial-gradient(circle, rgba(139,92,246,0.75) 0%, rgba(109,40,217,0.28) 40%, transparent 65%)", filter: "blur(70px)", width: "550px", height: "550px", bottom: "-15%", left: "-5%" }} />
             <div className="load-orb-3 absolute rounded-full"
-              style={{ background: "radial-gradient(circle, rgba(244,63,94,0.4) 0%, rgba(236,72,153,0.12) 45%, transparent 65%)", filter: "blur(45px)", width: "300px", height: "300px", top: "35%", left: "32%" }} />
+              style={{ background: "radial-gradient(circle, rgba(244,114,182,0.45) 0%, rgba(219,39,119,0.16) 45%, transparent 65%)", filter: "blur(45px)", width: "300px", height: "300px", top: "35%", left: "32%" }} />
             <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(7,7,7,0.75) 100%)" }} />
           </div>
 
@@ -231,7 +276,7 @@ export default function Home() {
           <div className="relative z-10 flex flex-col items-center">
             {/* Label */}
             <p className="load-label text-white/30 text-[8px] tracking-[0.6em] font-light mb-8">
-              FULL CREATIVE DEVELOPMENT AGENCY
+              MAATWERK SOFTWARE &amp; DEVELOPMENT
             </p>
 
             {/* Title with clip-path reveal */}
@@ -284,22 +329,22 @@ export default function Home() {
 
         {/* ─── 1. HERO ─────────────────────────────────────────── */}
         <section className="relative h-screen w-full overflow-hidden bg-[#070707]">
-          {/* Gradient orb background */}
+          {/* Gradient orb background — rich, layered aurora */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Amber — top right */}
-            <div id="orb-wrap-1" className="absolute will-change-transform" style={{ top: "0%", right: "0%", width: "650px", height: "650px" }}>
+            {/* Gold — top right, warm & premium, the dominant tone */}
+            <div id="orb-wrap-1" className="absolute will-change-transform" style={{ top: "-5%", right: "-8%", width: "820px", height: "820px" }}>
               <div className="orb-breathe-1 w-full h-full rounded-full"
-                style={{ background: "radial-gradient(circle, rgba(251,191,36,0.9) 0%, rgba(245,158,11,0.4) 38%, transparent 62%)", filter: "blur(50px)" }} />
+                style={{ background: "radial-gradient(circle, rgba(234,190,130,0.95) 0%, rgba(212,165,116,0.42) 40%, transparent 66%)", filter: "blur(50px)" }} />
             </div>
-            {/* Indigo — bottom left */}
-            <div id="orb-wrap-2" className="absolute will-change-transform" style={{ bottom: "-5%", left: "-5%", width: "700px", height: "700px" }}>
+            {/* Violet — bottom left, deep & rich, secondary */}
+            <div id="orb-wrap-2" className="absolute will-change-transform" style={{ bottom: "-15%", left: "-10%", width: "680px", height: "680px" }}>
               <div className="orb-breathe-2 w-full h-full rounded-full"
-                style={{ background: "radial-gradient(circle, rgba(99,102,241,0.85) 0%, rgba(79,70,229,0.35) 38%, transparent 62%)", filter: "blur(60px)" }} />
+                style={{ background: "radial-gradient(circle, rgba(139,92,246,0.62) 0%, rgba(109,40,217,0.24) 38%, transparent 65%)", filter: "blur(65px)" }} />
             </div>
-            {/* Rose — center */}
-            <div id="orb-wrap-3" className="absolute will-change-transform" style={{ top: "25%", left: "28%", width: "400px", height: "400px" }}>
+            {/* Rose — small accent, binds gold and violet */}
+            <div id="orb-wrap-3" className="absolute will-change-transform" style={{ top: "38%", left: "38%", width: "380px", height: "380px" }}>
               <div className="orb-breathe-3 w-full h-full rounded-full"
-                style={{ background: "radial-gradient(circle, rgba(244,63,94,0.55) 0%, rgba(236,72,153,0.2) 42%, transparent 62%)", filter: "blur(40px)" }} />
+                style={{ background: "radial-gradient(circle, rgba(244,114,182,0.4) 0%, rgba(219,39,119,0.14) 42%, transparent 65%)", filter: "blur(45px)" }} />
             </div>
             {/* Grain */}
             <div className="absolute inset-0 opacity-[0.05]"
@@ -311,17 +356,17 @@ export default function Home() {
           {/* Content */}
           <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
             <p className="text-white/35 text-[9px] tracking-[0.55em] font-light mb-12 uppercase" style={{ animation: "fadeInUp 1s ease-out 0.3s both" }}>
-              Full Creative Development Agency · Limburg & Internationaal
+              Maatwerk Software &amp; Development · Nederland &amp; België
             </p>
 
             <div style={{ animation: "fadeInUp 1s ease-out 0.6s both" }}>
-              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em] mb-3">WIJ CREËREN</p>
+              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em] mb-3">WIJ BOUWEN</p>
               <div className="overflow-hidden mb-3">
-                <h1 key={svcIdx} className="hero-slot-word text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-light text-white tracking-[0.06em] leading-none">
+                <h1 key={svcIdx} className="hero-slot-word text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] font-light text-white tracking-[0.04em] leading-none">
                   {heroServices[svcIdx]}
                 </h1>
               </div>
-              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em]">DIE INDRUK MAKEN.</p>
+              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em]">EN DENKEN MEE OVER WAT BETER KAN.</p>
             </div>
 
             {/* Service pills */}
@@ -347,10 +392,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" style={{ animation: "fadeInUp 1s ease-out 1.4s both" }}>
-            <span className="text-white/25 text-[9px] tracking-[0.4em] font-light">SCROLL</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent animate-bounce"></div>
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10" style={{ animation: "fadeInUp 1s ease-out 1.4s both" }}>
+            <div className="w-[22px] h-[36px] rounded-full border border-white/25 flex justify-center pt-2">
+              <div className="scroll-dot w-[3px] h-[3px] rounded-full bg-[#d4a574]" />
+            </div>
           </div>
+
+          {/* Corner-bracket signature — closes the hero frame before the marquee */}
+          <CornerMark position="bottom-left" delay={1.6} />
+          <CornerMark position="bottom-right" delay={1.6} />
         </section>
 
         {/* ─── 2. MARQUEE ──────────────────────────────────────── */}
@@ -374,40 +424,36 @@ export default function Home() {
               style={{ fontSize: "clamp(100px, 19vw, 240px)", opacity: 0.055 }}>DYNIQUE</span>
           </div>
 
-          {/* Amber glow behind right/photo side */}
+          {/* Emerald glow behind right/photo side */}
           <div className="absolute right-0 top-0 bottom-0 w-[50%] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 75% 35%, rgba(251,191,36,0.13) 0%, transparent 60%)" }} />
-          <div className="absolute right-0 bottom-0 w-[30%] h-[40%] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 90% 90%, rgba(99,102,241,0.1) 0%, transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 75% 35%, rgba(212,165,116,0.16) 0%, transparent 60%)" }} />
 
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-14 lg:gap-20 items-center">
 
               {/* LEFT — Editorial text */}
               <div className="relative z-10 order-2 lg:order-1">
-                <p className="text-white/30 text-[8px] tracking-[0.6em] font-light mb-10 anim">DE MENS ACHTER DYNIQUE</p>
-
-                <h2 className="text-3xl lg:text-4xl xl:text-[2.8rem] font-extralight text-white tracking-[0.02em] leading-[1.2] mb-8 anim delay-1">
-                  Ik bouw wat anderen<br />alleen <span className="text-white/30 italic">beschrijven.</span>
+                <h2 className="text-3xl lg:text-4xl xl:text-[2.8rem] font-extralight text-white tracking-[0.02em] leading-[1.2] mb-8 anim">
+                  Dynamisch in aanpak.<br />Uniek in <span className="text-white/30 italic">resultaat.</span>
                 </h2>
 
-                <div className="w-8 h-px bg-amber-400/70 mb-8 anim delay-2" />
+                <div className="w-8 h-px bg-[#d4a574]/70 mb-8 anim delay-2" />
 
                 <p className="text-white/55 text-sm font-light leading-[1.9] tracking-wide mb-5 anim delay-2">
-                  Dynique begon vanuit één overtuiging: de kloof tussen een goed idee en een world-class uitvoering moet kleiner. Voor elke ondernemer die ergens voor staat.
+                  Dynamisch omdat elk project om een andere aanpak vraagt — geen sjabloon, geen checklist die toevallig ook op jouw bedrijf past. Ik kom aan tafel zitten, vraag door, en denk actief mee. Ook als je daar niet naar vroeg.
                 </p>
-                <p className="text-white/30 text-sm font-light leading-[1.9] tracking-wide mb-12 anim delay-2">
-                  Websites, automatisering, AI-marketing en dronebeelden. Onder één dak, met één aanspreekpunt dat jouw verhaal van binnen kent.
+                <p className="text-white/55 text-sm font-light leading-[1.9] tracking-wide mb-12 anim delay-2">
+                  Uniek in resultaat omdat er een technische opleiding en jarenlange praktijkervaring achter elk project zit — projectmatig, correct en veilig. Ik bouw precies wat je vraagt. En als ik onderweg iets beters zie, hoor je dat ook.
                 </p>
 
                 <div className="grid grid-cols-3 gap-5 pt-7 border-t border-white/10 anim delay-3">
                   {[
-                    { v: "VAKMANSCHAP", d: "Elk detail telt." },
-                    { v: "DIRECTHEID", d: "Beloofd is beloofd." },
-                    { v: "EIGENAARSCHAP", d: "Jouw project. Mijn verantwoordelijkheid." },
+                    { v: "TECHNISCH ONDERLEGD", d: "Opleiding en ervaring, geen giswerk." },
+                    { v: "DOORDACHT & PRECIES", d: "Denkt mee, bouwt precies wat gevraagd is." },
+                    { v: "EIGENZINNIG EERLIJK", d: "Zegt het ook als het ongevraagd beter kan." },
                   ].map(({ v, d }) => (
                     <div key={v}>
-                      <div className="w-4 h-px bg-amber-400/60 mb-3" />
+                      <div className="w-4 h-px bg-[#d4a574]/60 mb-3" />
                       <p className="text-white/60 text-[8px] tracking-[0.28em] font-light mb-1.5">{v}</p>
                       <p className="text-white/30 text-[11px] font-light leading-relaxed">{d}</p>
                     </div>
@@ -427,7 +473,7 @@ export default function Home() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/rsc/founder2.jpeg"
-                    alt="Oprichter Dynique"
+                    alt="Zwart-wit portret van de oprichter van Dynique"
                     className="w-full block"
                     style={{ aspectRatio: "3/4", objectFit: "cover", objectPosition: "center 15%", filter: "grayscale(1) contrast(1.15) brightness(0.85)" }}
                   />
@@ -439,13 +485,13 @@ export default function Home() {
                     style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "128px" }} />
                 </div>
 
-                {/* Amber accent line — aligns with diagonal edge */}
-                <div className="absolute top-6 bottom-14 w-[2px] bg-gradient-to-b from-transparent via-amber-400/80 to-transparent"
+                {/* Emerald accent line — aligns with diagonal edge */}
+                <div className="absolute top-6 bottom-14 w-[2px] bg-gradient-to-b from-transparent via-[#d4a574]/80 to-transparent"
                   style={{ left: "calc(16% - 2px)" }} />
 
                 {/* Caption */}
                 <div className="mt-5 flex items-center gap-3" style={{ paddingLeft: "18%" }}>
-                  <div className="w-5 h-px bg-amber-400/50" />
+                  <div className="w-5 h-px bg-[#d4a574]/50" />
                   <p className="text-white/35 text-[8px] tracking-[0.45em] font-light">OPRICHTER · DYNIQUE</p>
                 </div>
               </div>
@@ -454,204 +500,110 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ─── 4. DIENSTEN ─────────────────────────────────────── */}
-        <section className="bg-[#0a0a0a]" id="diensten">
-
-          {/* Header */}
-          <div className="container mx-auto px-6 lg:px-12 pt-20 pb-12 border-b border-white/[0.06] anim">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-              <div>
-                <p className="text-white/22 text-[8px] tracking-[0.6em] font-light mb-5">EXPERTISE</p>
-                <h2 className="text-4xl lg:text-5xl font-extralight text-white tracking-[0.03em] leading-[1.1]">
-                  Vier dingen.<br /><span className="text-white/28 italic">Exceptioneel goed.</span>
-                </h2>
-              </div>
-              <a href="#contact" className="group flex items-center gap-3 text-white/30 text-[9px] tracking-[0.4em] font-light hover:text-white transition-colors duration-300 pb-1 self-start sm:self-end">
-                KENNISMAKING PLANNEN
-                <span className="w-5 h-px bg-white/25 group-hover:w-9 group-hover:bg-white transition-all duration-400" />
-              </a>
-            </div>
-          </div>
-
-          {/* 4-column grid — desktop horizontal, mobile stacked */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06]">
-            {diensten.map((d, i) => (
-              <a
-                key={d.n}
-                href={d.href}
-                className="group relative flex flex-col px-7 py-10 lg:px-8 lg:py-12 overflow-hidden transition-colors duration-500 hover:bg-white/[0.03] anim"
-                style={{ transitionDelay: `${i * 0.08}s` }}
-              >
-                {/* Top accent line — animates in on scroll, brightens on hover */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] opacity-40 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(to right, ${d.color}, transparent)` }} />
-
-                {/* Hover glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600 pointer-events-none"
-                  style={{ background: `radial-gradient(ellipse at 30% 0%, ${d.glow} 0%, transparent 65%)` }} />
-
-                {/* Number */}
-                <span className="text-white/18 text-[8px] tracking-[0.5em] font-light mb-8 block">{d.n}</span>
-
-                {/* Title */}
-                <h3 className="relative text-white text-lg lg:text-xl font-extralight tracking-[0.1em] leading-snug mb-3 transition-all duration-500 group-hover:tracking-[0.14em]">
-                  {d.title}
-                </h3>
-
-                {/* Tagline */}
-                <p className="relative text-white/40 text-[11px] font-light leading-relaxed tracking-wide mb-6 italic">
-                  {d.tagline}
-                </p>
-
-                {/* Divider */}
-                <div className="w-full h-px bg-white/[0.06] mb-6" />
-
-                {/* Description */}
-                <p className="relative text-white/35 text-[12px] font-light leading-[1.85] tracking-wide flex-1 mb-7">
-                  {d.desc}
-                </p>
-
-                {/* Keywords — minimal dots */}
-                <div className="relative mb-8">
-                  {d.keys.map((k, ki) => (
-                    <span key={k} className="text-white/22 text-[9px] tracking-[0.18em] font-light">
-                      {k}{ki < d.keys.length - 1 && <span className="mx-2 opacity-40">·</span>}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTA arrow */}
-                <div className="relative flex items-center gap-3 text-white/25 text-[8px] tracking-[0.35em] font-light group-hover:text-white/55 transition-colors duration-300 mt-auto">
-                  ONTDEKKEN
-                  <svg className="w-3 h-3 transition-transform duration-400 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* ─── 5. PORTFOLIO ────────────────────────────────────── */}
-        <section className="relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
-          {/* Ambient orb */}
-          <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", filter: "blur(40px)" }} />
-          <div className="absolute -bottom-20 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.05) 0%, transparent 70%)", filter: "blur(40px)" }} />
+        {/* ─── 4. WAAROM DYNIQUE — één verhaal i.p.v. een dienstengrid ── */}
+        <section className="relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
+          <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#d4a574]/30 to-transparent" />
+          <CornerMark position="top-right" />
+          <div aria-hidden className="absolute -top-40 right-0 w-[600px] h-[600px] pointer-events-none opacity-40"
+            style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 60%)" }} />
 
           <div className="container mx-auto px-6 lg:px-12 relative">
-            {/* Header */}
-            <div className="flex items-end justify-between mb-14 anim">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-px bg-white/20" />
-                  <p className="text-white/30 text-[10px] tracking-[0.5em] font-light">GESELECTEERD WERK</p>
-                </div>
-                <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.1em]">PORTFOLIO<span className="text-white/20">.</span></h2>
-              </div>
-              <a href="/portfolio" className="hidden md:inline-flex items-center gap-2 text-white/30 text-[10px] tracking-[0.35em] font-light hover:text-white/70 transition-colors duration-300 group">
-                ALLE CASES
-                <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+            {/* Probleem */}
+            <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-24">
+              <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-8 anim">
+                Standaardsoftware buigt niet mee.<br />
+                <span className="italic text-white/40">Jouw bedrijf wel.</span>
+              </h2>
+              <p className="text-white/55 text-base lg:text-lg font-light leading-[1.85] tracking-wide anim delay-1">
+                De meeste bedrijfssoftware is gebouwd voor een gemiddeld bedrijf dat niet bestaat.
+                Je past je aan, werkt om beperkingen heen, betaalt voor functies die je niet gebruikt —
+                en mist de ene functie die je wél nodig hebt.
+              </p>
             </div>
 
-            {/* 2×2 Browser-frame grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-              {projects.map((p, i) => (
-                <a key={p.number} href={p.link}
-                  className="group relative block anim"
-                  style={{ transitionDelay: `${i * 0.1}s` }}>
-                  {/* Ghost number */}
-                  <span className="absolute -top-8 -left-2 text-[110px] font-extralight text-white/[0.035] leading-none select-none pointer-events-none z-0 tracking-tighter">{p.number}</span>
+            {/* Aanpak */}
+            <div className="max-w-4xl mx-auto text-center mb-16 anim delay-1">
+              <div className="w-10 h-px bg-[#d4a574]/60 mx-auto mb-8" />
+              <h3 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.15] mb-6">
+                Dus bouwen we het <span className="italic text-[#d4a574]/90">anders.</span>
+              </h3>
+              <p className="text-white/55 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-2xl mx-auto">
+                Ik breng eerst in kaart hoe je nu werkt — niet hoe een softwarepakket denkt dat je
+                zou moeten werken. Daarna bouw ik een systeem daaromheen. Inclusief een eigen mening,
+                als ik ergens een betere oplossing zie.
+              </p>
+            </div>
 
-                  {/* Browser frame */}
-                  <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1.5">
-                    {/* Accent glow */}
-                    <div className="absolute -inset-4 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                      style={{ background: `radial-gradient(circle at 50% 50%, ${p.accent}22 0%, transparent 70%)`, filter: "blur(20px)" }} />
-
-                    <div className="relative rounded-md overflow-hidden bg-zinc-950 border border-white/[0.06] group-hover:border-white/[0.12] transition-colors duration-500 shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)]">
-                      {/* Browser top bar */}
-                      <div className="h-8 bg-zinc-900/80 backdrop-blur border-b border-white/[0.04] flex items-center px-3 relative">
-                        <div className="flex gap-1.5">
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-red-400/50 transition-colors duration-500" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-amber-400/50 transition-colors duration-500" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-green-400/50 transition-colors duration-500" />
-                        </div>
-                        <div className="absolute left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] font-light tracking-[0.2em] text-white/25 bg-zinc-800/60 rounded-sm">
-                          {p.url}
-                        </div>
-                      </div>
-
-                      {/* Screenshot area */}
-                      <div className="relative aspect-[16/10] overflow-hidden">
-                        {p.video ? (
-                          <video src={p.video}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                            autoPlay muted loop playsInline preload="metadata" />
-                        ) : p.image ? (
-                          <img src={p.image} alt={p.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                            loading="lazy" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center relative"
-                            style={{ background: `linear-gradient(135deg, ${p.accent}18 0%, #0a0a0a 60%)` }}>
-                            <div className="absolute inset-0 opacity-30"
-                              style={{ backgroundImage: `radial-gradient(circle at 30% 40%, ${p.accent}30 0%, transparent 50%)` }} />
-                            <div className="relative z-10 text-center px-8">
-                              <p className="text-white/15 text-[9px] tracking-[0.5em] font-light mb-4">VOORVERTONING VOLGT</p>
-                              <p className="text-white/50 text-2xl lg:text-3xl font-extralight tracking-[0.1em]">{p.title}</p>
-                            </div>
-                          </div>
-                        )}
-                        {/* Inner glow */}
-                        <div className="absolute inset-0 pointer-events-none"
-                          style={{ boxShadow: `inset 0 0 60px ${p.accent}10` }} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Info below */}
-                  <div className="pt-6 flex items-start justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-white/25 text-[9px] tracking-[0.4em] font-light">{p.number}</span>
-                        <span className="w-4 h-px bg-white/15" />
-                        <span className="text-white/30 text-[9px] tracking-[0.4em] font-light">{p.category}</span>
-                      </div>
-                      <h3 className="text-white text-xl lg:text-2xl font-extralight tracking-[0.1em] mb-2 group-hover:text-white/90 transition-colors">{p.title}</h3>
-                      <p className="text-white/35 text-[12px] font-light tracking-wide italic">{p.summary}</p>
-                    </div>
-                    <div className="flex items-center gap-2 text-white/25 text-[9px] tracking-[0.35em] font-light group-hover:text-white/70 transition-colors duration-400 pt-1 flex-shrink-0">
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: p.accent }} />
-                        LIVE
-                      </span>
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+            {/* Live before/after — scroll-scrubbed proof, niet alleen beweerd */}
+            <div className="max-w-[680px] mx-auto mb-24 lg:mb-28 anim delay-2">
+              <div className="flex items-center justify-between max-w-[640px] mx-auto mb-4">
+                <span className="ba-label-before flex items-center gap-2 text-[10px] tracking-[0.3em] font-light text-red-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> VOOR
+                </span>
+                <span className="ba-label-after flex items-center gap-2 text-[10px] tracking-[0.3em] font-light" style={{ color: "#d4a574" }}>
+                  NA <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#d4a574" }} />
+                </span>
+              </div>
+              <div ref={scrubRef} className="ba-window max-w-[640px] mx-auto">
+                <div className="flex items-center gap-2 px-4 h-9 border-b border-white/[0.07] bg-white/[0.02]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">jouwbedrijf.app</span>
+                </div>
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+                  <BeforeScreen />
+                  <div className="ba-after absolute inset-0"><AfterScreen /></div>
+                  <div className="ba-divider">
+                    <span className="ba-handle">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
                       </svg>
-                    </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-white/30 text-[10px] tracking-[0.25em] font-light mt-4">
+                SCROLL OM TE ZIEN
+              </p>
+            </div>
+
+            {/* Drie pijlers — web-ontwikkeling als fundament, geen aparte kaart */}
+            <div className="grid sm:grid-cols-3 gap-px bg-white/[0.06] max-w-5xl mx-auto anim delay-2">
+              {pijlers.map((p) => (
+                <a
+                  key={p.n}
+                  href={p.href}
+                  className="group relative bg-[#0a0a0a] hover:bg-white/[0.02] flex flex-col px-7 py-10 transition-colors duration-500"
+                >
+                  <span className="text-[#d4a574]/70 text-[10px] tracking-[0.5em] font-light mb-6 block">{p.n}</span>
+                  <h4 className="text-white text-base font-extralight tracking-[0.08em] leading-snug mb-3 transition-all duration-500 group-hover:tracking-[0.11em]">
+                    {p.title}
+                  </h4>
+                  <p className="text-white/50 text-[12px] font-light leading-[1.75] tracking-wide flex-1">
+                    {p.desc}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2 text-white/25 text-[8px] tracking-[0.3em] font-light group-hover:text-[#d4a574]/80 transition-colors duration-300">
+                    MEER
+                    <svg className="w-3 h-3 transition-transform duration-400 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Mobile CTA */}
-            <div className="flex justify-center mt-12 md:hidden">
-              <a href="/portfolio" className="inline-flex items-center gap-2 text-white/35 text-[10px] tracking-[0.35em] font-light">
-                ALLE CASES
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            {/* CTA */}
+            <div className="flex justify-center mt-16 anim delay-3">
+              <a href="/diensten/processen" className="group inline-flex items-center gap-3 text-white/40 text-[10px] tracking-[0.35em] font-light hover:text-white transition-colors duration-300">
+                ONTDEK HOE WE TE WERK GAAN
+                <span className="w-5 h-px bg-white/25 group-hover:w-9 group-hover:bg-[#d4a574] transition-all duration-400" />
               </a>
             </div>
           </div>
         </section>
 
-        {/* ─── 6. REVIEWS ──────────────────────────────────────── */}
+        {/* ─── 5. REVIEWS ──────────────────────────────────────── */}
         <section className="relative bg-[#070707] py-32 lg:py-44 overflow-hidden" id="reviews">
           {/* Ambient accent glow — shifts with active review */}
           {(() => {
@@ -834,13 +786,12 @@ export default function Home() {
           })()}
         </section>
 
-        {/* ─── 7. PROCESS — "HET TRAJECT" ─────────────────────── */}
+        {/* ─── 6. PROCESS — "HET TRAJECT" ─────────────────────── */}
         <section className="relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
-          {/* Ambient accent orbs */}
-          <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-60"
-               style={{ background: "radial-gradient(circle, rgba(212,165,116,0.10) 0%, transparent 60%)" }} />
-          <div aria-hidden className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-50"
-               style={{ background: "radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 60%)" }} />
+          <CornerMark position="top-right" />
+          {/* Ambient accent orb */}
+          <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-50"
+               style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 60%)" }} />
           {/* Ultra-subtle grid */}
           <div aria-hidden className="absolute inset-0 pointer-events-none opacity-[0.025]"
                style={{
@@ -860,12 +811,12 @@ export default function Home() {
               <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-end">
                 <h2 className="lg:col-span-7 text-5xl lg:text-7xl xl:text-[5.5rem] font-extralight text-white tracking-[0.02em] leading-[1.02] anim delay-1">
                   Van eerste gesprek<br />
-                  <span className="italic text-white/50">tot live website.</span>
+                  <span className="italic text-white/50">tot werkend systeem.</span>
                 </h2>
                 <p className="lg:col-span-5 text-white/50 text-base lg:text-lg font-light leading-[1.9] tracking-wide anim delay-2">
-                  Geen dikke offertes. Geen vage tijdlijnen. Vier heldere fases,
-                  transparante communicatie en een vaste prijs. Van kennismaking
-                  tot live: gemiddeld <span className="text-white">zeven dagen</span>.
+                  Geen dikke offertes. Geen vage tijdlijnen. Heldere fases, transparante
+                  communicatie en een vaste prijs per fase. De doorlooptijd hangt af van
+                  wat er gebouwd wordt — dat bespreken we <span className="text-white">eerlijk vooraf</span>, niet achteraf.
                 </p>
               </div>
             </div>
@@ -879,38 +830,38 @@ export default function Home() {
                 {
                   n: "01",
                   title: "INTAKE",
-                  duration: "Dag 1",
-                  tagline: "We leren je merk kennen.",
-                  desc: "Een gesprek van een uur waarin we je doel, doelgroep en ambities scherp krijgen. Online, op locatie of bij ons aan tafel. Na afloop weet je precies wat je kunt verwachten, inclusief prijs en planning.",
-                  deliverables: ["Strategisch gesprek", "Heldere offerte", "Vaste einddatum"],
-                  accent: "#a78bfa",
+                  duration: "Fase 1",
+                  tagline: "We leren je bedrijf kennen.",
+                  desc: "Een gesprek waarin we je doel, je huidige werkwijze en de knelpunten scherp krijgen. Online, op locatie of bij ons aan tafel. Na afloop weet je precies wat we gaan bouwen, wat het kost en hoe het traject eruitziet.",
+                  deliverables: ["Strategisch gesprek", "Heldere offerte", "Concreet stappenplan"],
+                  accent: "#d4a574",
                 },
                 {
                   n: "02",
                   title: "CONCEPT",
-                  duration: "Dag 2–3",
-                  tagline: "We vertalen je merk naar design.",
-                  desc: "Binnen drie werkdagen zie je de eerste visuele richting. Geen Figma-files die je zelf moet interpreteren: een klikbaar prototype van je eigen website. Jij geeft feedback, wij verfijnen.",
-                  deliverables: ["Klikbaar prototype", "Merkhuisstijl", "Content-structuur"],
+                  duration: "Fase 2",
+                  tagline: "We vertalen je werkwijze naar een systeem.",
+                  desc: "Je ziet de eerste opzet niet in een onleesbaar technisch document, maar in een klikbaar prototype van je eigen systeem. Jij geeft feedback, wij verfijnen — net zo lang tot het klopt.",
+                  deliverables: ["Klikbaar prototype", "Technisch ontwerp", "Heldere planning"],
                   accent: "#d4a574",
                 },
                 {
                   n: "03",
                   title: "BOUWEN",
-                  duration: "Dag 4–7",
-                  tagline: "We bouwen je merk online.",
-                  desc: "We bouwen in Next.js: razendsnel, toekomstbestendig en perfect vindbaar in Google. Je ziet elke dag de voortgang live op een staging-link. Geen black box: volledige transparantie.",
-                  deliverables: ["Next.js development", "Staging preview", "Live feedback loop"],
-                  accent: "#fb923c",
+                  duration: "Fase 3",
+                  tagline: "We bouwen het systeem.",
+                  desc: "We bouwen met moderne, onderhoudbare code — toekomstbestendig en veilig. Je ziet de voortgang live op een staging-omgeving. Geen black box: volledige transparantie.",
+                  deliverables: ["Development", "Staging-omgeving", "Live feedback loop"],
+                  accent: "#d4a574",
                 },
                 {
                   n: "04",
                   title: "LIVE",
-                  duration: "Dag 7+",
-                  tagline: "We zetten je merk aan.",
-                  desc: "Launch, SEO-setup, analytics, security: alles wordt voor je ingeregeld. Daarna blijven we bereikbaar voor updates, uitbreidingen en beheer. Je staat er nooit alleen voor.",
-                  deliverables: ["Launch & SEO", "Analytics setup", "Doorlopend beheer"],
-                  accent: "#34d399",
+                  duration: "Fase 4",
+                  tagline: "We zetten het live.",
+                  desc: "Livegang, beveiliging, monitoring: alles wordt voor je ingeregeld. Daarna blijven we bereikbaar voor updates, uitbreidingen en beheer. Je staat er nooit alleen voor.",
+                  deliverables: ["Livegang & beveiliging", "Monitoring", "Doorlopend beheer"],
+                  accent: "#d4a574",
                 },
               ].map((step, i) => (
                 <div
@@ -931,12 +882,7 @@ export default function Home() {
                     />
                     <div
                       className="text-6xl lg:text-8xl font-extralight leading-none tracking-wider transition-colors"
-                      style={{
-                        background: `linear-gradient(135deg, ${step.accent} 0%, ${step.accent}60 100%)`,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                      }}
+                      style={{ color: step.accent }}
                     >
                       {step.n}
                     </div>
@@ -967,7 +913,7 @@ export default function Home() {
                         {step.tagline}
                       </h3>
                     </div>
-                    <p className="text-white/50 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-3xl">
+                    <p className="text-white/65 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-3xl">
                       {step.desc}
                     </p>
                     {/* Deliverables */}
@@ -998,7 +944,7 @@ export default function Home() {
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      "radial-gradient(80% 100% at 50% 0%, rgba(212,165,116,0.14) 0%, transparent 70%), linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
+                      "radial-gradient(80% 100% at 50% 0%, rgba(212,165,116,0.16) 0%, transparent 70%), linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
                   }}
                 />
                 <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-[#d4a574]/60 to-transparent" />
@@ -1006,8 +952,8 @@ export default function Home() {
                 <div className="relative px-8 py-14 lg:px-20 lg:py-20 text-center space-y-10">
                   <div>
                     <div className="flex items-center justify-center gap-3 mb-8">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 10px #34d399" }} />
-                      <p className="text-[#34d399] text-[10px] tracking-[0.4em] font-light uppercase">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#d4a574]" style={{ boxShadow: "0 0 10px #d4a574" }} />
+                      <p className="text-[#d4a574] text-[10px] tracking-[0.4em] font-light uppercase">
                         Beschikbaar voor nieuwe projecten
                       </p>
                     </div>
@@ -1015,8 +961,8 @@ export default function Home() {
                       Klaar om <span className="italic text-white/50">te starten?</span>
                     </h3>
                     <p className="mt-6 text-white/50 text-base lg:text-lg font-light leading-[1.8] tracking-wide max-w-2xl mx-auto">
-                      Binnen 24 uur een reactie. Binnen een week een concept.
-                      Binnen twee weken live. Zonder verrassingen, met vaste prijs.
+                      Binnen 24 uur een reactie. Een helder plan voordat we beginnen.
+                      Geen verrassingen, een vaste prijs per fase.
                     </p>
                   </div>
 
@@ -1024,8 +970,8 @@ export default function Home() {
                   <div className="grid sm:grid-cols-3 gap-px bg-white/5 max-w-3xl mx-auto">
                     {[
                       { n: "24u", label: "Reactietijd" },
-                      { n: "7d", label: "Gem. oplevering" },
                       { n: "100%", label: "Vaste prijs" },
+                      { n: "3", label: "Revisierondes" },
                     ].map((v) => (
                       <div key={v.label} className="bg-[#050505] py-6 px-4">
                         <p className="text-2xl lg:text-3xl font-extralight text-white tracking-wider">{v.n}</p>
@@ -1079,6 +1025,172 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ─── 7. PORTFOLIO ────────────────────────────────────── */}
+        <section className="relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
+          <CornerMark position="top-right" />
+          {/* Ambient orb */}
+          <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", filter: "blur(40px)" }} />
+          <div className="absolute -bottom-20 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.05) 0%, transparent 70%)", filter: "blur(40px)" }} />
+
+          <div className="container mx-auto px-6 lg:px-12 relative">
+            {/* Header */}
+            <div className="flex items-end justify-between mb-6 anim">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-px bg-white/20" />
+                  <p className="text-white/30 text-[10px] tracking-[0.5em] font-light">GESELECTEERD WERK</p>
+                </div>
+                <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.1em]">PORTFOLIO<span className="text-white/20">.</span></h2>
+              </div>
+              <a href="/portfolio" className="hidden md:inline-flex items-center gap-2 text-white/30 text-[10px] tracking-[0.35em] font-light hover:text-white/70 transition-colors duration-300 group">
+                ALLE CASES
+                <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+            <p className="text-white/45 text-base lg:text-lg font-light leading-relaxed tracking-wide max-w-xl mb-16 anim delay-1">
+              Zelf gebouwd, van concept tot livegang — geen sjabloon, geen shortcuts.
+            </p>
+
+            {/* Featured case — eerste project groot uitgelicht */}
+            {projects.slice(0, 1).map((p) => (
+              <a key={p.number} href={p.link} className="group relative block mb-10 lg:mb-14 anim delay-1">
+                <span className="absolute -top-10 -left-2 lg:-left-4 text-[160px] lg:text-[220px] font-extralight text-white/[0.04] leading-none select-none pointer-events-none z-0 tracking-tighter">{p.number}</span>
+
+                <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-2">
+                  <div className="absolute -inset-6 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{ background: `radial-gradient(circle at 50% 40%, ${p.accent}25 0%, transparent 70%)`, filter: "blur(30px)" }} />
+
+                  <div className="relative rounded-lg overflow-hidden bg-zinc-950 border border-white/[0.08] group-hover:border-white/[0.16] transition-colors duration-500 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]">
+                    <div className="h-9 bg-zinc-900/80 backdrop-blur border-b border-white/[0.05] flex items-center px-4 relative">
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-red-400/50 transition-colors duration-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-amber-400/50 transition-colors duration-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-green-400/50 transition-colors duration-500" />
+                      </div>
+                      <div className="absolute left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] font-light tracking-[0.2em] text-white/25 bg-zinc-800/60 rounded-sm">
+                        {p.url}
+                      </div>
+                    </div>
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      {p.video ? (
+                        <PortfolioVideo src={p.video} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                      ) : p.image ? (
+                        <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy" />
+                      ) : null}
+                      <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: `inset 0 0 80px ${p.accent}12` }} />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-7 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="inline-block px-2.5 py-1 text-[9px] tracking-[0.3em] font-light border" style={{ color: p.accent, borderColor: `${p.accent}50` }}>UITGELICHT</span>
+                      <span className="text-white/30 text-[9px] tracking-[0.4em] font-light">{p.category}</span>
+                    </div>
+                    <h3 className="text-white text-2xl lg:text-4xl font-extralight tracking-[0.06em] mb-2 group-hover:text-white/90 transition-colors">{p.title}</h3>
+                    <p className="text-white/40 text-sm font-light tracking-wide italic">{p.summary}</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-white/25 text-[9px] tracking-[0.35em] font-light group-hover:text-white/70 transition-colors duration-400 flex-shrink-0">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: p.accent }} />
+                      LIVE
+                    </span>
+                    <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            ))}
+
+            {/* Overige cases */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {projects.slice(1).map((p, i) => (
+                <a key={p.number} href={p.link}
+                  className="group relative block anim"
+                  style={{ transitionDelay: `${i * 0.1}s` }}>
+                  {/* Ghost number */}
+                  <span className="absolute -top-8 -left-2 text-[90px] font-extralight text-white/[0.035] leading-none select-none pointer-events-none z-0 tracking-tighter">{p.number}</span>
+
+                  {/* Browser frame */}
+                  <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1.5">
+                    {/* Accent glow */}
+                    <div className="absolute -inset-4 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                      style={{ background: `radial-gradient(circle at 50% 50%, ${p.accent}22 0%, transparent 70%)`, filter: "blur(20px)" }} />
+
+                    <div className="relative rounded-md overflow-hidden bg-zinc-950 border border-white/[0.06] group-hover:border-white/[0.12] transition-colors duration-500 shadow-[0_25px_60px_-20px_rgba(0,0,0,0.8)]">
+                      {/* Browser top bar */}
+                      <div className="h-8 bg-zinc-900/80 backdrop-blur border-b border-white/[0.04] flex items-center px-3 relative">
+                        <div className="flex gap-1.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-red-400/50 transition-colors duration-500" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-amber-400/50 transition-colors duration-500" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-white/[0.08] group-hover:bg-green-400/50 transition-colors duration-500" />
+                        </div>
+                        <div className="absolute left-1/2 -translate-x-1/2 px-3 py-0.5 text-[10px] font-light tracking-[0.2em] text-white/25 bg-zinc-800/60 rounded-sm">
+                          {p.url}
+                        </div>
+                      </div>
+
+                      {/* Screenshot area */}
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        {p.video ? (
+                          <PortfolioVideo src={p.video}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+                        ) : p.image ? (
+                          <img src={p.image} alt={p.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                            loading="lazy" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center relative"
+                            style={{ background: `linear-gradient(135deg, ${p.accent}18 0%, #0a0a0a 60%)` }}>
+                            <div className="absolute inset-0 opacity-30"
+                              style={{ backgroundImage: `radial-gradient(circle at 30% 40%, ${p.accent}30 0%, transparent 50%)` }} />
+                            <div className="relative z-10 text-center px-8">
+                              <p className="text-white/15 text-[9px] tracking-[0.5em] font-light mb-4">VOORVERTONING VOLGT</p>
+                              <p className="text-white/50 text-2xl lg:text-3xl font-extralight tracking-[0.1em]">{p.title}</p>
+                            </div>
+                          </div>
+                        )}
+                        {/* Inner glow */}
+                        <div className="absolute inset-0 pointer-events-none"
+                          style={{ boxShadow: `inset 0 0 60px ${p.accent}10` }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info below */}
+                  <div className="pt-6 flex items-start justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-white/25 text-[9px] tracking-[0.4em] font-light">{p.number}</span>
+                        <span className="w-4 h-px bg-white/15" />
+                        <span className="text-white/30 text-[9px] tracking-[0.4em] font-light">{p.category}</span>
+                      </div>
+                      <h3 className="text-white text-lg lg:text-xl font-extralight tracking-[0.08em] mb-2 group-hover:text-white/90 transition-colors">{p.title}</h3>
+                      <p className="text-white/35 text-[12px] font-light tracking-wide italic">{p.summary}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile CTA */}
+            <div className="flex justify-center mt-12 md:hidden">
+              <a href="/portfolio" className="inline-flex items-center gap-2 text-white/35 text-[10px] tracking-[0.35em] font-light">
+                ALLE CASES
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ─── 7b. ADVISEUR — consultatieve multiple-choice ────── */}
         <Advisor />
 
@@ -1107,14 +1219,13 @@ export default function Home() {
               {/* Left */}
               <div className="space-y-12">
                 <div>
-                  <p className="text-black/30 text-xs tracking-[0.4em] font-light mb-4 anim">CONTACT</p>
-                  <h2 className="text-4xl lg:text-6xl font-extralight text-black tracking-[0.08em] leading-tight anim delay-1">
+                  <h2 className="text-4xl lg:text-6xl font-extralight text-black tracking-[0.08em] leading-tight anim">
                     Laten we<br />
                     <span className="font-light italic">kennismaken.</span>
                   </h2>
                 </div>
                 <div className="space-y-6 anim delay-2">
-                  <p className="text-black/50 text-base font-light leading-[1.8] tracking-wide">
+                  <p className="text-black/65 text-base font-light leading-[1.8] tracking-wide">
                     Vertel ons over je project. We reageren altijd binnen 24 uur, meestal veel eerder.
                   </p>
                   <div className="space-y-4 pt-4 border-t border-black/5">
@@ -1249,8 +1360,7 @@ export default function Home() {
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-3 gap-16 lg:gap-32">
               <div>
-                <p className="text-white/20 text-xs tracking-[0.4em] font-light mb-4 anim">FAQ</p>
-                <h2 className="text-4xl lg:text-5xl font-extralight text-white tracking-[0.08em] leading-tight anim delay-1">
+                <h2 className="text-4xl lg:text-5xl font-extralight text-white tracking-[0.08em] leading-tight anim">
                   Directe<br />antwoorden.
                 </h2>
                 <p className="text-white/30 text-sm font-light tracking-wide mt-6 leading-relaxed anim delay-2">
@@ -1280,7 +1390,7 @@ export default function Home() {
                       </div>
                     </button>
                     <div className={`overflow-hidden transition-all duration-500 ${openFAQ === i ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
-                      <p className="text-white/40 text-sm font-light leading-[1.8] tracking-wide pr-10">{faq.a}</p>
+                      <p className="text-white/65 text-sm font-light leading-[1.8] tracking-wide pr-10">{faq.a}</p>
                     </div>
                   </div>
                 ))}
@@ -1291,6 +1401,7 @@ export default function Home() {
 
         <Footer />
       </main>
+      <ProcessStyles />
 
       <style jsx>{`
         /* ── Loading screen ───────────────────────── */
@@ -1340,6 +1451,21 @@ export default function Home() {
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollDot {
+          0%   { transform: translateY(0); opacity: 1; }
+          70%  { transform: translateY(14px); opacity: 0; }
+          100% { transform: translateY(0); opacity: 0; }
+        }
+        .scroll-dot {
+          animation: scrollDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+        .corner-mark {
+          animation: fadeInUp 1s ease-out var(--corner-delay, 0s) both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .scroll-dot { animation: none; opacity: 0.6; }
+          .corner-mark { animation: none; opacity: 1; }
         }
         @keyframes marquee {
           from { transform: translateX(0); }
@@ -1396,23 +1522,6 @@ export default function Home() {
         .delay-1 { transition-delay: 0.12s; }
         .delay-2 { transition-delay: 0.26s; }
         .delay-3 { transition-delay: 0.42s; }
-
-        /* Diensten row hover-expand */
-        .dienst-expand {
-          grid-template-rows: 0fr;
-          transition: grid-template-rows 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .dienst-row:hover .dienst-expand {
-          grid-template-rows: 1fr;
-        }
-
-        /* Diensten row slide-up entry */
-        .dienst-row.anim {
-          transform: translateY(28px);
-        }
-        .dienst-row.anim.animate-in {
-          transform: translateY(0);
-        }
 
         /* Slide-in from left (manifesto photo) */
         .anim.anim-from-left {

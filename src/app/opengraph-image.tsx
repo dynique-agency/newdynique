@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
-export const alt = "Dynique — Full Creative Development Agency";
+export const alt = "Dynique — Maatwerk Software & Development";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,7 +21,7 @@ export default function OpengraphImage() {
           overflow: "hidden",
         }}
       >
-        {/* Ambient glow top-right */}
+        {/* Ambient glow top-right — gold */}
         <div
           style={{
             position: "absolute",
@@ -30,10 +30,10 @@ export default function OpengraphImage() {
             width: 620,
             height: 620,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(251,191,36,0.22) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(212,165,116,0.28) 0%, transparent 65%)",
           }}
         />
-        {/* Ambient glow bottom-left */}
+        {/* Ambient glow bottom-left — violet */}
         <div
           style={{
             position: "absolute",
@@ -42,7 +42,7 @@ export default function OpengraphImage() {
             width: 480,
             height: 480,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(139,92,246,0.16) 0%, transparent 65%)",
           }}
         />
 
@@ -64,15 +64,15 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
           <div
             style={{
-              color: "#fbbf24",
+              color: "#d4a574",
               fontSize: 18,
               fontWeight: 300,
-              letterSpacing: "0.55em",
+              letterSpacing: "0.5em",
               textTransform: "uppercase",
               marginBottom: "28px",
             }}
           >
-            Full Creative Development Agency
+            Maatwerk Software &amp; Development
           </div>
           <div
             style={{
@@ -118,7 +118,7 @@ export default function OpengraphImage() {
               letterSpacing: "0.22em",
             }}
           >
-            <span>Websites · Maatwerk Software · AI Marketing · Drone</span>
+            <span>Maatwerk Software · Web Applicaties · Digitalisering</span>
             <span>dynique.nl</span>
           </div>
         </div>

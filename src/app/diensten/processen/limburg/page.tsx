@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -115,8 +116,8 @@ export default function ProcessenLimburg() {
 
                 <p className="hv hv-3 text-white/55 text-lg lg:text-xl font-extralight tracking-wide leading-relaxed max-w-xl mb-9">
                   Je bedrijf groeit, maar achter de schermen gaat er nog steeds te veel tijd verloren.
-                  Wij bouwen maatwerk software voor het MKB in Limburg, en komen bij je langs voor een
-                  gratis procesanalyse op locatie.
+                  Wij bouwen maatwerk software voor bedrijven in Limburg die vastlopen in standaardpakketten
+                  — van MKB tot grotere bedrijven — en komen bij je langs voor een gratis procesanalyse op locatie.
                 </p>
 
                 {/* region row */}
@@ -147,6 +148,11 @@ export default function ProcessenLimburg() {
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
                   Gratis &amp; vrijblijvend · bij jou op locatie in Limburg · gebouwd met code
                 </div>
+
+                <p className="hv hv-5 mt-6 text-white/40 text-sm font-light italic leading-relaxed max-w-lg">
+                  Bij je op locatie kijk ik niet alleen mee — ik denk ook actief mee, en zeg het als
+                  een andere aanpak slimmer is. Ook ongevraagd.
+                </p>
               </div>
 
               <div className="lg:col-span-5 hv hv-4">
@@ -193,7 +199,7 @@ export default function ProcessenLimburg() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06]">
                 {costs.map((c) => (
                   <div key={c.k} className="cost-card group bg-[#070707] px-7 py-9 relative overflow-hidden">
-                    <div className="relative mb-6 text-white/35 group-hover:text-[#34d399] transition-colors duration-300">
+                    <div className="relative mb-6 text-white/35 group-hover:text-[#d4a574] transition-colors duration-300">
                       <CostIcon k={c.k} />
                     </div>
                     <p className="relative text-[10px] tracking-[0.4em] font-light mb-3" style={{ color: ACCENT }}>{c.k}</p>
@@ -258,13 +264,16 @@ export default function ProcessenLimburg() {
             style={{ background: `radial-gradient(ellipse at 50% 30%, ${ACCENT}10 0%, transparent 60%)` }} />
           <div className="container mx-auto relative">
             <div className="max-w-3xl mx-auto text-center anim mb-12 lg:mb-14">
-              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>DE OPLOSSING</p>
+              <div className="mb-5">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[10px] tracking-[0.35em] font-light"
+                  style={{ background: `${ACCENT}1a`, color: ACCENT, border: `1px solid ${ACCENT}40` }}>DE OPLOSSING</span>
+              </div>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.01em] leading-[1.12] mb-5">
                 Geen standaardpakket.{" "}
                 <span className="italic" style={{ color: ACCENT }}>Software rondom hoe jullie werken.</span>
               </h2>
               <p className="text-white/50 text-base font-light leading-relaxed tracking-wide max-w-xl mx-auto">
-                Maatwerk voor het Limburgse MKB, volledig op code, gebouwd om jullie werk makkelijker te maken in plaats van andersom.
+                Maatwerk voor bedrijven in Limburg — van MKB tot grotere bedrijven — volledig op code, gebouwd om jullie werk makkelijker te maken in plaats van andersom.
               </p>
             </div>
 
@@ -293,7 +302,7 @@ export default function ProcessenLimburg() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
-                        <span className={`text-sm font-light leading-relaxed tracking-wide ${col.dim ? "text-white/40" : "text-white/80"}`}>{p}</span>
+                        <span className={`text-sm font-light leading-relaxed tracking-wide ${col.dim ? "text-white/55" : "text-white/80"}`}>{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -342,7 +351,7 @@ export default function ProcessenLimburg() {
                 style={{ background: `radial-gradient(ellipse at 15% 0%, ${ACCENT}12 0%, transparent 55%)` }} />
               <div className="relative grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <div className="lg:col-span-5">
-                  <p className="text-[10px] tracking-[0.5em] font-light mb-4" style={{ color: ACCENT }}>WERKGEBIED</p>
+                  <p className="text-white/30 text-[10px] tracking-[0.5em] font-light mb-4">WERKGEBIED</p>
                   <h2 className="text-2xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.15] mb-4">
                     Wij komen naar
                     <br />
@@ -356,8 +365,8 @@ export default function ProcessenLimburg() {
                   <div className="flex flex-wrap gap-2.5">
                     {CITIES.map((c) => (
                       <span key={c}
-                        className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 bg-white/[0.02] text-white/55 text-xs font-light tracking-wide hover:border-[#34d399]/50 hover:text-white transition-all duration-300">
-                        <span className="w-1 h-1 rounded-full transition-colors duration-300 group-hover:bg-[#34d399]" style={{ background: "rgba(255,255,255,0.3)" }} />
+                        className="group inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 bg-white/[0.02] text-white/55 text-xs font-light tracking-wide hover:border-[#d4a574]/50 hover:text-white transition-all duration-300">
+                        <span className="w-1 h-1 rounded-full transition-colors duration-300 group-hover:bg-[#d4a574]" style={{ background: "rgba(255,255,255,0.3)" }} />
                         {c}
                       </span>
                     ))}
@@ -406,6 +415,19 @@ export default function ProcessenLimburg() {
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <Link href="/portfolio"
+                    className="group inline-flex items-center gap-2 text-white/55 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+                    Liever eerst voorbeelden zien?
+                    <span className="inline-flex items-center gap-1.5" style={{ color: ACCENT }}>
+                      Bekijk ons werk
+                      <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </Link>
+                </div>
               </div>
 
               <div className="lg:col-span-7 anim delay-1">
@@ -419,8 +441,8 @@ export default function ProcessenLimburg() {
                     <Field label="TELEFOON" value={form.phone} onChange={set("phone")} placeholder="06 ..." type="tel" />
                   </div>
                   <div className="mt-5">
-                    <label className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">WAAR LOOPT HET VAST? (OPTIONEEL)</label>
-                    <textarea value={form.message} onChange={set("message")} rows={4}
+                    <label htmlFor="processen-limburg-message" className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">WAAR LOOPT HET VAST? (OPTIONEEL)</label>
+                    <textarea id="processen-limburg-message" value={form.message} onChange={set("message")} rows={4}
                       placeholder="Beschrijf kort waar je nu tijd, geld of overzicht verliest..."
                       className="w-full bg-black/40 border border-white/10 text-white/90 text-sm font-light tracking-wide px-4 py-3 rounded outline-none focus:border-white/30 transition-colors duration-300 placeholder:text-white/25 resize-none" />
                   </div>
@@ -434,7 +456,7 @@ export default function ProcessenLimburg() {
                     </svg>
                   </button>
 
-                  <p className="mt-5 text-center text-white/35 text-xs font-light tracking-wide">
+                  <p className="mt-5 text-center text-white/55 text-xs font-light tracking-wide">
                     Liever direct?{" "}
                     <a href="https://wa.me/31624572572" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">WhatsApp ons</a>
                     {" "}of mail{" "}

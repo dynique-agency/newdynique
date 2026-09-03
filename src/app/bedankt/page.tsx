@@ -35,11 +35,11 @@ function BedanktContent() {
           <div className="max-w-3xl mx-auto text-center">
             {/* Success indicator */}
             <div className="flex items-center justify-center gap-3 mb-12 anim">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 14px #34d399" }}></span>
-              <p className="text-[#34d399] text-[10px] tracking-[0.5em] font-light uppercase">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#d4a574]" style={{ boxShadow: "0 0 14px #d4a574" }}></span>
+              <p className="text-[#d4a574] text-[10px] tracking-[0.5em] font-light uppercase">
                 Succesvol verzonden
               </p>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 14px #34d399" }}></span>
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#d4a574]" style={{ boxShadow: "0 0 14px #d4a574" }}></span>
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extralight text-white tracking-[0.01em] leading-[1.02] anim delay-1">
@@ -60,9 +60,9 @@ function BedanktContent() {
                 { n: "03", t: "Concept", d: "Binnen 3 dagen na intake een eerste richting." },
               ].map((s) => (
                 <div key={s.n} className="bg-[#050505] p-8 lg:p-10 text-left">
-                  <p className="text-[#34d399] text-xs tracking-[0.25em] font-light mb-4">{s.n}</p>
+                  <p className="text-[#d4a574] text-xs tracking-[0.25em] font-light mb-4">{s.n}</p>
                   <p className="text-white text-sm tracking-[0.15em] font-light uppercase mb-3">{s.t}</p>
-                  <p className="text-white/45 text-sm font-light leading-[1.7] tracking-wide">{s.d}</p>
+                  <p className="text-white/60 text-sm font-light leading-[1.7] tracking-wide">{s.d}</p>
                 </div>
               ))}
             </div>

@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function DroneDienst() {
@@ -82,12 +83,12 @@ export default function DroneDienst() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
               style={{ animation: "fadeInUp 0.8s ease-out 0.9s both" }}
             >
-              <a
+              <Link
                 href="/#contact"
-                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 OPNAME AANVRAGEN
-              </a>
+              </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"
@@ -129,7 +130,7 @@ export default function DroneDienst() {
                   <span className="text-black/15 text-xs tracking-[0.3em] font-light">0{i + 1}</span>
                   <h3 className="text-black text-sm tracking-[0.2em] font-light mt-4 mb-3">{s.title.toUpperCase()}</h3>
                   <div className="w-8 h-px bg-black/20 mb-4"></div>
-                  <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
+                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -148,12 +149,12 @@ export default function DroneDienst() {
                 De video gaat live op je site, in je social media en in je ads. Alles in één traject,
                 één aanspreekpunt, één factuur.
               </p>
-              <a
+              <Link
                 href="/#contact"
-                className="inline-block px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300 animate-on-scroll delay-200"
+                className="inline-block px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300 animate-on-scroll delay-200"
               >
                 COMBIPAKKET AANVRAGEN
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -176,7 +177,7 @@ export default function DroneDienst() {
                   <div>
                     <h3 className="text-black text-sm tracking-[0.2em] font-light mb-3">{p.title.toUpperCase()}</h3>
                     <div className="w-8 h-px bg-black/20 mb-4"></div>
-                    <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
+                    <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -194,12 +195,12 @@ export default function DroneDienst() {
               Vertel ons over je project. We sturen snel een voorstel met beschikbaarheid en prijsindicatie.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
-              <a
+              <Link
                 href="/#contact"
-                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 OPNAME AANVRAGEN
-              </a>
+              </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, type RefObject } from "react";
+import { useEffect, useId, type RefObject } from "react";
 
-export const ACCENT = "#34d399";
+export const ACCENT = "#d4a574";
 
 /* ════════════════════════════════════════════════════════════
    Shared coded visuals + styles + hooks for the
@@ -215,10 +215,12 @@ export function Field({
   type?: string;
   required?: boolean;
 }) {
+  const id = useId();
   return (
     <div>
-      <label className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">{label}</label>
+      <label htmlFor={id} className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={onChange}

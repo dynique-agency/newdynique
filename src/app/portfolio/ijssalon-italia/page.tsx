@@ -93,8 +93,8 @@ export default function IJssalonItalia() {
             <div className="animate-on-scroll delay-100">
               <div className="relative w-full overflow-hidden border border-black/10">
                 <img
-                  src="/rsc/ijssalon/hero.png"
-                  alt="IJssalon Italia"
+                  src="/rsc/ijssalon/hero.webp"
+                  alt="Nieuwe mobielvriendelijke website van IJssalon Italia met heritage-verhaal en ijssmakenoverzicht"
                   className="w-full h-auto"
                   loading="eager"
                 />
@@ -240,16 +240,13 @@ export default function IJssalonItalia() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="order-2 lg:order-1 animate-on-scroll">
                 <img
-                  src="/rsc/ijssalon/geschiedenis.png"
+                  src="/rsc/ijssalon/geschiedenis.webp"
                   alt="Geschiedenis IJssalon Italia"
                   className="w-full h-auto border border-black/10"
                   loading="lazy"
                 />
               </div>
               <div className="order-1 lg:order-2 animate-on-scroll delay-100">
-                <div className="inline-block px-4 py-1.5 bg-black/5 border border-black/10 rounded-full mb-6">
-                  <span className="text-black/60 text-[10px] tracking-[0.3em] font-light uppercase">Heritage</span>
-                </div>
                 <h2 className="text-2xl lg:text-4xl font-light text-black tracking-[0.15em] leading-tight mb-4">
                   HET VERHAAL
                   <br />
@@ -288,9 +285,6 @@ export default function IJssalonItalia() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="animate-on-scroll">
-                <div className="inline-block px-4 py-1.5 bg-white/5 border border-white/10 rounded-full mb-6">
-                  <span className="text-white/60 text-[10px] tracking-[0.3em] font-light uppercase">Assortiment</span>
-                </div>
                 <h2 className="text-2xl lg:text-4xl font-light text-white tracking-[0.15em] leading-tight mb-4">
                   50+ IJSSMAKEN
                   <br />
@@ -320,7 +314,7 @@ export default function IJssalonItalia() {
               </div>
               <div className="animate-on-scroll delay-100">
                 <img
-                  src="/rsc/ijssalon/ijssmaken.png"
+                  src="/rsc/ijssalon/ijssmaken.webp"
                   alt="IJssmaken Overzicht"
                   className="w-full h-auto border border-white/10"
                   loading="lazy"
@@ -338,16 +332,13 @@ export default function IJssalonItalia() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="order-2 lg:order-1 animate-on-scroll">
                 <img
-                  src="/rsc/ijssalon/infotossfeerenimpressie.png"
+                  src="/rsc/ijssalon/infotossfeerenimpressie.webp"
                   alt="Informatie en Sfeer Impressie"
                   className="w-full h-auto border border-black/10"
                   loading="lazy"
                 />
               </div>
               <div className="order-1 lg:order-2 animate-on-scroll delay-100">
-                <div className="inline-block px-4 py-1.5 bg-black/5 border border-black/10 rounded-full mb-6">
-                  <span className="text-black/60 text-[10px] tracking-[0.3em] font-light uppercase">Functionaliteit</span>
-                </div>
                 <h2 className="text-2xl lg:text-4xl font-light text-black tracking-[0.15em] leading-tight mb-4">
                   DUidelijke
                   <br />
@@ -515,7 +506,7 @@ export default function IJssalonItalia() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-              <a
+              <Link
                 href="/"
                 className="inline-flex items-center gap-3 px-12 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm tracking-[0.2em] font-light hover:bg-white/20 hover:border-white/50 transition-all duration-300"
               >
@@ -523,7 +514,7 @@ export default function IJssalonItalia() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

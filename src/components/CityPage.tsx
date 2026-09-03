@@ -37,7 +37,14 @@ export default function CityPage({ data }: { data: CityData }) {
         email: "info@dynique.nl",
         priceRange: "€€",
         areaServed: { "@type": "City", name: data.city },
-        address: { "@type": "PostalAddress", addressRegion: data.region, addressCountry: "NL" },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Ir. Em. Melottestraat 10",
+          postalCode: "6291 HE",
+          addressLocality: "Vaals",
+          addressRegion: "Limburg",
+          addressCountry: "NL",
+        },
       },
       {
         "@type": "BreadcrumbList",
@@ -116,7 +123,7 @@ export default function CityPage({ data }: { data: CityData }) {
                 { l: "Regio", v: data.region },
                 { l: "Reistijd", v: data.travelTime },
                 { l: "Postcode", v: data.postal },
-                { l: "Levertijd", v: "7–14 dagen" },
+                { l: "Reactietijd", v: "Binnen 24 uur" },
               ].map((m) => (
                 <div key={m.l} className="bg-[#050505] py-6 px-4">
                   <p className="text-white/35 text-[10px] tracking-[0.3em] font-light uppercase mb-2">{m.l}</p>
@@ -133,9 +140,6 @@ export default function CityPage({ data }: { data: CityData }) {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-20">
             <div className="lg:col-span-5 anim">
-              <p className="text-white/40 text-[10px] tracking-[0.5em] font-light uppercase mb-6">
-                Lokaal · Persoonlijk
-              </p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.1]">
                 Een bureau dat <span className="italic" style={{ color: data.accent }}>{data.city}</span> kent.
               </h2>
@@ -164,12 +168,7 @@ export default function CityPage({ data }: { data: CityData }) {
             <div className="grid md:grid-cols-2 gap-px bg-white/5">
               {data.highlights.map((h, i) => (
                 <div key={i} className="bg-[#050505] p-10 lg:p-14 anim" style={{ transitionDelay: `${i * 0.08}s` }}>
-                  <div className="text-5xl font-extralight leading-none mb-8"
-                       style={{
-                         background: `linear-gradient(135deg, ${data.accent} 0%, ${data.accent}60 100%)`,
-                         WebkitBackgroundClip: "text",
-                         WebkitTextFillColor: "transparent",
-                       }}>
+                  <div className="text-5xl font-extralight leading-none mb-8" style={{ color: data.accent }}>
                     {h.n}
                   </div>
                   <h3 className="text-white text-sm tracking-[0.2em] font-light uppercase mb-4">{h.title}</h3>
@@ -186,13 +185,10 @@ export default function CityPage({ data }: { data: CityData }) {
       <section className="relative py-24 lg:py-32 border-t border-white/5">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-5xl mx-auto text-center">
-            <p className="text-white/40 text-[10px] tracking-[0.5em] font-light uppercase mb-6 anim">
-              Sectoren waar we voor werken
-            </p>
-            <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-16 anim delay-1">
-              Van ZZP tot MKB <span className="italic" style={{ color: data.accent }}>in {data.region}.</span>
+            <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-16 anim">
+              Voor elke sector <span className="italic" style={{ color: data.accent }}>in {data.region}.</span>
             </h2>
-            <div className="flex flex-wrap justify-center gap-3 anim delay-2">
+            <div className="flex flex-wrap justify-center gap-3 anim delay-1">
               {data.industries.map((ind) => (
                 <span key={ind} className="inline-block px-5 py-2.5 border border-white/10 text-white/60 text-xs tracking-[0.2em] font-light hover:text-white hover:border-white/30 transition-colors duration-300">
                   {ind}
@@ -235,15 +231,15 @@ export default function CityPage({ data }: { data: CityData }) {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-8 anim">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 10px #34d399" }}></span>
-              <p className="text-[#34d399] text-[10px] tracking-[0.4em] font-light uppercase">Beschikbaar in {data.city}</p>
+              <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: data.accent, boxShadow: `0 0 10px ${data.accent}` }}></span>
+              <p className="text-[10px] tracking-[0.4em] font-light uppercase" style={{ color: data.accent }}>Beschikbaar in {data.city}</p>
             </div>
             <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] anim delay-1">
               Klaar voor een website<br />
               <span className="italic" style={{ color: data.accent }}>die {data.city} kent?</span>
             </h2>
             <p className="mt-8 text-white/50 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-2xl mx-auto anim delay-2">
-              Binnen 24 uur reactie. Binnen 7 dagen een concept. Geen verrassingen, vaste prijs.
+              Binnen 24 uur reactie. Een helder plan voordat we beginnen — geen verrassingen, vaste prijs per fase.
             </p>
             <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center anim delay-3">
               <Link href="/#contact" className="group inline-flex items-center justify-center gap-3 px-12 py-5 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500">

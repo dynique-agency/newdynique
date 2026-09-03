@@ -43,7 +43,7 @@ export default function Vervanging() {
     message += `📝 *Naam:* ${formData.name || '(niet ingevuld)'}\n`;
     if (formData.company) message += `🏢 *Bedrijf:* ${formData.company}\n`;
     message += `\n📋 *Huidige situatie:*\n${formData.description || '(niet ingevuld)'}\n`;
-    
+
     if (wantsAppointment && formData.date) {
       message += `\n📅 *Gewenst gesprek:*\n`;
       message += `Datum: ${formData.date}\n`;
@@ -57,42 +57,43 @@ export default function Vervanging() {
   };
 
   return (
-    <main className="relative bg-white">
+    <main className="relative bg-[#050505]">
       {/* Header */}
-      <Header />
+      <Header variant="light" />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-gradient-to-br from-black via-neutral-900 to-red-950">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent"></div>
-        
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[#050505] overflow-hidden">
+        {/* Gold glow */}
+        <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-60"
+             style={{ background: "radial-gradient(circle, rgba(212,165,116,0.16) 0%, transparent 65%)" }}></div>
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-full animate-on-scroll">
-              <span className="text-red-400 text-[10px] tracking-[0.3em] font-light uppercase">Urgent</span>
+            <div className="inline-block mb-4 px-4 py-1.5 bg-[#d4a574]/10 border border-[#d4a574]/25 rounded-full animate-on-scroll">
+              <span className="text-[#d4a574] text-[10px] tracking-[0.3em] font-light uppercase">Website-check</span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.15em] leading-tight mb-6 animate-on-scroll delay-100">
               IS JOUW WEBSITE
               <br />
-              <span className="font-extralight bg-gradient-to-r from-white to-red-200 bg-clip-text text-transparent">NOG VAN DEZE TIJD?</span>
+              <span className="font-extralight text-[#d4a574]">NOG VAN DEZE TIJD?</span>
             </h1>
             <p className="text-white/60 text-sm lg:text-base font-light tracking-wide mb-6 animate-on-scroll delay-200">
-              Herken je deze signalen?
+              Drie vragen die het antwoord meestal al geven.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll delay-300">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                style={{ background: "#d4a574" }}
               >
                 <span className="relative z-10">PLAN EEN GESPREK</span>
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </a>
               <a
                 href="#problems"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white text-sm tracking-[0.2em] font-light hover:bg-white/20 hover:border-red-500/50 hover:tracking-[0.25em] transition-all duration-500"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 text-white text-sm tracking-[0.2em] font-light hover:bg-white/10 hover:border-[#d4a574]/40 hover:tracking-[0.25em] transition-all duration-500"
               >
                 ZIE HET PROBLEEM
               </a>
@@ -102,10 +103,7 @@ export default function Vervanging() {
       </section>
 
       {/* Problems Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-black via-neutral-900 to-red-950" id="problems">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]" id="problems">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -120,59 +118,59 @@ export default function Vervanging() {
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 {
-                  question: "Werkt je site nog wel op mobiel?",
-                  description: "60% van je bezoekers gebruikt een telefoon.",
+                  question: "Werkt je site nog wel goed op mobiel?",
+                  description: "Een groeiend deel van je bezoekers is onderweg. Hapert de site daar, dan ben je ze al kwijt.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                   ),
-                  color: "from-red-500 to-orange-500"
+                  color: "from-[#d4a574] to-[#b8894f]"
                 },
                 {
-                  question: "Laadt hij snel genoeg?",
-                  description: "Elke seconde kost je klanten.",
+                  question: "Laadt hij nog snel genoeg?",
+                  description: "Traagheid is meetbaar — en bepaalt direct of iemand blijft of wegklikt.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ),
-                  color: "from-orange-500 to-red-500"
+                  color: "from-[#e0b989] to-[#d4a574]"
                 },
                 {
-                  question: "Krijg je überhaupt nog aanvragen?",
-                  description: "Een site die niet converteert is zinloos.",
+                  question: "Krijg je überhaupt nog serieuze aanvragen?",
+                  description: "Een site die niet converteert, is decoratie — geen bedrijfsmiddel.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
                     </svg>
                   ),
-                  color: "from-red-500 to-pink-500"
+                  color: "from-[#c9a06a] to-[#d4a574]"
                 },
                 {
-                  question: "Duurt een aanpassing weken?",
-                  description: "Jouw bureau reageert niet. Wij wel.",
+                  question: "Duurt een aanpassing bij je huidige bureau weken?",
+                  description: "Trage doorlooptijden zijn een keuze van je bureau — niet een gegeven.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                     </svg>
                   ),
-                  color: "from-orange-500 to-red-600"
+                  color: "from-[#d4a574] to-[#a67c4a]"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="group relative p-5 lg:p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-red-500/50 hover:bg-white/10 transition-all duration-500 overflow-hidden animate-on-scroll"
+                  className="group relative p-5 lg:p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#d4a574]/40 hover:bg-white/10 transition-all duration-500 overflow-hidden animate-on-scroll"
                   style={{
                     transitionDelay: `${index * 0.1}s`
                   }}
                 >
                   {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500`}></div>
+
                   <div className="relative flex items-start gap-3">
                     <div className={`mt-0.5 p-2 rounded-lg bg-gradient-to-br ${item.color} bg-opacity-10`}>
-                      <div className="text-red-400 group-hover:text-red-300 transition-colors duration-500">
+                      <div className="text-[#d4a574] group-hover:text-[#e0b989] transition-colors duration-500">
                         {item.icon}
                       </div>
                     </div>
@@ -193,28 +191,27 @@ export default function Vervanging() {
       </section>
 
       {/* Solution Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-black via-neutral-900 to-red-950">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-red-900/10 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#050505] overflow-hidden">
+        <div aria-hidden className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-40"
+             style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 65%)" }}></div>
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-8 animate-on-scroll">
               DE OPLOSSING
             </h2>
             <p className="text-white/80 text-lg lg:text-xl font-light tracking-wide leading-relaxed mb-12 max-w-3xl mx-auto animate-on-scroll delay-100">
-              Een nieuwe website. Gebouwd op moderne technologie. Razend snel. Perfect op elk device. 
-              En binnen <span className="text-white">7-14 dagen online</span>.
+              Een nieuwe website, gebouwd op moderne technologie en een doordachte structuur. Snel, stabiel op elk device, en binnen <span className="text-white">7-14 dagen online</span>.
             </p>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {[
                 { title: "SNEL", description: "7-14 dagen van gesprek tot live" },
-                { title: "BETAALBAAR", description: "Geen maandenlange trajecten" },
-                { title: "MODERN", description: "Laatste technologie, razend snel" },
+                { title: "ZORGVULDIG", description: "Gestructureerde migratie die je bestaande content en SEO-waarde beschermt" },
+                { title: "MODERN", description: "Actuele technologie, gebouwd om mee te groeien" },
               ].map((item, index) => (
-                <div key={index} className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-red-500/50 transition-all duration-500 animate-on-scroll" style={{ transitionDelay: `${index * 0.1}s` }}>
-                  <h3 className="text-xl font-light tracking-[0.2em] mb-3">{item.title}</h3>
+                <div key={index} className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#d4a574]/40 transition-all duration-500 animate-on-scroll" style={{ transitionDelay: `${index * 0.1}s` }}>
+                  <h3 className="text-xl font-light tracking-[0.2em] mb-3 text-white">{item.title}</h3>
                   <p className="text-white/60 text-sm font-light tracking-wide">{item.description}</p>
                 </div>
               ))}
@@ -223,17 +220,17 @@ export default function Vervanging() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll delay-200">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                style={{ background: "#d4a574" }}
               >
                 <span className="relative z-10">VERVANG JOUW WEBSITE NU</span>
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white text-sm tracking-[0.2em] font-light hover:bg-white/20 hover:border-red-500/50 hover:tracking-[0.25em] transition-all duration-500"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 text-white text-sm tracking-[0.2em] font-light hover:bg-white/10 hover:border-[#d4a574]/40 hover:tracking-[0.25em] transition-all duration-500"
               >
                 DIRECT CONTACT
               </a>
@@ -243,14 +240,14 @@ export default function Vervanging() {
       </section>
 
       {/* Social Proof Section */}
-      <section className="relative py-20 lg:py-32 bg-white">
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
                 ANDEREN GINGEN JE VOOR
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
                 Van verouderde site naar moderne website in 7-14 dagen
               </p>
             </div>
@@ -260,31 +257,31 @@ export default function Vervanging() {
                 {
                   name: "Tom Creemers",
                   company: "Creemers Exclusive",
-                  quote: "We hadden een oude WordPress site die niet meer werkte. Dynique bouwde binnen een week een volledig nieuwe site met AI-visuals. Binnen een week al de eerste aanvragen.",
-                  result: "Eerste aanvraag binnen 1 week"
+                  quote: "Binnen drie dagen live. Geen enkele professionele foto, wel een strakke deadline. Dynique leverde AI-visuals die ons merk premium maakten en de eerste aanvragen kwamen binnen een week binnen.",
+                  result: "Eerste aanvragen binnen een week"
                 },
                 {
-                  name: "SA Personeel",
-                  company: "Recruitment Platform",
-                  quote: "Onze oude site was niet mobiel-vriendelijk en verouderd. Dynique bouwde een modern platform met dual-funnel architectuur. Direct meer kwalitatieve leads.",
-                  result: "Meer kwalitatieve leads"
+                  name: "Wally & Roger",
+                  company: "IJssalon Italia",
+                  quote: "Ze begrepen onze familiegeschiedenis direct. Een ijssalon online zetten klinkt eenvoudig, maar het gevoel moest kloppen. Dynique ving precies de juiste sfeer. De salon is drukker dan ooit.",
+                  result: "Salon drukker dan ooit"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-8 bg-black/[0.02] border border-black/5 hover:border-black/20 transition-all duration-500 animate-on-scroll"
+                  className="p-8 bg-white/[0.03] border border-white/10 hover:border-white/25 transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <p className="text-black/80 text-base font-light leading-relaxed mb-6">
+                  <p className="text-white/80 text-base font-light leading-relaxed mb-6">
                     "{item.quote}"
                   </p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-black text-sm tracking-[0.15em] font-light">{item.name}</p>
-                      <p className="text-black/40 text-xs tracking-wide font-light">{item.company}</p>
+                      <p className="text-white text-sm tracking-[0.15em] font-light">{item.name}</p>
+                      <p className="text-white/40 text-xs tracking-wide font-light">{item.company}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-black/60 text-xs tracking-wide font-light">{item.result}</p>
+                      <p className="text-[#d4a574] text-xs tracking-wide font-light">{item.result}</p>
                     </div>
                   </div>
                 </div>
@@ -295,7 +292,7 @@ export default function Vervanging() {
       </section>
 
       {/* Process Section */}
-      <section className="relative py-20 lg:py-32 bg-black text-white">
+      <section className="relative py-20 lg:py-32 bg-[#050505] text-white">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
@@ -312,34 +309,34 @@ export default function Vervanging() {
                 {
                   step: "01",
                   title: "GESPREK",
-                  description: "We bespreken wat er niet werkt aan je huidige site en wat je nodig hebt. 30 minuten. Direct duidelijk.",
+                  description: "We bespreken wat er niet werkt aan je huidige site en wat je nodig hebt. Direct duidelijk, zonder omhaal.",
                   duration: "30 min"
                 },
                 {
                   step: "02",
                   title: "ONTWERP & BOUW",
-                  description: "We bouwen je nieuwe website. Modern, snel, perfect op alle devices. Jij hoeft niks te doen.",
+                  description: "We bouwen je nieuwe website: modern, snel, correct op elk device. Tussentijds houden we je op de hoogte.",
                   duration: "5-10 dagen"
                 },
                 {
                   step: "03",
                   title: "FEEDBACK & FINETUNING",
-                  description: "Je bekijkt het resultaat. Kleine aanpassingen? Geen probleem. We regelen het direct.",
+                  description: "Je bekijkt het resultaat. Aanpassingen verwerken we direct, zonder ruis.",
                   duration: "1-2 dagen"
                 },
                 {
                   step: "04",
                   title: "LIVE",
-                  description: "Je nieuwe website gaat online. Oude site offline. Alles werkt perfect. Jij krijgt aanvragen.",
+                  description: "Je nieuwe website gaat online, de oude gaat offline. We controleren dat alles doet wat is afgesproken.",
                   duration: "Direct"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-8 items-start p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 transition-all duration-500 animate-on-scroll"
+                  className="flex gap-8 items-start p-6 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#d4a574]/30 transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <div className="text-5xl font-extralight text-white/20 flex-shrink-0 w-16">
+                  <div className="text-5xl font-extralight text-white/15 flex-shrink-0 w-16">
                     {item.step}
                   </div>
                   <div className="flex-1">
@@ -359,14 +356,14 @@ export default function Vervanging() {
       </section>
 
       {/* ROI Section */}
-      <section className="relative py-20 lg:py-32 bg-white">
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
                 WAT JE KRIJGT
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
                 Alles wat je nodig hebt voor een website die werkt
               </p>
             </div>
@@ -374,19 +371,19 @@ export default function Vervanging() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { title: "RAZENDSNEL", description: "Laadt in <2 seconden" },
-                { title: "MOBIEL PERFECT", description: "Werkt perfect op alle devices" },
-                { title: "SEO OPTIMAAL", description: "Gevonden worden op Google" },
-                { title: "CONVERSIE GERICHT", description: "Bezoekers worden klanten" },
-                { title: "EENVOUDIG BEHEER", description: "Wij passen alles aan" },
-                { title: "MODERN DESIGN", description: "Ziet er professioneel uit" },
+                { title: "MOBIEL PERFECT", description: "Werkt perfect op elk device" },
+                { title: "SEO BEHOUDEN", description: "Vindbaarheid en content blijven intact tijdens de migratie" },
+                { title: "CONVERSIEGERICHT", description: "Bezoekers worden serieuze aanvragen" },
+                { title: "EENVOUDIG BEHEER", description: "Wij passen aan wat nodig is" },
+                { title: "TECHNISCH ONDERBOUWD", description: "Elke keuze beargumenteerd, niet toevallig" },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-6 bg-black/[0.02] border border-black/5 hover:border-black/20 transition-all duration-500 animate-on-scroll"
+                  className="p-6 bg-white/[0.03] border border-white/10 hover:border-[#d4a574]/30 transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.05}s` }}
                 >
-                  <h3 className="text-lg font-light text-black tracking-[0.15em] mb-2">{item.title}</h3>
-                  <p className="text-black/60 text-sm font-light tracking-wide">{item.description}</p>
+                  <h3 className="text-lg font-light text-white tracking-[0.15em] mb-2">{item.title}</h3>
+                  <p className="text-white/60 text-sm font-light tracking-wide">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -395,56 +392,62 @@ export default function Vervanging() {
       </section>
 
       {/* Contact Section */}
-      <section className="relative py-20 lg:py-32 bg-black text-white" id="contact">
+      <section className="relative py-20 lg:py-32 bg-[#050505] text-white" id="contact">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center space-y-6 mb-12">
+            <div className="text-center space-y-4 mb-12">
               <h2 className="text-3xl lg:text-5xl font-light tracking-[0.15em] leading-tight animate-on-scroll">
                 VERVANG JOUW WEBSITE
               </h2>
               <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
                 Vul het formulier in en stuur direct via WhatsApp
               </p>
+              <p className="text-white/40 text-xs font-light tracking-wide animate-on-scroll delay-100">
+                We werken vanuit Limburg, voor opdrachtgevers in heel Nederland en België.
+              </p>
             </div>
 
             <div className="space-y-6 animate-on-scroll delay-200">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
+                  <label htmlFor="verv-name" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                     Naam *
                   </label>
                   <input
+                    id="verv-name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     placeholder="Jouw naam"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
+                  <label htmlFor="verv-company" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                     Bedrijfsnaam
                   </label>
                   <input
+                    id="verv-company"
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({...formData, company: e.target.value})}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     placeholder="Optioneel"
                   />
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
+                <label htmlFor="verv-description" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                   Wat werkt er niet aan je huidige website? *
                 </label>
                 <textarea
+                  id="verv-description"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   rows={4}
-                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 resize-none"
+                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 resize-none focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   placeholder="Bijvoorbeeld: niet mobiel-vriendelijk, laadt te langzaam, geen conversies..."
                 />
               </div>
@@ -455,7 +458,8 @@ export default function Vervanging() {
                   id="appointment"
                   checked={wantsAppointment}
                   onChange={(e) => setWantsAppointment(e.target.checked)}
-                  className="w-4 h-4 bg-transparent border-white/30 text-white focus:ring-white/50"
+                  className="w-4 h-4 bg-transparent border-white/30"
+                  style={{ accentColor: "#d4a574" }}
                 />
                 <label htmlFor="appointment" className="text-white/70 text-sm font-light tracking-wide cursor-pointer">
                   Ik wil een gesprek inplannen
@@ -466,26 +470,28 @@ export default function Vervanging() {
                 <div className="space-y-6 pt-4 border-t border-white/10">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
+                      <label htmlFor="verv-date" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                         Gewenste datum
                       </label>
                       <input
+                        id="verv-date"
                         type="date"
                         value={formData.date}
                         onChange={(e) => setFormData({...formData, date: e.target.value})}
-                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                       />
                     </div>
 
                     <div className="space-y-3">
-                      <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
+                      <label htmlFor="verv-time" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                         Gewenste tijd
                       </label>
                       <input
+                        id="verv-time"
                         type="time"
                         value={formData.time}
                         onChange={(e) => setFormData({...formData, time: e.target.value})}
-                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                       />
                     </div>
                   </div>
@@ -497,10 +503,11 @@ export default function Vervanging() {
                     <div className="flex gap-4">
                       <button
                         type="button"
+                        aria-pressed={formData.meetingType === 'online'}
                         onClick={() => setFormData({...formData, meetingType: 'online'})}
                         className={`px-6 py-3 text-sm font-light tracking-wide transition-all duration-300 ${
                           formData.meetingType === 'online'
-                            ? 'bg-white text-black'
+                            ? 'bg-[#d4a574] text-black'
                             : 'bg-white/10 text-white/70 hover:bg-white/20'
                         }`}
                       >
@@ -508,14 +515,15 @@ export default function Vervanging() {
                       </button>
                       <button
                         type="button"
+                        aria-pressed={formData.meetingType === 'fysiek'}
                         onClick={() => setFormData({...formData, meetingType: 'fysiek'})}
                         className={`px-6 py-3 text-sm font-light tracking-wide transition-all duration-300 ${
                           formData.meetingType === 'fysiek'
-                            ? 'bg-white text-black'
+                            ? 'bg-[#d4a574] text-black'
                             : 'bg-white/10 text-white/70 hover:bg-white/20'
                         }`}
                       >
-                        Fysiek (Amsterdam)
+                        Fysiek (Limburg)
                       </button>
                     </div>
                   </div>
@@ -524,7 +532,8 @@ export default function Vervanging() {
 
               <button
                 onClick={handleWhatsAppSubmit}
-                className="w-full mt-8 px-12 py-5 bg-white text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3"
+                className="w-full mt-8 px-12 py-5 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3"
+                style={{ background: "#d4a574" }}
               >
                 VERSTUUR VIA WHATSAPP
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -564,4 +573,3 @@ export default function Vervanging() {
     </main>
   );
 }
-

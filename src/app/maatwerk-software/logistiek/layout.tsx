@@ -18,6 +18,24 @@ export const metadata: Metadata = {
     description: "Ritplanning, track & trace en voorraad in één systeem. Maatwerk software op code voor logistiek.",
     url: "https://dynique.nl/maatwerk-software/logistiek",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor logistiek & transport",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor logistiek & transport",
+      },
+    ],
   },
 };
 

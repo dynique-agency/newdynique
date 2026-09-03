@@ -91,8 +91,8 @@ export default function CreemersExclusive() {
             >
               <div className="relative w-full overflow-hidden border border-black/10">
                 <img
-                  src="/rsc/creemers/hero.png"
-                  alt="Creemers Exclusive Website"
+                  src="/rsc/creemers/hero.webp"
+                  alt="Minimalistische zwart-witwebsite van Creemers Exclusive met AI-gegenereerde beelden en boekingstool"
                   className="w-full h-auto"
                 />
               </div>
@@ -222,7 +222,7 @@ export default function CreemersExclusive() {
               </div>
               <div className="relative w-full overflow-hidden border border-black/10">
                 <img
-                  src="/rsc/creemers/calendertool.png"
+                  src="/rsc/creemers/calendertool.webp"
                   alt="Interactive Calendar Booking Tool"
                   className="w-full h-auto"
                 />
@@ -248,9 +248,9 @@ export default function CreemersExclusive() {
                 <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory">
                   {[
                     { src: "/rsc/creemers/galery1.jpg", alt: "AI Generated Freelance Professional" },
-                    { src: "/rsc/creemers/galery2.png", alt: "AI Generated Premium Workspace" },
-                    { src: "/rsc/creemers/galery3.png", alt: "AI Generated Creative Studio" },
-                    { src: "/rsc/creemers/galery4.png", alt: "AI Generated Elegant Office" },
+                    { src: "/rsc/creemers/galery2.webp", alt: "AI Generated Premium Workspace" },
+                    { src: "/rsc/creemers/galery3.webp", alt: "AI Generated Creative Studio" },
+                    { src: "/rsc/creemers/galery4.webp", alt: "AI Generated Elegant Office" },
                   ].map((image, index) => (
                     <div
                       key={index}

@@ -31,7 +31,7 @@ const posts = [
     category: "Lokaal",
     readTime: "6 min lezen",
     date: "Mrt 2026",
-    accent: "#34d399",
+    accent: "#d4a574",
   },
 ];
 
@@ -68,7 +68,7 @@ export default function BlogIndex() {
               Het Journaal.
             </h1>
             <p className="mt-10 max-w-2xl text-white/55 text-base lg:text-xl font-light leading-[1.85] tracking-wide anim delay-2">
-              Eerlijke verhalen over web, AI en ondernemen. Geen SEO-trucjes. Geen filler. Alleen wat we daadwerkelijk geleerd hebben in projecten.
+              Eerlijke verhalen over maatwerk software en de digitale keuzes die daaraan voorafgaan. Geen SEO-trucjes. Geen filler. Alleen wat we daadwerkelijk geleerd hebben in projecten.
             </p>
           </div>
         </div>

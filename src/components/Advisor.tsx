@@ -16,13 +16,13 @@ const STEPS: Step[] = [
   {
     id: "start",
     tag: "Situatie",
-    q: "Waar sta je nu?",
-    hint: "Zo weten we vanuit welk punt we adviseren.",
+    q: "Waar loop je nu tegenaan?",
+    hint: "Zo weten we vanuit welk probleem we adviseren.",
     options: [
-      { id: "niets", label: "Ik heb nog geen website", desc: "We beginnen vanaf nul" },
-      { id: "verouderd", label: "Mijn site is verouderd of traag", desc: "Toe aan vervanging" },
-      { id: "teweinig", label: "Mijn site levert te weinig op", desc: "Werkt wel, maar te weinig resultaat" },
-      { id: "prima", label: "Mijn website is prima", desc: "Ik zoek iets anders" },
+      { id: "lostools", label: "We werken nog met losse tools", desc: "Excel, mail, WhatsApp — niets praat met elkaar" },
+      { id: "groeitniet", label: "Ons systeem past niet meer", desc: "We zijn eruit gegroeid of het remt ons af" },
+      { id: "geenapp", label: "We missen een eigen app of portaal", desc: "Klanten of team hebben geen eigen omgeving" },
+      { id: "onduidelijk", label: "We voelen het probleem, niet de oplossing", desc: "Nog niet zeker wat er precies nodig is" },
     ],
   },
   {
@@ -31,11 +31,10 @@ const STEPS: Step[] = [
     q: "Wat wil je vooral bereiken?",
     hint: "Kies wat er voor jou het zwaarst weegt.",
     options: [
-      { id: "klanten", label: "Meer klanten & aanvragen" },
-      { id: "professioneler", label: "Professioneler overkomen" },
-      { id: "gevonden", label: "Beter gevonden worden in Google" },
-      { id: "tijd", label: "Tijd besparen, minder handwerk" },
-      { id: "beeld", label: "Opvallen met beeld & video" },
+      { id: "handwerk", label: "Minder handwerk, meer automatisch" },
+      { id: "koppelen", label: "Systemen aan elkaar koppelen" },
+      { id: "app", label: "Een app of platform voor klanten/team" },
+      { id: "overzicht", label: "Overzicht en controle over het proces" },
     ],
   },
   {
@@ -44,9 +43,9 @@ const STEPS: Step[] = [
     q: "Wat is voor jou het belangrijkst?",
     hint: "Dit bepaalt hoe we het traject inrichten.",
     options: [
-      { id: "snel", label: "Snel live of snel resultaat" },
+      { id: "snel", label: "Snel starten of snel resultaat" },
       { id: "prijs", label: "Een vaste, voorspelbare prijs" },
-      { id: "premium", label: "Topkwaliteit & premium uitstraling" },
+      { id: "robuust", label: "Kwaliteit & veiligheid voorop", desc: "Code die jaren meegaat, geen quick fix" },
       { id: "lokaal", label: "Persoonlijk, lokaal contact" },
     ],
   },
@@ -73,91 +72,55 @@ type Service = {
 };
 
 const SERVICES: Record<string, Service> = {
-  eersteWebsite: {
-    title: "Een eerste website",
+  automatisering: {
+    title: "Je processen automatiseren",
     accent: "#d4a574",
-    href: "/eerste-website",
-    cta: "Bekijk hoe we starten",
-    base: "Je begint vanaf nul — dan telt vooral een heldere basis die meteen vertrouwen wekt.",
-    points: [
-      "Een strakke, snelle site die je merk direct professioneel neerzet",
-      "Mobile-first en SEO-ready opgeleverd, klaar om gevonden te worden",
-      "Begeleiding van eerste gesprek tot livegang, met een vaste prijs",
-    ],
-  },
-  vervanging: {
-    title: "Je website vervangen",
-    accent: "#a78bfa",
-    href: "/vervanging",
-    cta: "Bekijk de aanpak",
-    base: "Je hebt al een site, maar die remt je. Een moderne herbouw haalt die rem eraf.",
-    points: [
-      "Sneller, moderner en beter converterend dan je huidige site",
-      "Je SEO en bestaande content blijven behouden bij de migratie",
-      "Een uitstraling die weer past bij waar je nu staat",
-    ],
-  },
-  marketing: {
-    title: "Beter gevonden worden & meer uit je site halen",
-    accent: "#fb923c",
-    href: "/diensten/marketing",
-    cta: "Bekijk marketing & SEO",
-    base: "Je site staat er — nu draait het om vindbaarheid en conversie, niet om opnieuw bouwen.",
-    points: [
-      "SEO-fundamenten zodat je structureel hoger in Google komt",
-      "Content en campagnes die de juiste bezoekers binnenhalen",
-      "Slimme aanpassingen die meer bezoekers omzetten in klanten",
-    ],
-  },
-  processen: {
-    title: "Je processen slimmer maken",
-    accent: "#34d399",
     href: "/diensten/processen",
     cta: "Bekijk maatwerk software",
-    base: "Je grootste winst zit niet in een nieuwe site, maar in minder handwerk.",
+    base: "Je grootste winst zit niet in nog een tool erbij, maar in de tools die je al hebt slim laten samenwerken.",
     points: [
       "Koppel je website, CRM en facturatie zodat data vanzelf doorstroomt",
-      "Maatwerk software op code, gebouwd rondom hoe jullie écht werken",
-      "Eenmalige bouw, daarna bespaar je uren — elke week opnieuw",
+      "Workflows die het handwerk overnemen, niet nog een dashboard erbij",
+      "Gebouwd rondom hoe jullie nu al werken, niet andersom",
     ],
   },
-  drone: {
-    title: "Opvallen met beeld & video",
-    accent: "#38bdf8",
-    href: "/diensten/drone",
-    cta: "Bekijk video & drone",
-    base: "Onderscheidend beeld blijft hangen — zeker bewegend beeld vanuit de lucht.",
+  maatwerkSysteem: {
+    title: "Een systeem op maat",
+    accent: "#a78bfa",
+    href: "/diensten/processen",
+    cta: "Bekijk maatwerk software",
+    base: "Een kant-en-klaar pakket buigt niet mee met jouw bedrijf. Een systeem op maat wel.",
     points: [
-      "Cinematische aerial footage die je bedrijf groots in beeld brengt",
-      "Bedrijfsfilms en social reels die scrollers laten stoppen",
-      "Beeld dat je website, socials én advertenties direct sterker maakt",
+      "Gebouwd rondom jullie eigen werkwijze, niet een generiek sjabloon",
+      "Groeit mee als je bedrijf verandert, in plaats van dat jij je moet plooien",
+      "Eén overzicht in plaats van losse spreadsheets en systemen",
     ],
   },
-  web: {
-    title: "Een sterke website op maat",
-    accent: "#d4a574",
+  appPortaal: {
+    title: "Een app of platform op maat",
+    accent: "#f472b6",
     href: "/diensten/web",
-    cta: "Bekijk websites & web apps",
-    base: "Een doordachte website blijft je belangrijkste digitale visitekaartje.",
+    cta: "Bekijk web apps",
+    base: "Een eigen omgeving voor klanten of team is vaak de ontbrekende schakel — geen extra e-mail, geen losse spreadsheet.",
     points: [
-      "Maatwerk dat past bij je merk en je doelgroep",
-      "Snel, mobile-first en SEO-ready opgeleverd",
-      "Gebouwd om te converteren, niet alleen om mooi te zijn",
+      "Een eigen klantportaal of interne tool, gebouwd op maat",
+      "Modern, snel en veilig — geen page-builder die je later beperkt",
+      "Koppelbaar met de systemen die je al gebruikt",
     ],
   },
 };
 
 const APPROACH: Record<string, string> = {
-  snel: "We houden het traject strak en kort — vaak ben je binnen 1 tot 2 weken live.",
+  snel: "We houden het traject strak en kort — vaak zit je binnen een paar weken in een eerste werkende versie.",
   prijs: "Je krijgt vooraf een vaste prijs. Geen nacalculatie, geen verrassingen achteraf.",
-  premium: "We werken bewust met een klein team, zodat kwaliteit en detail altijd voorop staan.",
+  robuust: "We bouwen met code die jaren meegaat — getest en onderhoudbaar, geen quick fix.",
   lokaal: "Persoonlijk contact staat centraal — online of gewoon bij jou aan tafel in Limburg.",
 };
 
 const TIMELINE: Record<string, string> = {
   zsm: "Je wilt snel schakelen: we plannen meestal binnen een paar dagen een eerste gesprek in.",
-  maanden: "Je hebt wat ruimte in de planning — ideaal om het rustig en goed op te zetten.",
-  orienteren: "Je oriënteert je nog: een vrijblijvend gesprek of onze checklist is dan een fijn startpunt.",
+  maanden: "Je hebt wat ruimte in de planning — ideaal om de scope rustig en goed uit te werken.",
+  orienteren: "Je oriënteert je nog: een vrijblijvend gesprek is dan een goed startpunt, zonder verplichtingen.",
 };
 
 type Answers = { start?: string; goal?: string; prio?: string; speed?: string };
@@ -174,38 +137,32 @@ function computeAdvice(a: Answers): Advice {
   const { start, goal, prio, speed } = a;
 
   let key: keyof typeof SERVICES;
-  if (goal === "tijd") key = "processen";
-  else if (goal === "beeld") key = "drone";
-  else if (goal === "gevonden") key = "marketing";
-  else if (start === "niets") key = "eersteWebsite";
-  else if (start === "verouderd") key = "vervanging";
-  else if (start === "teweinig") key = goal === "professioneler" ? "vervanging" : "marketing";
-  else key = goal === "professioneler" ? "web" : "marketing";
+  if (goal === "app" || start === "geenapp") key = "appPortaal";
+  else if (goal === "handwerk" || goal === "koppelen" || start === "lostools") key = "automatisering";
+  else key = "maatwerkSysteem";
 
   const service = SERVICES[key];
 
   let secondary: Advice["secondary"] = null;
-  if (speed === "orienteren" || start === "niets") {
-    secondary = { label: "Of download eerst de gratis checklist", href: "/gratis-checklist" };
+  if (start === "onduidelijk") {
+    secondary = { label: "Twijfel je nog? Plan een gratis procesanalyse", href: "/diensten/processen" };
   } else if (prio === "lokaal") {
     secondary = { label: "Bekijk ons werkgebied in de regio", href: "/locaties/maastricht" };
-  } else if (goal === "gevonden") {
-    secondary = { label: "Lees: website laten maken in Limburg", href: "/blog/website-laten-maken-limburg" };
-  } else if (goal === "tijd") {
-    secondary = { label: "Lees: automatiseren — tool of maatwerk?", href: "/blog/n8n-make-zapier" };
+  } else if (goal === "handwerk" || goal === "koppelen") {
+    secondary = { label: "Lees: automatiseren — standaardtool of maatwerk?", href: "/blog/n8n-make-zapier" };
   }
 
   return {
     service,
     points: service.points,
-    approach: APPROACH[prio ?? "premium"] ?? APPROACH.premium,
+    approach: APPROACH[prio ?? "robuust"] ?? APPROACH.robuust,
     timeline: TIMELINE[speed ?? "maanden"] ?? TIMELINE.maanden,
     secondary,
   };
 }
 
 const LETTERS = ["A", "B", "C", "D", "E"];
-const STEP_ACCENTS = ["#d4a574", "#a78bfa", "#fb923c", "#34d399"];
+const STEP_ACCENTS = ["#d4a574", "#a78bfa", "#f472b6", "#fbbf24"];
 
 function labelFor(stepId: string, optId?: string) {
   if (!optId) return "";
@@ -305,11 +262,12 @@ export default function Advisor() {
           </div>
           <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-white tracking-[0.005em] leading-[1.02] adv-reveal adv-d1">
             Niet verkopen.<br />
-            <span className="adv-shimmer italic">Adviseren.</span>
+            <span className="italic" style={{ color: accent }}>Adviseren.</span>
           </h2>
           <p className="mt-9 text-white/55 text-base lg:text-lg font-light leading-[1.9] tracking-wide adv-reveal adv-d2">
-            Vier korte vragen. Daarna krijg je een eerlijk advies dat past bij jóuw situatie —
-            ook als dat betekent dat je (nog) geen nieuwe website nodig hebt.
+            Vier korte vragen over jouw app of maatwerk-softwarebehoefte. Daarna krijg je een
+            eerlijk advies dat past bij jóuw situatie — ook als dat betekent dat je (nog) niets
+            hoeft te laten bouwen.
           </p>
         </div>
 
@@ -356,7 +314,7 @@ export default function Advisor() {
                     <h3 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.005em] leading-[1.12]">
                       {current.q}
                     </h3>
-                    <p className="mt-4 text-white/40 text-sm font-light leading-relaxed tracking-wide max-w-xs">
+                    <p className="mt-4 text-white/60 text-sm font-light leading-relaxed tracking-wide max-w-xs">
                       {current.hint}
                     </p>
 
@@ -424,7 +382,7 @@ export default function Advisor() {
                     {isResult ? "Resultaat" : `Vraag ${step + 1} — ${STEPS.length}`}
                   </span>
                   <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5">
+                    <div className="flex gap-1.5" aria-hidden>
                       {STEPS.map((_, i) => (
                         <span
                           key={i}
@@ -477,7 +435,7 @@ export default function Advisor() {
                                 {opt.label}
                               </span>
                               {opt.desc && (
-                                <span className="block text-white/35 text-xs font-light tracking-wide mt-0.5">
+                                <span className="block text-white/60 text-xs font-light tracking-wide mt-0.5">
                                   {opt.desc}
                                 </span>
                               )}
@@ -580,7 +538,7 @@ export default function Advisor() {
                     </>
                   ) : (
                     <>
-                      <p className="text-white/30 text-xs font-light leading-relaxed tracking-wide max-w-sm">
+                      <p className="text-white/55 text-xs font-light leading-relaxed tracking-wide max-w-sm">
                         Geen verkooppraatje. We zeggen het eerlijk als we niet de beste match zijn —
                         dan denken we toch graag even met je mee.
                       </p>
@@ -615,20 +573,6 @@ export default function Advisor() {
         }
         .adv-reveal.adv-d2 {
           transition-delay: 0.26s;
-        }
-
-        /* Shimmer op 'Adviseren.' */
-        .adv-shimmer {
-          background: linear-gradient(100deg, rgba(255, 255, 255, 0.4) 30%, #ffffff 50%, rgba(255, 255, 255, 0.4) 70%);
-          background-size: 200% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: advShimmer 6s linear infinite;
-        }
-        @keyframes advShimmer {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
         }
 
         /* Console + animated edge */
@@ -669,12 +613,8 @@ export default function Advisor() {
         /* Giant ghost numeral */
         .adv-num {
           font-size: clamp(96px, 13vw, 168px);
-          color: transparent;
-          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
-          background: linear-gradient(180deg, var(--acc) 0%, transparent 85%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          opacity: 0.9;
+          color: var(--acc);
+          opacity: 0.16;
         }
 
         /* Grain */
@@ -714,7 +654,7 @@ export default function Advisor() {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .adv-shimmer, .adv-edge { animation: none; }
+          .adv-edge { animation: none; }
         }
       `}</style>
     </section>

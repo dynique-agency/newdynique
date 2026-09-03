@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -53,6 +53,34 @@ export type CaseStudyData = {
   next?: { title: string; href: string };
 };
 
+function ScrollAwareVideo({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoEl.play().catch(() => {});
+          } else {
+            videoEl.pause();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(videoEl);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video ref={videoRef} src={src} className="w-full h-full object-cover" muted loop playsInline preload="metadata" />
+  );
+}
+
 function HeroMedia({ data }: { data: CaseStudyData }) {
   const { heroVideo, heroImage, accent, title } = data;
   return (
@@ -62,7 +90,7 @@ function HeroMedia({ data }: { data: CaseStudyData }) {
       <div className="relative rounded-lg overflow-hidden bg-zinc-950 border border-white/[0.08] shadow-[0_50px_100px_-40px_rgba(0,0,0,0.95)]">
         <div className="relative aspect-[16/10] overflow-hidden">
           {heroVideo ? (
-            <video src={heroVideo} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
+            <ScrollAwareVideo src={heroVideo} />
           ) : heroImage ? (
             <img src={heroImage} alt={title} className="w-full h-full object-cover" />
           ) : (
@@ -227,9 +255,8 @@ export default function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
       {data.features && data.features.length > 0 && (
         <section className="relative px-6 lg:px-12 py-20 lg:py-28">
           <div className="container mx-auto">
-            <div className="cs-anim flex items-center gap-3 mb-12">
-              <div className="w-10 h-px" style={{ background: accent, opacity: 0.8 }} />
-              <span className="text-white/40 text-[10px] tracking-[0.5em] font-light">WAT WE BOUWDEN</span>
+            <div className="cs-anim mb-12">
+              <span className="text-[11px] tracking-[0.15em] font-light uppercase" style={{ color: accent }}>Wat we bouwden</span>
             </div>
             <div className="grid md:grid-cols-2 gap-px bg-white/[0.06] border border-white/[0.06]">
               {data.features.map((f, idx) => (
@@ -323,15 +350,12 @@ export default function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="cs-anim">
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-px bg-white/20" />
-                <p className="text-white/30 text-[10px] tracking-[0.5em] font-light">KLAAR VOOR MEER</p>
-              </div>
+              <div className="w-10 h-px bg-white/20 mb-5" />
               <h2 className="text-4xl lg:text-5xl font-extralight text-white tracking-[0.05em] leading-[1.05] mb-6">
                 Bouwen we<br />
                 <span className="italic text-white/55">de jouwe?</span>
               </h2>
-              <p className="text-white/40 text-sm font-light leading-relaxed tracking-wide max-w-md">
+              <p className="text-white/60 text-sm font-light leading-relaxed tracking-wide max-w-md">
                 Eén gesprek is genoeg om te weten of het klikt. We denken graag mee, vrijblijvend.
               </p>
             </div>

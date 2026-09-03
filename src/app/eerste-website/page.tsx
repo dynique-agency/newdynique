@@ -43,7 +43,7 @@ export default function EersteWebsite() {
     message += `📝 *Naam:* ${formData.name || '(niet ingevuld)'}\n`;
     if (formData.company) message += `🏢 *Bedrijf:* ${formData.company}\n`;
     message += `\n📋 *Wat ik nodig heb:*\n${formData.description || '(niet ingevuld)'}\n`;
-    
+
     if (wantsAppointment && formData.date) {
       message += `\n📅 *Gewenst gesprek:*\n`;
       message += `Datum: ${formData.date}\n`;
@@ -57,44 +57,45 @@ export default function EersteWebsite() {
   };
 
   return (
-    <main className="relative bg-white">
+    <main className="relative bg-[#050505]">
       {/* Header */}
-      <Header />
+      <Header variant="light" />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/80">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/20 to-transparent"></div>
-        
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-[#050505] overflow-hidden">
+        {/* Gold glow */}
+        <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-60"
+             style={{ background: "radial-gradient(circle, rgba(212,165,116,0.16) 0%, transparent 65%)" }}></div>
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full animate-on-scroll">
-              <span className="text-emerald-600 text-[10px] tracking-[0.3em] font-light uppercase">Start Vandaag</span>
+            <div className="inline-block mb-4 px-4 py-1.5 bg-[#d4a574]/10 border border-[#d4a574]/25 rounded-full animate-on-scroll">
+              <span className="text-[#d4a574] text-[10px] tracking-[0.3em] font-light uppercase">Fundament</span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-black tracking-[0.15em] leading-tight mb-6 animate-on-scroll delay-100">
-              JOUW EERSTE
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-[0.15em] leading-tight mb-6 animate-on-scroll delay-100">
+              NOG GEEN
               <br />
-              <span className="font-extralight bg-gradient-to-r from-black to-emerald-600 bg-clip-text text-transparent">WEBSITE?</span>
+              <span className="font-extralight text-[#d4a574]">WEBSITE?</span>
             </h1>
-            <p className="text-black/60 text-sm lg:text-base font-light tracking-wide mb-6 animate-on-scroll delay-200">
-              We snappen dat het overweldigend kan zijn.
+            <p className="text-white/60 text-sm lg:text-base font-light tracking-wide mb-6 max-w-2xl mx-auto animate-on-scroll delay-200">
+              Je hebt tot nu toe zonder gered. Vanaf hier bouwen we het fundament waar de rest op verder gaat — geen sjabloon, maar een structuur die past bij hoe je bedrijf al werkt.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll delay-300">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                style={{ background: "#d4a574" }}
               >
-                <span className="relative z-10">START VANDAAG</span>
+                <span className="relative z-10">START HET GESPREK</span>
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </a>
               <a
                 href="#doubts"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-emerald-50/50 backdrop-blur-sm border border-emerald-200/50 text-black text-sm tracking-[0.2em] font-light hover:bg-emerald-100/50 hover:border-emerald-500/50 hover:tracking-[0.25em] transition-all duration-500"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 text-white text-sm tracking-[0.2em] font-light hover:bg-white/10 hover:border-[#d4a574]/40 hover:tracking-[0.25em] transition-all duration-500"
               >
-                BEANTWOORD VRAGEN
+                EERST DE VRAGEN
               </a>
             </div>
           </div>
@@ -102,87 +103,84 @@ export default function EersteWebsite() {
       </section>
 
       {/* Doubts Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/80" id="doubts">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/20 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]" id="doubts">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-3 animate-on-scroll">
-                WE SNAPPEN HET
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-3 animate-on-scroll">
+                TERECHTE VRAGEN
               </h2>
-              <p className="text-black/60 text-sm lg:text-base font-light tracking-wide animate-on-scroll delay-100">
-                Deze vragen horen we vaak
+              <p className="text-white/60 text-sm lg:text-base font-light tracking-wide animate-on-scroll delay-100">
+                Dit horen we vaak bij een eerste website
               </p>
             </div>
 
             <div className="space-y-4 mb-10">
               {[
                 {
-                  question: "Wat moet erop staan?",
-                  answer: "We helpen je. Jouw verhaal, wat je doet, hoe klanten je kunnen bereiken. Simpel.",
+                  question: "We hebben nog nooit een website gehad — waar beginnen we?",
+                  answer: "Met een gesprek, niet met een sjabloon. We brengen in kaart wat je bedrijf al doet en voor wie, en vertalen dat naar structuur en inhoud — voordat er een regel code geschreven wordt.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   ),
-                  color: "from-emerald-500 to-teal-500"
+                  color: "from-[#d4a574] to-[#b8894f]"
                 },
                 {
-                  question: "Moet het meteen perfect zijn?",
-                  answer: "Nee. Start met een goede basis. Aanpassen kan altijd. Beter online dan perfect in je hoofd.",
+                  question: "Moet dit meteen alles kunnen?",
+                  answer: "Nee. We bouwen een heldere basis nu, met een architectuur die ruimte laat voor een klantportaal, koppeling of systeem zodra dat relevant wordt — niet alles tegelijk.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   ),
-                  color: "from-teal-500 to-cyan-500"
+                  color: "from-[#e0b989] to-[#d4a574]"
                 },
                 {
-                  question: "Is het niet te duur?",
-                  answer: "Veel betaalbaarder dan je denkt. En het verdient zich direct terug via aanvragen.",
+                  question: "Hoe weten we dat dit technisch goed staat?",
+                  answer: "Doordat we projectmatig werken: vaste fases, duidelijke opleverpunten en verantwoording over de keuzes die we maken. Geen black box.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ),
-                  color: "from-emerald-500 to-green-500"
+                  color: "from-[#c9a06a] to-[#d4a574]"
                 },
                 {
-                  question: "Wat als ik geen foto's heb?",
-                  answer: "Geen probleem. We maken ze met AI. Ziet er premium uit. Klaar in dagen.",
+                  question: "En als we het ergens niet mee eens zijn?",
+                  answer: "Zeg het gewoon. Als wij een betere aanpak zien, zeggen we dat ook als er niet naar gevraagd is — dat is hoe we werken.",
                   icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                   ),
-                  color: "from-cyan-500 to-emerald-500"
+                  color: "from-[#d4a574] to-[#a67c4a]"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="group relative p-5 lg:p-6 bg-white border border-emerald-100/50 hover:border-emerald-500/30 hover:bg-emerald-50/30 transition-all duration-500 overflow-hidden animate-on-scroll"
+                  className="group relative p-5 lg:p-6 bg-white/[0.03] border border-white/10 hover:border-[#d4a574]/40 hover:bg-white/[0.05] transition-all duration-500 overflow-hidden animate-on-scroll"
                   style={{
                     transitionDelay: `${index * 0.1}s`
                   }}
                 >
                   {/* Gradient background on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
+                  <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500`}></div>
+
                   <div className="relative flex items-start gap-4">
                     <div className="mt-1 flex-shrink-0">
                       <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
-                        <div className="text-white">
+                        <div className="text-black">
                           {item.icon}
                         </div>
                       </div>
                     </div>
                     <div className="flex-1">
-                      <p className="text-black text-sm lg:text-base font-light tracking-wide mb-2">
+                      <p className="text-white text-sm lg:text-base font-light tracking-wide mb-2">
                         {item.question}
                       </p>
-                      <p className="text-black/60 text-xs lg:text-sm font-light tracking-wide leading-relaxed">
+                      <p className="text-white/60 text-xs lg:text-sm font-light tracking-wide leading-relaxed">
                         {item.answer}
                       </p>
                     </div>
@@ -195,38 +193,37 @@ export default function EersteWebsite() {
       </section>
 
       {/* Why Now Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/80">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/20 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#050505] overflow-hidden">
+        <div aria-hidden className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-40"
+             style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 65%)" }}></div>
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-8 animate-on-scroll">
-              WAAROM NU?
+            <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-8 animate-on-scroll">
+              WAAROM NU BEGINNEN
             </h2>
-            <p className="text-black/80 text-lg lg:text-xl font-light tracking-wide leading-relaxed mb-16 max-w-3xl mx-auto animate-on-scroll delay-100">
-              Elke dag dat je wacht, missen potentiële klanten je online. 
-              Ze zoeken wat jij aanbiedt. Maar ze vinden je niet.
+            <p className="text-white/80 text-lg lg:text-xl font-light tracking-wide leading-relaxed mb-16 max-w-3xl mx-auto animate-on-scroll delay-100">
+              Zonder eigen website ben je afhankelijk van kanalen die niet van jou zijn — een social-account, een marktplaats-vermelding. Een eigen fundament verandert dat.
             </p>
 
             <div className="grid md:grid-cols-3 gap-8 mb-16">
               {[
                 {
-                  stat: "70%",
-                  description: "Van je klanten zoekt online eerst voordat ze contact opnemen"
+                  title: "EIGEN FUNDAMENT",
+                  description: "Een domein en structuur die van jou zijn — niet geleend van een platform-algoritme."
                 },
                 {
-                  stat: "24/7",
-                  description: "Je website werkt. Ook als jij slaapt. Altijd bereikbaar."
+                  title: "RUIMTE OM TE GROEIEN",
+                  description: "Gebouwd als basis, niet als eindpunt: klaar voor een klantportaal of systeemkoppeling zodra dat relevant wordt."
                 },
                 {
-                  stat: "10x",
-                  description: "Meer vertrouwen. Een professionele website geeft instant geloofwaardigheid."
+                  title: "PROJECTMATIG OPGELEVERD",
+                  description: "Vaste fases en heldere opleverpunten, zodat je precies weet wat je krijgt en wanneer."
                 },
               ].map((item, index) => (
-                <div key={index} className="p-8 bg-white border border-emerald-100/50 hover:border-emerald-500/30 transition-all duration-500 animate-on-scroll" style={{ transitionDelay: `${index * 0.1}s` }}>
-                  <div className="text-4xl lg:text-5xl font-extralight mb-4 text-black">{item.stat}</div>
-                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">
+                <div key={index} className="p-8 bg-white/[0.03] border border-white/10 hover:border-[#d4a574]/40 transition-all duration-500 animate-on-scroll" style={{ transitionDelay: `${index * 0.1}s` }}>
+                  <h3 className="text-lg font-light tracking-[0.15em] mb-4 text-[#d4a574]">{item.title}</h3>
+                  <p className="text-white/60 text-sm font-light leading-relaxed tracking-wide">
                     {item.description}
                   </p>
                 </div>
@@ -236,17 +233,17 @@ export default function EersteWebsite() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll delay-200">
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                className="group relative inline-flex items-center gap-3 px-10 py-4 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] hover:px-12 transition-all duration-500 overflow-hidden"
+                style={{ background: "#d4a574" }}
               >
                 <span className="relative z-10">START JOUW WEBSITE</span>
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-3 px-10 py-4 bg-emerald-50/50 backdrop-blur-sm border border-emerald-200/50 text-black text-sm tracking-[0.2em] font-light hover:bg-emerald-100/50 hover:border-emerald-500/50 hover:tracking-[0.25em] transition-all duration-500"
+                className="inline-flex items-center gap-3 px-10 py-4 bg-white/5 backdrop-blur-sm border border-white/15 text-white text-sm tracking-[0.2em] font-light hover:bg-white/10 hover:border-[#d4a574]/40 hover:tracking-[0.25em] transition-all duration-500"
               >
                 DIRECT CONTACT
               </a>
@@ -256,15 +253,15 @@ export default function EersteWebsite() {
       </section>
 
       {/* Social Proof Section */}
-      <section className="relative py-20 lg:py-32 bg-white">
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
                 VAN NUL TOT WEBSITE
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
-                Anderen startten ook zonder ervaring
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+                Ook zij begonnen zonder online fundament
               </p>
             </div>
 
@@ -273,31 +270,31 @@ export default function EersteWebsite() {
                 {
                   name: "Stacy Kohnen",
                   company: "Zangeres",
-                  quote: "Ik had geen idee waar te beginnen. Dynique hielp me met alles: van branding tot booking systeem. Binnen een week stond ik online met een professionele website.",
-                  result: "Online binnen 1 week"
+                  quote: "Andere bureaus zeiden weken. Dynique leverde een meertalige website met booking-systeem binnen zeven dagen. De site voelt professioneler dan ik had durven hopen.",
+                  result: "Aanvragen verdubbeld"
                 },
                 {
-                  name: "House of Chocolate",
-                  company: "E-commerce",
-                  quote: "Van nul tot complete branding en webshop. Geen logo, geen foto's, geen probleem. Dynique regelde alles met AI. Nu verkopen we online.",
-                  result: "Complete branding + webshop"
+                  name: "Mitchell & Gert-Jan",
+                  company: "Chefs Connect",
+                  quote: "Een platform waar topchefs en premium keukens elkaar vinden: klinkt complex, werd elegant. Dynique dacht mee, bouwde snel en leverde een product dat direct serieus genomen wordt.",
+                  result: "Direct serieus genomen"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-8 bg-black/[0.02] border border-black/5 hover:border-black/20 transition-all duration-500 animate-on-scroll"
+                  className="p-8 bg-white/[0.03] border border-white/10 hover:border-white/25 transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <p className="text-black/80 text-base font-light leading-relaxed mb-6">
+                  <p className="text-white/80 text-base font-light leading-relaxed mb-6">
                     "{item.quote}"
                   </p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-black text-sm tracking-[0.15em] font-light">{item.name}</p>
-                      <p className="text-black/40 text-xs tracking-wide font-light">{item.company}</p>
+                      <p className="text-white text-sm tracking-[0.15em] font-light">{item.name}</p>
+                      <p className="text-white/40 text-xs tracking-wide font-light">{item.company}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-black/60 text-xs tracking-wide font-light">{item.result}</p>
+                      <p className="text-[#d4a574] text-xs tracking-wide font-light">{item.result}</p>
                     </div>
                   </div>
                 </div>
@@ -308,17 +305,14 @@ export default function EersteWebsite() {
       </section>
 
       {/* Process Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/80">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/20 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#050505]">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
                 HET PROCES
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
                 7-14 dagen van gesprek tot live website
               </p>
             </div>
@@ -328,42 +322,42 @@ export default function EersteWebsite() {
                 {
                   step: "01",
                   title: "GESPREK",
-                  description: "We bespreken wat je doet, wat je nodig hebt, en wat je wilt bereiken. Geen technisch jargon. Gewoon een gesprek.",
+                  description: "We bespreken wat je bedrijf doet, wat je nodig hebt en wat je wilt bereiken. Concreet, zonder onnodig jargon.",
                   duration: "30 min"
                 },
                 {
                   step: "02",
-                  title: "BRANDING & DESIGN",
-                  description: "Geen logo? Geen foto's? Geen probleem. We maken alles met AI. Logo, visuals, kleuren - alles wordt geregeld.",
+                  title: "STRUCTUUR & DESIGN",
+                  description: "We zetten de opbouw en visuele richting neer op basis van hoe je bedrijf werkt — inclusief AI-visuals waar dat nodig is.",
                   duration: "2-3 dagen"
                 },
                 {
                   step: "03",
-                  title: "BOUW & ONTWIKKELING",
-                  description: "We bouwen je website. Modern, snel, perfect op alle devices. Jij hoeft niks te doen, wij regelen alles.",
+                  title: "BOUW & OPLEVERING",
+                  description: "We bouwen de website: modern, snel, correct op elk device. Tussentijds houden we je op de hoogte van de voortgang.",
                   duration: "5-8 dagen"
                 },
                 {
                   step: "04",
-                  title: "LIVE & TRAINING",
-                  description: "Je website gaat online. We geven je een korte training. Je begrijpt hoe alles werkt. Klaar om klanten te krijgen.",
+                  title: "LIVE & TOELICHTING",
+                  description: "Je website gaat online. We lopen samen door hoe alles werkt, zodat je precies weet wat je hebt en hoe je het beheert.",
                   duration: "1 dag"
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-8 items-start p-6 bg-white border border-emerald-100/50 hover:border-emerald-500/30 transition-all duration-500 animate-on-scroll"
+                  className="flex gap-8 items-start p-6 bg-white/[0.03] border border-white/10 hover:border-[#d4a574]/30 transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.1}s` }}
                 >
-                  <div className="text-5xl font-extralight text-black/10 flex-shrink-0 w-16">
+                  <div className="text-5xl font-extralight text-white/10 flex-shrink-0 w-16">
                     {item.step}
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-4 mb-3">
-                      <h3 className="text-xl font-light tracking-[0.2em] text-black">{item.title}</h3>
-                      <span className="text-black/40 text-xs tracking-wide">{item.duration}</span>
+                      <h3 className="text-xl font-light tracking-[0.2em] text-white">{item.title}</h3>
+                      <span className="text-white/40 text-xs tracking-wide">{item.duration}</span>
                     </div>
-                    <p className="text-black/70 text-sm font-light leading-relaxed tracking-wide">
+                    <p className="text-white/70 text-sm font-light leading-relaxed tracking-wide">
                       {item.description}
                     </p>
                   </div>
@@ -375,40 +369,37 @@ export default function EersteWebsite() {
       </section>
 
       {/* What You Get Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-emerald-50 via-white to-emerald-50/80">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-100/20 to-transparent"></div>
-        
+      <section className="relative py-20 lg:py-32 bg-[#0a0a0a]">
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight mb-4 animate-on-scroll">
                 WAT JE KRIJGT
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
-                Alles wat je nodig hebt voor je eerste website
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+                Alles wat je nodig hebt voor een gedegen eerste website
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { title: "COMPLETE BRANDING", description: "Logo, kleuren, typografie" },
-                { title: "AI VISUALS", description: "Professionele foto's en video's" },
+                { title: "FUNDAMENT OP MAAT", description: "Structuur gebouwd rond hoe jouw bedrijf werkt" },
+                { title: "AI-VISUALS WAAR NODIG", description: "Professioneel beeldmateriaal, ook zonder eigen fotografie" },
                 { title: "RAZENDSNEL", description: "Laadt in <2 seconden" },
-                { title: "MOBIEL PERFECT", description: "Werkt perfect op alle devices" },
-                { title: "SEO OPTIMAAL", description: "Gevonden worden op Google" },
-                { title: "CONTACT FORMULIER", description: "Bezoekers worden klanten" },
-                { title: "SOCIAL MEDIA", description: "Koppeling met je accounts" },
-                { title: "EENVOUDIG BEHEER", description: "Wij passen alles aan" },
-                { title: "TRAINING", description: "Je begrijpt hoe alles werkt" },
+                { title: "MOBIEL PERFECT", description: "Werkt vlekkeloos op elk device" },
+                { title: "SEO-FUNDAMENT", description: "Technisch correct opgezet om gevonden te worden" },
+                { title: "CONTACTFORMULIER", description: "Bezoekers worden serieuze aanvragen" },
+                { title: "KOPPELBAAR", description: "Architectuur met ruimte voor uitbreiding naar systemen" },
+                { title: "EENVOUDIG BEHEER", description: "Wij passen aan wat nodig is" },
+                { title: "TOELICHTING", description: "Je begrijpt precies hoe het werkt en waarom" },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="p-6 bg-white border border-emerald-100/50 hover:border-emerald-500/30 hover:bg-emerald-50/30 transition-all duration-500 animate-on-scroll"
+                  className="p-6 bg-white/[0.03] border border-white/10 hover:border-[#d4a574]/30 hover:bg-white/[0.05] transition-all duration-500 animate-on-scroll"
                   style={{ transitionDelay: `${index * 0.05}s` }}
                 >
-                  <h3 className="text-lg font-light tracking-[0.15em] mb-2 text-black">{item.title}</h3>
-                  <p className="text-black/60 text-sm font-light tracking-wide">{item.description}</p>
+                  <h3 className="text-lg font-light tracking-[0.15em] mb-2 text-white">{item.title}</h3>
+                  <p className="text-white/60 text-sm font-light tracking-wide">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -417,56 +408,62 @@ export default function EersteWebsite() {
       </section>
 
       {/* Contact Section */}
-      <section className="relative py-20 lg:py-32 bg-white" id="contact">
+      <section className="relative py-20 lg:py-32 bg-[#050505]" id="contact">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center space-y-6 mb-12">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] leading-tight animate-on-scroll">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl lg:text-5xl font-light text-white tracking-[0.15em] leading-tight animate-on-scroll">
                 START JOUW WEBSITE
               </h2>
-              <p className="text-black/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
+              <p className="text-white/60 text-base lg:text-lg font-light tracking-wide animate-on-scroll delay-100">
                 Vul het formulier in en stuur direct via WhatsApp
+              </p>
+              <p className="text-white/40 text-xs font-light tracking-wide animate-on-scroll delay-100">
+                We werken vanuit Limburg, voor opdrachtgevers in heel Nederland en België.
               </p>
             </div>
 
             <div className="space-y-6 animate-on-scroll delay-200">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-3">
-                  <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                  <label htmlFor="ew-name" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                     Naam *
                   </label>
                   <input
+                    id="ew-name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-transparent border-b border-black/20 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                     placeholder="Jouw naam"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                  <label htmlFor="ew-company" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                     Bedrijfsnaam
                   </label>
                   <input
+                    id="ew-company"
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({...formData, company: e.target.value})}
-                    className="w-full bg-transparent border-b border-black/20 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                    className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                     placeholder="Optioneel"
                   />
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                <label htmlFor="ew-description" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                   Wat wil je met je website bereiken? *
                 </label>
                 <textarea
+                  id="ew-description"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   rows={4}
-                  className="w-full bg-transparent border-b border-black/20 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 resize-none"
+                  className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 resize-none focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                   placeholder="Bijvoorbeeld: klanten werven, producten verkopen, portfolio tonen..."
                 />
               </div>
@@ -477,67 +474,72 @@ export default function EersteWebsite() {
                   id="appointment"
                   checked={wantsAppointment}
                   onChange={(e) => setWantsAppointment(e.target.checked)}
-                  className="w-4 h-4 bg-transparent border-black/30 text-black focus:ring-black/50"
+                  className="w-4 h-4 bg-transparent border-white/30"
+                  style={{ accentColor: "#d4a574" }}
                 />
-                <label htmlFor="appointment" className="text-black/70 text-sm font-light tracking-wide cursor-pointer">
+                <label htmlFor="appointment" className="text-white/70 text-sm font-light tracking-wide cursor-pointer">
                   Ik wil een gesprek inplannen
                 </label>
               </div>
 
               {wantsAppointment && (
-                <div className="space-y-6 pt-4 border-t border-black/10">
+                <div className="space-y-6 pt-4 border-t border-white/10">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                      <label htmlFor="ew-date" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                         Gewenste datum
                       </label>
                       <input
+                        id="ew-date"
                         type="date"
                         value={formData.date}
                         onChange={(e) => setFormData({...formData, date: e.target.value})}
-                        className="w-full bg-transparent border-b border-black/20 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                       />
                     </div>
 
                     <div className="space-y-3">
-                      <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                      <label htmlFor="ew-time" className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                         Gewenste tijd
                       </label>
                       <input
+                        id="ew-time"
                         type="time"
                         value={formData.time}
                         onChange={(e) => setFormData({...formData, time: e.target.value})}
-                        className="w-full bg-transparent border-b border-black/20 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300"
+                        className="w-full bg-transparent border-b border-white/20 focus:border-white text-white text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#d4a574]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-black/60 text-xs tracking-[0.2em] font-light uppercase">
+                    <label className="text-white/60 text-xs tracking-[0.2em] font-light uppercase">
                       Gesprekstype
                     </label>
                     <div className="flex gap-4">
                       <button
                         type="button"
+                        aria-pressed={formData.meetingType === 'online'}
                         onClick={() => setFormData({...formData, meetingType: 'online'})}
                         className={`px-6 py-3 text-sm font-light tracking-wide transition-all duration-300 ${
                           formData.meetingType === 'online'
-                            ? 'bg-black text-white'
-                            : 'bg-black/5 text-black/70 hover:bg-black/10'
+                            ? 'bg-[#d4a574] text-black'
+                            : 'bg-white/10 text-white/70 hover:bg-white/20'
                         }`}
                       >
                         Online (Google Meet)
                       </button>
                       <button
                         type="button"
+                        aria-pressed={formData.meetingType === 'fysiek'}
                         onClick={() => setFormData({...formData, meetingType: 'fysiek'})}
                         className={`px-6 py-3 text-sm font-light tracking-wide transition-all duration-300 ${
                           formData.meetingType === 'fysiek'
-                            ? 'bg-black text-white'
-                            : 'bg-black/5 text-black/70 hover:bg-black/10'
+                            ? 'bg-[#d4a574] text-black'
+                            : 'bg-white/10 text-white/70 hover:bg-white/20'
                         }`}
                       >
-                        Fysiek (Amsterdam)
+                        Fysiek (Limburg)
                       </button>
                     </div>
                   </div>
@@ -546,7 +548,8 @@ export default function EersteWebsite() {
 
               <button
                 onClick={handleWhatsAppSubmit}
-                className="w-full mt-8 px-12 py-5 bg-black text-white text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3"
+                className="w-full mt-8 px-12 py-5 text-black text-sm tracking-[0.2em] font-light hover:tracking-[0.25em] transition-all duration-500 flex items-center justify-center gap-3"
+                style={{ background: "#d4a574" }}
               >
                 VERSTUUR VIA WHATSAPP
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -586,4 +589,3 @@ export default function EersteWebsite() {
     </main>
   );
 }
-

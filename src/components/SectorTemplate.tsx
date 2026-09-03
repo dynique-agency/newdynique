@@ -107,9 +107,18 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
                     STEL JE VRAAG
                   </a>
                 </div>
-                <div className="hv hv-5 mt-10 flex items-center gap-3 text-white/35 text-xs font-light tracking-wide">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
-                  Gratis &amp; vrijblijvend · gebouwd met code, geen standaardpakket
+                <div className="hv hv-5 mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-white/60 text-xs font-light tracking-wide">
+                  <span className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+                    Gratis &amp; vrijblijvend · gebouwd met code, geen standaardpakket
+                  </span>
+                  <Link href="/portfolio"
+                    className="group inline-flex items-center gap-1.5 text-white/50 hover:text-white/85 underline underline-offset-4 decoration-white/20 hover:decoration-white/50 transition-colors duration-300">
+                    Bekijk ons werk
+                    <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
 
@@ -142,7 +151,7 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06]">
                 {data.pains.map((c) => (
                   <div key={c.k} className="cost-card group bg-[#070707] px-7 py-9 relative overflow-hidden">
-                    <div className="relative mb-6 text-white/35 group-hover:text-[#34d399] transition-colors duration-300">
+                    <div className="relative mb-6 text-white/35 group-hover:text-[#d4a574] transition-colors duration-300">
                       <CostIcon k={c.icon} />
                     </div>
                     <p className="relative text-[10px] tracking-[0.4em] font-light mb-3" style={{ color: ACCENT }}>{c.k}</p>
@@ -228,7 +237,6 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
         <section className="relative px-6 lg:px-12 py-20 lg:py-28">
           <div className="container mx-auto">
             <div className="max-w-3xl anim mb-12">
-              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>HOE WE BEGINNEN</p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
                 Er is geen betere plek om je processen te begrijpen
                 <span className="text-white/45 italic"> dan waar het werk gebeurt.</span>
@@ -246,6 +254,20 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
                   <p className="text-white/50 text-sm font-light leading-relaxed tracking-wide">{s.d}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── FOUNDER VOICE / CREDIBILITY ─────────────────── */}
+        <section className="relative px-6 lg:px-12 py-16 lg:py-20 border-t border-white/[0.06]">
+          <div className="container mx-auto">
+            <div className="max-w-3xl mx-auto text-center anim">
+              <div className="w-8 h-px mx-auto mb-7" style={{ background: ACCENT }} />
+              <p className="text-white/70 text-lg lg:text-xl font-extralight leading-[1.7] tracking-wide italic">
+                &ldquo;Ik breng eerst in kaart hoe jullie in {data.sectorPhrase} nu werken — niet hoe een standaardpakket
+                denkt dat het zou moeten. Inclusief een eigen mening, als ik ergens een betere oplossing zie.&rdquo;
+              </p>
+              <p className="mt-6 text-white/35 text-[10px] tracking-[0.4em] font-light">OPRICHTER · DYNIQUE</p>
             </div>
           </div>
         </section>
@@ -306,7 +328,7 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </button>
-                  <p className="mt-5 text-center text-white/35 text-xs font-light tracking-wide">
+                  <p className="mt-5 text-center text-white/60 text-xs font-light tracking-wide">
                     Liever direct?{" "}
                     <a href="https://wa.me/31624572572" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">WhatsApp ons</a>
                     {" "}of mail{" "}

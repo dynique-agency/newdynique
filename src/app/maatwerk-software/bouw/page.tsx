@@ -2,7 +2,7 @@
 
 import SectorTemplate, { SectorData } from "@/components/SectorTemplate";
 
-const A = "#34d399";
+const A = "#d4a574";
 
 const data: SectorData = {
   slug: "bouw",
@@ -27,7 +27,7 @@ const data: SectorData = {
   painParagraphs: [
     "Op de bouwplaats loopt het. Maar achter de schermen verdwijnt er tijd in werkbonnen op papier, uren in Excel en calculaties in losse sheets die nergens op aansluiten.",
     "Gegevens worden meerdere keren ingevoerd, bonnen raken kwijt en van gewerkte uren naar een factuur duurt veel te lang. Je team werkt om de software heen in plaats van ermee.",
-    "En dat kost niet alleen tijd, maar ook overzicht en marge.",
+    "En dat kost niet alleen tijd, maar uiteindelijk ook marge op elk project.",
   ],
   pains: [
     { k: "WERKBONNEN", icon: "OVERZICHT", v: "Bonnen op papier of via WhatsApp raken kwijt of komen te laat binnen." },

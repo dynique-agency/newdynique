@@ -1,5 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -8,39 +15,38 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dynique.nl"),
-  title: "Dynique — Full Creative Development Agency",
-  description: "Websites, maatwerk software, AI marketing en drone videografie voor ambitieuze ondernemers. Dynamisch in aanpak, uniek in resultaat. Limburg & nationaal.",
+  title: "Dynique — Maatwerk Software & Development",
+  description: "Maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten. Technisch onderbouwd, projectmatig en veilig — met websites en digitale processen als fundament.",
   keywords: [
-    "creative development agency limburg",
+    "maatwerk software laten maken",
+    "bedrijfssoftware op maat",
+    "maatwerk software nederland",
+    "maatwerk software belgië",
+    "software op maat voor bedrijven",
+    "digitale bedrijfsprocessen automatiseren",
+    "workflow automatisering",
+    "web applicatie laten bouwen",
+    "app laten ontwikkelen op maat",
+    "systemen koppelen bedrijf",
+    "web app laten maken",
     "website laten maken limburg",
     "website laten maken maastricht",
     "website laten maken heerlen",
-    "web app laten maken",
     "webdesign bureau limburg",
-    "digitale bedrijfsprocessen automatiseren",
-    "workflow automatisering mkb",
+    "webshop laten maken",
+    "website laten bouwen",
+    "professionele website laten maken",
+    "responsive website laten maken",
+    "bedrijfswebsite laten maken",
+    "e-commerce website limburg",
     "ai marketing bureau",
     "ai content marketing",
     "drone videografie limburg",
     "drone video bedrijf",
     "dji mini 5 pro bedrijfsfilm",
     "aerial footage nederland",
-    "webshop laten maken",
-    "website laten bouwen",
-    "professionele website laten maken",
-    "website laten maken voor zzp",
-    "website laten maken startende ondernemer",
-    "snelle website laten maken",
-    "responsive website laten maken",
-    "bedrijfswebsite laten maken",
-    "e-commerce website limburg",
-    "lokaal webdesign bureau",
-    "maatwerk software laten maken",
-    "bedrijfssoftware op maat",
     "ai website design",
-    "maatwerk software limburg",
-    "seo bureau limburg",
-    "full service digital agency nederland"
+    "seo bureau limburg"
   ],
   authors: [{ name: "Dynique" }],
   creator: "Dynique",
@@ -64,23 +70,23 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
     url: 'https://dynique.nl',
     siteName: 'Dynique',
-    title: 'Dynique — Full Creative Development Agency',
-    description: 'Websites, maatwerk software, AI marketing en drone videografie. Dynamisch in aanpak, uniek in resultaat.',
+    title: 'Dynique — Maatwerk Software & Development',
+    description: 'Maatwerk software voor bedrijven in Nederland en België — technisch onderbouwd, projectmatig en veilig, met websites en digitale processen als fundament.',
     images: [
       {
-        url: 'https://dynique.nl/og.png',
+        url: 'https://dynique.nl/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Dynique — Full Creative Development Agency',
+        alt: 'Dynique — Maatwerk Software & Development',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dynique — Full Creative Development Agency',
-    description: 'Websites, maatwerk software, AI marketing en drone videografie. Dynamisch in aanpak, uniek in resultaat.',
+    title: 'Dynique — Maatwerk Software & Development',
+    description: 'Maatwerk software voor bedrijven in Nederland en België — technisch onderbouwd, projectmatig en veilig, met websites en digitale processen als fundament.',
     creator: '@dynique',
-    images: ['https://dynique.nl/og.png'],
+    images: ['https://dynique.nl/opengraph-image'],
   },
   alternates: {
     canonical: 'https://dynique.nl',
@@ -98,7 +104,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl">
+    <html lang="nl" className={bricolage.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -116,18 +122,21 @@ export default function RootLayout({
                     "@id": "https://dynique.nl/#logo",
                     "url": "https://dynique.nl/favicon.png",
                     "contentUrl": "https://dynique.nl/favicon.png",
-                    "width": 512,
-                    "height": 512,
+                    "width": 1024,
+                    "height": 1024,
                     "caption": "Dynique"
                   },
                   "image": { "@id": "https://dynique.nl/#logo" },
-                  "description": "Full creative development agency gespecialiseerd in websites, maatwerk software, AI marketing en drone videografie voor ambitieuze ondernemers in Limburg en nationaal.",
+                  "description": "Dynique bouwt maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten — technisch onderbouwd, projectmatig en veilig, met websites en digitale processen als fundament.",
                   "telephone": "+31624572572",
                   "email": "info@dynique.nl",
                   "address": {
                     "@type": "PostalAddress",
-                    "addressCountry": "NL",
-                    "addressRegion": "Limburg"
+                    "streetAddress": "Ir. Em. Melottestraat 10",
+                    "postalCode": "6291 HE",
+                    "addressLocality": "Vaals",
+                    "addressRegion": "Limburg",
+                    "addressCountry": "NL"
                   },
                   "contactPoint": {
                     "@type": "ContactPoint",
@@ -135,7 +144,7 @@ export default function RootLayout({
                     "email": "info@dynique.nl",
                     "contactType": "customer service",
                     "availableLanguage": ["Dutch", "English"],
-                    "areaServed": "NL"
+                    "areaServed": ["NL", "BE"]
                   },
                   "foundingDate": "2024",
                   "sameAs": [],
@@ -180,16 +189,16 @@ export default function RootLayout({
                   ],
                   "priceRange": "€€",
                   "areaServed": [
-                    { "@type": "State", "name": "Limburg" },
                     { "@type": "Country", "name": "Nederland" },
-                    { "@type": "Place", "name": "Internationaal" }
+                    { "@type": "Country", "name": "België" },
+                    { "@type": "State", "name": "Limburg" }
                   ],
                   "serviceType": [
-                    "Website Development",
-                    "Web Application Development",
-                    "E-commerce Development",
                     "Maatwerk Software",
                     "Digitale Bedrijfsprocessen",
+                    "Web Application Development",
+                    "Website Development",
+                    "E-commerce Development",
                     "AI Marketing",
                     "Content Marketing",
                     "Drone Videografie",
@@ -216,7 +225,7 @@ export default function RootLayout({
                   "@id": "https://dynique.nl/#website",
                   "url": "https://dynique.nl",
                   "name": "Dynique",
-                  "description": "Full creative development agency — websites, maatwerk software, AI marketing en drone videografie.",
+                  "description": "Maatwerk software en webontwikkeling voor bedrijven in Nederland en België.",
                   "publisher": { "@id": "https://dynique.nl/#organization" },
                   "inLanguage": "nl-NL"
                 }

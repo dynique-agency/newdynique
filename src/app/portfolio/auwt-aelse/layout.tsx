@@ -11,6 +11,24 @@ export const metadata: Metadata = {
       "Bourgondisch tafelen, eigentijds geserveerd. Een bistrosite met menu en reserveren.",
     url: "https://dynique.nl/portfolio/auwt-aelse",
     type: "article",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Auwt Aelse bistro website case study",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Auwt Aelse bistro website case study",
+      },
+    ],
   },
 };
 

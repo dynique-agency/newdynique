@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Waar Zapier, Make en n8n vastlopen — en wanneer maatwerk software op code beter past.",
     url: "https://dynique.nl/blog/n8n-make-zapier",
     type: "article",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Automatiseren: standaardtool of maatwerk met code?" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Automatiseren: standaardtool of maatwerk met code?" }],
   },
 };
 

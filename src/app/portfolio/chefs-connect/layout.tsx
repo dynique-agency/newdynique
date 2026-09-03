@@ -11,6 +11,24 @@ export const metadata: Metadata = {
       "Een culinair platform dat de juiste match maakt tussen chefs, restaurants en events.",
     url: "https://dynique.nl/portfolio/chefs-connect",
     type: "article",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Chefs Connect culinair matchingplatform website case study",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Chefs Connect culinair matchingplatform website case study",
+      },
+    ],
   },
 };
 

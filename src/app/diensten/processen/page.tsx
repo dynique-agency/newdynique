@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useEffect, useRef, useState } from "react";
 
-const ACCENT = "#34d399";
+const ACCENT = "#d4a574";
 
 /* ════════════════════════════════════════════════════════════
    CODED VISUALS — no external images.
@@ -349,7 +349,8 @@ export default function ProcessenDienst() {
 
                 <p className="hv hv-3 text-white/55 text-lg lg:text-xl font-extralight tracking-wide leading-relaxed max-w-xl mb-12">
                   Je bedrijf groeit, maar achter de schermen gaat er nog steeds te veel tijd verloren.
-                  Wij bouwen maatwerk software voor het MKB, gebouwd rondom hoe jullie écht werken.
+                  Wij bouwen maatwerk software voor bedrijven die vastlopen in standaardpakketten —
+                  van MKB tot grotere bedrijven — gebouwd rondom hoe jullie écht werken.
                 </p>
 
                 <div className="hv hv-4 flex flex-col sm:flex-row gap-4">
@@ -371,6 +372,11 @@ export default function ProcessenDienst() {
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
                   Gratis &amp; vrijblijvend · bij jou op locatie · gebouwd met code
                 </div>
+
+                <p className="hv hv-5 mt-6 text-white/40 text-sm font-light italic leading-relaxed max-w-lg">
+                  Voordat ik iets bouw, kijk ik eerst hoe je nu werkt — en ik zeg het als ik onderweg
+                  een betere oplossing zie, ook als daar niet naar gevraagd is.
+                </p>
               </div>
 
               {/* coded flow diagram */}
@@ -420,7 +426,7 @@ export default function ProcessenDienst() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06]">
                 {costs.map((c) => (
                   <div key={c.k} className="cost-card group bg-[#070707] px-7 py-9 relative overflow-hidden">
-                    <div className="relative mb-6 text-white/35 group-hover:text-[#34d399] transition-colors duration-300">
+                    <div className="relative mb-6 text-white/35 group-hover:text-[#d4a574] transition-colors duration-300">
                       <CostIcon k={c.k} />
                     </div>
                     <p className="relative text-[10px] tracking-[0.4em] font-light mb-3" style={{ color: ACCENT }}>{c.k}</p>
@@ -489,7 +495,10 @@ export default function ProcessenDienst() {
             style={{ background: `radial-gradient(ellipse at 50% 30%, ${ACCENT}10 0%, transparent 60%)` }} />
           <div className="container mx-auto relative">
             <div className="max-w-3xl mx-auto text-center anim mb-12 lg:mb-14">
-              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>DE OPLOSSING</p>
+              <div className="mb-5">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[10px] tracking-[0.35em] font-light"
+                  style={{ background: `${ACCENT}1a`, color: ACCENT, border: `1px solid ${ACCENT}40` }}>DE OPLOSSING</span>
+              </div>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.01em] leading-[1.12] mb-5">
                 Geen standaardpakket.{" "}
                 <span className="italic" style={{ color: ACCENT }}>Software rondom hoe jullie werken.</span>
@@ -524,7 +533,7 @@ export default function ProcessenDienst() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
-                        <span className={`text-sm font-light leading-relaxed tracking-wide ${col.dim ? "text-white/40" : "text-white/80"}`}>{p}</span>
+                        <span className={`text-sm font-light leading-relaxed tracking-wide ${col.dim ? "text-white/55" : "text-white/80"}`}>{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -570,7 +579,7 @@ export default function ProcessenDienst() {
         <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
           <div className="container mx-auto">
             <div className="max-w-3xl anim mb-12">
-              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>VOOR WELKE SECTOREN</p>
+              <p className="text-white/30 text-[10px] tracking-[0.5em] font-light mb-5">VOOR WELKE SECTOREN</p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
                 We kennen de praktijk
                 <span className="text-white/45 italic"> in jouw branche.</span>
@@ -597,7 +606,7 @@ export default function ProcessenDienst() {
                 </Link>
               ))}
             </div>
-            <p className="anim mt-6 text-white/35 text-sm font-light tracking-wide">
+            <p className="anim mt-6 text-white/55 text-sm font-light tracking-wide">
               Andere branche? Geen probleem — we bouwen maatwerk voor elk bedrijf dat vastloopt op standaardsoftware.
             </p>
           </div>
@@ -637,6 +646,19 @@ export default function ProcessenDienst() {
                     </div>
                   ))}
                 </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <Link href="/portfolio"
+                    className="group inline-flex items-center gap-2 text-white/55 hover:text-white text-sm font-light tracking-wide transition-colors duration-300">
+                    Liever eerst voorbeelden zien?
+                    <span className="inline-flex items-center gap-1.5" style={{ color: ACCENT }}>
+                      Bekijk ons werk
+                      <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </Link>
+                </div>
               </div>
 
               <div className="lg:col-span-7 anim delay-1">
@@ -650,8 +672,8 @@ export default function ProcessenDienst() {
                     <Field label="E-MAIL" value={form.email} onChange={set("email")} placeholder="naam@bedrijf.nl" type="email" />
                   </div>
                   <div className="mt-5">
-                    <label className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">WAAR LOOPT HET VAST? (OPTIONEEL)</label>
-                    <textarea value={form.message} onChange={set("message")} rows={4}
+                    <label htmlFor="processen-message" className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">WAAR LOOPT HET VAST? (OPTIONEEL)</label>
+                    <textarea id="processen-message" value={form.message} onChange={set("message")} rows={4}
                       placeholder="Beschrijf kort waar je nu tijd, geld of overzicht verliest..."
                       className="w-full bg-black/40 border border-white/10 text-white/90 text-sm font-light tracking-wide px-4 py-3 rounded outline-none focus:border-white/30 transition-colors duration-300 placeholder:text-white/25 resize-none" />
                   </div>
@@ -665,7 +687,7 @@ export default function ProcessenDienst() {
                     </svg>
                   </button>
 
-                  <p className="mt-5 text-center text-white/35 text-xs font-light tracking-wide">
+                  <p className="mt-5 text-center text-white/55 text-xs font-light tracking-wide">
                     Liever direct?{" "}
                     <a href="https://wa.me/31624572572" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">WhatsApp ons</a>
                     {" "}of mail{" "}
@@ -806,10 +828,12 @@ function Field({
   type?: string;
   required?: boolean;
 }) {
+  const id = `field-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
   return (
     <div>
-      <label className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">{label}</label>
+      <label htmlFor={id} className="block text-white/40 text-[10px] tracking-[0.3em] font-light mb-2.5">{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={onChange}

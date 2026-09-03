@@ -18,6 +18,24 @@ export const metadata: Metadata = {
     description: "Van werkbon tot factuur in één systeem. Maatwerk software op code voor bouwbedrijven.",
     url: "https://dynique.nl/maatwerk-software/bouw",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor de bouw",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor de bouw",
+      },
+    ],
   },
 };
 

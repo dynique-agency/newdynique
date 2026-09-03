@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Premium webdesign in Heerlen en Parkstad. Snel, persoonlijk, vaste prijs.",
     url: "https://dynique.nl/locaties/heerlen",
     type: "website",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Heerlen" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Heerlen" }],
   },
 };
 
@@ -18,7 +22,7 @@ const data: CityData = {
   cityShort: "Heerlen",
   region: "Parkstad Limburg",
   tagline: "Webdesign voor het hart van Parkstad.",
-  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen websites die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector.",
+  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen websites en maatwerk software die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector.",
   vibe: "Parkstad heeft karakter: nuchter, ondernemend en met een eigen identiteit. Geen poespas, wel kwaliteit. Onze klanten in Heerlen waarderen heldere afspraken, korte lijnen en een website die gewoon werkt. We kennen het verschil tussen het Schinkelkwartier, de Bongerd en Heerlerheide — en zorgen dat jouw website precies de juiste doelgroep aanspreekt.",
   accent: "#a78bfa",
   postal: "6411 — 6446",
@@ -33,7 +37,7 @@ const data: CityData = {
   faq: [
     { q: "Werken jullie voor bedrijven in heel Parkstad?", a: "Ja. We werken voor klanten in Heerlen, Kerkrade, Landgraaf, Brunssum en de omliggende gemeenten. De korte afstanden in Parkstad maken persoonlijk contact eenvoudig." },
     { q: "Kennen jullie de zorgsector?", a: "Absoluut. We bouwen regelmatig websites voor zorgaanbieders, met aandacht voor toegankelijkheid (WCAG), AVG-compliance en heldere communicatie naar patiënten of cliënten." },
-    { q: "Wat is de typische investering in Heerlen?", a: "Een professionele website voor MKB-ondernemers in Heerlen begint vanaf €2.500. Webshops vanaf €4.500. Custom platforms op maat. Altijd transparant, altijd een vaste prijs vooraf." },
+    { q: "Wat is de typische investering in Heerlen?", a: "Dat hangt af van de scope — een eenvoudige website is iets anders dan een webshop of maatwerk software. Bij het eerste gesprek krijg je een concreet voorstel met een vaste prijs, geen slag in de lucht." },
     { q: "Kunnen jullie ook ondersteunen bij subsidie-trajecten?", a: "We werken niet zelf in subsidies, maar denken graag mee als je aanspraak maakt op innovatiesubsidies of digitaliseringsregelingen in Limburg." },
   ],
 };

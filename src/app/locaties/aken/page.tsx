@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Premium Webdesign in Aachen und der Euregio. Schnell, persönlich, Festpreis.",
     url: "https://dynique.nl/locaties/aken",
     type: "website",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Aken" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Aken" }],
   },
 };
 
@@ -18,7 +22,7 @@ const data: CityData = {
   cityShort: "Aken",
   region: "Euregio Maas-Rijn",
   tagline: "Cross-border webdesign voor de Euregio.",
-  intro: "Aken ligt op steenworp afstand en voelt voor ons als thuis. Wij bouwen websites voor Duitse ondernemers die de Nederlandse markt willen bereiken — en voor Limburgse bedrijven die uitbreiden over de grens. Meertalig, cultureel passend, conversie-gericht.",
+  intro: "Aken ligt op steenworp afstand en voelt voor ons als thuis. Wij bouwen websites en maatwerk software voor Duitse ondernemers die de Nederlandse markt willen bereiken — en voor Limburgse bedrijven die uitbreiden over de grens. Meertalig, cultureel passend, conversie-gericht.",
   vibe: "Aken is academisch, internationaal en historisch in één. De stad herbergt een van Duitslands grootste technische universiteiten, een levendige zorgsector en een hechte ondernemersgemeenschap. Wij begrijpen het verschil in zakelijke cultuur tussen Nederland en Duitsland: directe communicatie versus formaliteit, en bouwen websites die beide werelden respecteren — vaak in twee of meer talen.",
   accent: "#ef4444",
   postal: "52062 — 52080",

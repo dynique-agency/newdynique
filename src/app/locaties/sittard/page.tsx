@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Premium webdesign in Sittard, Geleen en Born. Snel, persoonlijk, vaste prijs.",
     url: "https://dynique.nl/locaties/sittard",
     type: "website",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Sittard-Geleen" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Sittard-Geleen" }],
   },
 };
 
@@ -18,7 +22,7 @@ const data: CityData = {
   cityShort: "Sittard",
   region: "Westelijke Mijnstreek",
   tagline: "Webdesign voor Sittard, Geleen en Born.",
-  intro: "Een regio die wereldspelers herbergt: Chemelot, VDL Nedcar en de hele toeleveringsketen daarom heen. Wij bouwen websites die kwaliteit uitstralen — voor toeleveranciers, lokaal MKB, retail in de Sittardse binnenstad en ondernemers in Geleen en Born.",
+  intro: "Een regio die wereldspelers herbergt: Chemelot, VDL Nedcar en de hele toeleveringsketen daarom heen. Wij bouwen websites en maatwerk software die kwaliteit uitstralen — voor toeleveranciers, lokaal MKB, retail in de Sittardse binnenstad en ondernemers in Geleen en Born.",
   vibe: "De Westelijke Mijnstreek combineert grote industrie met sterke lokale ondernemers. Vakmanschap zit in het DNA, en dat verdient een digitale presentatie die past. We kennen de verschillen tussen het oude centrum van Sittard, Geleen-Zuid en Born — en bouwen sites die zowel B2B als B2C-doelgroepen aanspreken in deze veelzijdige regio.",
   accent: "#fb923c",
   postal: "6131 — 6166",

@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Premium webdesign in Eindhoven en Brainport. Snel, persoonlijk, vaste prijs.",
     url: "https://dynique.nl/locaties/eindhoven",
     type: "website",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Eindhoven" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Eindhoven" }],
   },
 };
 
@@ -18,9 +22,9 @@ const data: CityData = {
   cityShort: "Eindhoven",
   region: "Brainport",
   tagline: "Webdesign voor Brainport-ondernemers.",
-  intro: "Eindhoven is design en techniek in elke vezel. Wij bouwen websites die passen bij die ambitie — voor startups op Strijp-S, scale-ups in Brainport, design studio's en de creatieve sector. Snel, ambitieus en internationaal van toon.",
+  intro: "Eindhoven is design en techniek in elke vezel. Wij bouwen websites en maatwerk software die passen bij die ambitie — voor startups op Strijp-S, scale-ups in Brainport, design studio's en de creatieve sector. Snel, ambitieus en internationaal van toon.",
   vibe: "Brainport heeft een eigen taal: pragmatisch, design-gedreven en internationaal. Eindhovense ondernemers verwachten geen poespas maar wel kwaliteit en snelheid. Wij snappen die mentaliteit. Of het nu gaat om een tech-startup, een design-studio op Strijp, een scale-up rond Flight Forum of een gevestigde MKB-onderneming: we bouwen sites die passen bij de Brainport-cultuur.",
-  accent: "#34d399",
+  accent: "#d4a574",
   postal: "5611 — 5658",
   travelTime: "Sittard 40 min · Maastricht 65 min",
   highlights: [

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -47,7 +47,7 @@ const projects: Project[] = [
     category: "FAMILIEBEDRIJF",
     tagline: "Ambachtelijk ijs sinds 1969.",
     description: "Een sfeervolle digitale extensie van een Vaalse traditie. Warme beeldtaal, heldere structuur en alle smaken, verhalen en openingstijden op één plek. Zo blijft het ambacht ook online tastbaar.",
-    image: "/rsc/ijssalon/hero.png",
+    image: "/rsc/ijssalon/hero.webp",
     url: "ijssalonitaliavaals.nl",
     year: "2025",
     accent: "#fb923c",
@@ -58,13 +58,39 @@ const projects: Project[] = [
     category: "ARTIST PORTFOLIO",
     tagline: "Viertalig. Eén stem. Eindeloze podia.",
     description: "Een meertalige portfoliosite met live audio, agendabeheer en directe boekingen. Alles wat een internationale zangeres nodig heeft, in een ontwerp dat even warm aanvoelt als haar stem klinkt.",
-    image: "/rsc/stacykohnen/hero.png",
+    image: "/rsc/stacykohnen/hero.webp",
     url: "stacykohnen.de",
     year: "2025",
     accent: "#a78bfa",
     link: "/portfolio/stacy-kohnen",
   },
 ];
+
+// Lazily plays/pauses a video based on viewport proximity, instead of autoplaying unconditionally
+function PortfolioVideo({ src, className }: { src: string; className: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (inView) el.play().catch(() => {});
+    else el.pause();
+  }, [inView]);
+
+  return <video ref={ref} src={src} className={className} muted loop playsInline preload="metadata" />;
+}
 
 // Browser-frame mockup component (inline styles for simplicity)
 function BrowserMockup({ p, large = false }: { p: Project; large?: boolean }) {
@@ -93,11 +119,9 @@ function BrowserMockup({ p, large = false }: { p: Project; large?: boolean }) {
         {/* Screenshot */}
         <div className={`relative ${large ? "aspect-[16/10]" : "aspect-[16/10]"} overflow-hidden`}>
           {p.video ? (
-            <video src={p.video}
-              className="w-full h-full object-cover"
-              autoPlay muted loop playsInline preload="metadata" />
+            <PortfolioVideo src={p.video} className="w-full h-full object-cover" />
           ) : p.image ? (
-            <img src={p.image} alt={p.title}
+            <img src={p.image} alt={`Schermopname van de ${p.title.toLowerCase()} website — ${p.tagline}`}
               className="w-full h-full object-cover"
               loading="lazy" />
           ) : (
@@ -164,7 +188,7 @@ export default function Portfolio() {
             <h1 className="text-[clamp(60px,12vw,160px)] font-extralight text-white tracking-[0.08em] leading-[0.9]">
               Portfolio<span className="text-white/20">.</span>
             </h1>
-            <p className="text-white/40 text-base lg:text-lg font-extralight tracking-wide mt-8 max-w-xl italic leading-relaxed">
+            <p className="text-white/60 text-base lg:text-lg font-extralight tracking-wide mt-8 max-w-xl italic leading-relaxed">
               Een selectie uit ons archief. Elk project op maat ontworpen, gebouwd om te presteren.
               Websites die het werk doen, lang nadat ze live zijn gegaan.
             </p>
@@ -173,10 +197,10 @@ export default function Portfolio() {
           {/* Stat strip — no counters, just signals of breadth */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06] anim delay-1">
             {[
-              { k: "DISCIPLINES", v: "Web · App · Brand" },
-              { k: "SECTOREN", v: "Horeca · Cultuur · B2B" },
-              { k: "BEREIK", v: "Limburg & Nationaal" },
-              { k: "STANDAARD", v: "Maatwerk, altijd" },
+              { k: "FUNDAMENT", v: "Maatwerk software & web" },
+              { k: "SECTOREN", v: "Horeca · Cultuur · Bedrijven" },
+              { k: "BEREIK", v: "Nederland & België" },
+              { k: "STANDAARD", v: "Op maat, altijd" },
             ].map((s) => (
               <div key={s.k} className="bg-[#070707] px-6 py-7">
                 <p className="text-white/20 text-[9px] tracking-[0.4em] font-light mb-2.5">{s.k}</p>
@@ -224,7 +248,7 @@ export default function Portfolio() {
                     </p>
 
                     {/* Description */}
-                    <p className="text-white/40 text-sm font-light leading-[1.8] tracking-wide mb-10 max-w-md">
+                    <p className="text-white/60 text-sm font-light leading-[1.8] tracking-wide mb-10 max-w-md">
                       {p.description}
                     </p>
 
@@ -293,7 +317,7 @@ export default function Portfolio() {
               </span>
               <div>
                 <p className="text-white/70 text-sm font-light tracking-wide">Meer cases in productie.</p>
-                <p className="text-white/35 text-xs font-light tracking-wide mt-1">Nieuw werk verschijnt hier zodra het live gaat.</p>
+                <p className="text-white/55 text-xs font-light tracking-wide mt-1">Nieuw werk verschijnt hier zodra het live gaat.</p>
               </div>
             </div>
             <Link href="/#contact"
@@ -320,7 +344,7 @@ export default function Portfolio() {
                 Kan de volgende<br />
                 <span className="italic text-white/55">van jou zijn.</span>
               </h2>
-              <p className="text-white/40 text-sm font-light leading-relaxed tracking-wide max-w-md">
+              <p className="text-white/60 text-sm font-light leading-relaxed tracking-wide max-w-md">
                 We bouwen enkele projecten per kwartaal. Met persoonlijke aandacht en ongegeneerd hoge standaarden.
               </p>
             </div>

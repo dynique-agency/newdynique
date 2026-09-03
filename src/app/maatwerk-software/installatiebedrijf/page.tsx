@@ -2,7 +2,7 @@
 
 import SectorTemplate, { SectorData } from "@/components/SectorTemplate";
 
-const A = "#34d399";
+const A = "#d4a574";
 
 const data: SectorData = {
   slug: "installatiebedrijf",
@@ -27,7 +27,7 @@ const data: SectorData = {
   painParagraphs: [
     "Je monteurs draaien, maar de planning gaat via telefoon en whiteboard, werkbonnen komen op papier of als foto via WhatsApp, en onderhoudscontracten leven in Excel.",
     "Daardoor mis je beurten, raakt informatie kwijt en heb je geen zicht op materiaal in de bus. Je team past zich aan losse tools aan in plaats van andersom.",
-    "En dat kost niet alleen tijd, maar ook overzicht en marge.",
+    "En dat kost niet alleen tijd, maar ook grip op onderhoud en materiaal.",
   ],
   pains: [
     { k: "PLANNING", icon: "OVERZICHT", v: "Monteurs en ploegen handmatig inplannen, met telefoon en whiteboard." },

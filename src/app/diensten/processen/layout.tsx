@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Maatwerk software & digitale bedrijfsprocessen | Dynique",
   description:
-    "Software moet vóór jouw bedrijf werken, niet andersom. Wij bouwen maatwerk software op code voor het MKB, gebouwd rondom hoe jullie écht werken. Gratis procesanalyse op locatie.",
+    "Software moet vóór jouw bedrijf werken, niet andersom. Wij bouwen maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom hoe jullie écht werken. Gratis procesanalyse op locatie.",
   alternates: { canonical: "https://dynique.nl/diensten/processen" },
   openGraph: {
     title: "Maatwerk software & digitale bedrijfsprocessen | Dynique",
     description:
-      "Maatwerk software op code voor het MKB. Gratis en vrijblijvende procesanalyse op locatie.",
+      "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten. Gratis en vrijblijvende procesanalyse op locatie.",
     url: "https://dynique.nl/diensten/processen",
     type: "website",
     images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "Maatwerk software — Dynique" }],
@@ -20,9 +20,9 @@ const jsonLd = {
   "@type": "Service",
   serviceType: "Maatwerk Software & Digitale Bedrijfsprocessen",
   provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-  areaServed: ["Nederland"],
+  areaServed: ["Nederland", "België"],
   description:
-    "Maatwerk software op code voor MKB-bedrijven, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
+    "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
   offers: {
     "@type": "Offer",
     name: "Gratis procesanalyse op locatie",

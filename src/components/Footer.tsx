@@ -3,8 +3,8 @@ import Link from "next/link";
 export default function Footer() {
   const diensten = [
     { label: "Alle diensten", href: "/diensten" },
-    { label: "Websites & Web Apps", href: "/diensten/web" },
-    { label: "Bedrijfsprocessen", href: "/diensten/processen" },
+    { label: "Maatwerk Software", href: "/diensten/processen" },
+    { label: "Web & Platformen", href: "/diensten/web" },
     { label: "AI Marketing", href: "/diensten/marketing" },
     { label: "Drone & Video", href: "/diensten/drone" },
   ];
@@ -14,6 +14,7 @@ export default function Footer() {
     { label: "Portfolio", href: "/portfolio" },
     { label: "Blog", href: "/blog" },
     { label: "Gratis checklist", href: "/gratis-checklist" },
+    { label: "FAQ", href: "/#faq" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -39,8 +40,8 @@ export default function Footer() {
               <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide max-w-xs">
                 Dynamisch in aanpak, uniek in resultaat.
               </p>
-              <p className="text-black/40 text-xs font-light leading-relaxed tracking-wide max-w-xs">
-                Full creative development agency voor websites, web apps, digitale bedrijfsprocessen, AI marketing en drone videografie.
+              <p className="text-black/60 text-xs font-light leading-relaxed tracking-wide max-w-xs">
+                Maatwerk software voor bedrijven in Nederland en België — met web &amp; platformen als fundament, AI marketing en drone/video als aanvullende diensten.
               </p>
             </div>
 
@@ -116,6 +117,21 @@ export default function Footer() {
             >
               START EEN PROJECT
             </a>
+          </div>
+
+          {/* Legal / Company Info */}
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 pb-6 mb-6 text-center">
+            <p className="text-black/45 text-xs font-light tracking-wide">
+              Dynique is de handelsnaam van Creemers Inclusives
+            </p>
+            <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
+            <p className="text-black/45 text-xs font-light tracking-wide">
+              KVK 90531264
+            </p>
+            <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
+            <p className="text-black/45 text-xs font-light tracking-wide">
+              Ir. Em. Melottestraat 10, 6291 HE Vaals
+            </p>
           </div>
 
           {/* Copyright */}

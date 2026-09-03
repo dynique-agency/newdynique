@@ -11,6 +11,24 @@ export const metadata: Metadata = {
       "Single-page scroll, allergenen-filtering en topprestaties op mobiel.",
     url: "https://dynique.nl/portfolio/ijssalon-italia",
     type: "article",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — IJssalon Italia Vaals website case study",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — IJssalon Italia Vaals website case study",
+      },
+    ],
   },
 };
 

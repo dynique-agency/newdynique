@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Het Journaal — Blog over web, AI & ondernemen | Dynique",
+  title: "Het Journaal — Blog over maatwerk software & digitale processen | Dynique",
   description:
-    "Eerlijke gidsen over websites laten maken, maatwerk software en online ondernemen. Wat kost een website, automatiseren met code of standaardtools, en kiezen voor een lokaal bureau in Limburg.",
+    "Doordachte inzichten over maatwerk software en de digitale keuzes die daaraan voorafgaan: wanneer een standaardpakket vastloopt, wat automatisering met code oplost dat Zapier niet kan, en hoe je de juiste partner kiest voor een website of platform.",
   alternates: { canonical: "https://dynique.nl/blog" },
   openGraph: {
     title: "Het Journaal — Blog van Dynique",
     description:
-      "Eerlijke gidsen over websites, automatisering en online ondernemen.",
+      "Doordachte inzichten over maatwerk software en de digitale keuzes die daaraan voorafgaan.",
     url: "https://dynique.nl/blog",
     type: "website",
   },

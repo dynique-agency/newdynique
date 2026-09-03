@@ -2,7 +2,7 @@
 
 import SectorTemplate, { SectorData } from "@/components/SectorTemplate";
 
-const A = "#34d399";
+const A = "#d4a574";
 
 const data: SectorData = {
   slug: "zorg",

@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 import { useEffect } from "react";
 
 export default function WebDienst() {
@@ -74,18 +75,18 @@ export default function WebDienst() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
               style={{ animation: "fadeInUp 0.8s ease-out 0.8s both" }}
             >
-              <a
+              <Link
                 href="/#contact"
-                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 START JE PROJECT
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/portfolio"
                 className="px-10 py-4 border border-white/20 text-white text-xs tracking-[0.2em] font-light hover:border-white/50 hover:bg-white/5 transition-all duration-300"
               >
                 BEKIJK PORTFOLIO
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -104,7 +105,7 @@ export default function WebDienst() {
                   <span className="text-black/15 text-xs tracking-[0.3em] font-light">0{i + 1}</span>
                   <h3 className="text-black text-sm tracking-[0.2em] font-light mt-4 mb-3">{s.title.toUpperCase()}</h3>
                   <div className="w-8 h-px bg-black/20 mb-4"></div>
-                  <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
+                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -139,7 +140,7 @@ export default function WebDienst() {
                   <div className="text-black/10 text-6xl font-extralight tracking-wider mb-6">{p.step}</div>
                   <h3 className="text-black text-sm tracking-[0.2em] font-light mb-3">{p.title.toUpperCase()}</h3>
                   <div className="w-8 h-px bg-black/20 mb-4"></div>
-                  <p className="text-black/50 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
+                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
                 </div>
               ))}
             </div>
@@ -156,12 +157,12 @@ export default function WebDienst() {
               Vertel ons over je project en we reageren binnen 24 uur.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
-              <a
+              <Link
                 href="/#contact"
-                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-light hover:bg-white/90 transition-all duration-300"
+                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
               >
                 GRATIS OFFERTE
-              </a>
+              </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"

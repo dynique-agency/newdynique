@@ -18,6 +18,24 @@ export const metadata: Metadata = {
     description: "Minder administratie, meer tijd voor de cliënt. Maatwerk software op code voor de zorg.",
     url: "https://dynique.nl/maatwerk-software/zorg",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor de zorg",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk software voor de zorg",
+      },
+    ],
   },
 };
 

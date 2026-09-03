@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Wat onderscheidt een lokaal webdesignbureau in Limburg? Eerlijke gids voor ondernemers.",
     url: "https://dynique.nl/blog/website-laten-maken-limburg",
     type: "article",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Website laten maken in Limburg" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Website laten maken in Limburg" }],
   },
 };
 
@@ -19,7 +23,7 @@ const meta = {
   category: "Lokaal",
   readTime: "6 min lezen",
   date: "Mrt 2026",
-  accent: "#34d399",
+  accent: "#d4a574",
   slug: "website-laten-maken-limburg",
 };
 
@@ -78,9 +82,12 @@ export default function Post() {
       </ul>
 
       <h2>Hoe Dynique werkt</h2>
-      <p>Wij zijn gevestigd in Zuid-Limburg en werken voor klanten in heel <a href="/locaties/maastricht">Maastricht</a>, <a href="/locaties/heerlen">Heerlen</a>, <a href="/locaties/sittard">Sittard-Geleen</a>, <a href="/locaties/aken">Aken</a> en <a href="/locaties/eindhoven">Eindhoven</a>. We bouwen in Next.js, leveren binnen 7 tot 14 dagen, en werken met vaste prijzen.</p>
+      <p>Wij zijn gevestigd in Zuid-Limburg en werken voor klanten in heel <a href="/locaties/maastricht">Maastricht</a>, <a href="/locaties/heerlen">Heerlen</a>, <a href="/locaties/sittard">Sittard-Geleen</a>, <a href="/locaties/aken">Aken</a> en <a href="/locaties/eindhoven">Eindhoven</a>. We bouwen in Next.js en werken met heldere, vooraf afgesproken prijzen — geen open einde achteraf.</p>
 
-      <p>Onze klanten zijn restaurants, artiesten, zorgaanbieders en mkb-bedrijven die kiezen voor kwaliteit. We werken bewust met een klein team en nemen niet alles aan. Dat houdt de kwaliteit hoog en de communicatie persoonlijk.</p>
+      <p>Onze klanten lopen uiteen: van restaurants, zorgaanbieders en mkb-bedrijven die een website op maat nodig hebben, tot bedrijven die inmiddels te groot zijn geworden voor een standaardpakket en toe zijn aan een systeem dat écht bij hun werkwijze past. We werken bewust met een klein team en nemen niet alles aan. Dat houdt de kwaliteit hoog en de communicatie persoonlijk.</p>
+
+      <h2>Groeit je bedrijf voorbij een standaard website?</h2>
+      <p>Voor veel Limburgse ondernemers is een goede website het eindpunt. Maar sommige bedrijven groeien voorbij dat punt: interne processen die nog in Excel of losse tools draaien, workflows die niet meer passen bij een standaardpakket, systemen die niet met elkaar praten. Daarvoor bouwen we <strong>maatwerk software</strong> — een systeem gebouwd rond hoe jouw bedrijf al werkt, niet andersom. Dat is een ander traject dan een website: geen vaste prijstabel, maar een intake waarin we samen kijken wat er nodig is. <a href="/diensten/processen">Lees meer over maatwerk software</a>.</p>
 
       <h2>Begin met een gesprek</h2>
       <p>Twijfel je over welk type bureau bij jou past? Praat eens met een paar partijen voordat je kiest. Een eerste gesprek is bij ons altijd vrijblijvend en kosteloos. Online of bij ons aan tafel.</p>

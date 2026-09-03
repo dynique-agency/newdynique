@@ -11,6 +11,24 @@ export const metadata: Metadata = {
       "Meertalige artiestensite met real-time audio, interactieve agenda en AI-branding.",
     url: "https://dynique.nl/portfolio/stacy-kohnen",
     type: "article",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Stacy Kohnen artiestensite website case study",
+      },
+    ],
+  },
+  twitter: {
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique portfolio — Stacy Kohnen artiestensite website case study",
+      },
+    ],
   },
 };
 

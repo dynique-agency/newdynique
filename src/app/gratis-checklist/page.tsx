@@ -35,6 +35,7 @@ export default function LeadMagnetPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name) return;
+    setSubmitted(true);
     // In productie: stuur naam + e-mail ook naar API/Mailchimp/Resend.
     // Start de PDF-download direct in de browser.
     const a = document.createElement("a");
@@ -85,11 +86,11 @@ export default function LeadMagnetPage() {
                     <span className="text-[#d4a574] text-xs tracking-[0.25em] font-light pt-1">{c.n}</span>
                     <div>
                       <p className="text-white text-sm tracking-[0.1em] font-light mb-1">{c.t}</p>
-                      <p className="text-white/40 text-xs font-light leading-relaxed tracking-wide">{c.d}</p>
+                      <p className="text-white/60 text-xs font-light leading-relaxed tracking-wide">{c.d}</p>
                     </div>
                   </div>
                 ))}
-                <div className="bg-[#050505] flex items-center justify-center px-6 py-4 text-white/30 text-[10px] tracking-[0.3em] font-light uppercase">
+                <div className="bg-[#050505] flex items-center justify-center px-6 py-4 text-white/50 text-[10px] tracking-[0.3em] font-light uppercase">
                   + 4 hoofdstukken in de volledige PDF
                 </div>
               </div>
@@ -101,21 +102,22 @@ export default function LeadMagnetPage() {
                 <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-[#d4a574]/60 to-transparent" />
 
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" style={{ boxShadow: "0 0 10px #34d399" }}></span>
-                  <p className="text-[#34d399] text-[10px] tracking-[0.4em] font-light uppercase">Direct in je inbox</p>
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#d4a574]" style={{ boxShadow: "0 0 10px #d4a574" }}></span>
+                  <p className="text-[#d4a574] text-[10px] tracking-[0.4em] font-light uppercase">Direct in je inbox</p>
                 </div>
 
                 <h2 className="text-2xl lg:text-3xl font-extralight text-white tracking-[0.02em] leading-[1.2] mb-3">
                   Download de checklist.
                 </h2>
-                <p className="text-white/45 text-sm font-light leading-[1.8] tracking-wide mb-8">
+                <p className="text-white/60 text-sm font-light leading-[1.8] tracking-wide mb-8">
                   Vul je gegevens in, ontvang de PDF direct per mail. Geen spam, geen reseller-bedankjes. Je e-mail wordt alleen voor deze download gebruikt.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="text-white/40 text-[10px] tracking-[0.3em] font-light uppercase">Naam *</label>
+                    <label htmlFor="lead-name" className="text-white/60 text-[10px] tracking-[0.3em] font-light uppercase">Naam *</label>
                     <input
+                      id="lead-name"
                       type="text"
                       required
                       value={name}
@@ -125,8 +127,9 @@ export default function LeadMagnetPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-white/40 text-[10px] tracking-[0.3em] font-light uppercase">E-mail *</label>
+                    <label htmlFor="lead-email" className="text-white/60 text-[10px] tracking-[0.3em] font-light uppercase">E-mail *</label>
                     <input
+                      id="lead-email"
                       type="email"
                       required
                       value={email}
@@ -138,17 +141,18 @@ export default function LeadMagnetPage() {
 
                   <button
                     type="submit"
-                    className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500"
+                    disabled={submitted}
+                    className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:tracking-[0.3em]"
                   >
-                    DOWNLOAD PDF
+                    {submitted ? "EVEN GEDULD…" : "DOWNLOAD PDF"}
                     <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-y-0.5" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
                     </svg>
                   </button>
 
-                  <p className="text-white/30 text-[10px] tracking-[0.2em] font-light text-center leading-relaxed">
+                  <p className="text-white/55 text-[10px] tracking-[0.2em] font-light text-center leading-relaxed">
                     Door te downloaden ga je akkoord met onze{" "}
-                    <Link href="/privacyverklaring" className="underline hover:text-white/50 transition-colors">privacyverklaring</Link>. Je e-mail wordt nooit verkocht.
+                    <Link href="/privacyverklaring" className="underline hover:text-white/70 transition-colors">privacyverklaring</Link>. Je e-mail wordt nooit verkocht.
                   </p>
                 </form>
               </div>

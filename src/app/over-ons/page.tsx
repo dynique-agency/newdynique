@@ -16,6 +16,7 @@ const VALUES = [
 
 const PROMISE = [
   { t: "Eén aanspreekpunt", d: "Geen accountmanagers of doorverwijzingen. Je praat met degene die het ook bouwt." },
+  { t: "Projectmatig en veilig", d: "Vast stappenplan: functioneel ontwerp, bouw in korte iteraties, testen op een aparte omgeving — pas dan live. Zo liggen risico's vooraf op tafel, niet achteraf." },
   { t: "Snel live", d: "Strakke planning, korte iteraties. Vaak binnen dagen in plaats van maanden." },
   { t: "Eerlijk advies", d: "We zeggen ook wanneer iets simpeler of goedkoper kan. Dat bouwt vertrouwen." },
 ];
@@ -28,7 +29,7 @@ const JSON_LD = {
       name: "Over Dynique",
       url: "https://dynique.nl/over-ons",
       description:
-        "Het verhaal, de werkwijze en de waarden achter Dynique — een full creative development agency uit Limburg.",
+        "Het verhaal, de werkwijze en de waarden achter Dynique — maatwerk software voor bedrijven in Nederland en België, vanuit Limburg gebouwd: technisch onderbouwd, projectmatig en veilig.",
     },
     {
       "@type": "Organization",
@@ -36,9 +37,17 @@ const JSON_LD = {
       url: "https://dynique.nl",
       email: "info@dynique.nl",
       telephone: "+31624572572",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Ir. Em. Melottestraat 10",
+        postalCode: "6291 HE",
+        addressLocality: "Vaals",
+        addressRegion: "Limburg",
+        addressCountry: "NL",
+      },
       foundingLocation: { "@type": "Place", name: "Limburg, Nederland" },
       description:
-        "Full creative development agency: websites, maatwerk software, AI-marketing en drone-videografie.",
+        "Maatwerk software voor bedrijven in Nederland en België — met web & platformen als fundament, AI marketing en drone/video als aanvullende diensten.",
     },
     {
       "@type": "BreadcrumbList",
@@ -98,12 +107,14 @@ export default function OverOns() {
                   <span className="italic text-white/45">alleen beschrijven.</span>
                 </h1>
                 <p className="hv hv-3 text-white/55 text-lg lg:text-xl font-extralight tracking-wide leading-relaxed max-w-xl mb-6">
-                  Dynique begon vanuit één overtuiging: de kloof tussen een goed idee en een
-                  world-class uitvoering moet kleiner. Voor elke ondernemer die ergens voor staat.
+                  Dynique begon vanuit één overtuiging: bedrijven die vastlopen in standaardpakketten
+                  verdienen software die gebouwd is rondom hún manier van werken — niet andersom.
+                  Voor bedrijven in Nederland en België die een serieus softwaretraject overwegen,
+                  en eerst willen weten met wie ze in zee gaan.
                 </p>
-                <p className="hv hv-3 text-white/35 text-base font-light leading-relaxed tracking-wide max-w-xl">
-                  Websites, maatwerk software, AI-marketing en dronebeelden — onder één dak,
-                  met één aanspreekpunt dat jouw verhaal van binnen kent.
+                <p className="hv hv-3 text-white/55 text-base font-light leading-relaxed tracking-wide max-w-xl">
+                  Maatwerk software, met websites en digitale processen als fundament — en één vast
+                  aanspreekpunt dat je verhaal van binnen kent, van eerste gesprek tot lang na livegang.
                 </p>
               </div>
 
@@ -114,7 +125,7 @@ export default function OverOns() {
 
                 <div className="relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/rsc/founder2.jpeg" alt="Oprichter van Dynique"
+                  <img src="/rsc/founder2.jpeg" alt="Zwart-wit portret van de oprichter van Dynique"
                     className="w-full block rounded-sm"
                     style={{ aspectRatio: "3/4", objectFit: "cover", objectPosition: "center 15%", filter: "grayscale(1) contrast(1.15) brightness(0.85)" }} />
                   <div className="absolute inset-x-0 bottom-0 h-28" style={{ background: "linear-gradient(to top, #080808 10%, transparent 100%)" }} />
@@ -125,7 +136,7 @@ export default function OverOns() {
                   style={{ left: "calc(14% - 2px)", background: `linear-gradient(to bottom, transparent, ${GOLD}cc, transparent)` }} />
                 <div className="mt-5 flex items-center gap-3" style={{ paddingLeft: "16%" }}>
                   <div className="w-5 h-px" style={{ background: `${GOLD}88` }} />
-                  <p className="text-white/35 text-[8px] tracking-[0.45em] font-light">OPRICHTER · DYNIQUE</p>
+                  <p className="text-white/55 text-[8px] tracking-[0.45em] font-light">OPRICHTER · DYNIQUE</p>
                 </div>
               </div>
             </div>
@@ -179,7 +190,10 @@ export default function OverOns() {
           <div className="container mx-auto">
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
               <div className="lg:col-span-5 anim">
-                <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: GOLD }}>WAT JE MAG VERWACHTEN</p>
+                <div className="flex items-center gap-2.5 mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: GOLD }} />
+                  <p className="text-white/50 text-xs tracking-[0.15em] font-light uppercase">Wat je mag verwachten</p>
+                </div>
                 <h2 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.15]">
                   Werken met Dynique
                   <span className="text-white/45 italic"> voelt anders.</span>

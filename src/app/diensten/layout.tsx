@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Onze diensten — websites, software, marketing & drone | Dynique",
+  title: "Diensten — maatwerk software, web & digitale groei | Dynique",
   description:
-    "Full creative development agency uit Limburg: websites & web apps, maatwerk software, AI-marketing en drone-videografie. Vier disciplines, één partner die het geheel overziet.",
+    "Maatwerk software voor bedrijven die vastlopen in standaardpakketten — met websites, digitale processen, AI-marketing en drone/video als aanvullende diensten.",
   alternates: { canonical: "https://dynique.nl/diensten" },
   openGraph: {
-    title: "Onze diensten — vier disciplines, één partner",
+    title: "Diensten — maatwerk software als fundament",
     description:
-      "Websites, maatwerk software, marketing en beeld onder één dak. Full creative development agency uit Limburg.",
+      "Maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten, met websites en digitale processen als basis. Eén partner die meedenkt, niet alleen uitvoert.",
     url: "https://dynique.nl/diensten",
     type: "website",
   },

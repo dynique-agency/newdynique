@@ -1,24 +1,24 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const DISCIPLINES = [
   {
-    n: "01", title: "WEB & DESIGN", href: "/diensten/web",
+    n: "01", title: "MAATWERK SOFTWARE", href: "/diensten/processen",
+    tagline: "Slimmer werken. Meer ruimte voor groei.",
+    desc: "Wij brengen jouw werkwijze in kaart en bouwen maatwerk software op code die je bedrijf efficiënter, professioneler en schaalbaarder maakt. Geen standaardpakket.",
+    keys: ["Procesanalyse", "Maatwerk software", "Koppelingen", "Automatisering"],
+    color: "#d4a574",
+  },
+  {
+    n: "02", title: "WEB & DESIGN", href: "/diensten/web",
     tagline: "Jouw merk online, precies zoals het hoort.",
     desc: "Een sterke digitale aanwezigheid die bezoekers overtuigt en resultaat oplevert. Digitale producten die jouw merk vertegenwoordigen en meegroeien met je ambities.",
     keys: ["Website", "Webshop", "Web applicatie", "Branding"],
     color: "#fbbf24",
-  },
-  {
-    n: "02", title: "DIGITALISERING", href: "/diensten/processen",
-    tagline: "Slimmer werken. Meer ruimte voor groei.",
-    desc: "Wij brengen jouw werkwijze in kaart en bouwen maatwerk software op code die je bedrijf efficiënter, professioneler en schaalbaarder maakt. Geen standaardpakket.",
-    keys: ["Procesanalyse", "Maatwerk software", "Koppelingen", "Automatisering"],
-    color: "#6366f1",
   },
   {
     n: "03", title: "DIGITALE MARKETING", href: "/diensten/marketing",
@@ -36,6 +36,13 @@ const DISCIPLINES = [
   },
 ];
 
+const SECTOR_LINKS = [
+  { label: "Bouw", href: "/maatwerk-software/bouw" },
+  { label: "Zorg", href: "/maatwerk-software/zorg" },
+  { label: "Logistiek", href: "/maatwerk-software/logistiek" },
+  { label: "Installatiebedrijf", href: "/maatwerk-software/installatiebedrijf" },
+];
+
 const PROCESS = [
   { n: "01", t: "Kennismaking", d: "We luisteren naar je doel, je situatie en wat je écht nodig hebt." },
   { n: "02", t: "Plan & ontwerp", d: "Een helder voorstel en ontwerp op maat. Geen verrassingen achteraf." },
@@ -43,7 +50,7 @@ const PROCESS = [
   { n: "04", t: "Live & door", d: "Snel live, en we blijven doorontwikkelen waar dat groei oplevert." },
 ];
 
-const SPECTRUM = ["#fbbf24", "#6366f1", "#f43f5e", "#14b6a6"];
+const SPECTRUM = DISCIPLINES.map((d) => d.color);
 
 const JSON_LD = {
   "@context": "https://schema.org",
@@ -52,8 +59,8 @@ const JSON_LD = {
       "@type": "ItemList",
       name: "Diensten van Dynique",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Websites & Web Apps", url: "https://dynique.nl/diensten/web" },
-        { "@type": "ListItem", position: 2, name: "Digitale bedrijfsprocessen & maatwerk software", url: "https://dynique.nl/diensten/processen" },
+        { "@type": "ListItem", position: 1, name: "Maatwerk software & digitale processen", url: "https://dynique.nl/diensten/processen" },
+        { "@type": "ListItem", position: 2, name: "Websites & Web Apps", url: "https://dynique.nl/diensten/web" },
         { "@type": "ListItem", position: 3, name: "AI Marketing", url: "https://dynique.nl/diensten/marketing" },
         { "@type": "ListItem", position: 4, name: "Drone & Video", url: "https://dynique.nl/diensten/drone" },
       ],
@@ -69,6 +76,8 @@ const JSON_LD = {
 };
 
 export default function DienstenHub() {
+  const [openDisc, setOpenDisc] = useState(0);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -93,7 +102,7 @@ export default function DienstenHub() {
       <main className="relative bg-[#070707] overflow-hidden">
         {/* Ambient orbs */}
         <div className="absolute top-[4%] -right-40 w-[640px] h-[640px] rounded-full pointer-events-none z-0"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%)", filter: "blur(70px)" }} />
+          style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 65%)", filter: "blur(70px)" }} />
         <div className="absolute bottom-[8%] -left-40 w-[560px] h-[560px] rounded-full pointer-events-none z-0"
           style={{ background: "radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 65%)", filter: "blur(70px)" }} />
 
@@ -107,16 +116,17 @@ export default function DienstenHub() {
               <div className="lg:col-span-7">
                 <div className="hv hv-1 flex items-center gap-3 mb-8">
                   <div className="w-12 h-px bg-white/40" />
-                  <p className="text-white/45 text-[10px] tracking-[0.5em] font-light">FULL CREATIVE DEVELOPMENT AGENCY</p>
+                  <p className="text-white/45 text-[10px] tracking-[0.5em] font-light">MAATWERK SOFTWARE &amp; DIGITALE DIENSTEN</p>
                 </div>
                 <h1 className="hv hv-2 text-[clamp(40px,7vw,88px)] font-extralight text-white tracking-[0.02em] leading-[1.02] mb-8">
-                  Vier disciplines.
+                  Maatwerk software.
                   <br />
                   <span className="italic text-white/45">Eén partner.</span>
                 </h1>
                 <p className="hv hv-3 text-white/55 text-lg lg:text-xl font-extralight tracking-wide leading-relaxed max-w-xl mb-12">
-                  Websites, maatwerk software, marketing en beeld — onder één dak, met één aanspreekpunt
-                  dat jouw verhaal van binnen kent. Zo werkt alles samen in plaats van langs elkaar.
+                  Systemen op maat voor bedrijven die vastlopen in standaardpakketten, met websites en
+                  digitale processen als fundament. Marketing en beeld sluiten daarop aan — via één
+                  aanspreekpunt dat jouw verhaal van binnen kent.
                 </p>
                 <div className="hv hv-4 flex flex-col sm:flex-row gap-4">
                   <Link href="/contact"
@@ -133,11 +143,11 @@ export default function DienstenHub() {
                 </div>
               </div>
 
-              {/* coded spectrum: 4 disciplines → 1 partner */}
+              {/* coded spectrum: onze diensten → 1 partner */}
               <div className="lg:col-span-5 hv hv-4">
                 <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-5 lg:p-6 overflow-hidden">
                   <div className="relative flex items-center justify-between mb-5">
-                    <span className="text-white/45 text-[9px] tracking-[0.3em] font-light">VIER DISCIPLINES</span>
+                    <span className="text-white/45 text-[9px] tracking-[0.3em] font-light">ONZE DIENSTEN</span>
                     <span className="text-white/25 text-[9px] tracking-[0.25em] font-light">ÉÉN PARTNER</span>
                   </div>
                   <div className="relative w-full" style={{ aspectRatio: "5 / 4" }}>
@@ -179,70 +189,111 @@ export default function DienstenHub() {
             <div className="max-w-3xl anim mb-12 lg:mb-16">
               <p className="text-white/30 text-[10px] tracking-[0.5em] font-light mb-5">WAT WE DOEN</p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
-                Alles wat je online nodig hebt,
-                <span className="text-white/45 italic"> uit één hand.</span>
+                Maatwerk software als fundament,
+                <span className="text-white/45 italic"> de rest sluit erop aan.</span>
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
-              {DISCIPLINES.map((d, i) => (
-                <Link key={d.n} href={d.href}
-                  className="disc-card group relative p-8 lg:p-10 rounded-lg border border-white/[0.08] bg-white/[0.012] overflow-hidden anim"
-                  style={{ transitionDelay: `${(i % 2) * 0.08}s` }}>
-                  {/* top accent line */}
-                  <div className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700"
-                    style={{ background: `linear-gradient(to right, ${d.color}, transparent)` }} />
-                  {/* hover glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: `radial-gradient(ellipse at 25% 0%, ${d.color}14 0%, transparent 60%)` }} />
-                  {/* ghost number */}
-                  <div aria-hidden className="absolute -top-4 right-4 font-extralight text-white/[0.05] leading-none select-none pointer-events-none"
-                    style={{ fontSize: "clamp(70px,9vw,120px)" }}>{d.n}</div>
+            <div className="anim border-t border-white/[0.08]">
+              {DISCIPLINES.map((d, i) => {
+                const isOpen = openDisc === i;
+                return (
+                  <div key={d.n} className="border-b border-white/[0.08]">
+                    <h3 className="contents">
+                      <button
+                        type="button"
+                        onClick={() => setOpenDisc(isOpen ? -1 : i)}
+                        aria-expanded={isOpen}
+                        aria-controls={`disc-panel-${d.n}`}
+                        className="group w-full flex items-center gap-5 lg:gap-9 py-7 lg:py-9 text-left"
+                      >
+                        <span className="text-white/25 text-xs lg:text-sm font-light tracking-[0.2em] w-6 lg:w-8 flex-shrink-0">{d.n}</span>
+                        <span
+                          aria-hidden
+                          className="w-2 h-2 rounded-full flex-shrink-0 transition-transform duration-300"
+                          style={{ background: d.color, transform: isOpen ? "scale(1.35)" : "scale(1)" }}
+                        />
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-white text-xl lg:text-3xl font-extralight tracking-[0.05em] group-hover:text-white/85 transition-colors duration-300">
+                            {d.title}
+                          </span>
+                          <span className={`block text-white/45 text-sm lg:text-base font-extralight italic tracking-wide mt-1.5 grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[0fr] opacity-0" : "grid-rows-[1fr] opacity-100"}`}>
+                            <span className="overflow-hidden">{d.tagline}</span>
+                          </span>
+                        </span>
+                        <svg
+                          className={`w-4 h-4 text-white/35 flex-shrink-0 transition-transform duration-400 ${isOpen ? "rotate-45" : ""}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    </h3>
 
-                  <div className="relative">
-                    <div className="w-8 h-px mb-7 transition-all duration-500 group-hover:w-14" style={{ background: d.color }} />
-                    <h3 className="text-white text-xl lg:text-2xl font-extralight tracking-[0.06em] mb-3">{d.title}</h3>
-                    <p className="text-white/70 text-base font-extralight italic tracking-wide mb-5">{d.tagline}</p>
-                    <p className="text-white/45 text-sm font-light leading-[1.8] tracking-wide mb-7 max-w-md">{d.desc}</p>
-
-                    <div className="flex flex-wrap items-center gap-y-2 mb-8 text-white/40 text-[11px] tracking-wide font-light">
-                      {d.keys.map((k, ki) => (
-                        <span key={k}>{k}{ki < d.keys.length - 1 && <span className="mx-2 opacity-40">·</span>}</span>
-                      ))}
+                    <div
+                      id={`disc-panel-${d.n}`}
+                      className="disc-panel grid"
+                      style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                      aria-hidden={!isOpen}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="pb-8 lg:pb-10 pl-11 lg:pl-[4.75rem] pr-4 lg:pr-16 max-w-2xl">
+                          <p className="text-white/60 text-sm lg:text-base font-light leading-[1.8] tracking-wide mb-6">{d.desc}</p>
+                          <div className="flex flex-wrap items-center gap-y-2 mb-7 text-white/40 text-[11px] tracking-wide font-light">
+                            {d.keys.map((k, ki) => (
+                              <span key={k}>{k}{ki < d.keys.length - 1 && <span className="mx-2 opacity-40">·</span>}</span>
+                            ))}
+                          </div>
+                          <Link href={d.href}
+                            tabIndex={isOpen ? undefined : -1}
+                            className="group/link inline-flex items-center gap-2 text-[10px] tracking-[0.3em] font-light transition-colors duration-300"
+                            style={{ color: d.color }}>
+                            BEKIJK DIENST
+                            <svg className="w-3 h-3 group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-
-                    <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.3em] font-light transition-colors duration-300"
-                      style={{ color: d.color }}>
-                      BEKIJK DIENST
-                      <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </span>
                   </div>
-                </Link>
-              ))}
+                );
+              })}
+            </div>
+
+            <div className="anim mt-10 lg:mt-12 pt-8 border-t border-white/[0.06] flex flex-wrap items-center gap-x-3 gap-y-3">
+              <span className="text-white/35 text-[10px] tracking-[0.3em] font-light">MAATWERK SOFTWARE PER SECTOR</span>
+              <div className="flex flex-wrap items-center text-[12px] font-light tracking-wide">
+                {SECTOR_LINKS.map((s, i) => (
+                  <span key={s.href} className="flex items-center">
+                    <Link href={s.href}
+                      className="text-white/55 hover:text-[#d4a574] underline decoration-white/20 hover:decoration-[#d4a574]/60 underline-offset-4 transition-colors duration-300">
+                      {s.label}
+                    </Link>
+                    {i < SECTOR_LINKS.length - 1 && <span className="mx-2 text-white/20">·</span>}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── CROSS-DISCIPLINE STATEMENT ──────────────────── */}
+        {/* ── SOFTWARE ALS FUNDAMENT ──────────────────────── */}
         <section className="relative px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 60%)" }} />
+            style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(212,165,116,0.08) 0%, transparent 60%)" }} />
           <div className="container mx-auto relative">
             <div className="max-w-4xl mx-auto text-center anim">
-              <div className="flex items-center justify-center gap-2 mb-8">
-                {SPECTRUM.map((c) => <span key={c} className="w-2 h-2 rounded-full" style={{ background: c }} />)}
-              </div>
+              <div className="w-10 h-px bg-[#d4a574]/60 mx-auto mb-8" />
               <h2 className="text-3xl lg:text-[52px] font-extralight text-white tracking-[0.01em] leading-[1.15] mb-7">
-                Het sterkste resultaat ontstaat waar
+                Eén team, dezelfde aanpak,
                 <br />
-                <span className="italic text-white/55">de disciplines elkaar raken.</span>
+                <span className="italic text-[#d4a574]/90">over alle diensten heen.</span>
               </h2>
               <p className="text-white/55 text-lg font-light leading-relaxed tracking-wide max-w-2xl mx-auto">
-                Een website die nét zo goed converteert door de marketing erachter. Software die je beeld
-                en je proces verbindt. Eén partner die het geheel overziet, in plaats van losse leveranciers
-                die naar elkaar wijzen.
+                Maatwerk software is het startpunt: een systeem gebouwd rondom hoe jouw bedrijf al werkt.
+                Waar het slim is, sluiten website, marketing en beeld erop aan — vanuit hetzelfde team en
+                dezelfde technische aanpak, zonder dat je met losse partijen hoeft te schakelen.
               </p>
             </div>
           </div>
@@ -252,7 +303,6 @@ export default function DienstenHub() {
         <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
           <div className="container mx-auto">
             <div className="max-w-3xl anim mb-12">
-              <p className="text-white/30 text-[10px] tracking-[0.5em] font-light mb-5">ZO WERKEN WE</p>
               <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
                 Van eerste gesprek
                 <span className="text-white/45 italic"> tot live en door.</span>
@@ -321,10 +371,12 @@ export default function DienstenHub() {
         .spec-dash { animation: specDash 1.4s linear infinite; }
         @keyframes specPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.18), inset 0 0 16px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 26px 2px rgba(255,255,255,0.12), inset 0 0 20px rgba(255,255,255,0.08); } }
         .spec-hub { animation: specPulse 3.4s ease-in-out infinite; }
+        .disc-panel { transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1); }
         @media (prefers-reduced-motion: reduce) {
           .anim { opacity: 1; transform: none; transition: none; }
           .hv { opacity: 1; animation: none; }
           .spec-dash, .spec-hub { animation: none; }
+          .disc-panel { transition: none; }
         }
       `}</style>
     </>

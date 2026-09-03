@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Eerlijke prijsgids voor ondernemers. Van starter site tot custom platform.",
     url: "https://dynique.nl/blog/wat-kost-een-website",
     type: "article",
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Wat kost een website in 2026?" }],
+  },
+  twitter: {
+    images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Wat kost een website in 2026?" }],
   },
 };
 
@@ -43,10 +47,11 @@ export default function Post() {
 
       <h3>3. Premium bureau — €4.000 tot €15.000</h3>
       <p>Hier komt strategie, design, ontwikkeling en marketing samen. Een team werkt aan je project. Custom code, op maat gemaakt, schaalbaar gebouwd. SEO, performance en analytics zijn standaard onderdeel.</p>
-      <p>Bij <strong>Dynique</strong> bouwen we in deze range websites in Next.js: razendsnel, perfect indexeerbaar door Google, en gemaakt om de komende vijf jaar mee te groeien. Geen WordPress-thema's. Geen Wix-export. Custom werk, vaste prijs.</p>
+      <p>Websites die wij bouwen vallen doorgaans in dit segment: Next.js, razendsnel, perfect indexeerbaar door Google, en gemaakt om de komende jaren mee te groeien. Geen WordPress-thema's, geen Wix-export — custom werk, rond hoe je bedrijf werkt.</p>
 
       <h3>4. Enterprise / Custom platform — €15.000+</h3>
       <p>Webshops met complexe logica, SaaS-producten, marktplaatsen, meertalige internationale sites met honderden pagina's. Hier praat je over teams van 5+ mensen en trajecten van maanden. Niet voor de gemiddelde ondernemer, wel voor scale-ups en grotere bedrijven.</p>
+      <p>Dit is ook waar een website ophoudt en <strong>maatwerk software</strong> begint: geen pagina's meer, maar een systeem gebouwd rond een bedrijfsproces — voorraadbeheer, interne workflows, koppelingen tussen bestaande tools. Andere vraag, ander traject.</p>
 
       <h2>Wat zit er nou écht in die prijs?</h2>
       <p>Een professionele website is geen "design en plaatsen". Het is een combinatie van werkzaamheden:</p>
@@ -84,9 +89,9 @@ export default function Post() {
       </ul>
 
       <h2>Onze aanpak in een notendop</h2>
-      <p>Bij Dynique werken we met een <strong>vaste prijs</strong> die we vooraf bepalen. Geen open einde. Geen "kleine extra's" die optellen. Geen verborgen hostingmarges. We bouwen in Next.js, leveren binnen 7 tot 14 dagen op, en je krijgt alles in eigendom — inclusief code, designs en hostingsetup.</p>
+      <p>Bij Dynique werken we voor websites met een <strong>vaste prijs</strong> die we vooraf bepalen, op basis van scope en een intakegesprek. Geen open einde. Geen "kleine extra's" die optellen. Geen verborgen hostingmarges. We bouwen in Next.js en je krijgt alles in eigendom — inclusief code, designs en hostingsetup.</p>
 
-      <p>Een gemiddelde MKB-website ligt bij ons tussen <strong>€3.500 en €7.500</strong>. Een webshop tussen €6.000 en €15.000. Custom platforms op aanvraag. Inclusief alles wat we hierboven noemden, exclusief verrassingen.</p>
+      <p>Een gemiddelde MKB-website begint bij ons rond <strong>€3.500</strong>, met de uiteindelijke investering afhankelijk van omvang en functionaliteit. Een webshop start hoger. Voor <strong>maatwerk software</strong> — een platform of systeem op maat, voorbij wat een website kan dragen — geldt geen vaste prijstabel: dat bespreken we pas na een intake, waarin we scope, techniek en risico's in kaart brengen. <a href="/diensten/processen">Meer over maatwerk software</a>.</p>
 
       <h2>Conclusie</h2>
       <p>Een website laten maken in 2026 hoeft geen blackbox te zijn. Vraag door, vergelijk eerlijk, en kijk niet alleen naar de eerste prijs maar naar de <em>totale kosten over vijf jaar</em>. De goedkoopste optie is bijna nooit de voordeligste op lange termijn.</p>

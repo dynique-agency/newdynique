@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Over Dynique — het bureau achter je project | Dynique",
   description:
-    "Het verhaal, de werkwijze en de waarden achter Dynique. Eén aanspreekpunt dat websites, maatwerk software, marketing en beeld combineert — dynamisch in aanpak, uniek in resultaat.",
+    "Het verhaal, de werkwijze en de waarden achter Dynique — maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten, met websites en digitale processen als fundament.",
   alternates: { canonical: "https://dynique.nl/over-ons" },
   openGraph: {
     title: "Over Dynique — de mens achter het werk",
@@ -14,8 +14,22 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://dynique.nl/rsc/founder2.jpeg",
-        width: 1200,
-        height: 630,
+        width: 1573,
+        height: 2157,
+        alt: "De oprichter van Dynique",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Over Dynique — de mens achter het werk",
+    description:
+      "Verhaal, werkwijze en waarden achter Dynique. Eén partner die je verhaal van binnen kent.",
+    images: [
+      {
+        url: "https://dynique.nl/rsc/founder2.jpeg",
+        width: 1573,
+        height: 2157,
         alt: "De oprichter van Dynique",
       },
     ],
@@ -31,7 +45,7 @@ const jsonLd = {
       "url": "https://dynique.nl/over-ons",
       "name": "Over Dynique — het bureau achter je project",
       "description":
-        "Het verhaal, de werkwijze en de waarden achter Dynique. Eén aanspreekpunt dat websites, maatwerk software, marketing en beeld combineert.",
+        "Het verhaal, de werkwijze en de waarden achter Dynique — maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten, met websites en digitale processen als fundament.",
       "isPartOf": { "@id": "https://dynique.nl/#website" },
       "about": { "@id": "https://dynique.nl/#organization" },
       "inLanguage": "nl-NL",

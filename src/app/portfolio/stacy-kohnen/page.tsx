@@ -91,8 +91,8 @@ export default function StacyKohnen() {
             >
               <div className="relative w-full overflow-hidden border border-black/10">
                 <img
-                  src="/rsc/stacykohnen/hero.png"
-                  alt="Stacy Kohnen Website"
+                  src="/rsc/stacykohnen/hero.webp"
+                  alt="Meertalige website van zangeres Stacy Kohnen met audiosamples en boekingskalender"
                   className="w-full h-auto"
                 />
               </div>
