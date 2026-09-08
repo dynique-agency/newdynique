@@ -24,6 +24,32 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later) — 5 nieuwe landingspagina's + volledige breadcrumb/metadata-audit en -fixpas
+
+**Aanleiding:** "Ik wil dat je sowieso zo veel mogelijk landingspagina's gaat maken die daadwerkelijk hoog kunnen ranken... maak ook een top sitemap, zorg dat alle metadata perfect is en breadcrumbs perfect zijn." Dit botste direct met `STRATEGY.md` §5 (expliciete waarschuwing tegen een volledige stad×sector-kruismatrix, Google's "Scaled Content Abuse"-risico) — teruggekoppeld naar de eigenaar vóór het bouwen. Antwoord: geen sector×stad-combinaties zonder bewijs, geen nieuwe steden buiten Genk, wel expliciet akkoord op "voor elke pagina unieke informatie" met chefs-connect.nl's regiopagina's (`/personeel-{stad}`, elk met écht andere, stadseigen content) als kwaliteitsreferentie.
+
+**Uitgevoerd — 5 nieuwe pagina's, elk met eigen `layout.tsx` (metadata + `Service`/`BreadcrumbList` JSON-LD) en `FAQPage` JSON-LD:**
+- `/excel-vervangen-door-software` — pijnpunt-pillar, hoogste-prioriteit-item uit `STRATEGY.md` §8.
+- `/maatwerk-software-vs-saas`, `/low-code-vs-maatwerk-software` — eerlijke vergelijkingen (bewust niet eenzijdig: een "wanneer kies je wat"-sectie erkent expliciet wanneer SaaS/low-code de betere keuze is).
+- `/wat-kost-maatwerk-software` — kostenuitleg met 3 illustratieve, expliciet als "geen offerte" gelabelde richtbedragen (€4k / €15k / €35k+, exact de cijfers die de eigenaar eerder gaf voor de FAQ-prijsindicatie).
+- `/locaties/genk` — nieuwe, 7e stadspagina (België). Content geverifieerd via WebSearch i.p.v. uit het geheugen geschreven: postcode 3600, 67.500 inwoners/100+ nationaliteiten, Thor Park (93 ha, voormalige mijn Waterschei), C-mine (voormalige mijn Winterslag), Genk-Zuid (1.400 ha, grootste bedrijventerrein van Vlaanderen na de zeehavens), Ford Genk-sluiting 2012, rijafstand Vaals ~40 min. Zelfde kwaliteitslat als de bestaande 6 stadspagina's.
+
+**Nieuwe gedeelde componenten** (om niet 5× dezelfde ~150 regels te dupliceren): `src/components/FaqSection.tsx` (incl. `faqJsonLd()`-helper), `SocialProofSection.tsx`, `CompareTable.tsx`, `LeadFormSection.tsx`. `SectorTemplate.tsx` en `diensten/processen/page.tsx` zijn hierop gerefactored (zelfde gedrag, minder duplicatie). `ProcessStyles()` in `processen/Visuals.tsx` kreeg `.delay-3`/`.delay-4` toegevoegd — **zelf gevonden bug:** de 4 nieuwe pagina's gebruikten de "hv"-heldere-reveal-klassen niet maar renderden aanvankelijk zonder `<ProcessStyles />` te importeren, waardoor `.anim`-elementen geen enkele CSS-regel hadden — gefixt vóór livegang, bevestigd in de browser.
+
+**Zelfgevonden, buiten de directe opdracht, meteen gefixt:** `/investering` beweerde nog "geen vaste prijstabel" voor maatwerk software — een directe tegenspraak met de subtiele prijsindicatie die dezelfde sessie net op 5 andere pagina's is toegevoegd. Bijgewerkt naar dezelfde "vanaf €4.000, oplopend tot €15.000–€35.000+"-formulering.
+
+**Parallelle audit + fixpas (6 achtergrond-agents, na een losstaande audit-agent):** een volledige breadcrumb/metadata-audit over alle 36 routes vond: een echte breadcrumb-bug op alle 6 `/locaties/*`-pagina's (`CityPage.tsx`, "Locaties" en de stad wezen naar dezelfde URL — nu een schoon 2-niveau Home→Stad-pad), een verouderde OG-afbeelding met de tekst "FULL CREATIVE DEVELOPMENT AGENCY" (pre-rebrand-positionering) die nog op 5 pagina's stond, 8 pagina's zonder OG-afbeelding (Next.js' metadata-merge overschrijft `openGraph` per segment in plaats van te mergen), 19 pagina's met een onvolledige Twitter Card, 9 pagina's zonder `BreadcrumbList`, en 4 near-duplicate stadsbeschrijvingen (nu herschreven op basis van elke pagina's eigen, al bestaande unieke content — Aken/Hasselt waren al goed en dienden als lat). Alle 6 fix-agents raakten exclusieve bestandensets aan (geen overlap), elk geverifieerd met `npx tsc --noEmit`.
+
+**`docs/seo/GSC-INDEXATIE-WACHTRIJ.md`** (nieuw) — levende, kopieer-plak-vriendelijke lijst van nieuwe/gewijzigde URL's voor handmatige "Indexering aanvragen" in Search Console (GSC heeft geen bulk-indexeeractie). Wordt bijgewerkt, niet vervangen, bij elke nieuwe batch pagina's.
+
+**`STRATEGY.md`, `LEAD-PLAN-2026-09.md` en `docs/seo/README.md` bijgewerkt** met de nieuwe status (Fase 1 & 2 grotendeels afgerond, sector×stad-combinaties bewust nog open).
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon (46 routes, was 41). Alle 5 nieuwe pagina's + hun JSON-LD live gecontroleerd via `next dev` (geen dubbele/conflicterende schema's, `<details>`-FAQ werkt, sitemap.xml bevat alle 5 URL's).
+
+**Nog te doen:** de "maatwerk software limburg"-quick-win (positie 12,7 verstevigen) is nu het eerstvolgende concrete actiepunt uit de roadmap. Sector×stad-combinaties blijven bewust ongebouwd tot de eigenaar concreet bewijs aanlevert.
+
+---
+
 ## 2026-09-08 (later) — Twee redirect-fixes uit de GSC-analyse doorgevoerd
 
 **`public/_redirects`** (nieuw, Cloudflare Pages-formaat) — de twee triviale technische fixes uit `docs/seo/GSC-FINDINGS-2026-09.md` §4 en §5, akkoord gekregen om meteen door te voeren naast het committen van de SEO-documentatie:
