@@ -445,10 +445,10 @@ export default function Home() {
           </div>
 
           {/* Ambient glow behind right/photo side, small violet counterweight on the left */}
-          <div aria-hidden className="orb-breathe-1 absolute right-0 top-0 bottom-0 w-[60%] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 75% 35%, rgba(212,165,116,0.4) 0%, rgba(212,165,116,0.12) 45%, transparent 72%)" }} />
-          <div aria-hidden className="orb-breathe-2 absolute -left-16 top-1/4 w-[480px] h-[480px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(139,92,246,0.28) 0%, rgba(139,92,246,0.08) 45%, transparent 70%)", filter: "blur(24px)" }} />
+          <div aria-hidden className="orb-breathe-1 absolute -right-32 top-[-10%] w-[900px] h-[900px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(212,165,116,0.38) 0%, transparent 62%)", filter: "blur(30px)" }} />
+          <div aria-hidden className="orb-breathe-2 absolute -left-40 top-1/4 w-[480px] h-[480px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(139,92,246,0.26) 0%, transparent 65%)", filter: "blur(30px)" }} />
 
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-14 lg:gap-20 items-center">
