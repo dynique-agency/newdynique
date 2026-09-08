@@ -10,6 +10,27 @@ export const metadata: Metadata = {
     description: "Geen vage hints, geen verborgen prijstabel — wel een helder proces en een eerlijke inschatting.",
     url: "https://dynique.nl/investering",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Investering",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Investering — wat kost maatwerk software? | Dynique",
+    description: "Geen vage hints, geen verborgen prijstabel — wel een helder proces en een eerlijke inschatting.",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Investering",
+      },
+    ],
   },
 };
 

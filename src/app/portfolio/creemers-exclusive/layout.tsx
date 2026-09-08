@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Creemers Exclusive — case study",
+    description:
+      "Premium single-page website met AI-visuals en interactieve boekingstool.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

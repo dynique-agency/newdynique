@@ -11,6 +11,28 @@ export const metadata: Metadata = {
       "Maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten, met websites en digitale processen als basis. Eén partner die meedenkt, niet alleen uitvoert.",
     url: "https://dynique.nl/diensten",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Diensten",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Diensten — maatwerk software als fundament",
+    description:
+      "Maatwerk software voor bedrijven in Nederland en België die vastlopen in standaardpakketten, met websites en digitale processen als basis. Eén partner die meedenkt, niet alleen uitvoert.",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Diensten",
+      },
+    ],
   },
 };
 

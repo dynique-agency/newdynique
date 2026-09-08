@@ -35,6 +35,15 @@ const posts = [
   },
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://dynique.nl/blog" },
+  ],
+};
+
 export default function BlogIndex() {
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
@@ -52,7 +61,9 @@ export default function BlogIndex() {
   }, []);
 
   return (
-    <main className="relative bg-[#050505] min-h-screen overflow-hidden">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <main className="relative bg-[#050505] min-h-screen overflow-hidden">
       <Header variant="light" />
 
       <div aria-hidden className="fixed top-0 right-0 w-[800px] h-[800px] pointer-events-none opacity-40"
@@ -151,6 +162,7 @@ export default function BlogIndex() {
         .anim.delay-2 { transition-delay: 0.3s; }
         .anim.delay-3 { transition-delay: 0.45s; }
       `}</style>
-    </main>
+      </main>
+    </>
   );
 }

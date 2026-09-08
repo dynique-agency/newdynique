@@ -50,8 +50,7 @@ export default function CityPage({ data }: { data: CityData }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
-          { "@type": "ListItem", position: 2, name: "Locaties", item: url },
-          { "@type": "ListItem", position: 3, name: data.city, item: url },
+          { "@type": "ListItem", position: 2, name: data.city, item: url },
         ],
       },
       {

@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Website laten maken in Limburg" }],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Website laten maken in Limburg",
+    description: "Wat onderscheidt een lokaal webdesignbureau in Limburg? Eerlijke gids voor ondernemers.",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique blog — Website laten maken in Limburg" }],
   },
 };

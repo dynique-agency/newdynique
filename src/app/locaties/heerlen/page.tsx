@@ -3,11 +3,11 @@ import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Heerlen | Dynique",
-  description: "Maatwerk software en webdesign voor bedrijven in Heerlen en Parkstad Limburg. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
+  description: "Maatwerk software en webdesign voor Heerlen en Parkstad Limburg — van zorgpraktijken tot bedrijven op Avantis, met heldere afspraken en vaste prijs per fase.",
   alternates: { canonical: "https://dynique.nl/locaties/heerlen" },
   openGraph: {
     title: "Maatwerk software & webdesign Heerlen | Dynique",
-    description: "Maatwerk software en webdesign in Heerlen en Parkstad. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
+    description: "Maatwerk software en webdesign in Heerlen en Parkstad Limburg. Nuchter, persoonlijk en gebouwd rond zorg, retail en bedrijven op Avantis.",
     url: "https://dynique.nl/locaties/heerlen",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Heerlen" }],

@@ -11,6 +11,28 @@ export const metadata: Metadata = {
       "Doordachte inzichten over maatwerk software en de digitale keuzes die daaraan voorafgaan.",
     url: "https://dynique.nl/blog",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Het Journaal — Blog van Dynique",
+    description:
+      "Doordachte inzichten over maatwerk software en de digitale keuzes die daaraan voorafgaan.",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Blog",
+      },
+    ],
   },
 };
 

@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Stacy Kohnen — case study",
+    description:
+      "Meertalige artiestensite met real-time audio, interactieve agenda en AI-branding.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

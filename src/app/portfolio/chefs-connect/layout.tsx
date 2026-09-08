@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Chefs Connect — case study",
+    description:
+      "Een culinair platform dat horecazaken, freelance chefs en evenementenorganisatoren elk hun eigen traject geeft.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

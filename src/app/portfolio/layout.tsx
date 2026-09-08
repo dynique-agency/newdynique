@@ -11,6 +11,28 @@ export const metadata: Metadata = {
       "Websites, web apps en merkidentiteiten voor restaurants, artiesten en MKB.",
     url: "https://dynique.nl/portfolio",
     type: "website",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio — ons werk",
+    description:
+      "Websites, web apps en merkidentiteiten voor restaurants, artiesten en MKB.",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Portfolio",
+      },
+    ],
   },
 };
 

@@ -31,6 +31,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Maatwerk software laten maken in Limburg",
+    description:
+      "Maatwerk software op code voor bedrijven in Limburg die vastlopen in standaardpakketten. Gratis en vrijblijvende procesanalyse op locatie.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",
@@ -80,6 +84,14 @@ const jsonLd = {
         "Maastricht", "Heerlen", "Sittard-Geleen", "Kerkrade", "Landgraaf",
         "Brunssum", "Valkenburg", "Roermond", "Weert", "Limburg",
       ].map((name) => ({ "@type": "City", name })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+        { "@type": "ListItem", position: 2, name: "Maatwerk software", item: "https://dynique.nl/diensten/processen" },
+        { "@type": "ListItem", position: 3, name: "Limburg", item: "https://dynique.nl/diensten/processen/limburg" },
+      ],
     },
   ],
 };

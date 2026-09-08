@@ -3,11 +3,11 @@ import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Eindhoven | Dynique",
-  description: "Maatwerk software en webdesign voor bedrijven in Eindhoven en Brainport. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
+  description: "Maatwerk software en webdesign voor Eindhoven en Brainport — van tech-startups op Strijp-S tot scale-ups bij High Tech Campus. Snel, ambitieus, internationaal.",
   alternates: { canonical: "https://dynique.nl/locaties/eindhoven" },
   openGraph: {
     title: "Maatwerk software & webdesign Eindhoven | Dynique",
-    description: "Maatwerk software en webdesign in Eindhoven en Brainport. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
+    description: "Maatwerk software en webdesign voor Eindhoven en Brainport. Snel, design-gedreven en gebouwd rond Strijp-S, High Tech Campus en Flight Forum.",
     url: "https://dynique.nl/locaties/eindhoven",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Eindhoven" }],

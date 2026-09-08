@@ -3,11 +3,11 @@ import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Maastricht | Dynique",
-  description: "Maatwerk software en premium webdesign voor bedrijven in Maastricht en Zuid-Limburg. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
+  description: "Maatwerk software en premium webdesign voor Maastricht en Zuid-Limburg — van horeca aan het Vrijthof tot boutiques in Wyck en advocatenkantoren in Randwyck.",
   alternates: { canonical: "https://dynique.nl/locaties/maastricht" },
   openGraph: {
     title: "Maatwerk software & webdesign Maastricht | Dynique",
-    description: "Maatwerk software en webdesign in Maastricht. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
+    description: "Premium webdesign en maatwerk software in Maastricht. Elegant, meertalig en gebouwd rond horeca, boutiques en kantoren in Wyck en Randwyck.",
     url: "https://dynique.nl/locaties/maastricht",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Maastricht" }],

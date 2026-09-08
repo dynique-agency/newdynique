@@ -3,11 +3,11 @@ import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Sittard-Geleen | Dynique",
-  description: "Maatwerk software en webdesign voor bedrijven in Sittard, Geleen en Born. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
+  description: "Maatwerk software en webdesign voor Sittard, Geleen en Born — van toeleveranciers rond Chemelot tot retail in de Sittardse binnenstad. Vakmanschap staat voorop.",
   alternates: { canonical: "https://dynique.nl/locaties/sittard" },
   openGraph: {
     title: "Maatwerk software & webdesign Sittard-Geleen | Dynique",
-    description: "Maatwerk software en webdesign in Sittard, Geleen en Born. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
+    description: "Maatwerk software en webdesign voor Sittard, Geleen en Born. Vakkundig gebouwd rond Chemelot, VDL Nedcar en de Sittardse binnenstad.",
     url: "https://dynique.nl/locaties/sittard",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Sittard-Geleen" }],

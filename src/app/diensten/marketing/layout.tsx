@@ -11,18 +11,51 @@ export const metadata: Metadata = {
       "AI-content, social media automatisering, SEO en e-mailmarketing voor meer bereik en vindbaarheid.",
     url: "https://dynique.nl/diensten/marketing",
     type: "website",
-    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "AI Marketing & SEO — Dynique" }],
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — AI Marketing & SEO",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Marketing & SEO | Dynique",
+    description:
+      "AI-content, social media automatisering, SEO en e-mailmarketing voor meer bereik en vindbaarheid.",
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — AI Marketing & SEO",
+      },
+    ],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "AI Marketing, Content & SEO",
-  provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-  areaServed: ["Limburg", "Nederland"],
-  description:
-    "AI-gedreven contentcreatie, social media automatisering, SEO en e-mailmarketing, altijd met menselijke controle.",
+  "@graph": [
+    {
+      "@type": "Service",
+      serviceType: "AI Marketing, Content & SEO",
+      provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
+      areaServed: ["Limburg", "Nederland"],
+      description:
+        "AI-gedreven contentcreatie, social media automatisering, SEO en e-mailmarketing, altijd met menselijke controle.",
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+        { "@type": "ListItem", position: 2, name: "Diensten", item: "https://dynique.nl/diensten" },
+        { "@type": "ListItem", position: 3, name: "AI Marketing & SEO", item: "https://dynique.nl/diensten/marketing" },
+      ],
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

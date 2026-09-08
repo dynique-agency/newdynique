@@ -11,24 +11,43 @@ export const metadata: Metadata = {
       "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten. Gratis en vrijblijvende procesanalyse op locatie.",
     url: "https://dynique.nl/diensten/processen",
     type: "website",
-    images: [{ url: "https://dynique.nl/og.png", width: 1200, height: 630, alt: "Maatwerk software — Dynique" }],
+    images: [
+      {
+        url: "https://dynique.nl/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Dynique — Maatwerk Software & Digitale Bedrijfsprocessen",
+      },
+    ],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Maatwerk Software & Digitale Bedrijfsprocessen",
-  provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-  areaServed: ["Nederland", "België"],
-  description:
-    "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
-  offers: {
-    "@type": "Offer",
-    name: "Gratis procesanalyse op locatie",
-    price: "0",
-    priceCurrency: "EUR",
-  },
+  "@graph": [
+    {
+      "@type": "Service",
+      serviceType: "Maatwerk Software & Digitale Bedrijfsprocessen",
+      provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
+      areaServed: ["Nederland", "België"],
+      description:
+        "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
+      offers: {
+        "@type": "Offer",
+        name: "Gratis procesanalyse op locatie",
+        price: "0",
+        priceCurrency: "EUR",
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+        { "@type": "ListItem", position: 2, name: "Diensten", item: "https://dynique.nl/diensten" },
+        { "@type": "ListItem", position: 3, name: "Maatwerk software", item: "https://dynique.nl/diensten/processen" },
+      ],
+    },
+  ],
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

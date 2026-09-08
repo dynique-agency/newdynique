@@ -168,6 +168,15 @@ function BrowserMockup({ p }: { p: Project }) {
   );
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+    { "@type": "ListItem", position: 2, name: "Portfolio", item: "https://dynique.nl/portfolio" },
+  ],
+};
+
 export default function Portfolio() {
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
@@ -187,7 +196,9 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <main className="relative bg-[#070707] min-h-screen overflow-hidden">
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <main className="relative bg-[#070707] min-h-screen overflow-hidden">
       <Header variant="light" />
 
       {/* Ambient orbs */}
@@ -422,6 +433,7 @@ export default function Portfolio() {
           .browser-float { animation: none; }
         }
       `}</style>
-    </main>
+      </main>
+    </>
   );
 }

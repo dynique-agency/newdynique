@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "IJssalon Italia Vaals — case study",
+    description:
+      "Single-page scroll, allergenen-filtering en topprestaties op mobiel.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

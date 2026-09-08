@@ -21,6 +21,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Auwt Aelse — case study",
+    description:
+      "Bourgondisch tafelen, eigentijds geserveerd. Een tweetalige bistrosite met volledige kaart en sfeerimpressie.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",
