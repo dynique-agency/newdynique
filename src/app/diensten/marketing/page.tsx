@@ -49,8 +49,8 @@ export default function MarketingDienst() {
       linkLabel: "BEKIJK DE CASE",
     },
     {
-      title: "Eén team, geen overdracht",
-      desc: "Dezelfde mensen die je website of software bouwen, schrijven ook je content. Geen los bureau ertussen.",
+      title: "Eén aanspreekpunt, specialistische uitvoering",
+      desc: "Je schakelt met hetzelfde aanspreekpunt als voor je website. De advertising zelf wordt uitgevoerd door Dynique Digital, onze gespecialiseerde marketingtak.",
     },
   ];
 
@@ -249,6 +249,13 @@ export default function MarketingDienst() {
             </div>
           </div>
         </section>
+
+        {/* Uitvoerende partij — vereist voor Meta-advertentietransparantie, en gewoon eerlijk */}
+        <div className="relative px-6 lg:px-12 py-8 border-t border-white/[0.06] text-center">
+          <p className="text-white/35 text-xs font-light tracking-wide max-w-2xl mx-auto">
+            Deze dienst wordt uitgevoerd door <span className="text-white/55">Dynique Digital (VOF)</span>, KVK 42154878 — in samenwerking met Creemers Inclusives (KVK 90531264) voor de technische kant van je website of platform.
+          </p>
+        </div>
       </main>
 
       <Footer />

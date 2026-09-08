@@ -6,6 +6,22 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 — Twee-KVK-structuur zichtbaar en eerlijk gemaakt (Meta-advertentie-eis)
+
+**Aanleiding:** Dynique opereert feitelijk onder twee juridische entiteiten — Creemers Inclusives (eenmanszaak, KVK 90531264, Vaals) voor software/web, en Dynique Digital (VOF, KVK 42154878, Heerlen) voor AI-marketing/advertising, 50/50 tussen de eigenaar en zijn partner. Meta vereist dat de KVK van de adverterende entiteit op de website staat, maar de eigenaar wilde niet dat organische bezoekers denken met een VOF te maken te hebben en vervolgens door de eenmanszaak gefactureerd worden. Voorstel gedaan (3 lagen: footer, marketingpagina, AV), akkoord gekregen op footer + marketingpagina; de AV-alinea staat nog open tot de eigenaar teruggekomen is op de exacte contractvorm-afspraken met zijn partner.
+
+**Uitgevoerd:**
+- **`src/components/Footer.tsx`** — het legal-blok omgezet van één regel naar twee duidelijk gescheiden, gelijkwaardige regels: "Maatwerk software, web & platformen — Creemers Inclusives (eenmanszaak)" met KVK 90531264 + Vaals-adres, en "AI-marketing & advertising — Dynique Digital (VOF)" met KVK 42154878 + het eigen Heerlen-adres (Gouverneurstraat 32 — geverifieerd via KVK.nl, wijkt af van het Vaals-adres, dus expliciet los vermeld i.p.v. aangenomen).
+- **`src/app/diensten/marketing/page.tsx`** — nieuw disclosure-blok direct boven de footer: "Deze dienst wordt uitgevoerd door Dynique Digital (VOF), KVK 42154878 — in samenwerking met Creemers Inclusives...". Dit is de pagina waar de Meta-ads op landen, dus hier staat het het prominentst.
+- **Zelf gevonden, niet gevraagd:** de bestaande "proof"-tekst op diezelfde pagina beweerde "Eén team, geen overdracht — dezelfde mensen die je website bouwen, schrijven ook je content. Geen los bureau ertussen." — dat spreekt de nieuwe disclosure direct tegen (er ís een apart, juridisch zelfstandig bedrijf voor advertising). Herschreven naar "Eén aanspreekpunt, specialistische uitvoering", eerlijk over de aparte entiteit zonder de samenwerking te ondermijnen.
+- Beide KVK-links geverifieerd via een echte KVK.nl-zoekopdracht (niet aangenomen) — voor 42154878: "Dynique Digital", VOF, Hoofdvestiging Gouverneurstraat 32, Heerlen, vestigingsnummer 000066601479.
+
+**Geverifieerd:** `npx tsc --noEmit` schoon, `npm run build` slaagt (41 routes). Footer- en marketingpagina-tekst live gecontroleerd in de browser (`footer.innerText` en pagetext), beide KVK's en adressen kloppen.
+
+**Nog te doen — beslissing nodig van klant:** de algemene-voorwaarden-alinea (welke entiteit contracteert per dienst) wacht op de eigenaar's input over de exacte afspraken met zijn partner over facturatie/contractvorming — pas daarna definitief maken, en sowieso laten checken door een boekhouder/bedrijfsjurist voordat het live gaat.
+
+---
+
 ## 2026-09-07 (avond, afronding) — Leadcapture-backend, case-study's en portfolio-blurb geverifieerd compleet
 
 **Aanleiding:** de achtergrondagent die de Auwt Aelse/Chefs Connect-case-study's herschreef werd tussentijds onderbroken (sessielimiet/herstart) en meldde zich als "stopped" i.p.v. "completed". Gecontroleerd of het werk daadwerkelijk af was voordat er iets opnieuw gedaan werd.

@@ -120,26 +120,44 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Legal / Company Info */}
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 pb-6 mb-6 text-center">
-            <p className="text-black/45 text-xs font-light tracking-wide">
-              Dynique is de handelsnaam van Creemers Inclusives
-            </p>
-            <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
-            <p className="text-black/45 text-xs font-light tracking-wide">
-              <a
-                href="https://www.kvk.nl/bestellen/#/90531264000056256078?origin=search"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-black underline underline-offset-2 transition-colors duration-300"
-              >
-                KVK 90531264
-              </a>
-              <span className="text-black/30"> (NL handelsregister — vergelijkbaar met de Belgische KBO)</span>
-            </p>
-            <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
-            <p className="text-black/45 text-xs font-light tracking-wide">
-              Ir. Em. Melottestraat 10, 6291 HE Vaals
+          {/* Legal / Company Info — Dynique is de merknaam voor twee samenwerkende bedrijven */}
+          <div className="pb-6 mb-6 text-center space-y-2.5">
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+              <p className="text-black/45 text-xs font-light tracking-wide">
+                Maatwerk software, web &amp; platformen — Creemers Inclusives (eenmanszaak)
+              </p>
+              <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
+              <p className="text-black/45 text-xs font-light tracking-wide">
+                <a
+                  href="https://www.kvk.nl/bestellen/#/90531264000056256078?origin=search"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-black underline underline-offset-2 transition-colors duration-300"
+                >
+                  KVK 90531264
+                </a>
+                <span className="text-black/30"> · Ir. Em. Melottestraat 10, 6291 HE Vaals</span>
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+              <p className="text-black/45 text-xs font-light tracking-wide">
+                AI-marketing &amp; advertising — Dynique Digital (VOF)
+              </p>
+              <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
+              <p className="text-black/45 text-xs font-light tracking-wide">
+                <a
+                  href="https://www.kvk.nl/bestellen/#/42154878000066601479?origin=search"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-black underline underline-offset-2 transition-colors duration-300"
+                >
+                  KVK 42154878
+                </a>
+                <span className="text-black/30"> · Gouverneurstraat 32, 6411 XH Heerlen</span>
+              </p>
+            </div>
+            <p className="text-black/30 text-[10px] font-light tracking-wide">
+              (NL handelsregister — vergelijkbaar met de Belgische KBO)
             </p>
           </div>
 
