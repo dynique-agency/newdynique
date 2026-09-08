@@ -6,6 +6,7 @@ import StatusIndicator from "@/components/StatusIndicator";
 import Footer from "@/components/Footer";
 import Advisor from "@/components/Advisor";
 import CornerMark from "@/components/CornerMark";
+import DiagonalLine from "@/components/DiagonalLine";
 import {
   BeforeScreen,
   AfterScreen,
@@ -526,6 +527,7 @@ export default function Home() {
         <section className="relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
           <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#d4a574]/30 to-transparent" />
           <CornerMark position="top-right" />
+          <DiagonalLine corner="bottom-right" length={260} />
           <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="orb-breathe-1 absolute -top-32 right-[-6%] w-[680px] h-[680px] rounded-full"
               style={{ background: "radial-gradient(circle, rgba(212,165,116,0.42) 0%, rgba(212,165,116,0.14) 42%, transparent 68%)", filter: "blur(20px)" }} />
@@ -813,6 +815,7 @@ export default function Home() {
         {/* ─── 6. PROCESS — "HET TRAJECT" ─────────────────────── */}
         <section className="relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
           <CornerMark position="top-right" />
+          <DiagonalLine corner="top-right" length={300} />
           {/* Ambient accent orbs */}
           <div aria-hidden className="orb-breathe-2 absolute -top-16 right-[-8%] w-[780px] h-[780px] rounded-full pointer-events-none"
                style={{ background: "radial-gradient(circle, rgba(212,165,116,0.4) 0%, rgba(212,165,116,0.13) 42%, transparent 68%)", filter: "blur(20px)" }} />
@@ -1054,6 +1057,7 @@ export default function Home() {
         {/* ─── 7. PORTFOLIO ────────────────────────────────────── */}
         <section className="relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
           <CornerMark position="top-right" />
+          <DiagonalLine corner="top-right" length={240} />
           {/* Ambient orbs */}
           <div aria-hidden className="orb-breathe-1 absolute top-1/4 -right-24 w-[620px] h-[620px] rounded-full pointer-events-none"
             style={{ background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(99,102,241,0.1) 42%, transparent 70%)", filter: "blur(24px)" }} />

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PhotoCluster from "@/components/PhotoCluster";
 
 const GOLD = "#d4a574";
 
@@ -199,10 +200,16 @@ export default function OverOns() {
                   <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: GOLD }} />
                   <p className="text-white/50 text-xs tracking-[0.15em] font-light uppercase">Wat je mag verwachten</p>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.15]">
+                <h2 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.15] mb-12 lg:mb-16">
                   Werken met Dynique
                   <span className="text-white/45 italic"> voelt anders.</span>
                 </h2>
+                <PhotoCluster
+                  photos={[
+                    { src: "/rsc/founder.jpeg", alt: "Portret van de oprichter van Dynique" },
+                    { src: "/rsc/founder2.jpeg", alt: "Zwart-wit portret van de oprichter van Dynique" },
+                  ]}
+                />
               </div>
               <div className="lg:col-span-7 anim delay-1 space-y-px bg-white/[0.06] border border-white/[0.06]">
                 {PROMISE.map((p) => (
