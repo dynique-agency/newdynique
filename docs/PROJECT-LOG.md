@@ -6,6 +6,30 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later) — DIENSTEN-dropdown werkte niet op touch/tablet, plus verborgen focus-lek
+
+**Aanleiding:** "die diensten dropdown in de header werkt niet". Op desktop-breedte met een echte muis-hover werkte hij wel (bevestigd via screenshot) — de dropdown draaide puur op `onMouseEnter`/`onMouseLeave`, wat op touch-apparaten nooit afgaat. Voor die gebruikers navigeerde de link meteen weg zonder het menu ooit te tonen.
+
+**`src/components/Header.tsx`:**
+- Tap-to-open toegevoegd: de eerste klik/tik op "DIENSTEN" opent nu het menu (`preventDefault`) i.p.v. meteen te navigeren; een tweede klik (menu al open) navigeert gewoon door. Hover-gedrag voor muis/trackpad blijft ongewijzigd.
+- Klik-buiten-sluit het menu (`pointerdown`-listener op `document`, alleen actief zolang het menu open is) — nodig omdat touch geen `mouseleave`-equivalent heeft.
+- **Zelf gevonden tijdens het testen, zelfde bugklasse als de accordion-fix van eerder deze sessie:** de 4 dropdown-items waren altijd Tab-baar, ook toen het menu onzichtbaar was. `tabIndex={-1}` + `aria-hidden` toegevoegd op het paneel wanneer dicht, matching het patroon dat al op de diensten-pagina-accordion staat.
+
+**Geverifieerd:** `npx tsc --noEmit` en `npm run build` schoon (41 routes). Live doorgetest: een programmatische `.click()` (geen muis-hover ervoor, dus representatief voor een echte tik) opent het menu zonder te navigeren; tabIndex is `0` open en `-1` dicht; een `pointerdown` buiten het menu sluit het.
+
+---
+
+## 2026-09-08 (later) — Diagonale signatuurlijn + ronde founder-fotocluster
+
+**Aanleiding:** na Awwwards-onderzoek (incl. lusion.co als smaakreferentie — mooi als studio-portfolio, maar 25+ seconden laadtijd door custom shaders/scroll-jacking, dus bewust niet als technische blauwdruk gebruikt) een concrete lijst met award-winning ideeën voorgelegd; akkoord op de diagonale-lijn-uitbreiding van de hoek-bracket-signatuur en een ronde foto-cluster voor de "wie zit erachter"-boodschap op /over-ons.
+
+- **`src/components/DiagonalLine.tsx`** (nieuw) — dunne (1px), goudkleurige diagonale lijn die vanuit een sectiehoek naar binnen "steekt", zelfde `.anim`/IntersectionObserver-reveal en `prefers-reduced-motion`-conventie als `CornerMark.tsx`. Toegevoegd aan 3 van de 4 CornerMark-secties (Waarom Dynique, Het Traject, Portfolio — Manifesto bewust overgeslagen, die heeft al een drukkere orb/foto-compositie). Desktop-only (`lg:` en hoger); geometrie per sectie met de hand getest tegen koppen/orbs op meerdere breedtes om overlap te voorkomen.
+- **`src/components/PhotoCluster.tsx`** (nieuw) — twee (niet vier: er bestaan bewust geen extra "team"-foto's, alleen de twee echte founder-foto's die al gebruikt werden) rond uitgesneden, licht overlappende portretten met onafhankelijke, trage ademende beweging. Vervangt/vult de founder-credibility-sectie op `src/app/over-ons/page.tsx` aan — geen enkele nieuwe of verzonnen afbeelding, expliciet gecontroleerd tegen wat er al in `public/rsc/` stond.
+
+**Geverifieerd:** `npx tsc --noEmit` en `npm run build` schoon (41 routes). Live gecontroleerd via DOM-metingen (`getBoundingClientRect`, computed styles) omdat het screenshot-paneel deze sessie herhaaldelijk hing na scroll-acties — geen overlap tussen diagonale lijnen en secties-content op 375–1920px, beide founder-foto's laden echt en correct gepositioneerd.
+
+---
+
 ## 2026-09-08 — Twee-KVK-structuur zichtbaar en eerlijk gemaakt (Meta-advertentie-eis)
 
 **Aanleiding:** Dynique opereert feitelijk onder twee juridische entiteiten — Creemers Inclusives (eenmanszaak, KVK 90531264, Vaals) voor software/web, en Dynique Digital (VOF, KVK 42154878, Heerlen) voor AI-marketing/advertising, 50/50 tussen de eigenaar en zijn partner. Meta vereist dat de KVK van de adverterende entiteit op de website staat, maar de eigenaar wilde niet dat organische bezoekers denken met een VOF te maken te hebben en vervolgens door de eenmanszaak gefactureerd worden. Voorstel gedaan (3 lagen: footer, marketingpagina, AV), akkoord gekregen op footer + marketingpagina; de AV-alinea staat nog open tot de eigenaar teruggekomen is op de exacte contractvorm-afspraken met zijn partner.

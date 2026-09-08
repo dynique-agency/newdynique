@@ -30,6 +30,23 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
   const [dienstenOpen, setDienstenOpen] = useState(false);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const dienstenWrapRef = useRef<HTMLDivElement>(null);
+
+  // Hover works for mouse/trackpad, but touch/tablet devices never fire mouseenter —
+  // the trigger would just navigate away without ever showing the menu. Support tap-to-open
+  // as well: a first tap reveals the dropdown instead of navigating; tapping again (or the
+  // link itself once open) navigates normally. Click-outside closes it, since touch has no
+  // mouseleave equivalent.
+  useEffect(() => {
+    if (!dienstenOpen) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (dienstenWrapRef.current && !dienstenWrapRef.current.contains(e.target as Node)) {
+        setDienstenOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [dienstenOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,20 +147,38 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-10">
               <div
+                ref={dienstenWrapRef}
                 className="relative"
                 onMouseEnter={() => setDienstenOpen(true)}
                 onMouseLeave={() => setDienstenOpen(false)}
               >
-                <Link href="/diensten" className={`${textColor} text-sm font-light tracking-[0.15em] hover:tracking-[0.2em] transition-all duration-300 relative group flex items-center gap-2`}>
+                <Link
+                  href="/diensten"
+                  onClick={(e) => {
+                    if (!dienstenOpen) {
+                      e.preventDefault();
+                      setDienstenOpen(true);
+                    }
+                  }}
+                  className={`${textColor} text-sm font-light tracking-[0.15em] hover:tracking-[0.2em] transition-all duration-300 relative group flex items-center gap-2`}
+                >
                   DIENSTEN
                   <svg className={`w-3 h-3 transition-transform duration-300 ${dienstenOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
                   </svg>
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#d4a574] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <div className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-black/10 shadow-2xl transition-all duration-300 ${dienstenOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                <div
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-black/10 shadow-2xl transition-all duration-300 ${dienstenOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+                  aria-hidden={!dienstenOpen}
+                >
                   {dienstenItems.map((item) => (
-                    <Link key={item.href} href={item.href} className="group/item relative block overflow-hidden px-6 py-4 border-b border-black/5 last:border-0 hover:bg-black/[0.025] transition-colors duration-200">
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      tabIndex={dienstenOpen ? undefined : -1}
+                      className="group/item relative block overflow-hidden px-6 py-4 border-b border-black/5 last:border-0 hover:bg-black/[0.025] transition-colors duration-200"
+                    >
                       <span className="absolute left-0 top-0 bottom-0 w-0 group-hover/item:w-[3px] transition-all duration-300" style={{ background: "#d4a574" }} />
                       <div className="flex items-center gap-2 mb-1">
                         {item.primary && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#d4a574" }} />}
