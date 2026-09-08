@@ -1,0 +1,8 @@
+# www → apex: beide stonden apart geïndexeerd in Search Console en verdeelden
+# homepage-kliks/autoriteit (zie docs/seo/GSC-FINDINGS-2026-09.md §4).
+https://www.dynique.nl/* https://dynique.nl/:splat 301!
+
+# Verweesde portfolio-URL's (oude case studies, niet meer in de codebase) die nog
+# vertoningen trekken in Search Console — zie docs/seo/GSC-FINDINGS-2026-09.md §5.
+/portfolio/sa-personeel /portfolio 301
+/portfolio/house-of-chocolate /portfolio 301
