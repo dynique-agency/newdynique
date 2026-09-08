@@ -91,7 +91,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
-      document.querySelectorAll(".anim, .section-reveal").forEach((el) => el.classList.add("animate-in"));
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
       return;
     }
     const observer = new IntersectionObserver(
@@ -102,7 +102,7 @@ export default function Home() {
       },
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".anim, .section-reveal").forEach((el) => observer.observe(el));
+    document.querySelectorAll(".anim").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [loading]);
 
@@ -418,12 +418,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10" style={{ animation: "fadeInUp 1s ease-out 1.4s both" }}>
-            <div className="w-[22px] h-[36px] rounded-full border border-white/25 flex justify-center pt-2">
-              <div className="scroll-dot w-[3px] h-[3px] rounded-full bg-[#d4a574]" />
-            </div>
-          </div>
-
           {/* Corner-bracket signature — closes the hero frame before the marquee */}
           <CornerMark position="bottom-left" delay={1.6} />
           <CornerMark position="bottom-right" delay={1.6} />
@@ -442,7 +436,7 @@ export default function Home() {
         </div>
 
         {/* ─── 3. MANIFESTO ────────────────────────────────────── */}
-        <section className="section-reveal relative bg-[#080808] overflow-hidden py-24 lg:py-28">
+        <section className="relative bg-[#080808] overflow-hidden py-24 lg:py-28">
 
           {/* Ghost "DYNIQUE" — full width, bottom anchored, clearly visible */}
           <div aria-hidden className="absolute bottom-0 left-0 right-0 pointer-events-none select-none leading-[0.82] overflow-hidden">
@@ -450,9 +444,11 @@ export default function Home() {
               style={{ fontSize: "clamp(100px, 19vw, 240px)", opacity: 0.055 }}>DYNIQUE</span>
           </div>
 
-          {/* Emerald glow behind right/photo side */}
-          <div className="absolute right-0 top-0 bottom-0 w-[50%] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse at 75% 35%, rgba(212,165,116,0.16) 0%, transparent 60%)" }} />
+          {/* Ambient glow behind right/photo side, small violet counterweight on the left */}
+          <div aria-hidden className="orb-breathe-1 absolute right-0 top-0 bottom-0 w-[60%] pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at 75% 35%, rgba(212,165,116,0.4) 0%, rgba(212,165,116,0.12) 45%, transparent 72%)" }} />
+          <div aria-hidden className="orb-breathe-2 absolute -left-16 top-1/4 w-[480px] h-[480px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(139,92,246,0.28) 0%, rgba(139,92,246,0.08) 45%, transparent 70%)", filter: "blur(24px)" }} />
 
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-14 lg:gap-20 items-center">
@@ -527,11 +523,17 @@ export default function Home() {
         </section>
 
         {/* ─── 4. WAAROM DYNIQUE — één verhaal i.p.v. een dienstengrid ── */}
-        <section className="section-reveal relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
+        <section className="relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
           <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#d4a574]/30 to-transparent" />
           <CornerMark position="top-right" />
-          <div aria-hidden className="absolute -top-40 right-0 w-[600px] h-[600px] pointer-events-none opacity-40"
-            style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 60%)" }} />
+          <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="orb-breathe-1 absolute -top-32 right-[-6%] w-[680px] h-[680px] rounded-full"
+              style={{ background: "radial-gradient(circle, rgba(212,165,116,0.42) 0%, rgba(212,165,116,0.14) 42%, transparent 68%)", filter: "blur(20px)" }} />
+            <div className="orb-breathe-2 absolute -bottom-20 -left-10 w-[520px] h-[520px] rounded-full"
+              style={{ background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(139,92,246,0.1) 42%, transparent 68%)", filter: "blur(20px)" }} />
+            <div className="orb-breathe-3 absolute top-[15%] left-[8%] w-[300px] h-[300px] rounded-full"
+              style={{ background: "radial-gradient(circle, rgba(244,114,182,0.22) 0%, rgba(244,114,182,0.06) 42%, transparent 68%)", filter: "blur(18px)" }} />
+          </div>
 
           <div className="container mx-auto px-6 lg:px-12 relative">
             {/* Probleem */}
@@ -631,7 +633,7 @@ export default function Home() {
 
         {/* ─── 5. REVIEWS ──────────────────────────────────────── */}
         <section
-          className="section-reveal relative bg-[#070707] py-32 lg:py-44 overflow-hidden"
+          className="relative bg-[#070707] py-32 lg:py-44 overflow-hidden"
           id="reviews"
           onMouseEnter={() => { reviewsPausedRef.current = true; }}
           onMouseLeave={() => { reviewsPausedRef.current = false; }}
@@ -809,11 +811,13 @@ export default function Home() {
         </section>
 
         {/* ─── 6. PROCESS — "HET TRAJECT" ─────────────────────── */}
-        <section className="section-reveal relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
+        <section className="relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
           <CornerMark position="top-right" />
-          {/* Ambient accent orb */}
-          <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-50"
-               style={{ background: "radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 60%)" }} />
+          {/* Ambient accent orbs */}
+          <div aria-hidden className="orb-breathe-2 absolute -top-16 right-[-8%] w-[780px] h-[780px] rounded-full pointer-events-none"
+               style={{ background: "radial-gradient(circle, rgba(212,165,116,0.4) 0%, rgba(212,165,116,0.13) 42%, transparent 68%)", filter: "blur(20px)" }} />
+          <div aria-hidden className="orb-breathe-3 absolute bottom-[-5%] left-[0%] w-[540px] h-[540px] rounded-full pointer-events-none"
+               style={{ background: "radial-gradient(circle, rgba(244,114,182,0.28) 0%, rgba(244,114,182,0.09) 42%, transparent 68%)", filter: "blur(20px)" }} />
           {/* Ultra-subtle grid */}
           <div aria-hidden className="absolute inset-0 pointer-events-none opacity-[0.025]"
                style={{
@@ -1048,13 +1052,13 @@ export default function Home() {
         </section>
 
         {/* ─── 7. PORTFOLIO ────────────────────────────────────── */}
-        <section className="section-reveal relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
+        <section className="relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
           <CornerMark position="top-right" />
-          {/* Ambient orb */}
-          <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", filter: "blur(40px)" }} />
-          <div className="absolute -bottom-20 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.05) 0%, transparent 70%)", filter: "blur(40px)" }} />
+          {/* Ambient orbs */}
+          <div aria-hidden className="orb-breathe-1 absolute top-1/4 -right-24 w-[620px] h-[620px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(99,102,241,0.1) 42%, transparent 70%)", filter: "blur(24px)" }} />
+          <div aria-hidden className="orb-breathe-3 absolute -bottom-16 -left-20 w-[620px] h-[620px] rounded-full pointer-events-none"
+            style={{ background: "radial-gradient(circle, rgba(251,191,36,0.26) 0%, rgba(251,191,36,0.08) 42%, transparent 70%)", filter: "blur(24px)" }} />
 
           <div className="container mx-auto px-6 lg:px-12 relative">
             {/* Header */}
@@ -1217,7 +1221,7 @@ export default function Home() {
         <Advisor />
 
         {/* ─── 8. STATEMENT STRIP ──────────────────────────────── */}
-        <section className="section-reveal bg-black py-24 lg:py-32 overflow-hidden">
+        <section className="bg-black py-24 lg:py-32 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-12">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-extralight text-white tracking-[0.08em] leading-[1.1] anim">
               Klaar om te groeien?<br />
@@ -1235,7 +1239,7 @@ export default function Home() {
         </section>
 
         {/* ─── 9. CONTACT ──────────────────────────────────────── */}
-        <section className="section-reveal bg-white py-32 lg:py-40" id="contact">
+        <section className="bg-white py-32 lg:py-40" id="contact">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32">
               {/* Left */}
@@ -1391,7 +1395,7 @@ export default function Home() {
         </section>
 
         {/* ─── 10. FAQ ──────────────────────────────────────────── */}
-        <section className="section-reveal bg-zinc-950 py-32 lg:py-40" id="faq">
+        <section className="bg-zinc-950 py-32 lg:py-40" id="faq">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-3 gap-16 lg:gap-32">
               <div>
@@ -1496,17 +1500,6 @@ export default function Home() {
           from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes scrollDot {
-          0%   { transform: translateY(0); opacity: 1; }
-          70%  { transform: translateY(14px); opacity: 0; }
-          100% { transform: translateY(0); opacity: 0; }
-        }
-        .scroll-dot {
-          animation: scrollDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .scroll-dot { animation: none; opacity: 0.6; }
-        }
         @keyframes marquee {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
@@ -1562,22 +1555,6 @@ export default function Home() {
         .delay-1 { transition-delay: 0.12s; }
         .delay-2 { transition-delay: 0.26s; }
         .delay-3 { transition-delay: 0.42s; }
-
-        /* Section-level "camera settle" — the stage arrives as one surface, before its content populates */
-        .section-reveal {
-          opacity: 0;
-          transform: scale(0.97) translateY(20px);
-          transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                      transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
-          will-change: opacity, transform;
-        }
-        .section-reveal.animate-in {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .section-reveal { opacity: 1; transform: none; transition: none; }
-        }
 
         /* Photo diagonal reveal — polygon animates so diagonal shape is preserved */
         @keyframes photoDiagReveal {
