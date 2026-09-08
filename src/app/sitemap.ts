@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/low-code-vs-maatwerk-software`,   lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
 
     // ── Locatie landingspagina's ──
+    { url: `${base}/locaties`,            lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
     { url: `${base}/locaties/maastricht`, lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
     { url: `${base}/locaties/heerlen`,    lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${base}/locaties/sittard`,    lastModified: now, changeFrequency: 'monthly', priority: 0.72 },

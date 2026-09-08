@@ -28,7 +28,7 @@ const data: CityData = {
   postal: "3500 — 3540",
   travelTime: "Maastricht 40 min · Vaals 55 min",
   highlights: [
-    { n: "01", title: "Cross-border Business", desc: "Grensoverschrijdend ondernemen tussen Nederland en België: heldere afspraken over btw-verlegging en facturatie, geen verrassingen achteraf." },
+    { n: "01", title: "Cross-border Business", desc: "Voor Hasseltse mode- en techbedrijven die de Nederlandse markt op willen, of NL-bedrijven die in Belgisch Limburg willen uitbreiden: heldere afspraken over btw-verlegging en facturatie, geen verrassingen achteraf." },
     { n: "02", title: "Mode & Retail", desc: "Sterke webshops en merksites voor de Hasseltse mode- en retailsector — van de Grote Markt tot de Kolonel Dusartplein." },
     { n: "03", title: "Tech & Corda Campus", desc: "Moderne platforms op maat voor scale-ups en techbedrijven rond Corda Campus, UHasselt en PXL." },
     { n: "04", title: "Logistiek & Industrie", desc: "Systemen op maat voor logistieke dienstverleners en industriële bedrijven langs de E313/E314-corridor." },
@@ -37,7 +37,7 @@ const data: CityData = {
   faq: [
     { q: "Werken jullie ook voor Belgische bedrijven?", a: "Zeker. We werken al met bedrijven in heel Nederland en België — Hasselt en Belgisch Limburg horen daar gewoon bij, zowel op afstand als bij je op locatie." },
     { q: "Is er een taal- of cultuurbarrière tussen Nederland en België?", a: "Praktisch niet. We spreken dezelfde taal en de zakelijke cultuur ligt dicht bij elkaar — geen vertaalslag, geen aanpassingsperiode nodig." },
-    { q: "Hoe zit het met facturatie tussen Nederland en België?", a: "Voor grensoverschrijdende B2B-diensten werken we met btw-verlegging (intracommunautaire dienst) — standaard binnen de EU, en we regelen dat administratief correct van begin af aan." },
+    { q: "Hoe zit het met facturatie tussen Nederland en België?", a: "Voor Hasselaars die met een Nederlandse partij samenwerken — bijvoorbeeld een modewinkel die net over de grens levert, of een scale-up rond Corda Campus die de Nederlandse markt op wil — werken we met btw-verlegging (intracommunautaire dienst): standaard binnen de EU, en we regelen dat administratief correct van begin af aan." },
     { q: "Hoe ver reizen jullie voor een fysieke afspraak in Hasselt?", a: "Vanaf ons kantoor in Vaals is Hasselt ongeveer 55 minuten rijden. Voor een intake of kennismaking komen we graag langs." },
   ],
 };

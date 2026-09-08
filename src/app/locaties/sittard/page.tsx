@@ -40,6 +40,7 @@ const data: CityData = {
     { q: "Kunnen jullie ook meertalig bouwen voor Duitse klanten?", a: "Ja. Met VDL Nedcar en grensbedrijven is Duitse content vaak gewenst. We bouwen meertalig (NL/DE) of volledig Duits indien nodig." },
     { q: "Wat als ik al een website heb?", a: "We doen ook redesigns en migraties. We analyseren wat werkt, wat niet, en bouwen vanaf daar verder — zonder verlies van SEO-waarde." },
   ],
+  relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };
 
 export default function SittardPage() {

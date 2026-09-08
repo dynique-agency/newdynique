@@ -40,6 +40,7 @@ const data: CityData = {
     { q: "Wat is de typische investering in Heerlen?", a: "Dat hangt af van de scope — een eenvoudige website is iets anders dan een webshop of maatwerk software. Bij het eerste gesprek krijg je een concreet voorstel met een vaste prijs, geen slag in de lucht." },
     { q: "Kunnen jullie ook ondersteunen bij subsidie-trajecten?", a: "We werken niet zelf in subsidies, maar denken graag mee als je aanspraak maakt op innovatiesubsidies of digitaliseringsregelingen in Limburg." },
   ],
+  relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };
 
 export default function HeerlenPage() {

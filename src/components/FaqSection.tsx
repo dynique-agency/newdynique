@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type FaqItem = { q: string; a: string };
 
 export function faqJsonLd(faq: FaqItem[]) {
@@ -20,7 +22,7 @@ export default function FaqSection({
 }: {
   faq: FaqItem[];
   accent: string;
-  heading?: string;
+  heading?: ReactNode;
   eyebrow?: string;
 }) {
   return (

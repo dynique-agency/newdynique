@@ -651,6 +651,8 @@ export default function ProcessenDienst() {
                 { t: "Maatwerk software vs. SaaS", href: "/maatwerk-software-vs-saas" },
                 { t: "Low-code vs. maatwerk software", href: "/low-code-vs-maatwerk-software" },
                 { t: "Wat kost maatwerk software?", href: "/wat-kost-maatwerk-software" },
+                { t: "Maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
+                { t: "Al onze locaties", href: "/locaties" },
               ].map((l, i) => (
                 <Link key={l.href} href={l.href}
                   className="group bg-[#070707] p-6 anim relative overflow-hidden" style={{ transitionDelay: `${i * 0.06}s` }}>

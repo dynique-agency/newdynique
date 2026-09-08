@@ -84,7 +84,7 @@ export default function Footer() {
 
             {/* Locaties links */}
             <div className="md:col-span-3">
-              <p className="text-black/30 text-xs tracking-[0.25em] font-light mb-5 uppercase">Locaties</p>
+              <Link href="/locaties" className="block text-black/30 hover:text-black/60 text-xs tracking-[0.25em] font-light mb-5 uppercase transition-colors duration-300">Locaties</Link>
               <div className="space-y-3">
                 {locaties.map((d) => (
                   <Link

@@ -5,6 +5,16 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StatusIndicator from "@/components/StatusIndicator";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
+import LeadFormSection from "@/components/LeadFormSection";
+
+// Gedeeld, want de prijsstructuur verschilt niet per stad — dupliceren per
+// stadspagina zou precies het naam-swap-patroon zijn dat elders is vermeden.
+const PRICE_FAQ = {
+  q: "Wat kost een maatwerk software- of websitetraject?",
+  a: "Dat hangt sterk af van de omvang van je bedrijf, het aantal gebruikers en hoe complex je processen zijn. Een kleine, gerichte tool begint rond de €4.000; grotere bedrijfssoftware met meerdere gebruikers en koppelingen loopt vaak op tot €15.000–€35.000 of meer. Websites beginnen vanaf €3.500. Na een gratis kennismaking krijg je een concreet voorstel met een vaste prijs voor jullie situatie.",
+};
 
 export type CityData = {
   city: string;
@@ -20,17 +30,20 @@ export type CityData = {
   industries: string[];
   faq: { q: string; a: string }[];
   slug?: string;
+  /** Optioneel: link naar een bredere regiopagina (bijv. /diensten/processen/limburg) — alleen zinvol als die regio echt overlapt. */
+  relatedRegionLink?: { label: string; href: string };
 };
 
 export default function CityPage({ data }: { data: CityData }) {
   const slug = data.slug ?? data.city.toLowerCase();
   const url = `https://dynique.nl/locaties/${slug}`;
+  const fullFaq = [...data.faq, PRICE_FAQ];
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "LocalBusiness",
-        name: `Dynique — Webdesign ${data.city}`,
+        name: `Dynique — Maatwerk software ${data.city}`,
         description: data.tagline,
         url,
         telephone: "+31624572572",
@@ -50,17 +63,11 @@ export default function CityPage({ data }: { data: CityData }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
-          { "@type": "ListItem", position: 2, name: data.city, item: url },
+          { "@type": "ListItem", position: 2, name: "Locaties", item: "https://dynique.nl/locaties" },
+          { "@type": "ListItem", position: 3, name: data.city, item: url },
         ],
       },
-      {
-        "@type": "FAQPage",
-        mainEntity: data.faq.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-      },
+      faqJsonLd(fullFaq),
     ],
   };
 
@@ -111,10 +118,10 @@ export default function CityPage({ data }: { data: CityData }) {
             </p>
 
             <div className="mt-14 flex flex-col sm:flex-row gap-4 anim delay-3">
-              <Link href="/#contact" className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500">
+              <a href="#analyse" className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500">
                 START IN {data.cityShort.toUpperCase()}
                 <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </Link>
+              </a>
               <Link href="/portfolio" className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-white/15 text-white text-xs tracking-[0.3em] font-light hover:bg-white/5 hover:border-white/30 transition-all duration-500">
                 BEKIJK PORTFOLIO
               </Link>
@@ -184,6 +191,15 @@ export default function CityPage({ data }: { data: CityData }) {
                 </div>
               ))}
             </div>
+
+            {data.relatedRegionLink && (
+              <p className="mt-8 anim text-white/40 text-sm font-light tracking-wide">
+                Actief in de hele regio —{" "}
+                <Link href={data.relatedRegionLink.href} className="underline underline-offset-4 decoration-white/20 hover:decoration-white/50 hover:text-white/70 transition-colors">
+                  {data.relatedRegionLink.label}
+                </Link>
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -206,60 +222,19 @@ export default function CityPage({ data }: { data: CityData }) {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="relative py-24 lg:py-32 border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-[10px] tracking-[0.5em] font-light uppercase mb-6 anim" style={{ color: data.accent }}>
-              Veelgestelde vragen
-            </p>
-            <h2 className="text-4xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-16 anim delay-1">
-              Over werken in <span className="italic text-white/50">{data.city}.</span>
-            </h2>
-            <div className="space-y-px bg-white/5">
-              {data.faq.map((f, i) => (
-                <details key={i} className="group bg-[#050505] anim" style={{ transitionDelay: `${i * 0.06}s` }}>
-                  <summary className="flex items-center justify-between gap-4 px-8 py-7 cursor-pointer list-none hover:bg-white/[0.02] transition-colors">
-                    <span className="text-white text-base lg:text-lg font-light tracking-wide">{f.q}</span>
-                    <span className="text-white/40 text-2xl font-extralight transition-transform duration-300 group-open:rotate-45">+</span>
-                  </summary>
-                  <div className="px-8 pb-7 text-white/55 text-base font-light leading-[1.85] tracking-wide max-w-3xl">
-                    {f.a}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <SocialProofSection accent={data.accent} />
 
-      {/* CTA */}
-      <section className="relative py-24 lg:py-32 border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-8 anim">
-              <span className="inline-block w-1.5 h-1.5 rounded-full" style={{ background: data.accent, boxShadow: `0 0 10px ${data.accent}` }}></span>
-              <p className="text-[10px] tracking-[0.4em] font-light uppercase" style={{ color: data.accent }}>Beschikbaar in {data.city}</p>
-            </div>
-            <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] anim delay-1">
-              Klaar voor een website<br />
-              <span className="italic" style={{ color: data.accent }}>die {data.city} kent?</span>
-            </h2>
-            <p className="mt-8 text-white/50 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-2xl mx-auto anim delay-2">
-              Een helder plan voordat we beginnen — geen verrassingen, vaste prijs per fase.
-            </p>
-            <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center anim delay-3">
-              <Link href="/#contact" className="group inline-flex items-center justify-center gap-3 px-12 py-5 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500">
-                START JOUW PROJECT
-                <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </Link>
-              <Link href="/gratis-checklist" className="inline-flex items-center justify-center gap-3 px-12 py-5 border border-white/15 text-white text-xs tracking-[0.3em] font-light hover:bg-white/5 hover:border-white/30 transition-all duration-500">
-                GRATIS CHECKLIST
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection
+        faq={fullFaq}
+        accent={data.accent}
+        heading={<>Over werken in <span className="italic text-white/50">{data.city}.</span></>}
+      />
+
+      <LeadFormSection
+        accent={data.accent}
+        openingLine={`Hi! Ik wil meer weten over maatwerk software of een website voor mijn bedrijf in ${data.city}.`}
+        messagePrompt="Waar loopt het vast, of wat wil je laten bouwen?"
+      />
 
       <Footer />
 

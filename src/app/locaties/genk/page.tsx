@@ -39,7 +39,7 @@ const data: CityData = {
   industries: ["Energie", "Smart Manufacturing", "Logistiek", "Industrie", "Creatieve sector", "Techniek", "Zorg", "Bouw", "Retail", "Dienstverlening"],
   faq: [
     { q: "Werken jullie ook voor bedrijven in Genk en Belgisch Limburg?", a: "Zeker. We werken al met bedrijven in heel Nederland en België — Genk en Belgisch Limburg horen daar gewoon bij, zowel op afstand als bij je op locatie." },
-    { q: "Hoe zit het met facturatie tussen Nederland en België?", a: "Voor grensoverschrijdende B2B-diensten werken we met btw-verlegging (intracommunautaire dienst) — standaard binnen de EU, en we regelen dat administratief correct van begin af aan." },
+    { q: "Hoe zit het met facturatie tussen Nederland en België?", a: "Voor Genkse ondernemers die met een Nederlandse partij samenwerken — van een start-up op Thor Park tot een handelaar op Genk-Zuid — werken we met btw-verlegging (intracommunautaire dienst): standaard binnen de EU, en we regelen dat administratief correct van begin af aan." },
     { q: "Hoe ver reizen jullie voor een fysieke afspraak in Genk?", a: "Vanaf ons kantoor in Vaals is Genk ongeveer 40 minuten rijden. Voor een intake of kennismaking komen we graag langs, of dat nu op Thor Park, bij C-mine of op Genk-Zuid is." },
     { q: "Werken jullie ook in het Engels, gezien de internationale gemeenschap in Genk?", a: "Absoluut. We werken regelmatig volledig in het Engels — projectcommunicatie, documentatie en oplevering kunnen allemaal in het Engels, iets wat goed past bij Genk's internationale karakter." },
   ],

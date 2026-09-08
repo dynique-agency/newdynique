@@ -40,6 +40,7 @@ const data: CityData = {
     { q: "Kennen jullie de Maastrichtse markt?", a: "We werken al jaren voor ondernemers in Zuid-Limburg en kennen de bezoekersstromen, het seizoenseffect en de internationale doelgroep. Dat zie je terug in keuzes voor structuur, content en functionaliteit." },
     { q: "Hoe snel kan mijn website in Maastricht live?", a: "Dat hangt af van de scope — een eenvoudige website vraagt minder tijd dan een meertalig platform met koppelingen. Bij de intake krijg je een realistische planning met een vaste einddatum, geen slag in de lucht." },
   ],
+  relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };
 
 export default function MaastrichtPage() {
