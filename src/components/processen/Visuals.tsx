@@ -297,6 +297,8 @@ export function ProcessStyles() {
       .anim.animate-in { opacity: 1; transform: translateY(0); }
       .anim.delay-1 { transition-delay: 0.12s; }
       .anim.delay-2 { transition-delay: 0.24s; }
+      .anim.delay-3 { transition-delay: 0.36s; }
+      .anim.delay-4 { transition-delay: 0.48s; }
 
       @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
       .hv { opacity: 0; animation: fadeUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
