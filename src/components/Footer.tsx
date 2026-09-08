@@ -25,6 +25,7 @@ export default function Footer() {
     { label: "Aken", href: "/locaties/aken" },
     { label: "Eindhoven", href: "/locaties/eindhoven" },
     { label: "Hasselt", href: "/locaties/hasselt" },
+    { label: "Genk", href: "/locaties/genk" },
   ];
 
   return (

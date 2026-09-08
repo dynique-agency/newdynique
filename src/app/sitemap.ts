@@ -40,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/maatwerk-software/zorg`,               lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
     { url: `${base}/maatwerk-software/logistiek`,          lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
 
+    // ── Pijnpunt- & vergelijkingspagina's (nieuw, 2026-09-08) ──
+    { url: `${base}/excel-vervangen-door-software`,   lastModified: now, changeFrequency: 'monthly', priority: 0.82 },
+    { url: `${base}/maatwerk-software-vs-saas`,       lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/wat-kost-maatwerk-software`,      lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/low-code-vs-maatwerk-software`,   lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+
     // ── Locatie landingspagina's ──
     { url: `${base}/locaties/maastricht`, lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
     { url: `${base}/locaties/heerlen`,    lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
@@ -47,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/locaties/aken`,       lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
     { url: `${base}/locaties/eindhoven`,  lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
     { url: `${base}/locaties/hasselt`,    lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+    { url: `${base}/locaties/genk`,       lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
 
     // ── Overige landingspagina's ──
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
