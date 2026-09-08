@@ -6,6 +6,49 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later) — Twee redirect-fixes uit de GSC-analyse doorgevoerd
+
+**`public/_redirects`** (nieuw, Cloudflare Pages-formaat) — de twee triviale technische fixes uit `docs/seo/GSC-FINDINGS-2026-09.md` §4 en §5, akkoord gekregen om meteen door te voeren naast het committen van de SEO-documentatie:
+- `https://www.dynique.nl/* → https://dynique.nl/:splat` (301) — beide domeinvarianten stonden apart geïndexeerd in Search Console en verdeelden de homepage-kliks/autoriteit.
+- `/portfolio/sa-personeel` en `/portfolio/house-of-chocolate` (301, naar `/portfolio`) — twee niet meer bestaande case-study-URL's die nog vertoningen trokken (`sa personeel` zelfs op positie 5).
+
+`docs/seo/STRATEGY.md` §7 en `docs/seo/GSC-FINDINGS-2026-09.md` §4/§5 bijgewerkt om deze als afgerond te markeren. **Geverifieerd:** `npx tsc --noEmit` schoon, volledige `npm run build` schoon, `_redirects` bevestigd aanwezig in `out/`. Effect op indexering pas zichtbaar in een volgende GSC-export.
+
+---
+
+## 2026-09-08 (later) — SEO-documentatie verplaatst naar `docs/seo/`, eerste echte Search Console-data verwerkt
+
+**Aanleiding:** "Ik wil dat je vanaf nu alles over de seo heel erg goed gaat documenteren in deze map in md files zodat we echt een plan kunnen maken" — een staande instructie om alle SEO-werk voortaan gestructureerd te documenteren, niet alleen als eenmalig los rapport. Vrijwel gelijktijdig leverde de eigenaar een Google Search Console-export aan (`/Users/john/Downloads/dynique/`, 6 maanden data t/m 2026-09-06) — de eerste échte meetdata die er ooit is geweest voor deze site.
+
+**Uitgevoerd:**
+- **`docs/seo/`** (nieuw) — vaste map voor alle SEO-documentatie, met een [`README.md`](./seo/README.md) die de conventie vastlegt (gedateerde bestanden per databron, geen verzonnen cijfers, `STRATEGY.md` als levend document).
+- **`docs/seo/STRATEGY.md`** — het net geschreven strategiedocument verplaatst vanuit de repository-root (was `SEO_STRATEGY.md`).
+- **`docs/seo/GSC-FINDINGS-2026-09.md`** (nieuw) — volledige analyse van de GSC-export. Belangrijkste bevindingen: (1) Search Console blijkt al actief en geverifieerd, in tegenspraak met de net geschreven aanname "geen meetbasis"; (2) `/locaties/eindhoven` is verantwoordelijk voor 59% van alle vertoningen (7.794) maar op gemiddelde positie 61,76 en 0 kliks — vrijwel volledig oververzadigde brede "webdesign eindhoven"-achtige termen, precies zoals de strategie voorspelde; (3) "maatwerk software limburg" staat al op positie 12,7 (pagina 2) — het sterkste gemeten bewijs dat de nieuwe positionering werkt; (4) `www.dynique.nl` en `dynique.nl` staan apart geïndexeerd (geen `_redirects`-regel aanwezig) en verdelen homepage-autoriteit; (5) twee niet meer bestaande portfolio-URL's (`sa-personeel`, `house-of-chocolate`) trekken nog vertoningen zonder redirect; (6) klantnaam-zoekopdrachten ("stacy kohnen", "chefs connect") leveren aantoonbaar echt verkeer op via de eigen case-study-pagina's.
+- **`docs/seo/data/gsc-export-2026-09-08/`** — de ruwe CSV's uit de export bewaard in de repo (niet alleen in `~/Downloads`), zodat elke conclusie in `GSC-FINDINGS-2026-09.md` herleidbaar blijft.
+- **`docs/seo/STRATEGY.md` zelf bijgewerkt** op basis van de nieuwe data: §1 (meetbasis-aanname genuanceerd), §7 (twee nieuwe technische checklist-items: www-redirect, verweesde-URL-redirects), §8 (concrete Fase-1-actie: de al bijna-pagina-1-term "maatwerk software limburg" verstevigen i.p.v. blind nieuwe content bouwen), §10 (disclaimer bijgewerkt — de aangekondigde "zodra GSC-data er is"-stap is nu al gebeurd).
+
+**Nog te doen:** de twee genoemde `_redirects`-fixes (www-canonicalisatie, verweesde portfolio-URL's) zijn gedocumenteerd maar nog niet doorgevoerd — bewust niet unilateraal opgepakt, dit was een documentatie-taak, geen implementatie-taak. Zie `docs/seo/STRATEGY.md` §7 voor de concrete vervolgstappen.
+
+---
+
+## 2026-09-08 (later) — SEO_STRATEGY.md volledig herschreven: onderzoek + geprioriteerd plan voor landingspagina's NL+BE
+
+**Aanleiding:** "Ik wil dat je een taktiek gaat maken om landingspagina's te maken voor maatwerk software... Ik wil echt die seo top gaan aanpakken en in heel belgie en nederland de nummer 1 worden." Eerste bevinding: het bestaande root-`SEO_STRATEGY.md` bleek volledig verouderd (oude "website agency"-positionering, alleen Zuid-Limburg, verzonnen zoekvolumes zonder bron) — expliciet gemeld voordat nieuw werk begon.
+
+**Onderzoek via een 6-agent Workflow** (5 parallelle research-agents — NL-markt, BE-markt, programmatic-SEO-risico's, concurrentie-audit van 5 bureaus, codebase-audit — daarna 1 synthese-agent): elke research-agent kreeg de expliciete instructie géén zoekvolumecijfers te verzinnen, alleen kwalitatief/relatief kansensignaal te rapporteren.
+
+**Resultaat:** `SEO_STRATEGY.md` (204 regels, 10 secties) volledig herschreven. Kernpunten:
+- Sectie 1: "#1 in heel NL+BE" is als kortetermijndoel eerlijk afgewezen (geen koopintentie-termen, verzadigd veld van 40-60+ bureaus, nul huidige meetbasis) — vervangen door een haalbaar doel: top-3 op 15-25 long-tail-/sector+stad-combinaties in 6-12 maanden.
+- Sectie 2: expliciete prioritering "waar boeken we de meeste progressie" — NL-pijnpunt-long-tail (#1), bestaande sector+stad-verdieping (#2), Genk als enige nu-relevante BE-uitbreiding (#3); Antwerpen/Brussel/Leuven expliciet "niet nu" (te concurrentiedicht, te ver van Vaals).
+- Sectie 3: codebase-audit bevestigt de bestaande 10 stad/sector-pagina's zijn géén thin content (echt herschreven proza, niet naam-swap) — wél: nul analytics/GSC-verificatie, `/investering` ontbreekt in de sitemap.
+- Sectie 5: expliciete waarschuwing tegen een volledige 6×4-kruisproductmatrix (Google's "Scaled Content Abuse"-beleid, met concrete casuïstiek) — canary-batches van 4-8 pagina's, alleen bouwen met echt lokaal/sectoraal bewijs.
+- Sectie 8: gefaseerde roadmap (Fase 0: analytics/GSC/sitemap-fix → Fase 1: bestaande pagina's verdiepen + eerste pijnpunt-pillar → Fase 2: Genk + canary-batch → Fase 3-4: pas bij bewezen resultaat).
+- Sectie 9: expliciete "wat moet de eigenaar zelf doen"-lijst (Google Business Profile, GSC/analytics-account, sector×stad-combinaties met echt bewijs aanwijzen, reviews ophalen, Sortlist.be-profiel).
+
+**Nog te doen:** dit document is nog niet aan de eigenaar gepresenteerd, niet gecommit/gepusht. Uitvoering (Fase 0/1) start pas na diens reactie — bewust niet unilateraal begonnen met nieuwe pagina's bouwen.
+
+---
+
 ## 2026-09-08 (later) — DIENSTEN-dropdown werkte niet op touch/tablet, plus verborgen focus-lek
 
 **Aanleiding:** "die diensten dropdown in de header werkt niet". Op desktop-breedte met een echte muis-hover werkte hij wel (bevestigd via screenshot) — de dropdown draaide puur op `onMouseEnter`/`onMouseLeave`, wat op touch-apparaten nooit afgaat. Voor die gebruikers navigeerde de link meteen weg zonder het menu ooit te tonen.
