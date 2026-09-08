@@ -24,6 +24,33 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later, derde sessie) — Kritische zelf-audit van de locatiepagina's + `/locaties`-hub-pagina
+
+**Aanleiding:** expliciet gevraagd om de locatiepagina en de gebruikte tactiek kritisch te analyseren en met concrete verbetervoorstellen te komen. Zelf, met grep, geverifieerd — geen indruk maar bewijs. Bevindingen (zie ook `docs/seo/LEAD-PLAN-2026-09.md` item 8):
+
+1. **Zelf een naam-swap-patroon teruggesmokkeld.** De highlight "Cross-border Business" stond woord-voor-woord identiek op Hasselt/Tongeren/Maasmechelen/Sint-Truiden (4 pagina's); de btw-verlegging-FAQ was op 5 pagina's byte-identiek. Precies het patroon dat de hele sessie bewust vermeden werd, nu binnengeslopen via een herbruikbaar sub-onderdeel.
+2. **`LocalBusiness.name` in `CityPage.tsx` zei nog "Webdesign {stad}"** — de H1-fix van de vorige sessie miste dit parallelle structured-data-veld.
+3. **CTA's linkten naar `/#contact`** (generiek homepage-formulier) i.p.v. een eigen leadformulier met stadscontext — exact het component (`LeadFormSection`) dat wél op de sector-/pijnpuntpagina's staat, nooit teruggezet op de locatiepagina's.
+4. **Geen ingebedde social proof, geen prijsindicatie** — hetzelfde concurrentiegat dat elders wél is opgelost.
+5. **Content aan de ondergrens van de eigen norm** (~300-350 woorden echt uniek per stad, tegenover de 500-1.500-richtlijn uit `STRATEGY.md` §6).
+6. **Geen `/locaties`-hub-pagina** — met inmiddels 9 stadspagina's bestond er geen centrale overzichtspagina; dit was ook de onderliggende reden dat de breadcrumb eerder was afgezwakt naar 2 niveaus (geen "Locaties" om naar te wijzen).
+7. **Eigen roadmap-volgorde genegeerd** — "maatwerk software limburg verstevigen" (positie 12,7) stond al twee sessies als "volgende stap" aangewezen zonder uitgevoerd te zijn.
+8. **Geen meetmoment tussen de stedenbatches** — `STRATEGY.md` §5 zegt zelf "meten via Search Console voordat er een volgende batch komt", niet gevolgd tussen de Genk-batch en de Tongeren/Maasmechelen/Sint-Truiden-batch.
+
+**Uitgevoerd (op verzoek: "pak het allemaal op", geïnterpreteerd als: alle bevindingen fixen op alle bestaande locatiepagina's, geen extra nieuwe steden bouwen):**
+- **`src/components/CityPage.tsx`** — `LocalBusiness.name` gefixt; `SocialProofSection` en `LeadFormSection` toegevoegd (CTA's linken nu naar `#analyse`, een echt op-pagina formulier met een WhatsApp-openingsregel die de stad noemt); een gedeelde `PRICE_FAQ`-constante toegevoegd aan elke pagina's FAQ (bewust gedeeld, niet per stad gedupliceerd — de prijsstructuur verschilt niet per stad); breadcrumb terug naar 3 niveaus (Home → Locaties → Stad) nu `/locaties` bestaat; FAQ-rendering vervangen door de gedeelde `FaqSection`-component (was zelf ook al een ongemerkte duplicatie van diezelfde markup).
+- **5 stadspagina's herschreven** (Hasselt, Genk, Tongeren, Maasmechelen, Sint-Truiden) — de btw-verlegging-FAQ en (waar van toepassing) de "Cross-border Business"-highlight zijn nu per stad uniek, met een echt stadseigen detail verwerkt, i.p.v. een kale naam-swap.
+- **`src/app/locaties/page.tsx` + `layout.tsx`** (nieuw) — een echte hub-pagina met een inhoudelijke intro, alle 10 locaties gegroepeerd (Nederland & Duitsland / België) met een eigen hook-zin per stad, plus social proof, FAQ en leadformulier. Losbreekt de breadcrumb-leemte en geeft de site voor het eerst een centrale plek die alle locaties verzamelt.
+- **`/diensten/processen/limburg` kreeg voor het eerst interne links** — bleek twee sessies lang zonder één inkomende link te staan (alleen de sitemap wist dat de pagina bestond). Nu gelinkt vanuit Maastricht/Heerlen/Sittard (via een nieuw `relatedRegionLink`-veld op `CityData`, alleen gezet op de 3 steden die de Limburg-pagina zelf noemt) en vanuit `diensten/processen`'s "VERDER LEZEN".
+- **`Footer.tsx`** — "Locaties"-kopje is nu zelf een link naar `/locaties`.
+- **`sitemap.ts`** bijgewerkt met `/locaties`.
+
+**Bewust niet gedaan:** geen nieuwe steden — de eigen aanbeveling om eerst te meten voordat er weer wordt uitgebreid staat nog. Zie `LEAD-PLAN-2026-09.md`'s bijgewerkte "volgende stap".
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon (50 routes, was 49). Grep bevestigt: geen resterende woord-voor-woord duplicatie tussen de locatiepagina's. Live gecontroleerd via `next dev`: JSON-LD-naam correct, 3-niveau breadcrumb naar `/locaties`, prijs-FAQ aanwezig, interne link naar `/diensten/processen/limburg` werkt, hero-CTA scrollt naar het leadformulier.
+
+---
+
 ## 2026-09-08 (later, tweede sessie) — 3 nieuwe Belgisch-Limburgse stadspagina's + H1-bug op alle locatiepagina's gefixt
 
 **Aanleiding:** verzoek om meer landingspagina's voor "website laten maken + Belgische stad", "webdesign + stad" en "digitaliseren + stad", met chefs-connect.nl's regiopagina's (`/personeel-{stad}`, elk écht anders geschreven) als kwaliteitsreferentie, plus expliciet gevraagd wat ik hier zelf van vind. Teruggekoppeld vóór het bouwen: "website laten maken"/"webdesign" + stad is op déze site al bewezen niet te werken (`/locaties/eindhoven` trekt 7.794 vertoningen op precies die termen, positie 61,76, 0 kliks — zie `GSC-FINDINGS-2026-09.md` §2), en "digitaliseren" + stad target een term die `STRATEGY.md` §1 al had afgewezen als niet-commercieel (levert overheidscontent op). Voorstel: dezelfde chefs-connect-kwaliteit, maar op "maatwerk software" als hoofdterm (de term die al traction heeft) i.p.v. de bewezen-falende termen.

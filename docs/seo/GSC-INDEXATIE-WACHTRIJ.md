@@ -2,6 +2,65 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-08 (derde sessie) — /locaties hub-pagina + herindexatie na kritische fixpas
+
+Nieuwe pagina:
+
+- [ ] `/locaties` — nieuwe hub-pagina die alle 10 locaties verzamelt
+  ```
+  https://dynique.nl/locaties
+  ```
+
+**Alle 10 bestaande locatiepagina's zijn inhoudelijk gewijzigd** (LocalBusiness-naam gefixt, gedupliceerde highlight/FAQ-tekst herschreven, leadformulier + social proof toegevoegd, prijs-FAQ toegevoegd, breadcrumb naar 3 niveaus) — de moeite waard om opnieuw te laten crawlen:
+
+- [ ] `/locaties/maastricht`
+  ```
+  https://dynique.nl/locaties/maastricht
+  ```
+- [ ] `/locaties/heerlen`
+  ```
+  https://dynique.nl/locaties/heerlen
+  ```
+- [ ] `/locaties/sittard`
+  ```
+  https://dynique.nl/locaties/sittard
+  ```
+- [ ] `/locaties/aken`
+  ```
+  https://dynique.nl/locaties/aken
+  ```
+- [ ] `/locaties/eindhoven`
+  ```
+  https://dynique.nl/locaties/eindhoven
+  ```
+- [ ] `/locaties/hasselt`
+  ```
+  https://dynique.nl/locaties/hasselt
+  ```
+- [ ] `/locaties/genk`
+  ```
+  https://dynique.nl/locaties/genk
+  ```
+- [ ] `/locaties/tongeren`
+  ```
+  https://dynique.nl/locaties/tongeren
+  ```
+- [ ] `/locaties/maasmechelen`
+  ```
+  https://dynique.nl/locaties/maasmechelen
+  ```
+- [ ] `/locaties/sint-truiden`
+  ```
+  https://dynique.nl/locaties/sint-truiden
+  ```
+
+Ook de moeite waard (kreeg voor het eerst interne links naar binnen toe):
+
+- [ ] `/diensten/processen/limburg`
+  ```
+  https://dynique.nl/diensten/processen/limburg
+  ```
+
 ## Batch 2026-09-08 (later) — 3 nieuwe Belgisch-Limburgse stadspagina's
 
 - [ ] `/locaties/tongeren` — oudste stad van België, erfgoed/toerisme/horeca
