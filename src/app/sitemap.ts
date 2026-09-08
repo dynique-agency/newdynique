@@ -46,6 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/locaties/sittard`,    lastModified: now, changeFrequency: 'monthly', priority: 0.72 },
     { url: `${base}/locaties/aken`,       lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
     { url: `${base}/locaties/eindhoven`,  lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+    { url: `${base}/locaties/hasselt`,    lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
 
     // ── Overige landingspagina's ──
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
