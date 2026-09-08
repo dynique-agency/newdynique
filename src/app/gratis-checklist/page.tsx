@@ -22,6 +22,10 @@ export default function LeadMagnetPage() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const o = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add("animate-in"); o.unobserve(e.target); }
@@ -36,7 +40,18 @@ export default function LeadMagnetPage() {
     e.preventDefault();
     if (!email || !name) return;
     setSubmitted(true);
-    // In productie: stuur naam + e-mail ook naar API/Mailchimp/Resend.
+
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "checklist",
+        name,
+        email,
+        description: "Aanvraag gratis website-checklist (PDF).",
+      }),
+    }).catch(() => {});
+
     // Start de PDF-download direct in de browser.
     const a = document.createElement("a");
     a.href = "/dynique-website-checklist-2026.pdf";

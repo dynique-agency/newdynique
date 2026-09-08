@@ -37,6 +37,10 @@ const posts = [
 
 export default function BlogIndex() {
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const o = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add("animate-in"); o.unobserve(e.target); }

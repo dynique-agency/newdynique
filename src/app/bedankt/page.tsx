@@ -5,12 +5,17 @@ import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StatusIndicator from "@/components/StatusIndicator";
 
 function BedanktContent() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const o = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add("animate-in"); o.unobserve(e.target); }
@@ -26,7 +31,7 @@ function BedanktContent() {
       <Header variant="light" />
 
       <div aria-hidden className="fixed top-0 right-0 w-[800px] h-[800px] pointer-events-none opacity-50"
-           style={{ background: "radial-gradient(circle, rgba(52,211,153,0.18) 0%, transparent 60%)" }} />
+           style={{ background: "radial-gradient(circle, rgba(212,165,116,0.18) 0%, transparent 60%)" }} />
       <div aria-hidden className="fixed bottom-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-30"
            style={{ background: "radial-gradient(circle, rgba(212,165,116,0.10) 0%, transparent 60%)" }} />
 
@@ -49,13 +54,16 @@ function BedanktContent() {
             </h1>
 
             <p className="mt-12 text-white/55 text-base lg:text-xl font-light leading-[1.85] tracking-wide max-w-2xl mx-auto anim delay-2">
-              Je bericht is binnen. We reageren binnen 24 uur — meestal binnen 2 uur op werkdagen. Check ook even je spam-folder voor de zekerheid.
+              Je bericht is binnen. Check ook even je spam-folder voor de zekerheid.
+            </p>
+            <p className="mt-3 anim delay-2">
+              <StatusIndicator className="text-[#d4a574] text-sm font-light tracking-wide" />
             </p>
 
             {/* What's next */}
             <div className="mt-20 grid sm:grid-cols-3 gap-px bg-white/5 anim delay-3">
               {[
-                { n: "01", t: "Reactie", d: "Binnen 24 uur reageren we persoonlijk." },
+                { n: "01", t: "Reactie", d: "We reageren persoonlijk, geen automatisch bericht." },
                 { n: "02", t: "Intake", d: "We plannen een vrijblijvend kennismakingsgesprek." },
                 { n: "03", t: "Concept", d: "Binnen 3 dagen na intake een eerste richting." },
               ].map((s) => (

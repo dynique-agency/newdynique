@@ -21,9 +21,9 @@ type Project = {
 const projects: Project[] = [
   {
     title: "CHEFS CONNECT",
-    category: "CULINAIR PLATFORM",
+    category: "HORECA PLATFORM",
     tagline: "Waar topchefs en premium keukens elkaar vinden.",
-    description: "Een digitaal ontmoetingsplatform voor restaurants, events en chefs. Strak ontwerp dat kwaliteit uitademt, met heldere navigatie die zorgt dat de juiste match op het juiste moment gemaakt wordt.",
+    description: "Drie trajecten in één platform: horecazaken vinden freelance chefs en bediening, professionals hun volgende opdracht, en organisatoren boeken fine dining catering via het sub-merk Connect Events & Dining. Regionaal vindbaar via 48 landingspagina's door Nederland en België.",
     image: null,
     video: "/rsc/chefsconnect/preview.mp4",
     url: "chefs-connect.nl",
@@ -64,6 +64,17 @@ const projects: Project[] = [
     accent: "#a78bfa",
     link: "/portfolio/stacy-kohnen",
   },
+  {
+    title: "CREEMERS EXCLUSIVE",
+    category: "FREELANCE BUREAU",
+    tagline: "Geen foto's. Wel live — volledig AI-gegenereerd.",
+    description: "Een premium freelance bureau zonder één professionele bedrijfsfoto, met een deadline van drie dagen. Wij genereerden alle visuals volledig met AI — van mensen in premium settings tot sfeerbeelden — en leverden een single-page site met interactieve boekingstool, binnen die drie dagen live.",
+    image: "/rsc/creemers/hero.webp",
+    url: "creemers.pages.dev",
+    year: "2025",
+    accent: "#d4a574",
+    link: "/portfolio/creemers-exclusive",
+  },
 ];
 
 // Lazily plays/pauses a video based on viewport proximity, instead of autoplaying unconditionally
@@ -74,6 +85,10 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: "200px" }
@@ -93,7 +108,7 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
 }
 
 // Browser-frame mockup component (inline styles for simplicity)
-function BrowserMockup({ p, large = false }: { p: Project; large?: boolean }) {
+function BrowserMockup({ p }: { p: Project }) {
   return (
     <div className="relative group-hover/card:scale-[1.01] transition-transform duration-700">
       {/* Accent glow */}
@@ -117,7 +132,7 @@ function BrowserMockup({ p, large = false }: { p: Project; large?: boolean }) {
         </div>
 
         {/* Screenshot */}
-        <div className={`relative ${large ? "aspect-[16/10]" : "aspect-[16/10]"} overflow-hidden`}>
+        <div className="relative aspect-[16/10] overflow-hidden">
           {p.video ? (
             <PortfolioVideo src={p.video} className="w-full h-full object-cover" />
           ) : p.image ? (
@@ -155,6 +170,10 @@ function BrowserMockup({ p, large = false }: { p: Project; large?: boolean }) {
 
 export default function Portfolio() {
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -196,15 +215,23 @@ export default function Portfolio() {
 
           {/* Stat strip — no counters, just signals of breadth */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.06] border border-white/[0.06] anim delay-1">
-            {[
+            {([
               { k: "FUNDAMENT", v: "Maatwerk software & web" },
-              { k: "SECTOREN", v: "Horeca · Cultuur · Bedrijven" },
-              { k: "BEREIK", v: "Nederland & België" },
+              { k: "SECTOREN", v: "Horeca · Cultuur · Dienstverlening" },
+              { k: "BEREIK", v: "Drielandenregio · NL · BE · DE", sourceHref: "/portfolio/stacy-kohnen", sourceLabel: "Bron: Stacy Kohnen case" },
               { k: "STANDAARD", v: "Op maat, altijd" },
-            ].map((s) => (
+            ] as { k: string; v: string; sourceHref?: string; sourceLabel?: string }[]).map((s) => (
               <div key={s.k} className="bg-[#070707] px-6 py-7">
                 <p className="text-white/20 text-[9px] tracking-[0.4em] font-light mb-2.5">{s.k}</p>
                 <p className="text-white/70 text-sm font-light tracking-wide">{s.v}</p>
+                {s.sourceHref && (
+                  <Link
+                    href={s.sourceHref}
+                    className="mt-2 inline-block text-white/30 hover:text-white/60 text-[10px] font-light tracking-wide underline underline-offset-4 transition-colors duration-300"
+                  >
+                    {s.sourceLabel}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
@@ -290,7 +317,7 @@ export default function Portfolio() {
                 {/* Mockup column */}
                 <div className={`lg:col-span-7 anim delay-1 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:order-2"}`}>
                   <div className="browser-float">
-                    <BrowserMockup p={p} large />
+                    <BrowserMockup p={p} />
                   </div>
                 </div>
               </div>

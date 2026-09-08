@@ -46,7 +46,7 @@ const jsonLd = {
       "@type": "Service",
       serviceType: "Maatwerk software voor logistiek en transport",
       provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-      areaServed: ["Limburg", "Nederland"],
+      areaServed: ["Limburg", "Nederland", "België"],
       description: "Maatwerk software op code voor logistiek en transport: ritplanning, track & trace, voorraad en koppelingen.",
       offers: { "@type": "Offer", name: "Gratis procesanalyse op locatie", price: "0", priceCurrency: "EUR" },
     },

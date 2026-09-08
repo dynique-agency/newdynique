@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
-  title: "Website laten maken Sittard-Geleen | Dynique — Webdesign bureau",
-  description: "Premium website laten maken in Sittard, Geleen of Born. Lokaal webdesign bureau voor ZZP en MKB. Binnen 7–14 dagen live, vaste prijs.",
+  title: "Maatwerk software & webdesign Sittard-Geleen | Dynique",
+  description: "Maatwerk software en webdesign voor bedrijven in Sittard, Geleen en Born. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
   alternates: { canonical: "https://dynique.nl/locaties/sittard" },
   openGraph: {
-    title: "Website laten maken Sittard-Geleen | Dynique",
-    description: "Premium webdesign in Sittard, Geleen en Born. Snel, persoonlijk, vaste prijs.",
+    title: "Maatwerk software & webdesign Sittard-Geleen | Dynique",
+    description: "Maatwerk software en webdesign in Sittard, Geleen en Born. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
     url: "https://dynique.nl/locaties/sittard",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Sittard-Geleen" }],
@@ -21,8 +21,8 @@ const data: CityData = {
   city: "Sittard",
   cityShort: "Sittard",
   region: "Westelijke Mijnstreek",
-  tagline: "Webdesign voor Sittard, Geleen en Born.",
-  intro: "Een regio die wereldspelers herbergt: Chemelot, VDL Nedcar en de hele toeleveringsketen daarom heen. Wij bouwen websites en maatwerk software die kwaliteit uitstralen — voor toeleveranciers, lokaal MKB, retail in de Sittardse binnenstad en ondernemers in Geleen en Born.",
+  tagline: "Maatwerk software en webdesign voor Sittard, Geleen en Born.",
+  intro: "Een regio die wereldspelers herbergt: Chemelot, VDL Nedcar en de hele toeleveringsketen daarom heen. Wij bouwen maatwerk software en websites die kwaliteit uitstralen — voor toeleveranciers, lokaal MKB, retail in de Sittardse binnenstad en ondernemers in Geleen en Born.",
   vibe: "De Westelijke Mijnstreek combineert grote industrie met sterke lokale ondernemers. Vakmanschap zit in het DNA, en dat verdient een digitale presentatie die past. We kennen de verschillen tussen het oude centrum van Sittard, Geleen-Zuid en Born — en bouwen sites die zowel B2B als B2C-doelgroepen aanspreken in deze veelzijdige regio.",
   accent: "#fb923c",
   postal: "6131 — 6166",

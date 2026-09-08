@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StatusIndicator from "@/components/StatusIndicator";
 
 export type CityData = {
   city: string;
@@ -17,7 +18,6 @@ export type CityData = {
   travelTime: string;
   highlights: { n: string; title: string; desc: string }[];
   industries: string[];
-  testimonialCity?: string;
   faq: { q: string; a: string }[];
   slug?: string;
 };
@@ -66,6 +66,10 @@ export default function CityPage({ data }: { data: CityData }) {
   };
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const o = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) { e.target.classList.add("animate-in"); o.unobserve(e.target); }
@@ -123,11 +127,15 @@ export default function CityPage({ data }: { data: CityData }) {
                 { l: "Regio", v: data.region },
                 { l: "Reistijd", v: data.travelTime },
                 { l: "Postcode", v: data.postal },
-                { l: "Reactietijd", v: "Binnen 24 uur" },
+                { l: "Reactietijd", v: null },
               ].map((m) => (
                 <div key={m.l} className="bg-[#050505] py-6 px-4">
                   <p className="text-white/35 text-[10px] tracking-[0.3em] font-light uppercase mb-2">{m.l}</p>
-                  <p className="text-white text-sm tracking-wide font-light">{m.v}</p>
+                  {m.v ? (
+                    <p className="text-white text-sm tracking-wide font-light">{m.v}</p>
+                  ) : (
+                    <StatusIndicator className="text-white text-sm tracking-wide font-light" />
+                  )}
                 </div>
               ))}
             </div>
@@ -239,7 +247,7 @@ export default function CityPage({ data }: { data: CityData }) {
               <span className="italic" style={{ color: data.accent }}>die {data.city} kent?</span>
             </h2>
             <p className="mt-8 text-white/50 text-base lg:text-lg font-light leading-[1.85] tracking-wide max-w-2xl mx-auto anim delay-2">
-              Binnen 24 uur reactie. Een helder plan voordat we beginnen — geen verrassingen, vaste prijs per fase.
+              Een helder plan voordat we beginnen — geen verrassingen, vaste prijs per fase.
             </p>
             <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center anim delay-3">
               <Link href="/#contact" className="group inline-flex items-center justify-center gap-3 px-12 py-5 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500">

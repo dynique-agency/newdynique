@@ -15,6 +15,7 @@ import {
   useRevealOnScroll,
   useBeforeAfterScrub,
 } from "@/components/processen/Visuals";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 export type SectorData = {
   slug: string;            // e.g. "bouw"
@@ -54,7 +55,7 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
     if (form.company) m += `🏢 Bedrijf: ${form.company}\n`;
     if (form.phone) m += `📞 Telefoon: ${form.phone}\n`;
     if (form.message) m += `\n📋 Waar loopt het vast:\n${form.message}\n`;
-    window.open(`https://wa.me/31624572572?text=${encodeURIComponent(m)}`, "_blank");
+    openWhatsApp(m);
   };
 
   return (

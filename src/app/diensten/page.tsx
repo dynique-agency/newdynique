@@ -79,6 +79,10 @@ export default function DienstenHub() {
   const [openDisc, setOpenDisc] = useState(0);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {

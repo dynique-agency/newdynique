@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "AI Marketing & SEO | Dynique",
   description:
-    "AI-gedreven content, social media automatisering, SEO en e-mailmarketing. Meer bereik en betere vindbaarheid zonder dat het je dagen kost. Voor ZZP en MKB in Limburg.",
+    "AI-gedreven content, social media automatisering, SEO en e-mailmarketing, altijd met een mens die meekijkt. Voor bedrijven in Nederland en België.",
   alternates: { canonical: "https://dynique.nl/diensten/marketing" },
   openGraph: {
     title: "AI Marketing & SEO | Dynique",
@@ -22,7 +22,7 @@ const jsonLd = {
   provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
   areaServed: ["Limburg", "Nederland"],
   description:
-    "AI-gedreven contentcreatie, social media automatisering, SEO en e-mailmarketing voor ZZP en MKB.",
+    "AI-gedreven contentcreatie, social media automatisering, SEO en e-mailmarketing, altijd met menselijke controle.",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

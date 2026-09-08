@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ─────────────────────────────────────────────────────────────
    De Adviseur — een editoriale, consultatieve "advies-console".
@@ -68,7 +68,8 @@ type Service = {
   href: string;
   cta: string;
   base: string;
-  points: string[];
+  /** Eén vaste, service-identiteitsbepalende bullet — de andere twee komen uit START_INSIGHT/GOAL_INSIGHT en variëren dus per antwoord. */
+  identityPoint: string;
 };
 
 const SERVICES: Record<string, Service> = {
@@ -78,11 +79,7 @@ const SERVICES: Record<string, Service> = {
     href: "/diensten/processen",
     cta: "Bekijk maatwerk software",
     base: "Je grootste winst zit niet in nog een tool erbij, maar in de tools die je al hebt slim laten samenwerken.",
-    points: [
-      "Koppel je website, CRM en facturatie zodat data vanzelf doorstroomt",
-      "Workflows die het handwerk overnemen, niet nog een dashboard erbij",
-      "Gebouwd rondom hoe jullie nu al werken, niet andersom",
-    ],
+    identityPoint: "Gebouwd rondom hoe jullie nu al werken, niet andersom",
   },
   maatwerkSysteem: {
     title: "Een systeem op maat",
@@ -90,11 +87,7 @@ const SERVICES: Record<string, Service> = {
     href: "/diensten/processen",
     cta: "Bekijk maatwerk software",
     base: "Een kant-en-klaar pakket buigt niet mee met jouw bedrijf. Een systeem op maat wel.",
-    points: [
-      "Gebouwd rondom jullie eigen werkwijze, niet een generiek sjabloon",
-      "Groeit mee als je bedrijf verandert, in plaats van dat jij je moet plooien",
-      "Eén overzicht in plaats van losse spreadsheets en systemen",
-    ],
+    identityPoint: "Groeit mee als je bedrijf verandert, in plaats van dat jij je moet plooien",
   },
   appPortaal: {
     title: "Een app of platform op maat",
@@ -102,19 +95,31 @@ const SERVICES: Record<string, Service> = {
     href: "/diensten/web",
     cta: "Bekijk web apps",
     base: "Een eigen omgeving voor klanten of team is vaak de ontbrekende schakel — geen extra e-mail, geen losse spreadsheet.",
-    points: [
-      "Een eigen klantportaal of interne tool, gebouwd op maat",
-      "Modern, snel en veilig — geen page-builder die je later beperkt",
-      "Koppelbaar met de systemen die je al gebruikt",
-    ],
+    identityPoint: "Koppelbaar met de systemen die je al gebruikt",
   },
+};
+
+/* Per antwoord op "Waar loop je nu tegenaan?" — komt altijd terug als eerste, situatie-specifieke bullet */
+const START_INSIGHT: Record<string, string> = {
+  lostools: "We vervangen je losse tools niet door nóg een tool — we laten Excel, mail en WhatsApp automatisch met elkaar praten.",
+  groeitniet: "We bouwen met ruimte om te groeien, zodat je hier over twee jaar niet weer tegenaan loopt.",
+  geenapp: "Een eigen omgeving voor klanten of team staat centraal in wat we bouwen — geen add-on achteraf.",
+  onduidelijk: "We beginnen met een korte procesanalyse, zodat je vóórdat we bouwen al weet wat het probleem precies is.",
+};
+
+/* Per antwoord op "Wat wil je vooral bereiken?" — komt altijd terug als tweede, doel-specifieke bullet */
+const GOAL_INSIGHT: Record<string, string> = {
+  handwerk: "Concreet resultaat: workflows die het handwerk overnemen, niet nog een dashboard om bij te houden.",
+  koppelen: "Je systemen — CRM, facturatie, website — wisselen automatisch data uit, geen handmatig overtypewerk meer.",
+  app: "Een eigen, op maat gebouwde omgeving voor klanten of team — geen page-builder die je later beperkt.",
+  overzicht: "Eén overzicht van het hele proces, in plaats van losse spreadsheets en systemen naast elkaar.",
 };
 
 const APPROACH: Record<string, string> = {
   snel: "We houden het traject strak en kort — vaak zit je binnen een paar weken in een eerste werkende versie.",
   prijs: "Je krijgt vooraf een vaste prijs. Geen nacalculatie, geen verrassingen achteraf.",
   robuust: "We bouwen met code die jaren meegaat — getest en onderhoudbaar, geen quick fix.",
-  lokaal: "Persoonlijk contact staat centraal — online of gewoon bij jou aan tafel in Limburg.",
+  lokaal: "Persoonlijk contact staat centraal — online, of gewoon bij je aan tafel, waar in de Euregio je ook zit.",
 };
 
 const TIMELINE: Record<string, string> = {
@@ -152,16 +157,22 @@ function computeAdvice(a: Answers): Advice {
     secondary = { label: "Lees: automatiseren — standaardtool of maatwerk?", href: "/blog/n8n-make-zapier" };
   }
 
+  const points = [
+    START_INSIGHT[start ?? ""] ?? service.identityPoint,
+    GOAL_INSIGHT[goal ?? ""] ?? service.identityPoint,
+    service.identityPoint,
+  ];
+
   return {
     service,
-    points: service.points,
+    points,
     approach: APPROACH[prio ?? "robuust"] ?? APPROACH.robuust,
     timeline: TIMELINE[speed ?? "maanden"] ?? TIMELINE.maanden,
     secondary,
   };
 }
 
-const LETTERS = ["A", "B", "C", "D", "E"];
+const LETTERS = ["A", "B", "C", "D"];
 const STEP_ACCENTS = ["#d4a574", "#a78bfa", "#f472b6", "#fbbf24"];
 
 function labelFor(stepId: string, optId?: string) {
@@ -174,8 +185,30 @@ export default function Advisor() {
   const [step, setStep] = useState(0); // 0..STEPS.length-1, dan === length → resultaat
   const [answers, setAnswers] = useState<Answers>({});
   const [leaving, setLeaving] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const isFirstRender = useRef(true);
+
+  // Na elke stapwissel (klik of terug) verplaatst de focus mee naar de nieuwe
+  // vraag-heading, zodat toetsenbordgebruikers niet worden teruggeworpen naar
+  // de top van het document. Niet op de allereerste render (zou de pagina
+  // ongevraagd naar de Adviseur laten scrollen).
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (step >= STEPS.length) return;
+    const raf = requestAnimationFrame(() => {
+      headingRef.current?.focus();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [step]);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".adv-reveal").forEach((el) => el.classList.add("adv-in"));
+      return;
+    }
     const o = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
@@ -295,7 +328,7 @@ export default function Advisor() {
 
             <div className="relative grid lg:grid-cols-12">
               {/* ════ LINKER RAIL ════ */}
-              <div className="lg:col-span-5 relative p-8 sm:p-10 lg:p-14 lg:border-r border-white/[0.06] flex flex-col">
+              <div className="lg:col-span-5 relative p-8 sm:p-10 lg:p-14 lg:border-r border-white/[0.06] flex flex-col" aria-live="polite">
                 {!isResult && (
                   <div key={`rail-${step}`} className="adv-fade flex flex-col h-full">
                     {/* Giant numeral */}
@@ -311,7 +344,12 @@ export default function Advisor() {
                       </span>
                     </div>
 
-                    <h3 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.005em] leading-[1.12]">
+                    <h3
+                      ref={headingRef}
+                      id="advisor-step-heading"
+                      tabIndex={-1}
+                      className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.005em] leading-[1.12] outline-none focus-visible:ring-2 focus-visible:ring-[var(--acc)] focus-visible:ring-offset-4 focus-visible:ring-offset-[#080808]"
+                    >
                       {current.q}
                     </h3>
                     <p className="mt-4 text-white/60 text-sm font-light leading-relaxed tracking-wide max-w-xs">

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 export default function EersteWebsite() {
   const [wantsAppointment, setWantsAppointment] = useState(false);
@@ -18,6 +19,13 @@ export default function EersteWebsite() {
 
   // Intersection Observer for animations
   useEffect(() => {
+    const textElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (typeof IntersectionObserver === "undefined") {
+      textElements.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -32,7 +40,6 @@ export default function EersteWebsite() {
       });
     }, observerOptions);
 
-    const textElements = document.querySelectorAll('.animate-on-scroll');
     textElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
@@ -51,9 +58,7 @@ export default function EersteWebsite() {
       message += `Type: ${formData.meetingType === 'online' ? 'Online (Google Meet)' : 'Fysiek'}\n`;
     }
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/31624572572?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    openWhatsApp(message);
   };
 
   return (

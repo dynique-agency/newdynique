@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
-  title: "Website laten maken Eindhoven | Dynique — Webdesign bureau",
-  description: "Premium website laten maken in Eindhoven. Webdesign bureau voor de Brainport-regio. Binnen 7–14 dagen live, vaste prijs, persoonlijk contact.",
+  title: "Maatwerk software & webdesign Eindhoven | Dynique",
+  description: "Maatwerk software en webdesign voor bedrijven in Eindhoven en Brainport. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
   alternates: { canonical: "https://dynique.nl/locaties/eindhoven" },
   openGraph: {
-    title: "Website laten maken Eindhoven | Dynique",
-    description: "Premium webdesign in Eindhoven en Brainport. Snel, persoonlijk, vaste prijs.",
+    title: "Maatwerk software & webdesign Eindhoven | Dynique",
+    description: "Maatwerk software en webdesign in Eindhoven en Brainport. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
     url: "https://dynique.nl/locaties/eindhoven",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Eindhoven" }],
@@ -21,8 +21,8 @@ const data: CityData = {
   city: "Eindhoven",
   cityShort: "Eindhoven",
   region: "Brainport",
-  tagline: "Webdesign voor Brainport-ondernemers.",
-  intro: "Eindhoven is design en techniek in elke vezel. Wij bouwen websites en maatwerk software die passen bij die ambitie — voor startups op Strijp-S, scale-ups in Brainport, design studio's en de creatieve sector. Snel, ambitieus en internationaal van toon.",
+  tagline: "Maatwerk software en webdesign voor Brainport-ondernemers.",
+  intro: "Eindhoven is design en techniek in elke vezel. Wij bouwen maatwerk software en websites die passen bij die ambitie — voor startups op Strijp-S, scale-ups in Brainport, design studio's en de creatieve sector. Snel, ambitieus en internationaal van toon.",
   vibe: "Brainport heeft een eigen taal: pragmatisch, design-gedreven en internationaal. Eindhovense ondernemers verwachten geen poespas maar wel kwaliteit en snelheid. Wij snappen die mentaliteit. Of het nu gaat om een tech-startup, een design-studio op Strijp, een scale-up rond Flight Forum of een gevestigde MKB-onderneming: we bouwen sites die passen bij de Brainport-cultuur.",
   accent: "#d4a574",
   postal: "5611 — 5658",

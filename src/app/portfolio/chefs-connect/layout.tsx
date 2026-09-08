@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Chefs Connect — case study | Dynique",
   description:
-    "Een digitaal ontmoetingsplatform waar topchefs en premium keukens elkaar vinden. Zo bouwden we Chefs Connect.",
+    "Een platform met drie trajecten — horecapersoneel zoeken, als freelancer aan de slag, of fine dining catering boeken — plus 48 regiopagina's door Nederland en België. Zo bouwden we Chefs Connect.",
   alternates: { canonical: "https://dynique.nl/portfolio/chefs-connect" },
   openGraph: {
     title: "Chefs Connect — case study",
     description:
-      "Een culinair platform dat de juiste match maakt tussen chefs, restaurants en events.",
+      "Een culinair platform dat horecazaken, freelance chefs en evenementenorganisatoren elk hun eigen traject geeft.",
     url: "https://dynique.nl/portfolio/chefs-connect",
     type: "article",
     images: [

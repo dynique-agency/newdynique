@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
+import StatusIndicator from "@/components/StatusIndicator";
 import Footer from "@/components/Footer";
 import Advisor from "@/components/Advisor";
+import CornerMark from "@/components/CornerMark";
 import {
   BeforeScreen,
   AfterScreen,
-  FlowDiagram,
   ProcessStyles,
   useBeforeAfterScrub,
 } from "@/components/processen/Visuals";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const heroServices = ["MAATWERK SOFTWARE", "WEB APPLICATIES", "DIGITALE SYSTEMEN", "PROCESSEN OP MAAT"];
 
@@ -21,6 +23,10 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: "200px" }
@@ -39,30 +45,6 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
   return <video ref={ref} src={src} className={className} muted loop playsInline preload="metadata" />;
 }
 
-/** Small recurring corner-bracket accent — a quiet signature mark used at section edges. */
-function CornerMark({ position, delay }: { position: "top-right" | "bottom-left" | "bottom-right"; delay?: number }) {
-  const edge = {
-    "top-right": "top-6 right-6 lg:top-10 lg:right-10",
-    "bottom-left": "bottom-0 left-0",
-    "bottom-right": "bottom-0 right-0",
-  }[position];
-  const line = {
-    "top-right": "top-0 right-0",
-    "bottom-left": "bottom-0 left-0",
-    "bottom-right": "bottom-0 right-0",
-  }[position];
-  return (
-    <div
-      aria-hidden
-      className={`absolute ${edge} w-8 h-8 lg:w-10 lg:h-10 pointer-events-none z-10 ${delay !== undefined ? "corner-mark" : ""}`}
-      style={delay !== undefined ? ({ "--corner-delay": `${delay}s` } as React.CSSProperties) : undefined}
-    >
-      <div className={`absolute ${line} w-full h-px bg-[#d4a574]/40`} />
-      <div className={`absolute ${line} w-px h-full bg-[#d4a574]/40`} />
-    </div>
-  );
-}
-
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
@@ -70,10 +52,12 @@ export default function Home() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [svcIdx, setSvcIdx] = useState(0);
   const [reviewIdx, setReviewIdx] = useState(0);
+  const reviewsPausedRef = useRef(false);
   const scrubRef = useRef<HTMLDivElement>(null);
   useBeforeAfterScrub(scrubRef);
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     company: "",
     projectType: "",
     description: "",
@@ -83,20 +67,33 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const alreadySeen = sessionStorage.getItem("dq-intro-seen");
+    let alreadySeen = false;
+    try {
+      alreadySeen = sessionStorage.getItem("dq-intro-seen") === "1";
+    } catch {
+      // storage access blocked (private browsing, sandboxed iframe, etc.) — treat as not seen
+    }
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (alreadySeen || prefersReducedMotion) {
       setFadeOut(true);
       setLoading(false);
       return;
     }
-    sessionStorage.setItem("dq-intro-seen", "1");
+    try {
+      sessionStorage.setItem("dq-intro-seen", "1");
+    } catch {
+      // ignore — persistence is a nice-to-have, not required for the loading screen to finish
+    }
     const fadeTimer = setTimeout(() => setFadeOut(true), 1600);
     const loadingTimer = setTimeout(() => setLoading(false), 2200);
     return () => { clearTimeout(fadeTimer); clearTimeout(loadingTimer); };
   }, []);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim, .section-reveal").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -105,17 +102,21 @@ export default function Home() {
       },
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".anim").forEach((el) => observer.observe(el));
+    document.querySelectorAll(".anim, .section-reveal").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [loading]);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => setSvcIdx((i) => (i + 1) % heroServices.length), 2600);
     return () => clearInterval(id);
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => setReviewIdx((i) => i + 1), 14000);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      if (!reviewsPausedRef.current) setReviewIdx((i) => i + 1);
+    }, 14000);
     return () => clearInterval(id);
   }, []);
 
@@ -124,6 +125,9 @@ export default function Home() {
     const w2 = document.getElementById('orb-wrap-2') as HTMLElement;
     const w3 = document.getElementById('orb-wrap-3') as HTMLElement;
     if (!w1 || !w2 || !w3) return;
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reducedMotion) return;
     let raf: number;
     let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
     let x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
@@ -147,9 +151,26 @@ export default function Home() {
     return () => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
   }, []);
 
-  const handleWhatsAppSubmit = () => {
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "homepage",
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        projectType: formData.projectType,
+        description: formData.description,
+        appointment: wantsAppointment ? { date: formData.date, time: formData.time, type: formData.meetingType } : undefined,
+      }),
+    }).catch(() => {});
+
     let message = `Hi! Ik wil graag contact opnemen.\n\n`;
     message += `📝 *Naam:* ${formData.name || "(niet ingevuld)"}\n`;
+    if (formData.email) message += `✉️ *E-mail:* ${formData.email}\n`;
     if (formData.company) message += `🏢 *Bedrijf:* ${formData.company}\n`;
     message += `🎯 *Project:* ${formData.projectType || "(niet ingevuld)"}\n\n`;
     message += `📋 *Omschrijving:*\n${formData.description || "(niet ingevuld)"}\n`;
@@ -158,7 +179,7 @@ export default function Home() {
       if (formData.time) message += `Tijd: ${formData.time}\n`;
       message += `Type: ${formData.meetingType === "online" ? "Online (Google Meet)" : "Fysiek"}\n`;
     }
-    window.open(`https://wa.me/31624572572?text=${encodeURIComponent(message)}`, "_blank");
+    openWhatsApp(message);
   };
 
   const pijlers = [
@@ -232,7 +253,7 @@ export default function Home() {
 
   const faqs = [
     { q: "Hoe lang duurt een maatwerk software traject?", a: "Dat hangt echt af van de scope — een gekoppeld formulier is iets anders dan een compleet bedrijfssysteem. Bij de intake krijg je een concreet plan met fases en een reële planning, geen slag in de lucht." },
-    { q: "Werken jullie ook met bedrijven buiten Limburg?", a: "Ja. We werken met bedrijven door heel Nederland en België, grotendeels op afstand met heldere check-ins, en op locatie waar dat waarde toevoegt." },
+    { q: "Werken jullie ook met bedrijven buiten Limburg?", a: "Ja. We werken met bedrijven door heel Nederland en België, grotendeels op afstand met heldere check-ins, en op locatie waar dat waarde toevoegt — Hasselt bijvoorbeeld ligt op zo'n 55 minuten rijden vanaf ons kantoor in Vaals." },
     { q: "Hoe ga je te werk bij een bestaand systeem of team?", a: "Ik sluit aan op wat er al is — bestaande tools, data en workflows — in plaats van alles te vervangen. Waar het beter kan, zeg ik dat, maar de keuze blijft aan jou." },
     { q: "Hoe zit het met beveiliging en dataeigendom?", a: "Je data en code blijven van jou. Ik werk projectmatig en veilig volgens vaste standaarden, en leg vooraf uit hoe gegevens worden opgeslagen en verwerkt." },
     { q: "Wat als de scope tijdens het project verandert?", a: "Dat gebeurt vaker dan je denkt, en is geen probleem. We bespreken de impact op planning en prijs zodra het zich voordoet — geen verrassingen achteraf." },
@@ -360,13 +381,18 @@ export default function Home() {
             </p>
 
             <div style={{ animation: "fadeInUp 1s ease-out 0.6s both" }}>
-              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em] mb-3">WIJ BOUWEN</p>
-              <div className="overflow-hidden mb-3">
-                <h1 key={svcIdx} className="hero-slot-word text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] font-light text-white tracking-[0.04em] leading-none">
-                  {heroServices[svcIdx]}
-                </h1>
+              {/* Echte, stabiele H1 voor screenreaders/SEO — de visuele blokken eronder zijn
+                  puur decoratief en herhalen deze zin, dus die blijven voor assistive tech verborgen. */}
+              <h1 className="sr-only">Wij bouwen maatwerk software en denken mee over wat beter kan.</h1>
+              <div aria-hidden="true">
+                <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em] mb-3">WIJ BOUWEN</p>
+                <div className="overflow-hidden mb-3">
+                  <div key={svcIdx} className="hero-slot-word text-5xl sm:text-6xl md:text-8xl lg:text-[6.5rem] font-light text-white tracking-[0.04em] leading-none">
+                    {heroServices[svcIdx]}
+                  </div>
+                </div>
+                <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em]">EN DENKEN MEE OVER WAT BETER KAN.</p>
               </div>
-              <p className="text-white/25 text-xl sm:text-2xl md:text-3xl font-extralight tracking-[0.22em]">EN DENKEN MEE OVER WAT BETER KAN.</p>
             </div>
 
             {/* Service pills */}
@@ -416,7 +442,7 @@ export default function Home() {
         </div>
 
         {/* ─── 3. MANIFESTO ────────────────────────────────────── */}
-        <section className="relative bg-[#080808] overflow-hidden py-24 lg:py-28">
+        <section className="section-reveal relative bg-[#080808] overflow-hidden py-24 lg:py-28">
 
           {/* Ghost "DYNIQUE" — full width, bottom anchored, clearly visible */}
           <div aria-hidden className="absolute bottom-0 left-0 right-0 pointer-events-none select-none leading-[0.82] overflow-hidden">
@@ -501,7 +527,7 @@ export default function Home() {
         </section>
 
         {/* ─── 4. WAAROM DYNIQUE — één verhaal i.p.v. een dienstengrid ── */}
-        <section className="relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
+        <section className="section-reveal relative bg-[#0a0a0a] py-24 lg:py-32 overflow-hidden" id="waarom">
           <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#d4a574]/30 to-transparent" />
           <CornerMark position="top-right" />
           <div aria-hidden className="absolute -top-40 right-0 w-[600px] h-[600px] pointer-events-none opacity-40"
@@ -604,21 +630,17 @@ export default function Home() {
         </section>
 
         {/* ─── 5. REVIEWS ──────────────────────────────────────── */}
-        <section className="relative bg-[#070707] py-32 lg:py-44 overflow-hidden" id="reviews">
+        <section
+          className="section-reveal relative bg-[#070707] py-32 lg:py-44 overflow-hidden"
+          id="reviews"
+          onMouseEnter={() => { reviewsPausedRef.current = true; }}
+          onMouseLeave={() => { reviewsPausedRef.current = false; }}
+          onFocus={() => { reviewsPausedRef.current = true; }}
+          onBlur={() => { reviewsPausedRef.current = false; }}
+        >
           {/* Ambient accent glow — shifts with active review */}
           {(() => {
             const reviews = [
-              {
-                quote: "Binnen drie dagen live. Geen enkele professionele foto, wel een strakke deadline. Dynique leverde AI-visuals die ons merk premium maakten en de eerste aanvragen kwamen binnen een week binnen.",
-                name: "Tom Creemers",
-                role: "Founder · Creemers Exclusive",
-                project: "CREEMERS EXCLUSIVE",
-                verifyUrl: "https://creemersexclusive.nl",
-                verifyLabel: "creemersexclusive.nl",
-                accent: "#d4a574",
-                initials: "TC",
-                date: "Mrt 2025",
-              },
               {
                 quote: "Andere bureaus zeiden weken. Dynique leverde een meertalige website met booking-systeem binnen zeven dagen. De site voelt professioneler dan ik had durven hopen en het aantal aanvragen is verdubbeld.",
                 name: "Stacy Kohnen",
@@ -787,7 +809,7 @@ export default function Home() {
         </section>
 
         {/* ─── 6. PROCESS — "HET TRAJECT" ─────────────────────── */}
-        <section className="relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
+        <section className="section-reveal relative bg-[#050505] py-32 lg:py-44 overflow-hidden">
           <CornerMark position="top-right" />
           {/* Ambient accent orb */}
           <div aria-hidden className="absolute top-0 right-0 w-[700px] h-[700px] pointer-events-none opacity-50"
@@ -1026,7 +1048,7 @@ export default function Home() {
         </section>
 
         {/* ─── 7. PORTFOLIO ────────────────────────────────────── */}
-        <section className="relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
+        <section className="section-reveal relative bg-[#070707] py-28 lg:py-36 border-t border-white/[0.04] overflow-hidden" id="werk">
           <CornerMark position="top-right" />
           {/* Ambient orb */}
           <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
@@ -1191,11 +1213,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ─── 7b. ADVISEUR — consultatieve multiple-choice ────── */}
+        {/* ─── 7c. ADVISEUR — consultatieve multiple-choice ────── */}
         <Advisor />
 
         {/* ─── 8. STATEMENT STRIP ──────────────────────────────── */}
-        <section className="bg-black py-24 lg:py-32 overflow-hidden">
+        <section className="section-reveal bg-black py-24 lg:py-32 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-12">
             <h2 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-extralight text-white tracking-[0.08em] leading-[1.1] anim">
               Klaar om te groeien?<br />
@@ -1213,7 +1235,7 @@ export default function Home() {
         </section>
 
         {/* ─── 9. CONTACT ──────────────────────────────────────── */}
-        <section className="bg-white py-32 lg:py-40" id="contact">
+        <section className="section-reveal bg-white py-32 lg:py-40" id="contact">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32">
               {/* Left */}
@@ -1226,17 +1248,20 @@ export default function Home() {
                 </div>
                 <div className="space-y-6 anim delay-2">
                   <p className="text-black/65 text-base font-light leading-[1.8] tracking-wide">
-                    Vertel ons over je project. We reageren altijd binnen 24 uur, meestal veel eerder.
+                    Vertel ons over je project.
                   </p>
                   <div className="space-y-4 pt-4 border-t border-black/5">
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-black/60 text-[9px] tracking-[0.35em] font-light flex-shrink-0 w-24">REACTIETIJD</span>
+                      <StatusIndicator className="text-black/60 text-sm font-light tracking-wide" />
+                    </div>
                     {[
                       { label: "TELEFOON", value: "+31 6 24572572", href: "tel:+31624572572" },
                       { label: "E-MAIL", value: "info@dynique.nl", href: "mailto:info@dynique.nl" },
-                      { label: "REACTIETIJD", value: "Binnen 2 uur (ma–za, 9–20u)", href: null },
-                      { label: "WERKGEBIED", value: "Limburg · Nederland · Internationaal", href: null },
+                      { label: "WERKGEBIED", value: "Limburg · Nederland · België · daarbuiten op aanvraag", href: null },
                     ].map((item) => (
                       <div key={item.label} className="flex items-baseline gap-4">
-                        <span className="text-black/20 text-[9px] tracking-[0.35em] font-light flex-shrink-0 w-24">{item.label}</span>
+                        <span className="text-black/60 text-[9px] tracking-[0.35em] font-light flex-shrink-0 w-24">{item.label}</span>
                         {item.href ? (
                           <a href={item.href} className="text-black text-sm font-light tracking-wide hover:text-black/60 transition-colors duration-200">{item.value}</a>
                         ) : (
@@ -1249,16 +1274,19 @@ export default function Home() {
               </div>
 
               {/* Right — Form */}
-              <div className="space-y-8 anim delay-2">
+              <form onSubmit={handleWhatsAppSubmit} className="space-y-8 anim delay-2">
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
-                    { label: "Naam *", key: "name", placeholder: "Jouw naam", type: "text" },
-                    { label: "Bedrijf", key: "company", placeholder: "Optioneel", type: "text" },
+                    { label: "Naam *", key: "name", placeholder: "Jouw naam", type: "text", required: true },
+                    { label: "E-mail *", key: "email", placeholder: "naam@bedrijf.nl", type: "email", required: true },
+                    { label: "Bedrijf", key: "company", placeholder: "Optioneel", type: "text", required: false },
                   ].map((f) => (
-                    <div key={f.key} className="space-y-2">
-                      <label className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">{f.label}</label>
+                    <div key={f.key} className={f.key === "company" ? "space-y-2 md:col-span-2" : "space-y-2"}>
+                      <label htmlFor={`home-contact-${f.key}`} className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">{f.label}</label>
                       <input
+                        id={`home-contact-${f.key}`}
                         type={f.type}
+                        required={f.required}
                         value={formData[f.key as keyof typeof formData]}
                         onChange={(e) => setFormData({ ...formData, [f.key]: e.target.value })}
                         placeholder={f.placeholder}
@@ -1269,8 +1297,10 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">Wat heb je nodig? *</label>
+                  <label htmlFor="home-contact-project-type" className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">Wat heb je nodig? *</label>
                   <select
+                    id="home-contact-project-type"
+                    required
                     value={formData.projectType}
                     onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
                     className="w-full bg-white border-b border-black/15 focus:border-black text-black text-sm font-light tracking-wide py-3 outline-none transition-colors duration-300 cursor-pointer"
@@ -1287,8 +1317,10 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">Omschrijf je project *</label>
+                  <label htmlFor="home-contact-description" className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">Omschrijf je project *</label>
                   <textarea
+                    id="home-contact-description"
+                    required
                     rows={4}
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -1298,8 +1330,9 @@ export default function Home() {
                 </div>
 
                 <div className="border-t border-black/5 pt-6">
-                  <label className="flex items-center gap-3 cursor-pointer group">
+                  <label htmlFor="home-contact-wants-appointment" className="flex items-center gap-3 cursor-pointer group">
                     <input
+                      id="home-contact-wants-appointment"
                       type="checkbox"
                       checked={wantsAppointment}
                       onChange={(e) => setWantsAppointment(e.target.checked)}
@@ -1319,9 +1352,10 @@ export default function Home() {
                       { label: "Type", key: "meetingType", type: "select", options: ["online", "fysiek"] },
                     ].map((f) => (
                       <div key={f.key} className="space-y-2">
-                        <label className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">{f.label}</label>
+                        <label htmlFor={`home-contact-appt-${f.key}`} className="text-black/40 text-[10px] tracking-[0.3em] font-light uppercase">{f.label}</label>
                         {f.type === "date" ? (
                           <input
+                            id={`home-contact-appt-${f.key}`}
                             type="date"
                             value={formData.date}
                             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
@@ -1329,6 +1363,7 @@ export default function Home() {
                           />
                         ) : (
                           <select
+                            id={`home-contact-appt-${f.key}`}
                             value={formData[f.key as keyof typeof formData]}
                             onChange={(e) => setFormData({ ...formData, [f.key]: e.target.value })}
                             className="w-full bg-white border-b border-black/15 focus:border-black text-black text-sm font-light py-3 outline-none transition-colors duration-300 cursor-pointer"
@@ -1342,7 +1377,7 @@ export default function Home() {
                 )}
 
                 <button
-                  onClick={handleWhatsAppSubmit}
+                  type="submit"
                   className="group w-full mt-4 px-12 py-4 bg-black text-white text-xs tracking-[0.25em] font-light hover:bg-[#25D366] transition-all duration-500 flex items-center justify-center gap-3"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -1350,13 +1385,13 @@ export default function Home() {
                   </svg>
                   VERSTUUR VIA WHATSAPP
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </section>
 
         {/* ─── 10. FAQ ──────────────────────────────────────────── */}
-        <section className="bg-zinc-950 py-32 lg:py-40" id="faq">
+        <section className="section-reveal bg-zinc-950 py-32 lg:py-40" id="faq">
           <div className="container mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-3 gap-16 lg:gap-32">
               <div>
@@ -1374,7 +1409,11 @@ export default function Home() {
                 {faqs.map((faq, i) => (
                   <div key={i} className="py-6">
                     <button
+                      type="button"
+                      id={`faq-question-${i}`}
                       onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+                      aria-expanded={openFAQ === i}
+                      aria-controls={`faq-panel-${i}`}
                       className="w-full flex items-start justify-between gap-6 text-left group"
                     >
                       <h3 className="text-white/80 group-hover:text-white text-sm lg:text-base font-light tracking-wide leading-relaxed transition-colors duration-300">
@@ -1389,7 +1428,12 @@ export default function Home() {
                         </div>
                       </div>
                     </button>
-                    <div className={`overflow-hidden transition-all duration-500 ${openFAQ === i ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
+                    <div
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${i}`}
+                      className={`overflow-hidden transition-all duration-500 ${openFAQ === i ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}`}
+                    >
                       <p className="text-white/65 text-sm font-light leading-[1.8] tracking-wide pr-10">{faq.a}</p>
                     </div>
                   </div>
@@ -1460,12 +1504,8 @@ export default function Home() {
         .scroll-dot {
           animation: scrollDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
         }
-        .corner-mark {
-          animation: fadeInUp 1s ease-out var(--corner-delay, 0s) both;
-        }
         @media (prefers-reduced-motion: reduce) {
           .scroll-dot { animation: none; opacity: 0.6; }
-          .corner-mark { animation: none; opacity: 1; }
         }
         @keyframes marquee {
           from { transform: translateX(0); }
@@ -1523,14 +1563,20 @@ export default function Home() {
         .delay-2 { transition-delay: 0.26s; }
         .delay-3 { transition-delay: 0.42s; }
 
-        /* Slide-in from left (manifesto photo) */
-        .anim.anim-from-left {
-          transform: translateX(-40px) translateY(0px);
+        /* Section-level "camera settle" — the stage arrives as one surface, before its content populates */
+        .section-reveal {
           opacity: 0;
+          transform: scale(0.97) translateY(20px);
+          transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                      transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+          will-change: opacity, transform;
         }
-        .anim.anim-from-left.animate-in {
-          transform: translateX(0) translateY(0);
+        .section-reveal.animate-in {
           opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .section-reveal { opacity: 1; transform: none; transition: none; }
         }
 
         /* Photo diagonal reveal — polygon animates so diagonal shape is preserved */
@@ -1544,7 +1590,6 @@ export default function Home() {
 
         @media (max-width: 768px) {
           .anim { transform: translateY(20px); transition-duration: 0.7s; }
-          .anim.anim-from-left { transform: translateY(20px); }
         }
         @media (prefers-reduced-motion: reduce) {
           .anim { opacity: 1; transform: none; transition: none; }

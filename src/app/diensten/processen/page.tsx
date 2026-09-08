@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useEffect, useRef, useState } from "react";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const ACCENT = "#d4a574";
 
@@ -219,6 +220,10 @@ export default function ProcessenDienst() {
   const scrubRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -269,7 +274,7 @@ export default function ProcessenDienst() {
     if (form.phone) m += `📞 Telefoon: ${form.phone}\n`;
     if (form.email) m += `✉️ E-mail: ${form.email}\n`;
     if (form.message) m += `\n📋 Waar loopt het vast:\n${form.message}\n`;
-    window.open(`https://wa.me/31624572572?text=${encodeURIComponent(m)}`, "_blank");
+    openWhatsApp(m);
   };
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -455,7 +460,7 @@ export default function ProcessenDienst() {
             </div>
 
             {/* labels */}
-            <div className="ba-meta flex items-center justify-between max-w-[640px] mx-auto mb-4 anim delay-1">
+            <div className="flex items-center justify-between max-w-[640px] mx-auto mb-4 anim delay-1">
               <span className="ba-label-before flex items-center gap-2 text-[10px] tracking-[0.3em] font-light text-red-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> VOOR
               </span>
@@ -471,10 +476,10 @@ export default function ProcessenDienst() {
                 <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
                 <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
                 <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                <span className="ba-url mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">jouwbedrijf.app</span>
+                <span className="mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">jouwbedrijf.app</span>
               </div>
               {/* screen */}
-              <div className="ba-screen relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
                 <BeforeScreen />
                 <div className="ba-after absolute inset-0"><AfterScreen /></div>
                 <div className="ba-divider">
@@ -711,7 +716,6 @@ export default function ProcessenDienst() {
         }
         .anim.animate-in { opacity: 1; transform: translateY(0); }
         .anim.delay-1 { transition-delay: 0.12s; }
-        .anim.delay-2 { transition-delay: 0.24s; }
 
         /* ── hero staggered entrance ── */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }

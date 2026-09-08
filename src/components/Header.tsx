@@ -24,7 +24,7 @@ const mobileNav = [
 ];
 
 export default function Header({ variant = 'dark' }: HeaderProps) {
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [dienstenOpen, setDienstenOpen] = useState(false);
@@ -32,8 +32,13 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setIsScrolled((prev) => {
+        const next = window.scrollY > 50;
+        return prev === next ? prev : next;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -104,8 +109,8 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
   const logoColor = isMenuOpen ? 'text-white' : (isLight ? 'text-white' : 'text-black');
   const lineColor = isMenuOpen ? 'bg-white' : (isLight ? 'bg-white' : 'bg-black');
   const bgColor = isLight
-    ? (scrollY > 50 ? "bg-black/95 backdrop-blur-md" : "bg-transparent")
-    : (scrollY > 50 ? "bg-white/95 backdrop-blur-md border-b border-black/5" : "bg-white border-b border-black/5");
+    ? (isScrolled ? "bg-black/95 backdrop-blur-md" : "bg-transparent")
+    : (isScrolled ? "bg-white/95 backdrop-blur-md border-b border-black/5" : "bg-white border-b border-black/5");
   const textColor = isLight ? 'text-white' : 'text-black';
 
   return (
@@ -193,7 +198,7 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
 
       {/* ── Full Screen Menu ─────────────────────────────────── */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-[45]">
+        <div className="lg:hidden fixed inset-0 z-[55]">
           {/* Clip-path panel */}
           <div
             id="mobile-menu-panel"

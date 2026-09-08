@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 export default function Vervanging() {
   const [wantsAppointment, setWantsAppointment] = useState(false);
@@ -18,6 +19,13 @@ export default function Vervanging() {
 
   // Intersection Observer for animations
   useEffect(() => {
+    const textElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (typeof IntersectionObserver === "undefined") {
+      textElements.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -32,7 +40,6 @@ export default function Vervanging() {
       });
     }, observerOptions);
 
-    const textElements = document.querySelectorAll('.animate-on-scroll');
     textElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
@@ -51,9 +58,7 @@ export default function Vervanging() {
       message += `Type: ${formData.meetingType === 'online' ? 'Online (Google Meet)' : 'Fysiek'}\n`;
     }
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/31624572572?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    openWhatsApp(message);
   };
 
   return (
@@ -255,10 +260,10 @@ export default function Vervanging() {
             <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
-                  name: "Tom Creemers",
-                  company: "Creemers Exclusive",
-                  quote: "Binnen drie dagen live. Geen enkele professionele foto, wel een strakke deadline. Dynique leverde AI-visuals die ons merk premium maakten en de eerste aanvragen kwamen binnen een week binnen.",
-                  result: "Eerste aanvragen binnen een week"
+                  name: "Stacy Kohnen",
+                  company: "Stacy Kohnen Music",
+                  quote: "Andere bureaus zeiden weken. Dynique leverde een meertalige website met booking-systeem binnen zeven dagen. De site voelt professioneler dan ik had durven hopen en het aantal aanvragen is verdubbeld.",
+                  result: "Aanvragen verdubbeld"
                 },
                 {
                   name: "Wally & Roger",

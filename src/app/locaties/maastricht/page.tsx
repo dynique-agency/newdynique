@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
-  title: "Website laten maken Maastricht | Dynique — Webdesign bureau",
-  description: "Premium website laten maken in Maastricht. Lokaal webdesign bureau voor ZZP en MKB. Binnen 7–14 dagen live, vaste prijs, persoonlijk contact.",
+  title: "Maatwerk software & webdesign Maastricht | Dynique",
+  description: "Maatwerk software en premium webdesign voor bedrijven in Maastricht en Zuid-Limburg. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
   alternates: { canonical: "https://dynique.nl/locaties/maastricht" },
   openGraph: {
-    title: "Website laten maken Maastricht | Dynique",
-    description: "Premium webdesign in Maastricht. Snel, persoonlijk en met een vaste prijs.",
+    title: "Maatwerk software & webdesign Maastricht | Dynique",
+    description: "Maatwerk software en webdesign in Maastricht. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
     url: "https://dynique.nl/locaties/maastricht",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Maastricht" }],
@@ -21,8 +21,8 @@ const data: CityData = {
   city: "Maastricht",
   cityShort: "Maastricht",
   region: "Zuid-Limburg",
-  tagline: "Premium webdesign in de hoofdstad van Limburg.",
-  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen websites en maatwerk software die die elegantie vertalen naar het digitale. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
+  tagline: "Maatwerk software en webdesign in de hoofdstad van Limburg.",
+  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen maatwerk software en websites die die elegantie vertalen naar het digitale. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
   vibe: "Maastricht heeft een internationale uitstraling die je website verdient. We snappen de Bourgondische cultuur, de drukke toeristische seizoenen, en de subtiele balans tussen traditie en vernieuwing. Of je nu een restaurant runt aan de Maas, een boutique in Wyck, een advocatenkantoor aan de Maaskade of een internationaal bedrijf in Randwyck: wij vertalen jouw merk naar een website die past bij de stad én converteert.",
   accent: "#d4a574",
   postal: "6211 — 6229",

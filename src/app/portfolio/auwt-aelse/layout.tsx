@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Auwt Aelse — case study | Dynique",
   description:
-    "Een sfeervolle digitale kaart voor een eigentijdse bistro: warme beeldtaal, heldere menustructuur en moeiteloos reserveren. Zo bouwden we Auwt Aelse.",
+    "Een tweetalige (NL/EN) kaart voor bistro Auwt Aelse in Elsloo: volledige menukaart met echte foodfotografie, sfeerimpressie en drempelloos reserveren. Zo vertaalden we hun rebranding naar het scherm.",
   alternates: { canonical: "https://dynique.nl/portfolio/auwt-aelse" },
   openGraph: {
     title: "Auwt Aelse — case study",
     description:
-      "Bourgondisch tafelen, eigentijds geserveerd. Een bistrosite met menu en reserveren.",
+      "Bourgondisch tafelen, eigentijds geserveerd. Een tweetalige bistrosite met volledige kaart en sfeerimpressie.",
     url: "https://dynique.nl/portfolio/auwt-aelse",
     type: "article",
     images: [

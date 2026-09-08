@@ -90,6 +90,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://dynique.nl',
+    languages: {
+      'nl-NL': 'https://dynique.nl',
+      'nl-BE': 'https://dynique.nl',
+    },
   },
   // Zet je Search Console-token in .env.local als NEXT_PUBLIC_GSC_VERIFICATION
   // (of gebruik de DNS-/HTML-bestandsmethode). Zonder token wordt er niets toegevoegd.
@@ -151,17 +155,11 @@ export default function RootLayout({
                   "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "5.0",
-                    "reviewCount": "5",
+                    "reviewCount": "4",
                     "bestRating": "5",
                     "worstRating": "1"
                   },
                   "review": [
-                    {
-                      "@type": "Review",
-                      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-                      "author": { "@type": "Person", "name": "Tom Creemers" },
-                      "reviewBody": "Binnen drie dagen live. Geen enkele professionele foto, wel een strakke deadline. Dynique leverde AI-visuals die ons merk premium maakten en de eerste aanvragen kwamen binnen een week binnen."
-                    },
                     {
                       "@type": "Review",
                       "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },

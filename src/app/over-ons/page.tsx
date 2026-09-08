@@ -19,6 +19,7 @@ const PROMISE = [
   { t: "Projectmatig en veilig", d: "Vast stappenplan: functioneel ontwerp, bouw in korte iteraties, testen op een aparte omgeving — pas dan live. Zo liggen risico's vooraf op tafel, niet achteraf." },
   { t: "Snel live", d: "Strakke planning, korte iteraties. Vaak binnen dagen in plaats van maanden." },
   { t: "Eerlijk advies", d: "We zeggen ook wanneer iets simpeler of goedkoper kan. Dat bouwt vertrouwen." },
+  { t: "Eén eenmanszaak, geen wachtrij", d: "Dynique is bewust een eenmanszaak — precies waarom je geen accountmanager krijgt die moet doorschakelen. Voor continuïteit werk ik met vaste documentatie en overdraagbare code, zodat een project nooit vastzit aan één hoofd." },
 ];
 
 const JSON_LD = {
@@ -61,6 +62,10 @@ const JSON_LD = {
 
 export default function OverOns() {
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -254,7 +259,7 @@ export default function OverOns() {
         .anim.delay-1 { transition-delay: 0.12s; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
         .hv { opacity: 0; animation: fadeUp 0.95s cubic-bezier(0.16,1,0.3,1) forwards; }
-        .hv-1 { animation-delay: 0.05s; } .hv-2 { animation-delay: 0.18s; } .hv-3 { animation-delay: 0.32s; } .hv-4 { animation-delay: 0.32s; }
+        .hv-1 { animation-delay: 0.05s; } .hv-2 { animation-delay: 0.18s; } .hv-3 { animation-delay: 0.32s; } .hv-4 { animation-delay: 0.46s; }
         @media (prefers-reduced-motion: reduce) {
           .anim { opacity: 1; transform: none; transition: none; }
           .hv { opacity: 1; animation: none; }

@@ -9,6 +9,13 @@ export default function IJssalonItalia() {
 
   // Intersection Observer for premium text animations
   useEffect(() => {
+    const textElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (typeof IntersectionObserver === "undefined") {
+      textElements.forEach((el) => el.classList.add('animate-in'));
+      return;
+    }
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -23,7 +30,6 @@ export default function IJssalonItalia() {
       });
     }, observerOptions);
 
-    const textElements = document.querySelectorAll('.animate-on-scroll');
     textElements.forEach((el) => observer.observe(el));
 
     return () => {
@@ -76,7 +82,7 @@ export default function IJssalonItalia() {
               {/* CTA */}
               <div className="animate-on-scroll delay-200">
                 <a
-                  href="#"
+                  href="https://ijssalonitaliavaals.nl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-12 py-4 bg-black text-white text-sm tracking-[0.2em] font-light hover:bg-black/90 transition-all duration-300"
@@ -507,7 +513,7 @@ export default function IJssalonItalia() {
                 </svg>
               </Link>
               <Link
-                href="/"
+                href="/portfolio"
                 className="inline-flex items-center gap-3 px-12 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm tracking-[0.2em] font-light hover:bg-white/20 hover:border-white/50 transition-all duration-300"
               >
                 MEER CASES

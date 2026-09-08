@@ -3,6 +3,7 @@
 import { useEffect, useId, type RefObject } from "react";
 
 export const ACCENT = "#d4a574";
+const ACCENT_RGB = "212, 165, 116"; // rgb() equivalent of ACCENT, for rules needing a dynamic/calc() alpha
 
 /* ════════════════════════════════════════════════════════════
    Shared coded visuals + styles + hooks for the
@@ -235,6 +236,10 @@ export function Field({
 /* Reveal-on-scroll for .anim elements */
 export function useRevealOnScroll() {
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -339,7 +344,7 @@ export function ProcessStyles() {
         border: 1px solid rgba(255, 255, 255, 0.09);
         box-shadow:
           0 50px 120px -50px rgba(0, 0, 0, 0.85),
-          0 0 calc(var(--p) * 70px) rgba(52, 211, 153, calc(var(--p) * 0.28)),
+          0 0 calc(var(--p) * 70px) rgba(${ACCENT_RGB}, calc(var(--p) * 0.28)),
           inset 0 0 0 1px rgba(255, 255, 255, 0.04);
         transition: box-shadow 0.15s linear;
       }

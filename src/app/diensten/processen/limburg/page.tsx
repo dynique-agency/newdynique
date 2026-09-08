@@ -15,6 +15,7 @@ import {
   useRevealOnScroll,
   useBeforeAfterScrub,
 } from "@/components/processen/Visuals";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const CITIES = [
   "Maastricht", "Heerlen", "Sittard-Geleen", "Kerkrade", "Landgraaf",
@@ -37,7 +38,7 @@ export default function ProcessenLimburg() {
     if (form.place) m += `📍 Plaats: ${form.place}\n`;
     if (form.phone) m += `📞 Telefoon: ${form.phone}\n`;
     if (form.message) m += `\n📋 Waar loopt het vast:\n${form.message}\n`;
-    window.open(`https://wa.me/31624572572?text=${encodeURIComponent(m)}`, "_blank");
+    openWhatsApp(m);
   };
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>

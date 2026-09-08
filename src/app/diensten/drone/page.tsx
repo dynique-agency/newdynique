@@ -5,8 +5,14 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useEffect } from "react";
 
+const ACCENT = "#d4a574";
+
 export default function DroneDienst() {
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -44,72 +50,83 @@ export default function DroneDienst() {
     <>
       <Header variant="light" />
 
-      <main>
-        {/* Hero */}
-        <section className="relative min-h-screen bg-black flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black"></div>
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)", backgroundSize: "48px 48px" }}
-          ></div>
+      <main className="relative bg-[#070707] overflow-hidden">
+        {/* Ambient orbs */}
+        <div className="absolute top-[4%] -right-40 w-[640px] h-[640px] rounded-full pointer-events-none z-0"
+          style={{ background: `radial-gradient(circle, ${ACCENT}1f 0%, transparent 65%)`, filter: "blur(70px)" }} />
+        <div className="absolute bottom-[6%] -left-40 w-[560px] h-[560px] rounded-full pointer-events-none z-0"
+          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 65%)", filter: "blur(70px)" }} />
 
-          <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center py-32">
-            <p
-              className="text-white/40 text-xs tracking-[0.4em] font-light mb-8"
-              style={{ animation: "fadeInUp 0.8s ease-out 0.2s both" }}
-            >
-              DYNIQUE · DIENST 04
-            </p>
-            <h1
-              className="text-5xl sm:text-6xl md:text-8xl font-extralight text-white tracking-[0.15em] leading-tight mb-8"
-              style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
-            >
-              DRONE &<br />
-              <span className="font-light">VIDEO</span>
-            </h1>
-            <p
-              className="text-white/60 text-base lg:text-xl font-extralight tracking-wide max-w-2xl mx-auto mb-4 leading-relaxed"
-              style={{ animation: "fadeInUp 0.8s ease-out 0.6s both" }}
-            >
-              Jouw merk vanuit een nieuw perspectief. Spectaculaire aerial footage en bedrijfsfilms met de DJI Mini 5 Pro.
-            </p>
-            <p
-              className="text-white/30 text-xs tracking-[0.25em] font-light mb-12"
-              style={{ animation: "fadeInUp 0.8s ease-out 0.7s both" }}
-            >
-              4K · 60FPS · DJI MINI 5 PRO · LIMBURG & OMGEVING
-            </p>
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              style={{ animation: "fadeInUp 0.8s ease-out 0.9s both" }}
-            >
-              <Link
-                href="/#contact"
-                className="px-10 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
+        {/* Hero */}
+        <section className="relative min-h-[88vh] flex items-center px-6 lg:px-12 overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+            style={{ backgroundImage: "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)", backgroundSize: "56px 56px" }} />
+
+          <div className="relative z-10 container mx-auto px-0 py-32 lg:py-36">
+            <div className="max-w-3xl">
+              <div
+                className="flex items-center gap-3 mb-8"
+                style={{ animation: "fadeInUp 0.8s ease-out 0.1s both" }}
               >
-                OPNAME AANVRAGEN
-              </Link>
-              <a
-                href="https://wa.me/31624572572"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-10 py-4 border border-white/20 text-white text-xs tracking-[0.2em] font-light hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+                <div className="w-12 h-px" style={{ background: ACCENT }} />
+                <p className="text-white/45 text-[10px] tracking-[0.5em] font-light">VIDEO &amp; AERIAL · MAATWERK</p>
+              </div>
+              <h1
+                className="text-[clamp(40px,7vw,84px)] font-extralight text-white tracking-[0.02em] leading-[1.03] mb-8"
+                style={{ animation: "fadeInUp 0.8s ease-out 0.25s both" }}
               >
-                WHATSAPP
-              </a>
+                Drone &amp;
+                <br />
+                <span className="italic" style={{ color: ACCENT }}>video.</span>
+              </h1>
+              <p
+                className="text-white/55 text-lg lg:text-xl font-extralight tracking-wide max-w-2xl mb-4 leading-relaxed"
+                style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
+              >
+                Jouw merk vanuit een nieuw perspectief. Spectaculaire aerial footage en bedrijfsfilms met de DJI Mini 5 Pro.
+              </p>
+              <p
+                className="text-white/35 text-xs tracking-[0.25em] font-light mb-12"
+                style={{ animation: "fadeInUp 0.8s ease-out 0.5s both" }}
+              >
+                4K · 60FPS · DJI MINI 5 PRO · LIMBURG &amp; OMGEVING
+              </p>
+              <div
+                className="flex flex-col sm:flex-row gap-4"
+                style={{ animation: "fadeInUp 0.8s ease-out 0.6s both" }}
+              >
+                <Link
+                  href="/#contact"
+                  className="group inline-flex items-center justify-center gap-3 px-10 py-4 text-black text-[11px] tracking-[0.25em] font-medium transition-all duration-300"
+                  style={{ background: ACCENT }}
+                >
+                  OPNAME AANVRAGEN
+                  <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <a
+                  href="https://wa.me/31624572572"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-white/15 text-white/70 text-[11px] tracking-[0.25em] font-light hover:border-white/40 hover:text-white transition-all duration-300"
+                >
+                  WHATSAPP
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Equipment specs */}
-        <section className="bg-zinc-950 py-16 lg:py-20">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="relative px-6 lg:px-12 py-16 lg:py-20 border-t border-white/[0.06]">
+          <div className="container mx-auto">
             <p className="text-white/30 text-xs tracking-[0.4em] text-center mb-10 font-light">DJI MINI 5 PRO · SPECIFICATIES</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-white/5 max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-white/[0.06] border border-white/[0.06] max-w-4xl mx-auto">
               {specs.map((spec, i) => (
-                <div key={i} className="bg-zinc-950 p-6 text-center">
+                <div key={i} className="bg-[#070707] p-6 text-center">
                   <div className="text-white/80 text-sm font-light tracking-wide mb-2">{spec.value}</div>
-                  <div className="text-white/30 text-xs tracking-[0.2em] font-light">{spec.label.toUpperCase()}</div>
+                  <div className="text-[10px] tracking-[0.2em] font-light" style={{ color: ACCENT }}>{spec.label.toUpperCase()}</div>
                 </div>
               ))}
             </div>
@@ -117,20 +134,23 @@ export default function DroneDienst() {
         </section>
 
         {/* Services */}
-        <section className="bg-white py-24 lg:py-32">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] animate-on-scroll">
-                WAT WE VASTLEGGEN
+        <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
+          <div className="container mx-auto">
+            <div className="max-w-3xl mb-14 lg:mb-16 animate-on-scroll">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>WAT WE VASTLEGGEN</p>
+              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
+                Beelden die
+                <span className="text-white/45 italic"> blijven hangen.</span>
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] border border-white/[0.06]">
               {services.map((s, i) => (
-                <div key={i} className="bg-white p-10 lg:p-12 animate-on-scroll" style={{ transitionDelay: `${i * 0.07}s` }}>
-                  <span className="text-black/15 text-xs tracking-[0.3em] font-light">0{i + 1}</span>
-                  <h3 className="text-black text-sm tracking-[0.2em] font-light mt-4 mb-3">{s.title.toUpperCase()}</h3>
-                  <div className="w-8 h-px bg-black/20 mb-4"></div>
-                  <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
+                <div key={i} className="drone-card group bg-[#070707] p-8 lg:p-10 animate-on-scroll relative overflow-hidden" style={{ transitionDelay: `${i * 0.07}s` }}>
+                  <div className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700" style={{ background: ACCENT }} />
+                  <span className="text-[11px] tracking-[0.3em] font-light" style={{ color: ACCENT }}>0{i + 1}</span>
+                  <h3 className="text-white text-sm tracking-[0.2em] font-light mt-4 mb-3 uppercase">{s.title}</h3>
+                  <div className="w-8 h-px bg-white/15 mb-4" />
+                  <p className="text-white/55 text-sm font-light leading-relaxed tracking-wide">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -138,33 +158,42 @@ export default function DroneDienst() {
         </section>
 
         {/* Combinatie voordeel */}
-        <section className="bg-black py-20 lg:py-24">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="relative px-6 lg:px-12 py-20 lg:py-24 border-t border-white/[0.06] overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at 50% 50%, ${ACCENT}10 0%, transparent 60%)` }} />
+          <div className="container mx-auto relative">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.15em] mb-8 animate-on-scroll">
-                DRONE + WEBSITE = MAXIMALE IMPACT
+              <h2 className="text-3xl lg:text-4xl font-extralight text-white tracking-[0.02em] mb-8 animate-on-scroll">
+                Drone + website
+                <span className="italic" style={{ color: ACCENT }}> = maximale impact.</span>
               </h2>
-              <p className="text-white/50 font-light tracking-wide leading-relaxed mb-10 animate-on-scroll delay-100">
+              <p className="text-white/55 font-light tracking-wide leading-relaxed mb-10 animate-on-scroll delay-100">
                 Uniek aan Dynique: we combineren drone footage direct met je website of marketingcampagne.
                 De video gaat live op je site, in je social media en in je ads. Alles in één traject,
                 één aanspreekpunt, één factuur.
               </p>
               <Link
                 href="/#contact"
-                className="inline-block px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300 animate-on-scroll delay-200"
+                className="group inline-flex items-center justify-center gap-3 px-12 py-4 text-black text-[11px] tracking-[0.25em] font-medium transition-all duration-300 animate-on-scroll delay-200"
+                style={{ background: ACCENT }}
               >
                 COMBIPAKKET AANVRAGEN
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
             </div>
           </div>
         </section>
 
         {/* Process */}
-        <section className="bg-white py-24 lg:py-32">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
+          <div className="container mx-auto">
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl lg:text-5xl font-light text-black tracking-[0.15em] mb-16 animate-on-scroll">
-                VAN BRIEF TOT BEELDEN
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>HOE WE WERKEN</p>
+              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12] mb-16 animate-on-scroll">
+                Van brief
+                <span className="text-white/45 italic"> tot beelden.</span>
               </h2>
               {[
                 { step: "01", title: "Briefing & locatie verkenning", desc: "We bespreken wat je wilt bereiken, de locatie en de beste vliegtijden voor optimale lichtval." },
@@ -173,11 +202,11 @@ export default function DroneDienst() {
                 { step: "04", title: "Oplevering", desc: "Je ontvangt de video's in alle benodigde formaten: website, social, 4K master." },
               ].map((p, i) => (
                 <div key={i} className="flex gap-10 mb-12 animate-on-scroll" style={{ transitionDelay: `${i * 0.1}s` }}>
-                  <div className="text-black/10 text-4xl font-extralight tracking-wider flex-shrink-0 w-16">{p.step}</div>
+                  <div className="text-2xl font-extralight tracking-wider flex-shrink-0 w-16" style={{ color: ACCENT }}>{p.step}</div>
                   <div>
-                    <h3 className="text-black text-sm tracking-[0.2em] font-light mb-3">{p.title.toUpperCase()}</h3>
-                    <div className="w-8 h-px bg-black/20 mb-4"></div>
-                    <p className="text-black/60 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
+                    <h3 className="text-white text-sm tracking-[0.2em] font-light mb-3 uppercase">{p.title}</h3>
+                    <div className="w-8 h-px bg-white/15 mb-4" />
+                    <p className="text-white/55 text-sm font-light leading-relaxed tracking-wide">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -186,10 +215,12 @@ export default function DroneDienst() {
         </section>
 
         {/* CTA */}
-        <section className="bg-black py-24 lg:py-32">
-          <div className="container mx-auto px-6 lg:px-12 text-center">
-            <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.15em] mb-6 animate-on-scroll">
-              KLAAR VOOR EEN NIEUW PERSPECTIEF?
+        <section className="relative px-6 lg:px-12 py-24 lg:py-32 border-t border-white/[0.06] overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at 80% 30%, ${ACCENT}14 0%, transparent 55%)` }} />
+          <div className="container mx-auto relative text-center">
+            <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] mb-6 animate-on-scroll">
+              Klaar voor een nieuw perspectief?
             </h2>
             <p className="text-white/50 font-light tracking-wide mb-10 max-w-xl mx-auto animate-on-scroll delay-100">
               Vertel ons over je project. We sturen snel een voorstel met beschikbaarheid en prijsindicatie.
@@ -197,15 +228,19 @@ export default function DroneDienst() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
               <Link
                 href="/#contact"
-                className="px-12 py-4 bg-white text-black text-xs tracking-[0.2em] font-medium hover:bg-white/90 transition-all duration-300"
+                className="group inline-flex items-center justify-center gap-3 px-12 py-4 text-black text-[11px] tracking-[0.25em] font-medium transition-all duration-300"
+                style={{ background: ACCENT }}
               >
                 OPNAME AANVRAGEN
+                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
               <a
                 href="https://wa.me/31624572572"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-12 py-4 border border-white/20 text-white text-xs tracking-[0.2em] font-light hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 px-12 py-4 border border-white/15 text-white/70 text-[11px] tracking-[0.25em] font-light hover:border-white/40 hover:text-white transition-all duration-300"
               >
                 WHATSAPP
               </a>
@@ -232,6 +267,10 @@ export default function DroneDienst() {
         }
         .delay-100 { transition-delay: 0.1s; }
         .delay-200 { transition-delay: 0.2s; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-on-scroll { opacity: 1; transform: none; transition: none; }
+        }
       `}</style>
     </>
   );

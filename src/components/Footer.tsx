@@ -24,6 +24,7 @@ export default function Footer() {
     { label: "Sittard-Geleen", href: "/locaties/sittard" },
     { label: "Aken", href: "/locaties/aken" },
     { label: "Eindhoven", href: "/locaties/eindhoven" },
+    { label: "Hasselt", href: "/locaties/hasselt" },
   ];
 
   return (
@@ -126,7 +127,15 @@ export default function Footer() {
             </p>
             <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
             <p className="text-black/45 text-xs font-light tracking-wide">
-              KVK 90531264
+              <a
+                href="https://www.kvk.nl/bestellen/#/90531264000056256078?origin=search"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-black underline underline-offset-2 transition-colors duration-300"
+              >
+                KVK 90531264
+              </a>
+              <span className="text-black/30"> (NL handelsregister — vergelijkbaar met de Belgische KBO)</span>
             </p>
             <span className="hidden sm:block w-[1px] h-3 bg-black/15" />
             <p className="text-black/45 text-xs font-light tracking-wide">

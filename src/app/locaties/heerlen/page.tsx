@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import CityPage, { CityData } from "@/components/CityPage";
 
 export const metadata: Metadata = {
-  title: "Website laten maken Heerlen | Dynique — Webdesign bureau",
-  description: "Premium website laten maken in Heerlen. Lokaal webdesign bureau voor ZZP en MKB in Parkstad. Binnen 7–14 dagen live, vaste prijs.",
+  title: "Maatwerk software & webdesign Heerlen | Dynique",
+  description: "Maatwerk software en webdesign voor bedrijven in Heerlen en Parkstad Limburg. Persoonlijk contact en een helder plan per fase — van website tot digitaal systeem op maat.",
   alternates: { canonical: "https://dynique.nl/locaties/heerlen" },
   openGraph: {
-    title: "Website laten maken Heerlen | Dynique",
-    description: "Premium webdesign in Heerlen en Parkstad. Snel, persoonlijk, vaste prijs.",
+    title: "Maatwerk software & webdesign Heerlen | Dynique",
+    description: "Maatwerk software en webdesign in Heerlen en Parkstad. Persoonlijk, doordacht en gebouwd rondom hoe je bedrijf werkt.",
     url: "https://dynique.nl/locaties/heerlen",
     type: "website",
     images: [{ url: "https://dynique.nl/opengraph-image", width: 1200, height: 630, alt: "Dynique — Website laten maken in Heerlen" }],
@@ -21,8 +21,8 @@ const data: CityData = {
   city: "Heerlen",
   cityShort: "Heerlen",
   region: "Parkstad Limburg",
-  tagline: "Webdesign voor het hart van Parkstad.",
-  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen websites en maatwerk software die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector.",
+  tagline: "Maatwerk software en webdesign voor het hart van Parkstad.",
+  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen maatwerk software en websites die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector.",
   vibe: "Parkstad heeft karakter: nuchter, ondernemend en met een eigen identiteit. Geen poespas, wel kwaliteit. Onze klanten in Heerlen waarderen heldere afspraken, korte lijnen en een website die gewoon werkt. We kennen het verschil tussen het Schinkelkwartier, de Bongerd en Heerlerheide — en zorgen dat jouw website precies de juiste doelgroep aanspreekt.",
   accent: "#a78bfa",
   postal: "6411 — 6446",

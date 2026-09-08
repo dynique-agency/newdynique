@@ -1,22 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import StatusIndicator from "@/components/StatusIndicator";
+import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const GOLD = "#d4a574";
 
-const DETAILS = [
+type Detail = { label: string; value: string; href: string | null; caption?: string };
+
+const DETAILS: Detail[] = [
   { label: "TELEFOON", value: "+31 6 24572572", href: "tel:+31624572572" },
   { label: "E-MAIL", value: "info@dynique.nl", href: "mailto:info@dynique.nl" },
-  { label: "REACTIETIJD", value: "Binnen 2 uur (ma–za, 9–20u)", href: null },
-  { label: "WERKGEBIED", value: "Limburg · Nederland · Internationaal", href: null },
-  { label: "KVK", value: "90531264", href: null },
+  { label: "WERKGEBIED", value: "Limburg · Nederland · België · daarbuiten op aanvraag", href: null },
+  {
+    label: "KVK",
+    value: "90531264",
+    href: "https://www.kvk.nl/bestellen/#/90531264000056256078?origin=search",
+    caption: "NL handelsregister — vergelijkbaar met de Belgische KBO",
+  },
 ];
 
 const NEXT_STEPS = [
-  { n: "01", t: "Snelle reactie", d: "Je hoort binnen 2 uur van ons (ma–za). Geen wachtrij, geen ruis." },
+  { n: "01", t: "Snelle reactie", d: "Geen wachtrij, geen ruis — we reageren persoonlijk." },
   { n: "02", t: "Kennismaking", d: "Een kort gesprek over je doel, situatie en wat je écht nodig hebt." },
   { n: "03", t: "Helder voorstel", d: "Een plan op maat met wat we bouwen, wat het oplevert en wat het kost." },
 ];
@@ -39,7 +46,7 @@ const JSON_LD = {
       email: "info@dynique.nl",
       telephone: "+31624572572",
       priceRange: "€€",
-      taxID: "90531264",
+      // TODO: voeg hier het echte btw-nummer toe zodra bekend
       address: {
         "@type": "PostalAddress",
         streetAddress: "Ir. Em. Melottestraat 10",
@@ -48,7 +55,7 @@ const JSON_LD = {
         addressRegion: "Limburg",
         addressCountry: "NL",
       },
-      areaServed: ["Limburg", "Nederland"],
+      areaServed: ["Limburg", "Nederland", "België"],
     },
     {
       "@type": "BreadcrumbList",
@@ -66,6 +73,10 @@ export default function ContactPage() {
   const [appt, setAppt] = useState({ date: "", time: "10:00", type: "online" });
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -86,6 +97,22 @@ export default function ContactPage() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source: "contact",
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.company,
+        projectType: form.projectType,
+        description: form.description,
+        appointment: wantsCall ? appt : undefined,
+      }),
+    }).catch(() => {});
+
     let m = `Hi! Ik wil graag contact opnemen.\n\n`;
     m += `👤 Naam: ${form.name || "(niet ingevuld)"}\n`;
     if (form.company) m += `🏢 Bedrijf: ${form.company}\n`;
@@ -96,7 +123,7 @@ export default function ContactPage() {
     if (wantsCall && appt.date) {
       m += `\n📅 Gewenst gesprek:\nDatum: ${appt.date}\nTijd: ${appt.time}\nType: ${appt.type === "online" ? "Online (Google Meet)" : "Fysiek"}\n`;
     }
-    window.open(`https://wa.me/31624572572?text=${encodeURIComponent(m)}`, "_blank");
+    openWhatsApp(m);
   };
 
   const inputCls = "w-full bg-black/40 border border-white/10 text-white/90 text-sm font-light tracking-wide px-4 py-3 rounded outline-none focus:border-white/30 focus:ring-2 focus:ring-[#d4a574]/70 focus:ring-offset-2 focus:ring-offset-[#0c0c0c] transition-colors duration-300 placeholder:text-white/25";
@@ -131,18 +158,34 @@ export default function ContactPage() {
                   <span className="italic" style={{ color: GOLD }}>kennismaken.</span>
                 </h1>
                 <p className="hv hv-3 text-white/55 text-lg font-extralight tracking-wide leading-relaxed max-w-md mb-10">
-                  Vertel ons over je project. We reageren altijd binnen 24 uur — meestal veel eerder.
+                  Vertel ons over je project.
                 </p>
 
                 <div className="hv hv-3 space-y-4 pt-8 border-t border-white/[0.08]">
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-white/55 text-[9px] tracking-[0.35em] font-light flex-shrink-0 w-28">REACTIETIJD</span>
+                    <StatusIndicator className="text-white/60 text-sm font-light tracking-wide" />
+                  </div>
                   {DETAILS.map((d) => (
                     <div key={d.label} className="flex items-baseline gap-4">
                       <span className="text-white/55 text-[9px] tracking-[0.35em] font-light flex-shrink-0 w-28">{d.label}</span>
-                      {d.href ? (
-                        <a href={d.href} className="text-white text-sm font-light tracking-wide hover:text-white/60 transition-colors duration-200">{d.value}</a>
-                      ) : (
-                        <span className="text-white/60 text-sm font-light tracking-wide">{d.value}</span>
-                      )}
+                      <span className="flex flex-col">
+                        {d.href ? (
+                          <a
+                            href={d.href}
+                            target={d.href.startsWith("http") ? "_blank" : undefined}
+                            rel={d.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                            className="text-white text-sm font-light tracking-wide hover:text-white/60 transition-colors duration-200"
+                          >
+                            {d.value}
+                          </a>
+                        ) : (
+                          <span className="text-white/60 text-sm font-light tracking-wide">{d.value}</span>
+                        )}
+                        {d.caption && (
+                          <span className="text-white/30 text-[11px] font-light tracking-wide mt-0.5">{d.caption}</span>
+                        )}
+                      </span>
                     </div>
                   ))}
                 </div>

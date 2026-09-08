@@ -53,12 +53,17 @@ export type CaseStudyData = {
   next?: { title: string; href: string };
 };
 
-function ScrollAwareVideo({ src }: { src: string }) {
+function ScrollAwareVideo({ src, poster }: { src: string; poster?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const videoEl = videoRef.current;
     if (!videoEl) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      videoEl.play().catch(() => {});
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -77,7 +82,7 @@ function ScrollAwareVideo({ src }: { src: string }) {
   }, []);
 
   return (
-    <video ref={videoRef} src={src} className="w-full h-full object-cover" muted loop playsInline preload="metadata" />
+    <video ref={videoRef} src={src} poster={poster} className="w-full h-full object-cover" muted loop playsInline preload="metadata" />
   );
 }
 
@@ -90,7 +95,7 @@ function HeroMedia({ data }: { data: CaseStudyData }) {
       <div className="relative rounded-lg overflow-hidden bg-zinc-950 border border-white/[0.08] shadow-[0_50px_100px_-40px_rgba(0,0,0,0.95)]">
         <div className="relative aspect-[16/10] overflow-hidden">
           {heroVideo ? (
-            <ScrollAwareVideo src={heroVideo} />
+            <ScrollAwareVideo src={heroVideo} poster={heroImage ?? undefined} />
           ) : heroImage ? (
             <img src={heroImage} alt={title} className="w-full h-full object-cover" />
           ) : (
@@ -118,6 +123,10 @@ export default function CaseStudyTemplate({ data }: { data: CaseStudyData }) {
   const { accent } = data;
 
   useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      document.querySelectorAll(".cs-anim").forEach((el) => el.classList.add("animate-in"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
