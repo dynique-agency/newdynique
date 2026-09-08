@@ -6,6 +6,147 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-07 (avond, afronding) — Leadcapture-backend, case-study's en portfolio-blurb geverifieerd compleet
+
+**Aanleiding:** de achtergrondagent die de Auwt Aelse/Chefs Connect-case-study's herschreef werd tussentijds onderbroken (sessielimiet/herstart) en meldde zich als "stopped" i.p.v. "completed". Gecontroleerd of het werk daadwerkelijk af was voordat er iets opnieuw gedaan werd.
+
+**Bevinding: alles bleek al compleet.** Bij controle bleken zowel de twee case-study-pagina's (`src/app/portfolio/auwt-aelse/page.tsx`, `chefs-connect/page.tsx` — beide volledig herschreven met echte, van de live sites onderzochte content: Auwt Aelse's tweetalige NL/EN-kaart en Elsloo-locatie, Chefs Connect's drie trajecten + sub-merk "Connect Events & Dining" + 48 regiopagina's) als de volledige leadcapture-backend (`functions/api/{lead,status,mark-responded}.ts`, `src/components/StatusIndicator.tsx` gewired in homepage/contact/CityPage, `docs/LEADCAPTURE-SETUP.md`) al af en correct — dit was allemaal al gedaan vóór de onderbreking, alleen het eindrapport ontbrak.
+
+**Wel opgepakt: portfolio-listing-kaart voor Chefs Connect.** `src/app/portfolio/page.tsx` — de korte kaart-tekst op de portfolio-overzichtspagina was blijven hangen op de oude, vagere "digitaal ontmoetingsplatform"-framing terwijl de eigen case-study inmiddels de echte, specifiekere business beschrijft (freelance-personeelsbemiddeling + fine-dining-events-submerk). Category "CULINAIR PLATFORM" → "HORECA PLATFORM", description herschreven om de drie trajecten en 48 regiopagina's te noemen — consistent met wat een bezoeker vindt zodra hij doorklikt.
+
+**Geverifieerd:** eigen, gecombineerde `npx tsc --noEmit -p .` (zowel het hoofdproject als `functions/` met zijn eigen `tsconfig.json`) en `npm run build` (41/41 routes) — beide schoon, na alle bovenstaande wijzigingen samengevoegd.
+
+---
+
+## 2026-09-07 (avond, laatste ronde) — Resterende 6 P0-clusters uit de deepscan opgelost
+
+**Aanleiding:** "ga door met de rest" — de overige 6 P0-clusters uit de 300-cases-deepscan, na de eerdere ronde (leadcapture-backend, live-statusindicator, reviewrotatie, case-study's, Adviseur-personalisatie, algemene voorwaarden-concept). Vier achtergrondagents parallel ingezet (elk met exacte bestand/regel-citaten uit de deepscan als opdracht), plus twee stukken zelf gedaan vanwege merk-/juridische gevoeligheid.
+
+**1. Rebrand-gaps (agent).** `/diensten/web`, `/diensten/marketing`, `/diensten/drone` hadden nog het witte-op-zwarte "DIENST 0X"-sjabloon van vóór de rebrand — volledig omgezet naar het donker/goud-systeem van de rest van de site. Marketing-pagina's ongeverifieerde "10× sneller"-cijferblok vervangen door een verwijzing naar de echte Creemers Exclusive-case. Vijf locatiepagina's se metadata/hero-copy (nog "ZZP en MKB", "Webdesign bureau") bijgewerkt naar de huidige positionering. Creemers Exclusive toegevoegd aan `portfolio/page.tsx`'s eigen `projects`-array (ontbrak volledig — een echte renderbug, de case bestond wel als losse pagina).
+
+**2. Robuustheid (agent).** IntersectionObserver-featuredetectie toegevoegd op alle ~23 plekken in 20 bestanden (zonder support: content direct zichtbaar i.p.v. permanent onzichtbaar). `sessionStorage`-calls op de homepage in try/catch (blokkeerde voorheen bij Safari-privébrowsen o.i.d. de hele laadscherm-fallback). Gedeelde `src/lib/openWhatsApp.ts`-utility vervangt 7 losse, onbeveiligde `window.open()`-aanroepen (detecteert popup-blokkade, valt terug op directe navigatie). `Header.tsx`'s scroll-listener nu passive + een boolean `isScrolled` i.p.v. continue state-updates per pixel. Mousemove-parallax-lus start nu alleen nog op hover-capable/fine-pointer devices zonder reduced-motion.
+
+**3. Toegankelijkheid (agent).** Focus-management op de Adviseur-quiz (focus verplaatst naar de nieuwe vraag na elke stap, i.p.v. verloren te gaan). FAQ-accordeon: `aria-expanded`/`aria-controls`/`id`-koppeling. Homepage-contactformulier: alle labels correct gekoppeld via `htmlFor`/`id` (was volledig ongekoppeld — derde, inconsistente implementatie naast /contact en /gratis-checklist die het al goed deden). Contrastfix op de laagst-scorende tekst van de site (1,6:1 → ruim boven WCAG AA). WhatsApp-knop stond boven het mobiele menu (z-index gefixt). Reviewcarrousel en hero-woordrotatie pauzeren nu op hover/focus en stoppen volledig bij `prefers-reduced-motion`; homepage-H1 is nu een stabiele volledige zin (`sr-only`) i.p.v. een wisselend enkel woord.
+
+**4. België-onderbouwing (agent).** JSON-LD `areaServed` sloot België actief uit op de 4 sectorpagina's én (bonus, zelfde bug, zelf gevonden) op /contact — gecorrigeerd. WERKGEBIED-velden noemen België nu expliciet i.p.v. "Internationaal". Adviseur-quiz's "lokaal contact"-antwoord veronderstelde niet langer automatisch Limburg. **Nieuwe locatiepagina `/locaties/hasselt`** (Belgisch Limburg) met een eigen NL-BE grensoverschrijdende invalshoek (btw-verlegging, KBO vs. KVK — geen kopie van de Aken/Duitsland-framing), toegevoegd aan sitemap en footer. Portfolio's onderbouwde "Bereik NL & BE"-claim herschreven naar wat de Stacy Kohnen-case daadwerkelijk bewijst (NL·BE·DE). `hreflang nl-BE` toegevoegd. KVK-nummer in footer en /contact nu een geverifieerde, werkende link naar de KVK-bedrijvenzoeker, met KBO-duiding. **Het foutieve `taxID` (KVK-nummer hergebruikt als btw-ID) is verwijderd, niet vervangen door een verzonnen nummer** — TODO-comment staat klaar voor zodra het echte btw-nummer bekend is.
+
+**5. Eenmanszaak-transparantie (zelf, merkgevoelig).** Vijfde kaart toegevoegd aan de PROMISE-sectie op /over-ons: benoemt expliciet dat Dynique een eenmanszaak is — omgebogen tot bewijs ("precies waarom je geen accountmanager krijgt") met een concrete continuïteitsgarantie (vaste documentatie, overdraagbare code).
+
+**6. Prijstransparantie (zelf).** Nieuwe pagina **`/investering`**: geen prijstabel voor maatwerk software (bewust, consistent met de al gepubliceerde blogpost), wel "vanaf €3.500" voor websites (letterlijk overgenomen uit de bestaande, canonieke blogpost-tekst — geen nieuw getal verzonnen), plus een uitleg van wat de prijs bepaalt en wat er altijd in zit. Nog **niet** gelinkt vanuit de hoofdnavigatie — zie "Nog te doen".
+
+**Zelf gevonden tijdens verificatie, niet in de oorspronkelijke scan:** `src/components/CityPage.tsx` (het gedeelde component achter alle 6 locatiepagina's, inclusief het nieuwe Hasselt) had zijn eigen hardgecodeerde "Binnen 24 uur"-reactietijdclaim, buiten bereik van de eerdere StatusIndicator-fix. Beide plekken (metastrip-tegel + CTA-tekst) nu ook op de live indicator resp. neutrale formulering gezet.
+
+**Geverifieerd:** na alle 4 agents + eigen fixes samengevoegd, een volledige eigen `npx tsc --noEmit -p .` (schoon) en `npm run build` (41/41 routes, statische export) gedraaid tegen de gecombineerde eindstaat — niet alleen op elke agent se eigen deelrapport vertrouwd. Live gecontroleerd in de browser: sr-only H1 aanwezig, FAQ `aria-expanded` werkt, homepage-formulier-velden hebben nu correcte `id`'s, `/diensten/web` toont het herbrande donker/goud-thema, `/locaties/hasselt` rendert de volledige, inhoudelijk kloppende content.
+
+**Nog te doen — beslissing nodig van klant:**
+- `/investering` linken vanuit `Header.tsx` (nav) en `Footer.tsx` — bewust nog niet gedaan om editconflicten met de 4 parallelle agents te vermijden; kleine, losse vervolgstap.
+- Echte btw-nummer aanleveren voor de TODO in `/contact`'s JSON-LD.
+- Posterframe-afbeelding voor `/rsc/auwtaelse/preview.mp4` ontbreekt nog (2,4MB video zonder stilstaand beeld) — de `poster`-prop is al voorbereid in `CaseStudyTemplate.tsx`, alleen het plaatje zelf ontbreekt.
+- `/algemene-voorwaarden` (concept) en de eerdere leadcapture-backend-setup (Resend/Cloudflare KV) staan nog open van de vorige ronde.
+
+---
+
+## 2026-09-07 (avond, vervolg) — Adviseur-quiz echt gepersonaliseerd, algemene voorwaarden (concept)
+
+**Aanleiding:** twee resterende P0-clusters uit de deepscan, na overleg kritisch bevestigd door de eigenaar.
+
+**1. Adviseur-quiz (`src/components/Advisor.tsx`) — echte personalisatie i.p.v. 3 vaste bullet-sets.**
+Voorheen kwamen de "Waarom dit past"-bullets altijd uit een vaste array per dienst (3 mogelijke diensten × 3 statische bullets) — welke combinatie van antwoorden je ook gaf, alleen de aanpak- en tijdlijn-zin veranderden echt. Nu wordt elke van de 3 bullets samengesteld: bullet 1 komt uit `START_INSIGHT` (situatie-specifiek, 4 varianten), bullet 2 uit `GOAL_INSIGHT` (doel-specifiek, 4 varianten), bullet 3 blijft de vaste dienst-identiteitsbullet. Verandert de kernvraag, dan verandert nu ook het advies zelf — niet alleen de aanpak-zin. Live getest met twee volledig verschillende antwoordcombinaties (losse tools/handwerk/snel vs. onduidelijk/overzicht/kwaliteit): andere dienst, andere bullets, andere aanpak — bevestigd in de browser.
+
+**2. Algemene voorwaarden — conceptversie gepubliceerd, bewust niet gelinkt.**
+Nieuwe pagina `src/app/algemene-voorwaarden/page.tsx` (+ `layout.tsx`), zelfde visuele stijl als `/privacyverklaring`. 16 secties: toepasselijkheid, offertes, uitvoering/fasering, wijzigingen/meerwerk, prijzen/betaling, levertijd, IE, onderhoud na oplevering, aansprakelijkheid, overmacht, geheimhouding, duur/beëindiging, herroepingsrecht, toepasselijk recht, wijzigingsclausule, contact — inhoudelijk consistent gehouden met wat al elders op de site staat (vaste prijs per fase, drie revisierondes, het vierfasen-traject). **Dit is een juridisch ongecontroleerde conceptversie**, expliciet als zodanig gemarkeerd met een banner bovenaan de pagina zelf. Bewuste keuzes om misbruik/premature publicatie te voorkomen: `robots: { index: false }` in de layout-metadata, en (nog) geen link vanuit de footer of sitemap.xml — pas toevoegen zodra de eigenaar (of een jurist) de tekst heeft nagekeken.
+
+**Beslissing nodig van klant:** `/algemene-voorwaarden` doorlezen/laten checken; zodra akkoord, `noindex` verwijderen uit `src/app/algemene-voorwaarden/layout.tsx` en de pagina linken vanuit `Footer.tsx` (naast de bestaande privacyverklaring-link) en `sitemap.ts`.
+
+**Geverifieerd:** `npx tsc --noEmit -p .` schoon, volledige `npm run build` slaagt — nu 39 routes (was 38, `/algemene-voorwaarden` toegevoegd). Adviseur-personalisatie live doorgeklikt in de browser met twee verschillende antwoordcombinaties.
+
+---
+
+## 2026-09-07 (avond) — Deepscan-bevindingen verwerkt: leadcapture-backend, live-statusindicator, reviewrotatie, case-study's, 13 code-cruft-fixes
+
+**Aanleiding:** verwerking van de P0-bevindingen uit de 300-cases- en code-cruft-deepscan van eerder vandaag. Per cluster kritisch besproken met de eigenaar (AskUserQuestion) i.p.v. blind uitgevoerd; onderstaand de keuzes en wat daaruit gebouwd is.
+
+**1. Leadcapture-backend (nieuw fundament, eerder bewust uitgesteld — nu opgepakt).**
+Nieuwe Cloudflare Pages Functions naast de statische Next.js-export: `functions/api/lead.ts` (ontvangt formulierdata, verstuurt e-mail via Resend naar info@dynique.nl, reply-to op het bezoekersadres), `functions/api/status.ts` + `functions/api/mark-responded.ts` (live "laatst gereageerd"-tracking via een Cloudflare KV-namespace, met een 48-uur-staleness-check zodat er nooit een verouderde claim getoond wordt). `functions/tsconfig.json` toegevoegd + `functions/` uitgesloten van het hoofdproject se `tsconfig.json` (aparte build-pipeline, `@cloudflare/workers-types` als devDependency). Alle drie formulieren (homepage, /contact, /gratis-checklist) posten nu naar `/api/lead` vóór/naast de bestaande WhatsApp-flow — een lead gaat niet meer onzichtbaar verloren als de bezoeker de WhatsApp-stap niet zelf afmaakt. Homepage-formulier kreeg ook een e-mailveld (ontbrak volledig) en is nu een echte `<form>` met `required`-validatie i.p.v. losse divs zonder form-element.
+**Beslissing nodig van klant — zie [`docs/LEADCAPTURE-SETUP.md`](./LEADCAPTURE-SETUP.md):** Resend-account aanmaken + dynique.nl verifiëren, Cloudflare KV-namespace `DYNIQUE_KV` binden, env vars `RESEND_API_KEY`/`STATUS_SECRET` zetten. Zonder die setup vallen de formulieren terug op alleen de WhatsApp-flow (geen crash, gewoon nog geen e-mail).
+
+**2. Live reactietijd-indicator (`src/components/StatusIndicator.tsx`).**
+Vervangt de drie tegenstrijdige hardgecodeerde claims (24u/2u/"direct") op homepage, /contact en /bedankt. Toont "Reageert doorgaans dezelfde werkdag" totdat de eigenaar een lead heeft beantwoord en de mark-responded-link (zie setup-doc) heeft geopend — daarna "Laatst gereageerd: X geleden", met automatische terugval na 48 uur zodat de indicator nooit een verouderde/misleidende status kan tonen.
+
+**3. Meest prominente review (Creemers Exclusive/Tom Creemers) uit de rotatie gehaald.**
+Op eigen verzoek: verwijderd uit de homepage-reviewcarousel (`src/app/page.tsx`), de Organization/LocalBusiness JSON-LD in `src/app/layout.tsx` (reviewCount 5→4 — was ook een reëel risico voor Google's review-richtlijnen, zelfbeoordelingen in structured data), en de testimonialgrid op `/vervanging` (vervangen door Stacy Kohnen, zodat de 2-koloms grid niet scheef oogt met één kaart).
+
+**4. Case-study's Auwt Aelse en Chefs Connect afgemaakt.**
+Beide waren zichtbaar lege sjablonen ondanks een "Live"-badge — de eigenaar bevestigde dat de onderliggende klantsites (auwtaelse.nl, chefs-connect.nl) wél echt live zijn, dus het "Live"-label klopt; alleen de eigen case-study-pagina's waren onaf. Een achtergrondagent bezocht beide live sites en herschreef `src/app/portfolio/auwt-aelse/page.tsx` + `chefs-connect/page.tsx` (en hun `layout.tsx`) met echte, geverifieerde inhoud via het bestaande `CaseStudyTemplate.tsx`. Onverifieerbare cijfers (Chefs Connect noemt zelf tegenstrijdige netwerkgroottes — 350+ vs 200+) bewust weggelaten i.p.v. verzonnen. **Zelf gevonden, niet gevraagd:** de homepage/portfolio-kaart-blurb voor Chefs Connect ("digitaal ontmoetingsplatform") beschrijft niet meer precies wat het platform nu is (een freelance-horecastaffing-platform met drie bezoekersflows) — hiervoor is een aparte taak klaargezet (niet zelf doorgevoerd, betreft een quote toegeschreven aan de echte oprichters).
+
+**5. Dertien mechanische code-cruft-fixes** (van de 14 P0's uit de scan, 1 bleek bij nader inzien geen dode code): dode imports (`FlowDiagram`, `Link`, `useEffect/useState`), dode CSS (`.anim-from-left`, `.hero-video-zoom`, `.hero-title-mobile`, overbodige `.text-balance`, ongebruikte `.anim.delay-2` + `ba-url/ba-meta/ba-screen`-classNames), een niet-bestaand content-glob in `tailwind.config.ts`, een inert `large`-prop op `BrowserMockup`, een onbereikbare 5e letter in `Advisor.tsx`, twee kapotte links op de IJssalon-Italia-case (`href="#"` i.p.v. het echte domein, "MEER CASES" naar homepage i.p.v. portfolio), een gedupliceerde animatie-delay op /over-ons, en het laatste restje hardcoded groen (`#34d399`) in `Visuals.tsx` — vervangen door een van `ACCENT` afgeleide `ACCENT_RGB`-constante. Tijdens het handmatige werk nog één extra groen-restant gevonden en gefixt: de ambient-orb op `/bedankt`.
+
+**Geverifieerd:** `npx tsc --noEmit -p .` schoon (hoofdproject én `functions/` los via eigen tsconfig). Volledige `npm run build` slaagt, alle 38 routes (statische export, `homepage` blijft op 140kB First Load JS — de nieuwe formulier-/statuslogica voegt vrijwel niets toe).
+
+**Nog open — vervolgvragen aan eigenaar volgen:** de overige acht P0-clusters uit de use-case-scan (algemene voorwaarden, half doorgevoerde rebrand op /diensten/web·marketing·drone en de locatiepagina's, de Adviseur-quiz die maar 3 vaste diensten + 2 dynamische zinnen oplevert ongeacht de combinatie van antwoorden, prijsinformatie-inconsistentie, eenmanszaak-transparantie, toegankelijkheid, robuustheid, België-onderbouwing).
+
+---
+
+## 2026-09-07 (later) — 3D-vakmanschap-showcase teruggedraaid
+
+**Aanleiding:** de eigenaar zag de opgezette Three.js-scaffold (placeholder-laptop, canvas, fallback-lagen) en gaf direct af: "stop maar met dat three js ding echt lelijk". Volledig teruggedraaid, geen discussie.
+
+**Verwijderd:** `src/components/showcase/` (ShowcaseSection/ShowcaseCanvas/PosterFallback/model), de `<ShowcaseSection />`-plek in `src/app/page.tsx` (sectienummering teruggezet: 7c ADVISEUR i.p.v. 7c SHOWCASE/7d ADVISEUR), `three`/`@types/three` uit `package.json`, de `.img2threejs-work/`-scratchmap + bijbehorende `.gitignore`-regel. De achtergrond-agent die de echte laptop-reconstructie via de `img2threejs`-pipeline aan het bouwen was, is gestopt (`TaskStop`) vóórdat hij verder werk verspilde.
+
+**Bewust behouden:** de `CornerMark`-refactor naar een gedeeld `src/components/CornerMark.tsx` (nog steeds actief gebruikt op 5 plekken als hoek-bracket-signatuur) — dat was een op zichzelf staande, al eerder geaccordeerde verbetering, losstaand van de showcase-poging. De `img2threejs`-skill zelf blijft geïnstalleerd op `~/.claude/skills/` (buiten de site-repo, geen impact) voor eventueel later gebruik.
+
+**Geverifieerd:** `npx tsc --noEmit` schoon na de revert.
+
+**Vervolg:** eigenaar wil eigenlijk iets dat over de site heen beweegt (scroll-/pagina-breed bewegend element, geen 3D-object) — referentiesites worden nu verzameld als inspiratie voor die richting.
+
+---
+
+## 2026-09-07 (later) — 3D-vakmanschap-showcase: technische scaffold gebouwd, echte model-generatie loopt op de achtergrond
+
+**Aanleiding:** verzoek om de nieuwe `img2threejs`-skill in te zetten voor een "next level" 3D-showcase-element — puur additief naast de al afgeronde hero — specifiek om te bewijzen dat Dynique de technische skills zelf in huis heeft. Aanpak vooraf vastgelegd in een plan (`/Users/john/.claude/plans/drifting-skipping-wozniak.md`, via plan-mode + een Plan-agent voor de technische architectuur), met drie keuzes bevestigd door de eigenaar: een precies gemodelleerd laptop-device met eigen portfolio-werk "op het scherm" (concreet bewijs i.p.v. metafoor), een zelf gezochte rechtenvrije referentiefoto, en plaatsing als nieuwe homepage-sectie direct na Portfolio.
+
+**Gebouwd:**
+- `img2threejs`-skill geïnstalleerd (`~/.claude/skills/img2threejs`); Python-versieblocker opgelost (systeem-`python3` is 3.9.6, skill vereist 3.10+ — `/Users/john/.local/bin/python3.12` gebruikt).
+- Referentiefoto gezocht en gekozen (rechtenvrij, Unsplash, clean driekwart-studio-opname) — staat in `.img2threejs-work/` (gitignored scratch-map, nooit onderdeel van de site-repo).
+- **Een echte refactor, niet alleen nieuwe code:** `CornerMark` (het hoek-bracket-signatuurelement van de vorige sessie-ronde) verplaatst van een lokale, alleen-in-`page.tsx`-bruikbare functie naar een gedeelde `src/components/CornerMark.tsx` — met zijn eigen zelfstandige `<style jsx>`/keyframe (styled-jsx scoping betekent dat losse bestanden hun eigen stijlen moeten meenemen), zodat de nieuwe sectie 'm kan hergebruiken zoals het plan vereiste.
+- `src/components/showcase/` opgezet volgens het geaccordeerde plan: `ShowcaseSection.tsx` (copy/layout/CornerMark/`.anim`-reveal + IntersectionObserver-gate, hergebruikt de al bestaande globale `.anim`-CSS uit `ProcessStyles` i.p.v. die te dupliceren), `ShowcaseCanvas.tsx` (`next/dynamic(...,{ssr:false})`, eigen rAF-loop met cleanup, `webglcontextlost`/`restored`-handling, volledige dispose-discipline, `document.visibilitychange`-pauze), `PosterFallback.tsx` (CSS/SVG-only placeholder — geen extra netwerkrequest — met een aparte "tik voor 3D"-knopvariant voor mobiel).
+- Drievoudige fallback-laag vóór de zware chunk ooit wordt aangevraagd: `prefers-reduced-motion` → permanente statische poster, WebGL2-featuredetectie faalt → permanente statische poster, `pointer:coarse` (mobiel) → tap-to-activate i.p.v. autoplay.
+- `three@0.185.1` + `@types/three@0.185.4` toegevoegd, **exact gepind** (geen `^`), geen `@react-three/fiber` (geen bestaand precedent, en de skill's output is een plain imperatieve `THREE.Group`-factory die beter past bij deze codebase's bestaande manual-effect-stijl).
+- `src/components/showcase/model/createDeviceModel.ts` — een tijdelijke placeholder-factory (simpele primitives, zelfde exportsignatuur als wat de skill straks oplevert), zodat de hele canvas/lazy-load/fallback-keten nu al gebouwd én geverifieerd kon worden zonder op de modelgeneratie te hoeven wachten.
+
+**Echte modelgeneratie:** loopt op de achtergrond via een losse agent die de volledige `img2threejs`-pipeline doorloopt (intake → spec → gefaseerde codegen → render-vs-referentie-gating) op de gekozen laptop-referentiefoto, met expliciete instructies: generiek/merkloos (geen Apple-logo of macOS-UI overnemen — de foto was toevallig een MacBook Air), scherm als losse, lege textuur-regio (site vult 'm later met eigen portfolio-werk). Resultaat komt in `.img2threejs-work/output/createDeviceModel.ts`; wordt na oplevering 1-op-1 verplaatst naar de definitieve locatie zodra de fidelity beoordeeld is.
+
+**Geverifieerd (van de scaffold, met de placeholder-factory):**
+- `npx tsc --noEmit` schoon.
+- `npm run build`: homepage's First Load JS nauwelijks veranderd (140→141 kB) — de `three`-afhankelijkheid zit aantoonbaar **niet** in de initiële HTML/pagebundel (0 treffers bij het opzoeken van de lazy-chunk-bestandsnamen in `out/index.html` en de page-bundle), bevestigt dat de dynamic-import-scheiding werkt. De lazy 3D-chunk zelf: ~134 kB gzipped — eigen, apart budget, binnen de in het plan gestelde ~100-150 kB-richtlijn.
+- Canvas-rendering geverifieerd via directe pixel-sampling van de `<canvas>` (niet via screenshot — de Browser-pane liet zich deze sessie herhaaldelijk niet fatsoenlijk renderen/screenshotten, een bekend probleem uit eerdere sessie-rondes): 33% van de gesampelde pixels non-transparant/non-zwart, bevestigt dat er daadwerkelijk verlichte 3D-geometrie wordt getekend.
+- Tier-detectie geverifieerd via directe `matchMedia`-checks op zowel desktop- als mobiel-emulatie (`pointer:coarse` → correct "tap-to-activate"-pad met correcte knop/label; desktop → "autoplay"-pad).
+- De IntersectionObserver-lazy-mount kon in déze sessie niet visueel bevestigd worden op scroll-in-beeld (de testomgeving rapporteerde `document.visibilityState:"hidden"` ondanks een actieve tab, wat `IntersectionObserver`-callbacks onderdrukt — een omgevingsbeperking, niet een codefout: de logica volgt exact het al bewezen `PortfolioVideo`-patroon uit `page.tsx`). Verdient een korte handmatige controle door de eigenaar zodra de definitieve 3D-content erin staat.
+
+**Nog te doen:**
+- Wachten op de achtergrond-pipeline; bij oplevering de placeholder-factory vervangen door de echte gegenereerde `createDeviceModel.ts` en het portfolio-screenshot als schermtextuur toevoegen.
+- Live browsercontrole van de scroll-in-beeld-trigger door een mens (of in een sessie zonder de hierboven genoemde pane-beperking).
+
+---
+
+## 2026-09-07 — Deepscan: 300 klant-use-cases + volledige code-cruft-scan
+
+**Aanleiding:** verzoek om een kritische deepscan van de site — 300 gedetailleerde use-/edge-cases per klanttype ("klanten die het niet vertrouwen, klanten die een bepaald iets willen"), plus tegelijk een scan van elke pagina op oude/dode code.
+
+**Methode:** één workflow, twee onafhankelijke, parallelle onderdelen (49 agents totaal, in twee runs vanwege een tussentijdse sessielimiet — hervat via `resumeFromRunId`, geverifieerd dat gecachete resultaten intact bleven):
+- **Use-cases:** 20 klantarchetypen (wantrouwende eerste-bezoeker, trauma van een mislukt IT-project, technische CTO, prijsvergelijker, Belgische klant, sceptische techneut, enterprise/AVG-klant, oud device/traag netwerk, etc.) × 15 cases per archetype, elke batch daarna kritisch herzien door een aparte reviewer-agent.
+- **Code-scan:** 8 parallelle scans, één per paginagroep (homepage/root, diensten, sectorpagina's, locaties, portfolio, blog, standalone-pagina's, interactieve componenten), 54 ruwe bevindingen teruggebracht tot 40 unieke items na dedup.
+
+**Resultaat, vastgelegd in twee nieuwe documenten:**
+- [`docs/USE-CASES-DEEPSCAN-2026-09-07.md`](./USE-CASES-DEEPSCAN-2026-09-07.md) — 300 cases (98x P0 / 130x P1 / 72x P2), elk met situatieschets, exacte code-locatie van het probleem, en een concreet verbetervoorstel. Bevat een P0-index bovenaan om snel de 98 meest kritieke te doorlopen.
+- [`docs/CODE-CRUFT-SCAN-2026-09-07.md`](./CODE-CRUFT-SCAN-2026-09-07.md) — 40 bevindingen (14x P0 / 20x P1 / 6x P2) over 8 categorieën. Terugkerende patronen: een leftover groen kleurtoken (#34d399) in meerdere bestanden, `diensten/processen/page.tsx` dupliceert het hele gedeelde `Visuals.tsx` i.p.v. het te importeren (de Limburg-variant doet dit al goed), de rebrand ("AI Marketing"→"Digitale Marketing" etc.) is niet overal doorgevoerd, Tailwind's accent/ink-tokens zijn gedefinieerd maar nergens gebruikt, en een aantal content-tegenstrijdigheden los van code (de bekende 24u-vs-2u-reactietijd, een prijscontradictie in een blogpost, twee live-URL's voor Creemers Exclusive).
+
+**Belangrijke opmerking bij de use-cases:** dit is een AI-gegenereerde kritische scan, bedoeld als prioriteitenlijst en gespreksstof — niet als blindelings uit te voeren backlog. Met name de meest opvallende bevinding (de eerste/meest-herhaalde homepage-review is de eigenaar die zijn eigen tweede onderneming beoordeelt, zonder disclosure) verdient een bewuste keuze van de eigenaar, geen automatische fix.
+
+**Nog te doen — beslissing nodig van klant:** welke P0's (van beide documenten) opgepakt worden, en in welke volgorde. Nog niets uit deze scan is doorgevoerd in de code.
+
+---
+
 ## 2026-09-03 (later) — Feedback-ronde: stat-tellers weg, portfolio verplaatst, scroll-indicator vervangen, header ontdaan van drukte
 
 Vier directe correcties na de vorige feedback-iteratie, plus een productiebevinding:
