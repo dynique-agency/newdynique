@@ -24,6 +24,30 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later, tweede sessie) — 3 nieuwe Belgisch-Limburgse stadspagina's + H1-bug op alle locatiepagina's gefixt
+
+**Aanleiding:** verzoek om meer landingspagina's voor "website laten maken + Belgische stad", "webdesign + stad" en "digitaliseren + stad", met chefs-connect.nl's regiopagina's (`/personeel-{stad}`, elk écht anders geschreven) als kwaliteitsreferentie, plus expliciet gevraagd wat ik hier zelf van vind. Teruggekoppeld vóór het bouwen: "website laten maken"/"webdesign" + stad is op déze site al bewezen niet te werken (`/locaties/eindhoven` trekt 7.794 vertoningen op precies die termen, positie 61,76, 0 kliks — zie `GSC-FINDINGS-2026-09.md` §2), en "digitaliseren" + stad target een term die `STRATEGY.md` §1 al had afgewezen als niet-commercieel (levert overheidscontent op). Voorstel: dezelfde chefs-connect-kwaliteit, maar op "maatwerk software" als hoofdterm (de term die al traction heeft) i.p.v. de bewezen-falende termen.
+
+**Beslissingen van de eigenaar (via vragen):** steden = "gebieden in Belgisch Limburg die nog niet goed opgevangen worden" (dus geen sprong naar Antwerpen/Brussel/Leuven — die blijven "niet nu" per `STRATEGY.md` §2); H1-bug gelijk meefixen = ja.
+
+**Uitgevoerd:**
+- **`src/components/CityPage.tsx`** — de H1 ("Website laten maken in {stad}") en eyebrow-label ("Webdesign · {stad}") zeiden nog letterlijk de bewezen-falende brede term, terwijl de `<title>` al "Maatwerk software & webdesign {stad}" zei. Omgezet naar "Maatwerk software (voor) {stad}" — geldt automatisch voor alle 9 locatiepagina's via dit ene gedeelde component. Dit is precies de vermoedelijke verklaring achter het Eindhoven-patroon in de GSC-data.
+- **3 nieuwe stadspagina's**, elk met een eigen, geverifieerd (WebSearch, niet uit het geheugen) economisch profiel — geen van de drie is een naam-swap van hetzelfde sjabloon:
+  - `/locaties/tongeren` — oudste stad van België (Romeins bestuurscentrum), erfgoedtoerisme/horeca/retail, sinds 1 januari 2025 gefuseerd met Borgloon tot Tongeren-Borgloon, ~35 min vanaf Vaals.
+  - `/locaties/maasmechelen` — Maasmechelen Village (internationaal designer-outlet), voormalige mijnstreek (Eisden, 1923), geografisch de dichtstbijzijnde Belgische gemeente vanuit Vaals (~31 min).
+  - `/locaties/sint-truiden` — hart van de Limburgse fruitstreek (Vochtig-Haspengouw), PCFruit-onderzoekscentrum, ~69 min vanaf Vaals (verst van de 3, expliciet zo vermeld i.p.v. verzwegen).
+- **`sitemap.ts`** en **`Footer.tsx`** bijgewerkt met alle 3 nieuwe URL's.
+- **`docs/seo/GSC-INDEXATIE-WACHTRIJ.md`** — vorige batch (5 pagina's) afgevinkt als geïndexeerd (bevestigd door de eigenaar), nieuwe batch (3 stadspagina's + 7 bestaande locatiepagina's om te herindexeren i.v.m. de H1-fix) toegevoegd.
+- **`.claude/launch.json`** — `autoPort: true` toegevoegd aan de dev-server-config; poort 3000 bleek al bezet door een andere sessie (`chefsconnect-dev`) tijdens het verifiëren, dit voorkomt die botsing voortaan.
+
+**Bewust niet gedaan:** geen sector×stad-combinaties, geen Antwerpen/Brussel/Leuven — die stonden niet in de vraag en zouden het al afgewezen scaled-content-risico terug openen.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon (49 routes, was 46). H1-fix en alle 3 nieuwe pagina's live gecontroleerd via `next dev` (correcte 2-niveau breadcrumb, geen dubbele JSON-LD, content klopt met de brontekst).
+
+**Nog te doen:** enige nog openstaande item uit `LEAD-PLAN-2026-09.md` is nu item 5: "maatwerk software limburg" (positie 12,7) verstevigen.
+
+---
+
 ## 2026-09-08 (later) — 5 nieuwe landingspagina's + volledige breadcrumb/metadata-audit en -fixpas
 
 **Aanleiding:** "Ik wil dat je sowieso zo veel mogelijk landingspagina's gaat maken die daadwerkelijk hoog kunnen ranken... maak ook een top sitemap, zorg dat alle metadata perfect is en breadcrumbs perfect zijn." Dit botste direct met `STRATEGY.md` §5 (expliciete waarschuwing tegen een volledige stad×sector-kruismatrix, Google's "Scaled Content Abuse"-risico) — teruggekoppeld naar de eigenaar vóór het bouwen. Antwoord: geen sector×stad-combinaties zonder bewijs, geen nieuwe steden buiten Genk, wel expliciet akkoord op "voor elke pagina unieke informatie" met chefs-connect.nl's regiopagina's (`/personeel-{stad}`, elk met écht andere, stadseigen content) als kwaliteitsreferentie.

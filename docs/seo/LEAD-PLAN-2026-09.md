@@ -15,9 +15,10 @@
 | 3 | FAQ-blok bouwen (herbruikbare sectie, zelfde patroon als `CityPage.tsx` — inclusief `FAQPage` JSON-LD voor AEO/"People Also Ask") en toevoegen aan `diensten/processen` + de 4 `maatwerk-software/*`-pagina's | ✅ gedaan (2026-09-08) — 4 vragen per pagina, incl. prijsindicatie (zie sectie 2) |
 | 4 | Ingebedde social proof (2 echte, geverifieerde reviews rechtstreeks op de pagina, i.p.v. alleen een link naar `/portfolio`) op diezelfde 5 pagina's | ✅ gedaan (2026-09-08) — Stacy Kohnen + Chefs Connect, bewust niet als sectorspecifiek gepresenteerd (geen bouw/zorg/installatie/logistiek-cases beschikbaar; zie toelichting in `SectorTemplate.tsx`) |
 | 5 | "Maatwerk software limburg" verstevigen — uitzoeken welke pagina hiervoor rankt (positie 12,7, bijna pagina 1) en interne links/diepgang toevoegen | Nog te doen |
-| 6 | *(nieuw, gevonden tijdens dit werk, bewust nog niet aangepakt)* — de H1 op alle 6 `/locaties/*`-pagina's zegt nog letterlijk "Website laten maken in {stad}" (`CityPage.tsx:106-107`), terwijl de `<title>` al "Maatwerk software & webdesign {stad}" zegt. Dit verklaart direct het Eindhoven-patroon uit `GSC-FINDINGS-2026-09.md` §2 (massale vertoningen op brede "webdesign"-termen, 0 kliks). `STRATEGY.md` §8 noemt dit al expliciet "niet nu, wel meenemen bij de volgende contentronde" — hier laten staan tot die ronde, niet losstaand aanpakken. | Bewust uitgesteld |
+| 6 | H1 op alle `/locaties/*`-pagina's zei nog letterlijk "Website laten maken in {stad}" (`CityPage.tsx`), terwijl de `<title>` al "Maatwerk software & webdesign {stad}" zei — verklaarde direct het Eindhoven-patroon uit `GSC-FINDINGS-2026-09.md` §2 (massale vertoningen op brede "webdesign"-termen, 0 kliks) | ✅ gedaan (2026-09-08, tweede sessie) — H1 en eyebrow-label omgezet naar "Maatwerk software (voor) {stad}", geldt automatisch voor alle 9 locatiepagina's via het gedeelde `CityPage.tsx` |
+| 7 | 3 nieuwe Belgisch-Limburgse stadspagina's (Tongeren, Maasmechelen, Sint-Truiden) — expliciet op "maatwerk software" i.p.v. "webdesign/website laten maken" als hoofdterm, na terugkoppeling dat die laatste twee al bewezen niet werken (zie `GSC-FINDINGS-2026-09.md` §2) | ✅ gedaan (2026-09-08, tweede sessie) — content per stad geverifieerd via WebSearch, geen fabricage; zie `docs/PROJECT-LOG.md` |
 
-**Volgende stap:** item 5 (maatwerk software limburg verstevigen).
+**Volgende stap:** item 5 (maatwerk software limburg verstevigen) — nu het enige nog openstaande item uit dit plan.
 
 ## 2. Prijsindicatie — beslissing genomen (2026-09-08)
 

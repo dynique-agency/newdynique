@@ -45,6 +45,8 @@ Dit is letterlijk het antwoord op "waar boeken we het meeste progressie": een pr
 
 **Kortom:** de meeste realistische progressie zit in NL pijnpunt-long-tail (prioriteit 1) en het verdiepen van bestaande sector+stad-combinaties (prioriteit 2). België is een **reële maar bescheiden tweede-orde uitbreiding** (Genk als volgende logische stap), geen goudmijn en geen rebrand-schaal weddenschap.
 
+**Update 2026-09-08:** na Genk zijn ook Tongeren, Maasmechelen en Sint-Truiden toegevoegd — alle drie binnen Belgisch Limburg, dus dezelfde logica als Genk (geen sprong naar Antwerpen/Brussel/Leuven, die blijven "niet nu"). Elk gekozen op een eigen, geverifieerde reden i.p.v. willekeurige dekking: Maasmechelen is geografisch de dichtstbijzijnde Belgische gemeente vanuit Vaals, Tongeren en Sint-Truiden vullen elk een economisch profiel in dat nog niet bestond in de bestaande 7 (erfgoed/toerisme resp. fruitteelt/agrifood) — geen van de drie is dus een pure naam-swap van hetzelfde stadssjabloon.
+
 ---
 
 ## 3. Wat er al staat — en of dat solide genoeg is om op te bouwen
