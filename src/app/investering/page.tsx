@@ -106,12 +106,13 @@ export default function InvesteringPage() {
               <div className="anim delay-1 bg-[#0a0a0a] p-8 lg:p-10">
                 <p className="text-white/40 text-[10px] tracking-[0.4em] font-light uppercase mb-4">Maatwerk software</p>
                 <p className="text-3xl lg:text-4xl font-extralight tracking-[0.01em] mb-4" style={{ color: GOLD }}>
-                  geen vaste prijstabel
+                  vanaf €4.000
                 </p>
                 <p className="text-white/55 text-sm font-light leading-relaxed tracking-wide">
-                  Een systeem op maat verschilt te veel per bedrijf voor een tabel die overal klopt. Dat bespreken we
-                  na een gratis intake, waarin we scope, techniek en risico&apos;s in kaart brengen — daarna krijg je
-                  een vaste prijs per fase.
+                  Een kleine, gerichte tool begint hier. Grotere bedrijfssoftware met meerdere gebruikers en
+                  koppelingen loopt vaak op tot €15.000–€35.000 of meer — dat hangt echt af van omvang,
+                  gebruikers en complexiteit. Na een gratis intake, waarin we scope, techniek en risico&apos;s in
+                  kaart brengen, krijg je een vaste prijs per fase.
                 </p>
               </div>
             </div>
