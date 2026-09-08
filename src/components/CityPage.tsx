@@ -97,13 +97,13 @@ export default function CityPage({ data }: { data: CityData }) {
             <div className="flex items-center gap-4 mb-10 anim">
               <span className="inline-block w-8 h-[1px]" style={{ background: data.accent }}></span>
               <p className="text-[10px] tracking-[0.5em] font-light uppercase" style={{ color: data.accent }}>
-                Webdesign · {data.city}
+                Maatwerk software · {data.city}
               </p>
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-8xl xl:text-[7rem] font-extralight text-white tracking-[0.02em] leading-[0.95] anim delay-1">
-              Website laten maken<br />
-              <span className="italic text-white/50">in {data.city}.</span>
+              Maatwerk software<br />
+              <span className="italic text-white/50">voor {data.city}.</span>
             </h1>
 
             <p className="mt-12 max-w-2xl text-white/55 text-base lg:text-xl font-light leading-[1.85] tracking-wide anim delay-2">

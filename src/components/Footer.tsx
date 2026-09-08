@@ -26,6 +26,9 @@ export default function Footer() {
     { label: "Eindhoven", href: "/locaties/eindhoven" },
     { label: "Hasselt", href: "/locaties/hasselt" },
     { label: "Genk", href: "/locaties/genk" },
+    { label: "Tongeren", href: "/locaties/tongeren" },
+    { label: "Maasmechelen", href: "/locaties/maasmechelen" },
+    { label: "Sint-Truiden", href: "/locaties/sint-truiden" },
   ];
 
   return (

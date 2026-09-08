@@ -54,6 +54,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/locaties/eindhoven`,  lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
     { url: `${base}/locaties/hasselt`,    lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
     { url: `${base}/locaties/genk`,       lastModified: now, changeFrequency: 'monthly', priority: 0.70 },
+    { url: `${base}/locaties/tongeren`,     lastModified: now, changeFrequency: 'monthly', priority: 0.68 },
+    { url: `${base}/locaties/maasmechelen`, lastModified: now, changeFrequency: 'monthly', priority: 0.68 },
+    { url: `${base}/locaties/sint-truiden`, lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
 
     // ── Overige landingspagina's ──
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
