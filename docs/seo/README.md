@@ -6,6 +6,7 @@ Alle SEO-werk (onderzoek, strategie, data-analyse, beslissingen) wordt vanaf 202
 
 - [`STRATEGY.md`](./STRATEGY.md) — het canonieke strategiedocument: realiteitscheck, marktkansen NL/BE, architectuur voor nieuwe pagina's, geprioriteerde roadmap. Wordt bijgewerkt zodra er nieuwe data is die de prioritering verandert (zie hieronder) — geen los tweede document ernaast.
 - [`GSC-FINDINGS-2026-09.md`](./GSC-FINDINGS-2026-09.md) — analyse van de eerste echte Search Console-export (aangeleverd door de eigenaar, periode 2026-06-17 t/m 2026-09-06). Dit is de eerste keer dat de strategie tegen echte data getoetst is i.p.v. alleen kwalitatief onderzoek.
+- [`LEAD-PLAN-2026-09.md`](./LEAD-PLAN-2026-09.md) — het uitvoeringsplan gericht op aanvragen (niet alleen rankings): wat ik zelf direct kan doen, welke ene beslissing bij de eigenaar ligt, en waarom betaalde backlink-diensten expliciet zijn afgewezen.
 - [`data/`](./data/) — ruwe brondata (GSC-exports als CSV, per datum), zodat elke conclusie in de md-bestanden herleidbaar blijft naar de originele cijfers.
 
 ## Conventie

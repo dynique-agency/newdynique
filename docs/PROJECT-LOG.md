@@ -6,6 +6,24 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-08 (later) — Eigen lead-plan: FAQ + prijsindicatie + social proof op 5 pagina's
+
+**Aanleiding:** na het afwegen (en afwijzen, zie hieronder) van betaalde backlink-diensten: *"laten we dan voor nu even ons eigen plan trekken en zorgen dat we daarmee zoveel mogelijk aanvragen krijgen."* Nieuw document `docs/seo/LEAD-PLAN-2026-09.md` legt dit vast als expliciet op *aanvragen* geoptimaliseerd (niet alleen rankings) — de eerste actie daarin overlapt bewust met `STRATEGY.md` Fase 1, omdat dezelfde verdieping (FAQ/prijs/social proof) zowel de SEO-concurrentiegaten als de conversiegaten sluit.
+
+**Eén beslissing gevraagd, gekregen:** hoe prijsindicatie te tonen. Antwoord: subtiel, niet als prominent anker — "kleine tools tot grote bedrijfssoftware, begint vanaf 4k, kan ook 15k of 35k zijn afhankelijk van bedrijfsgrootte/processen/gebruikers." Verwerkt in elke FAQ, consistent verwoord.
+
+**Uitgevoerd (`src/components/SectorTemplate.tsx`, 4× `src/app/maatwerk-software/*/page.tsx`, `src/app/diensten/processen/page.tsx`):**
+- `SectorData`-type uitgebreid met verplicht `faq`-veld; nieuwe FAQ-sectie (native `<details>/<summary>`, zelfde patroon als `CityPage.tsx`) + `FAQPage` JSON-LD toegevoegd aan het gedeelde `SectorTemplate.tsx` én los aan `diensten/processen/page.tsx` (die geen `SectorTemplate` gebruikt).
+- 4 FAQ-items per pagina geschreven, gegrond op wat er al op elke pagina staat (bijv. zorg krijgt een AVG/privacy-vraag, logistiek een TMS-koppelvraag) — geen vraag zonder dekking in bestaande content verzonnen.
+- Nieuwe "GEVERIFIEERDE KLANTEN"-sectie met 2 echte, al site-breed gebruikte reviews (Stacy Kohnen, Chefs Connect) rechtstreeks ingebed. **Bewust géén sectorspecifieke social proof gefabriceerd** — er bestaat nog geen bouw/installatie/zorg/logistiek-case, dus de sectie is expliciet niet als sectorbewijs gepresenteerd, alleen als bewijs van de werkrelatie/kwaliteit.
+- `/investering` toegevoegd aan `src/app/sitemap.ts` (was gedocumenteerd gat, triviale fix).
+
+**Bewust niet aangepakt:** de H1 op alle `/locaties/*`-pagina's zegt nog "Website laten maken in {stad}" i.p.v. "Maatwerk software" — een nieuwe, tijdens dit werk gevonden verklaring voor het Eindhoven-patroon uit `GSC-FINDINGS-2026-09.md`. Blijft expliciet voor de volgende contentronde staan (zie `LEAD-PLAN-2026-09.md` §1 punt 6), niet losstaand meegenomen om scope beheersbaar te houden.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon (alle routes). Live gecontroleerd via `next dev` — FAQ-content, `FAQPage`-JSON-LD (3 scripts totaal per pagina, geen conflict met bestaande schema) en de social-proof-sectie kloppen op `/maatwerk-software/bouw`, `/maatwerk-software/zorg` en `/diensten/processen`; `<details>`-toggle werkt.
+
+---
+
 ## 2026-09-08 (later) — Twee redirect-fixes uit de GSC-analyse doorgevoerd
 
 **`public/_redirects`** (nieuw, Cloudflare Pages-formaat) — de twee triviale technische fixes uit `docs/seo/GSC-FINDINGS-2026-09.md` §4 en §5, akkoord gekregen om meteen door te voeren naast het committen van de SEO-documentatie:

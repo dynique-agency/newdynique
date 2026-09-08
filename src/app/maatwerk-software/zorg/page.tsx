@@ -43,6 +43,24 @@ const data: SectorData = {
     { title: "Koppelingen met bestaande systemen", desc: "We sluiten aan op wat je al gebruikt, zodat niets dubbel hoeft te worden ingevoerd." },
   ],
   sliderSub: "Scroll en zie losse roosters, verspreide gegevens en handwerk veranderen in één overzicht.",
+  faq: [
+    {
+      q: "Wat kost maatwerk software voor een zorgorganisatie?",
+      a: "Dat hangt sterk af van de omvang van je organisatie, het aantal gebruikers en hoe complex je processen zijn. Een kleine, gerichte tool (bijvoorbeeld alleen roosterplanning) begint rond de €4.000; grotere software met cliëntdossiers, rapportages en koppelingen loopt vaak op tot €15.000–€35.000 of meer. Na de gratis procesanalyse op locatie krijg je een concreet voorstel met een vaste prijs voor jullie situatie.",
+    },
+    {
+      q: "Is de software AVG-proof en veilig genoeg voor cliëntgegevens?",
+      a: "Ja — we bouwen cliënt- en dossieroverzichten bewust veilig en AVG-proof op, in plaats van gegevens verspreid over losse systemen en mappen te laten staan. Tijdens de procesanalyse bespreken we specifiek welke privacy-eisen voor jullie gelden.",
+    },
+    {
+      q: "Wat als na de procesanalyse blijkt dat maatwerk niet de beste oplossing is?",
+      a: "Dan zeggen we dat gewoon eerlijk. De procesanalyse is gratis en vrijblijvend — je krijgt sowieso inzicht in waar tijd en overzicht weglekt, ook als de conclusie is dat een bestaand systeem voor jullie beter past.",
+    },
+    {
+      q: "Kunnen jullie koppelen met het zorgsysteem dat we al gebruiken?",
+      a: "In veel gevallen wel. We kijken tijdens de procesanalyse naar wat je al gebruikt en sluiten daarop aan, zodat gegevens niet dubbel hoeven te worden ingevoerd.",
+    },
+  ],
 };
 
 export default function MaatwerkSoftwareZorg() {

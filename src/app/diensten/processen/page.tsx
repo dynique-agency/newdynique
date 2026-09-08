@@ -319,8 +319,55 @@ export default function ProcessenDienst() {
     { n: "04", t: "Bouwen met code", d: "We bouwen de oplossing op maat, testen grondig en zorgen dat het werkt rondom jullie manier van werken." },
   ];
 
+  const faq = [
+    {
+      q: "Wat kost een maatwerk software traject?",
+      a: "Dat hangt sterk af van de omvang van je bedrijf, het aantal gebruikers en hoe complex je processen zijn. Een kleine, gerichte tool begint rond de €4.000; grotere bedrijfssoftware met meerdere gebruikers en koppelingen loopt vaak op tot €15.000–€35.000 of meer. Na de gratis procesanalyse op locatie krijg je een concreet voorstel met een vaste prijs voor jullie situatie.",
+    },
+    {
+      q: "Hoe lang duurt een traject, van eerste gesprek tot livegang?",
+      a: "Dat hangt af van de omvang van het project — een kleine tool is sneller klaar dan bedrijfssoftware met meerdere koppelingen. Na de procesanalyse geven we een concreet tijdspad in het voorstel, zodat je vooraf weet waar je aan toe bent.",
+    },
+    {
+      q: "Wat gebeurt er tijdens de gratis procesanalyse op locatie?",
+      a: "We komen gratis en vrijblijvend langs op de plek waar het werk daadwerkelijk gebeurt en kijken mee waar tijd, geld of overzicht verloren gaat. Daaruit volgt een helder voorstel: wat we bouwen, wat het oplevert en wat het kost — zonder verplichtingen.",
+    },
+    {
+      q: "Wat als we later iets willen aanpassen of uitbreiden?",
+      a: "Software op maat groeit mee met je bedrijf. Aanpassingen en uitbreidingen bespreken we gewoon als losse vervolgstap, zodat je nooit vastzit aan iets dat niet meer past bij hoe jullie werken.",
+    },
+  ];
+
+  const socialProof = [
+    {
+      quote: "Andere bureaus zeiden weken. Dynique leverde een meertalige website met booking-systeem binnen zeven dagen. De site voelt professioneler dan ik had durven hopen en het aantal aanvragen is verdubbeld.",
+      name: "Stacy Kohnen",
+      role: "Zangeres · Stacy Kohnen Music",
+      verifyUrl: "https://stacykohnen.de",
+      verifyLabel: "stacykohnen.de",
+    },
+    {
+      quote: "Een platform waar topchefs en premium keukens elkaar vinden: klinkt complex, werd elegant. Dynique dacht mee, bouwde snel en leverde een product dat direct serieus genomen wordt.",
+      name: "Mitchell & Gert-Jan",
+      role: "Oprichters · Chefs Connect",
+      verifyUrl: "https://chefs-connect.nl",
+      verifyLabel: "chefs-connect.nl",
+    },
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
       <main className="relative bg-[#070707] overflow-hidden">
@@ -614,6 +661,60 @@ export default function ProcessenDienst() {
             <p className="anim mt-6 text-white/55 text-sm font-light tracking-wide">
               Andere branche? Geen probleem — we bouwen maatwerk voor elk bedrijf dat vastloopt op standaardsoftware.
             </p>
+          </div>
+        </section>
+
+        {/* ── SOCIAL PROOF ─────────────────────────────────── */}
+        <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
+          <div className="container mx-auto">
+            <div className="max-w-3xl anim mb-12">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>GEVERIFIEERDE KLANTEN</p>
+              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12]">
+                Zo werkt samenwerken
+                <span className="text-white/45 italic"> met Dynique.</span>
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 gap-px bg-white/[0.06] border border-white/[0.06]">
+              {socialProof.map((r) => (
+                <div key={r.name} className="bg-[#070707] p-8 lg:p-10 anim">
+                  <p className="text-white/70 text-base lg:text-lg font-light leading-[1.8] tracking-wide italic mb-6">
+                    &ldquo;{r.quote}&rdquo;
+                  </p>
+                  <p className="text-white/85 text-sm font-light tracking-wide">{r.name}</p>
+                  <p className="text-white/40 text-xs font-light tracking-wide mt-1">
+                    {r.role} ·{" "}
+                    <a href={r.verifyUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 decoration-white/20 hover:decoration-white/50 hover:text-white/70 transition-colors">
+                      {r.verifyLabel}
+                    </a>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ ──────────────────────────────────────────── */}
+        <section className="relative px-6 lg:px-12 py-20 lg:py-28 border-t border-white/[0.06]">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5 anim" style={{ color: ACCENT }}>VEELGESTELDE VRAGEN</p>
+              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.12] mb-14 anim delay-1">
+                Voor je begint.
+              </h2>
+              <div className="space-y-px bg-white/[0.06]">
+                {faq.map((f, i) => (
+                  <details key={i} className="group bg-[#070707] anim" style={{ transitionDelay: `${i * 0.06}s` }}>
+                    <summary className="flex items-center justify-between gap-4 px-6 lg:px-8 py-6 lg:py-7 cursor-pointer list-none hover:bg-white/[0.02] transition-colors">
+                      <span className="text-white text-base lg:text-lg font-light tracking-wide">{f.q}</span>
+                      <span className="text-white/40 text-2xl font-extralight transition-transform duration-300 group-open:rotate-45 flex-shrink-0">+</span>
+                    </summary>
+                    <div className="px-6 lg:px-8 pb-6 lg:pb-7 text-white/55 text-base font-light leading-[1.85] tracking-wide max-w-3xl">
+                      {f.a}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 

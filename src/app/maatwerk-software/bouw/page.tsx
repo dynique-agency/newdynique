@@ -43,6 +43,24 @@ const data: SectorData = {
     { title: "Koppeling met je boekhouding", desc: "We koppelen je administratie zodat facturen en cijfers automatisch kloppen." },
   ],
   sliderSub: "Scroll en zie losse werkbonnen, Excel-uren en zoekwerk veranderen in één strak overzicht.",
+  faq: [
+    {
+      q: "Wat kost maatwerk software voor een bouwbedrijf?",
+      a: "Dat hangt sterk af van de omvang van je bedrijf, het aantal gebruikers en hoe complex je processen zijn. Een kleine, gerichte tool (bijvoorbeeld alleen digitale werkbonnen) begint rond de €4.000; grotere bedrijfssoftware met meerdere gebruikers, planning en een koppeling met je boekhouding loopt vaak op tot €15.000–€35.000 of meer. Na de gratis procesanalyse op locatie krijg je een concreet voorstel met een vaste prijs voor jullie situatie.",
+    },
+    {
+      q: "Kunnen jullie koppelen met de boekhouding die we al gebruiken?",
+      a: "In veel gevallen wel. We kijken tijdens de procesanalyse naar wat je al gebruikt en sluiten daarop aan, zodat werkbonnen en uren automatisch doorstromen naar facturatie en cijfers automatisch kloppen — zonder dubbel werk.",
+    },
+    {
+      q: "Wat als na de procesanalyse blijkt dat maatwerk niet de beste oplossing is?",
+      a: "Dan zeggen we dat gewoon eerlijk. De procesanalyse is gratis en vrijblijvend — je krijgt sowieso inzicht in waar tijd en geld weglekt, ook als de conclusie is dat een bestaand pakket voor jullie beter past.",
+    },
+    {
+      q: "Waarom maatwerk in plaats van een standaard bouwapp of -pakket?",
+      a: "Een standaardpakket vraagt dat jullie je werkwijze aanpassen aan de software. Wij bouwen andersom: rondom hoe jullie al werken op de bouwplaats en op kantoor, met alleen de functies die je echt gebruikt.",
+    },
+  ],
 };
 
 export default function MaatwerkSoftwareBouw() {

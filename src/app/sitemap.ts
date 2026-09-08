@@ -51,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Overige landingspagina's ──
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
     { url: `${base}/vervanging`,      lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${base}/investering`,     lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${base}/gratis-checklist`,lastModified: now, changeFrequency: 'monthly', priority: 0.72 },
 
     // ── Juridisch ──
