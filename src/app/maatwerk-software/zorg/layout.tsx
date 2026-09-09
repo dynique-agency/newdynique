@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Maatwerk software voor de zorg",
+    description: "Minder administratie, meer tijd voor de cliënt. Maatwerk software op code voor de zorg.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

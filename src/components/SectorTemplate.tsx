@@ -17,7 +17,7 @@ import {
 } from "@/components/processen/Visuals";
 import { openWhatsApp } from "@/lib/openWhatsApp";
 import FaqSection, { faqJsonLd } from "@/components/FaqSection";
-import SocialProofSection from "@/components/SocialProofSection";
+import SocialProofSection, { type ReviewKey } from "@/components/SocialProofSection";
 
 export type SectorData = {
   slug: string;            // e.g. "bouw"
@@ -32,6 +32,8 @@ export type SectorData = {
   features: { title: string; desc: string }[];
   sliderSub?: string;
   faq: { q: string; a: string }[];
+  /** Optioneel: welke echte reviews tonen i.p.v. de generieke standaard (bijv. echte horeca-cases op de horeca-pagina). */
+  socialProofSelect?: ReviewKey[];
 };
 
 const STEPS = [
@@ -279,7 +281,7 @@ export default function SectorTemplate({ data }: { data: SectorData }) {
           </div>
         </section>
 
-        <SocialProofSection accent={ACCENT} />
+        <SocialProofSection accent={ACCENT} {...(data.socialProofSelect ? { select: data.socialProofSelect } : {})} />
         <FaqSection faq={data.faq} accent={ACCENT} />
 
         {/* ── LEAD FORM ───────────────────────────────────── */}

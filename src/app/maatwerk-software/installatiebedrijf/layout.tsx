@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Maatwerk software voor installatiebedrijven",
+    description: "Planning, werkbonnen en onderhoud in één systeem. Maatwerk software op code voor installatiebedrijven.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
+    card: "summary_large_image",
+    title: "Maatwerk software voor de bouw",
+    description: "Van werkbon tot factuur in één systeem. Maatwerk software op code voor bouwbedrijven.",
     images: [
       {
         url: "https://dynique.nl/opengraph-image",

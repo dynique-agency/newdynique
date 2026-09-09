@@ -46,6 +46,9 @@ const SECTORS = [
   { t: "Installatiebedrijven", d: "Mobiele bonnen, planning & onderhoud.", href: "/maatwerk-software/installatiebedrijf" },
   { t: "Zorg", d: "Roosters, dossiers & rapportage, AVG-proof.", href: "/maatwerk-software/zorg" },
   { t: "Logistiek & transport", d: "Ritplanning, track & trace & voorraad.", href: "/maatwerk-software/logistiek" },
+  { t: "Horeca", d: "Reserveringen, personeelsplanning & voorraad.", href: "/maatwerk-software/horeca" },
+  { t: "Detailhandel", d: "Voorraad, klantenbeheer & verkoopinzicht.", href: "/maatwerk-software/detailhandel" },
+  { t: "Agrarisch", d: "Teeltregistratie, planning & documentatie.", href: "/maatwerk-software/agrarisch" },
 ];
 
 const FAQ = [

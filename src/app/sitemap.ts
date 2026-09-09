@@ -39,6 +39,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/maatwerk-software/installatiebedrijf`, lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
     { url: `${base}/maatwerk-software/zorg`,               lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
     { url: `${base}/maatwerk-software/logistiek`,          lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/maatwerk-software/horeca`,             lastModified: now, changeFrequency: 'monthly', priority: 0.80 },
+    { url: `${base}/maatwerk-software/detailhandel`,       lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/maatwerk-software/agrarisch`,          lastModified: now, changeFrequency: 'monthly', priority: 0.78 },
 
     // ── Pijnpunt- & vergelijkingspagina's (nieuw, 2026-09-08) ──
     { url: `${base}/excel-vervangen-door-software`,   lastModified: now, changeFrequency: 'monthly', priority: 0.82 },
