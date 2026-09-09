@@ -257,11 +257,22 @@ export default function CityPage({ data }: { data: CityData }) {
             <div className="flex flex-wrap justify-center gap-3 anim delay-1">
               {data.industries.map((ind) => {
                 const href = SECTOR_LINKS[ind];
-                const className = "inline-block px-5 py-2.5 border border-white/10 text-white/60 text-xs tracking-[0.2em] font-light hover:text-white hover:border-white/30 transition-colors duration-300";
-                return href ? (
-                  <Link key={ind} href={href} className={className}>{ind}</Link>
-                ) : (
-                  <span key={ind} className={className}>{ind}</span>
+                if (!href) {
+                  return (
+                    <span key={ind} className="inline-block px-5 py-2.5 border border-white/10 text-white/60 text-xs tracking-[0.2em] font-light hover:text-white hover:border-white/30 transition-colors duration-300">
+                      {ind}
+                    </span>
+                  );
+                }
+                return (
+                  <Link key={ind} href={href}
+                    className="group inline-flex items-center gap-1.5 px-5 py-2.5 border text-xs tracking-[0.2em] font-light transition-colors duration-300"
+                    style={{ borderColor: `${data.accent}50`, color: data.accent }}>
+                    {ind}
+                    <svg className="w-3 h-3 opacity-60 group-hover:translate-x-0.5 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
                 );
               })}
             </div>

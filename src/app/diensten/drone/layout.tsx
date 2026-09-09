@@ -43,7 +43,7 @@ const jsonLd = {
       "@type": "Service",
       serviceType: "Drone Videografie & Bedrijfsfilm",
       provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-      areaServed: ["Limburg", "Nederland"],
+      areaServed: ["Limburg", "Nederland", "België"],
       description:
         "Aerial footage, bedrijfsfilms, social reels en dronefotografie met de DJI Mini 5 Pro.",
     },

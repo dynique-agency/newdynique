@@ -19,20 +19,10 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
-    { "@type": "ListItem", position: 2, name: "Locaties", item: "https://dynique.nl/locaties" },
-  ],
-};
-
+// Let op: dit is een layout.tsx met 10 child-routes (/locaties/{stad}). Next.js-
+// layouts wrappen ook alle child-pagina's — JSON-LD hier zou dus op elke stads-
+// pagina verschijnen en botsen met CityPage.tsx's eigen BreadcrumbList. Daarom
+// staat de breadcrumb voor déze hub-pagina zelf in page.tsx, niet hier.
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

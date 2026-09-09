@@ -22,42 +22,10 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Service",
-      serviceType: "Maatwerk Software & Digitale Bedrijfsprocessen",
-      provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-      areaServed: ["Nederland", "België"],
-      description:
-        "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
-      offers: {
-        "@type": "Offer",
-        name: "Gratis procesanalyse op locatie",
-        price: "0",
-        priceCurrency: "EUR",
-      },
-    },
-    {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
-        { "@type": "ListItem", position: 2, name: "Diensten", item: "https://dynique.nl/diensten" },
-        { "@type": "ListItem", position: 3, name: "Maatwerk software", item: "https://dynique.nl/diensten/processen" },
-      ],
-    },
-  ],
-};
-
+// Let op: dit is een layout.tsx met een child-route (/diensten/processen/limburg).
+// Next.js-layouts wrappen ook alle child-pagina's — JSON-LD hier zou dus ook op
+// /limburg verschijnen en botsen met diens eigen Service/BreadcrumbList. Daarom
+// staat de Service+BreadcrumbList voor déze pagina zelf in page.tsx, niet hier.
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

@@ -16,8 +16,8 @@ const FAQ = [
     a: "Dat hangt af van de opdracht: duur, locatie, aantal shots en de bewerking achteraf. We geven na een kort gesprek een concreet voorstel met prijsindicatie, zodat je vooraf weet waar je aan toe bent.",
   },
   {
-    q: "Hebben jullie een vergunning om met een drone te vliegen?",
-    a: "Ja, we vliegen volgens de geldende regelgeving en houden rekening met vluchtzones en vergunningen die per locatie kunnen gelden.",
+    q: "Hebben jullie een vergunning nodig om met een drone te vliegen?",
+    a: "Onze drone weegt minder dan 249 gram, wat volgens de Europese dronewetgeving in de lichtste categorie valt — daarvoor is geen aparte vergunning vereist. We houden ons wel altijd aan de geldende regels rond vluchtzones (bijvoorbeeld rond vliegvelden) en vragen waar dat nodig is toestemming ter plekke.",
   },
   {
     q: "Kan de video ook direct verwerkt worden in mijn website of marketing?",

@@ -16,6 +16,27 @@ import {
   useBeforeAfterScrub,
 } from "@/components/processen/Visuals";
 import { openWhatsApp } from "@/lib/openWhatsApp";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
+
+const FAQ = [
+  {
+    q: "Wat kost een maatwerk software traject in Limburg?",
+    a: "Dat hangt sterk af van de omvang van je bedrijf, het aantal gebruikers en hoe complex je processen zijn. Een kleine, gerichte tool begint rond de €4.000; grotere bedrijfssoftware met meerdere gebruikers en koppelingen loopt vaak op tot €15.000–€35.000 of meer. Na de gratis procesanalyse op locatie krijg je een concreet voorstel met een vaste prijs voor jullie situatie.",
+  },
+  {
+    q: "Voor welke plaatsen in Limburg geldt dit?",
+    a: "Heel Limburg, van Zuid- tot Midden-Limburg — Maastricht, Heerlen, Sittard-Geleen, Kerkrade, Landgraaf, Brunssum, Valkenburg, Roermond, Weert en alles daartussenin. Zit je net buiten dit lijstje, overleg gewoon even wat mogelijk is.",
+  },
+  {
+    q: "Is dit ook geschikt voor een klein bedrijf, of alleen voor grotere organisaties?",
+    a: "Beide. We bouwen net zo goed een kleine, gerichte tool voor een klein team als een uitgebreider systeem voor een groter bedrijf — de procesanalyse bepaalt wat past bij jullie situatie, niet andersom.",
+  },
+  {
+    q: "Wat als uit de procesanalyse blijkt dat maatwerk niet nodig is?",
+    a: "Dan zeggen we dat gewoon eerlijk. De procesanalyse is gratis en vrijblijvend — je krijgt sowieso concreet inzicht in waar tijd, geld of overzicht weglekt, ook als de conclusie is dat een bestaand pakket voor jullie al voldoet.",
+  },
+];
 
 const CITIES = [
   "Maastricht", "Heerlen", "Sittard-Geleen", "Kerkrade", "Landgraaf",
@@ -83,8 +104,11 @@ export default function ProcessenLimburg() {
     { n: "04", t: "Bouwen met code", d: "We bouwen de oplossing op maat, testen grondig en zorgen dat het werkt rondom jullie manier van werken." },
   ];
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
       <main className="relative bg-[#070707] overflow-hidden">
@@ -381,6 +405,9 @@ export default function ProcessenLimburg() {
             </div>
           </div>
         </section>
+
+        <SocialProofSection accent={ACCENT} />
+        <FaqSection faq={FAQ} accent={ACCENT} heading="Voor je begint." />
 
         {/* ── LEAD FORM ───────────────────────────────────── */}
         <section id="analyse" className="relative px-6 lg:px-12 py-20 lg:py-28 scroll-mt-24">

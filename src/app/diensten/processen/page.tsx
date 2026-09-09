@@ -341,9 +341,37 @@ export default function ProcessenDienst() {
   ];
 
   const jsonLd = faqJsonLd(faq);
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        serviceType: "Maatwerk Software & Digitale Bedrijfsprocessen",
+        provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
+        areaServed: ["Nederland", "België"],
+        description:
+          "Maatwerk software op code voor bedrijven die vastlopen in standaardpakketten, gebouwd rondom de praktijk. Inclusief gratis procesanalyse op locatie.",
+        offers: {
+          "@type": "Offer",
+          name: "Gratis procesanalyse op locatie",
+          price: "0",
+          priceCurrency: "EUR",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://dynique.nl" },
+          { "@type": "ListItem", position: 2, name: "Diensten", item: "https://dynique.nl/diensten" },
+          { "@type": "ListItem", position: 3, name: "Maatwerk software", item: "https://dynique.nl/diensten/processen" },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
