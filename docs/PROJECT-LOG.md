@@ -24,6 +24,23 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later, tweede deel) — `/diensten/web` verstevigd (herontdekte "app laten maken"-kans) + duidelijke dienst-routing op locatiepagina's
+
+**Aanleiding, twee delen:**
+1. Eerst het voorstel om per locatie aparte "webdesign"/"app"/"digitalisering"-pagina's te bouwen — afgewezen met dezelfde onderbouwing als eerder (webdesign+stad al bewezen dood spoor via de Eindhoven-data, digitalisering al afgewezen als niet-commerciële term, meerdere pagina's per locatie is de kruisproductmatrix die het onderzoek expliciet waarschuwt te vermijden).
+2. Het echte, onderliggende punt was terecht: onduidelijk wat Dynique wel/niet doet. Opgelost zonder nieuwe locatiepagina's: (a) een expliciet "Wat kunnen we voor je bouwen?"-blok op elke locatiepagina dat doorverwijst naar de juiste, al bestaande dienstpagina, en (b) op verzoek om onderbenutte bestaande zoektermen te vinden, de GSC-data opnieuw doorzocht.
+
+**Herontdekt bij het opnieuw doorzoeken van dezelfde GSC-export:** "mobile app development" (137 vertoningen, **positie 7,86** — beter dan "maatwerk software limburg") en "app laten maken limburg" (184 vertoningen, positie 20,97) — reëel volume, praktisch onbenut. `/diensten/web` is vermoedelijk de dragende pagina, maar had geen FAQ, geen social proof, geen prijsindicatie — het concurrentiegat dat elders al gedicht was, hier gemist.
+
+**Uitgevoerd:**
+- **`src/app/diensten/web/page.tsx` + `layout.tsx`** — FAQ toegevoegd (incl. prijs en een eerlijke "bouwen jullie ook apps?"-vraag: Dynique bouwt web apps, geen native iOS/Android-apps, expliciet zo verwoord om niet te overclaimen), ingebedde social proof, "web app laten maken" explicieter in title/intro/keywords, `areaServed` uitgebreid met België (stond alleen op Limburg/Nederland).
+- **`src/components/CityPage.tsx`** — nieuw "Wat kunnen we voor je bouwen in {stad}?"-blok (3 kaarten: Website/web app → `/diensten/web`, Bedrijfssoftware op maat → eigen leadformulier, Marketing/SEO/social media → `/diensten/marketing`) — geldt automatisch voor alle 10 locatiepagina's via dit ene component.
+- **`src/app/diensten/marketing/page.tsx`** — FAQ toegevoegd die expliciet "social media beheer" en "SEO" losstaand beantwoordt (op verzoek: duidelijk maken dat dit allemaal echt aangeboden wordt), zonder de bestaande VOF-disclosure aan te raken.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige build schoon. Live gecontroleerd: FAQ's tonen correct, geen JSON-LD-conflicten, VOF-disclosure op de marketingpagina staat nog exact waar die stond.
+
+---
+
 ## 2026-09-09 (later) — Hreflang gecorrigeerd na vraag over .nl-domein en Belgische rankings
 
 **Aanleiding:** "maakt het niet uit dat we een .nl domein hebben voor de belgische landingspagina's?" — geverifieerd via WebSearch i.p.v. op geheugen vertrouwd, want Google's geotargeting-mechanismen zijn sinds 2022 veranderd (Search Console's handmatige landinstelling is toen volledig verwijderd, werkte voor ccTLD's als `.nl` sowieso al nooit).

@@ -97,3 +97,26 @@ Deze export bevestigt dat **Search Console** werkt (hoe de verificatie precies i
 5. **Nieuw datapunt voor toekomstige titel-iteraties van stadspagina's:** overweeg het gewicht van "webdesign [stad]" naar "maatwerk software [stad]" te verschuiven, op basis van het Eindhoven-patroon in sectie 2 — niet nu doorvoeren, wel meenemen bij de volgende contentronde.
 
 Deze wijzigingen worden doorgevoerd in `STRATEGY.md`; dit bestand blijft staan als de onderbouwing met de ruwe cijfers erachter.
+
+---
+
+## 9. Update 2026-09-09 — herontdekt bij het opnieuw doorzoeken van dezelfde export: "app laten maken" staat al bijna op pagina 1
+
+Op verzoek om bestaande, niet-gecoverde zoektermen te vinden is dezelfde `Zoekopdrachten.csv` opnieuw doorzocht (niet-merkgebonden termen, ≥20 vertoningen, positie <30) — met een concreet, eerder gemist resultaat:
+
+| Zoekterm | Vertoningen | Positie |
+|---|---|---|
+| **mobile app development** | 137 | **7,86** — praktisch pagina 1 |
+| **app laten maken limburg** | 184 | 20,97 — pagina 2 |
+| maatwerk software limburg | 288 | 12,72 *(al bekend, sectie 3)* |
+| webdesign bureau heerlen | 119 | 21,16 |
+| seo bureau sittard-geleen | 101 | 25,59 |
+| seo sittard-geleen | 89 | 25,76 |
+
+**Waarom dit de moeite waard is:** "mobile app development" staat op positie 7,86 — beter dan "maatwerk software limburg", en met een substantieel volume (137 vertoningen) — terwijl er nergens op de site een pagina specifiek over app-ontwikkeling bestaat. De vermoedelijke bron is `/diensten/web` (enige pagina die "web app" noemt, `title: "Website & Web App laten maken"`), maar die pagina had tot nu toe geen FAQ, geen ingebedde social proof en geen prijsindicatie — exact het concurrentiegat dat elders al is gedicht, hier nog niet.
+
+**Belangrijke eerlijkheidskanttekening:** Dynique bouwt **web apps** (browser-based, Next.js/React — zie de techstack op `/diensten/web`), geen native iOS/Android-apps. De Engelse term "mobile app development" matcht hier vermoedelijk semantisch/los, niet omdat de pagina native app-ontwikkeling claimt. Bij het verstevigen van deze pagina is dit expliciet zo gehouden: geen native-app-claim toegevoegd, wel eerlijk uitgelegd waarom een web app voor de meeste gevallen (klantportalen, boekingssystemen, interne tools) een goed alternatief is — zie de nieuwe FAQ op die pagina.
+
+**Uitgevoerd (2026-09-09):** `/diensten/web` kreeg dezelfde behandeling als eerder `diensten/processen` en de sectorpagina's — FAQ (incl. prijs en de "bouwen jullie ook apps"-vraag), ingebedde social proof, en "app laten maken"/"web app laten maken" explicieter in title/intro/keywords. `areaServed` uitgebreid met België (stond alleen op Limburg/Nederland, inconsistent met de rest van de site).
+
+**Nog niet gedaan, mogelijke vervolgstap:** een aparte, diepere pijnpunt-pillar specifiek over app-ontwikkeling (zelfde categorie als `/excel-vervangen-door-software`) zou hier gerechtvaardigd kunnen zijn gezien het volume — maar per de "verstevig eerst wat al werkt"-discipline (zie `STRATEGY.md` §8, de les over de Limburg-pagina) is nu bewust eerst de bestaande, al goed rankende pagina versterkt in plaats van meteen een nieuwe te bouwen. Pas heroverwegen ná een nieuwe GSC-meting.
