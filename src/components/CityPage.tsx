@@ -34,6 +34,21 @@ export type CityData = {
   relatedRegionLink?: { label: string; href: string };
 };
 
+// Koppelt industry-chips aan hun bestaande sectorpagina, zodat de chip zelf linkwaarde
+// doorgeeft aan pagina's die al écht rankende termen dekken (bijv. "maatwerk software
+// voor de zorg"). Alleen Nederlandstalige labels — Duitse/Engelse varianten (Aken e.a.)
+// blijven bewust ongelinkt, want de sectorpagina's zijn Nederlandstalig.
+const SECTOR_LINKS: Record<string, string> = {
+  "Bouw": "/maatwerk-software/bouw",
+  "Installatie": "/maatwerk-software/installatiebedrijf",
+  "Zorg": "/maatwerk-software/zorg",
+  "Logistiek": "/maatwerk-software/logistiek",
+  "Horeca": "/maatwerk-software/horeca",
+  "Retail": "/maatwerk-software/detailhandel",
+  "Landbouw": "/maatwerk-software/agrarisch",
+  "Landbouw & Fruitteelt": "/maatwerk-software/agrarisch",
+};
+
 export default function CityPage({ data }: { data: CityData }) {
   const slug = data.slug ?? data.city.toLowerCase();
   const url = `https://dynique.nl/locaties/${slug}`;
@@ -240,11 +255,15 @@ export default function CityPage({ data }: { data: CityData }) {
               Voor elke sector <span className="italic" style={{ color: data.accent }}>in {data.region}.</span>
             </h2>
             <div className="flex flex-wrap justify-center gap-3 anim delay-1">
-              {data.industries.map((ind) => (
-                <span key={ind} className="inline-block px-5 py-2.5 border border-white/10 text-white/60 text-xs tracking-[0.2em] font-light hover:text-white hover:border-white/30 transition-colors duration-300">
-                  {ind}
-                </span>
-              ))}
+              {data.industries.map((ind) => {
+                const href = SECTOR_LINKS[ind];
+                const className = "inline-block px-5 py-2.5 border border-white/10 text-white/60 text-xs tracking-[0.2em] font-light hover:text-white hover:border-white/30 transition-colors duration-300";
+                return href ? (
+                  <Link key={ind} href={href} className={className}>{ind}</Link>
+                ) : (
+                  <span key={ind} className={className}>{ind}</span>
+                );
+              })}
             </div>
           </div>
         </div>

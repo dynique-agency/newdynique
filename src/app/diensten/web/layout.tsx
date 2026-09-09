@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     "webapplicatie op maat",
     "app laten maken",
     "webshop laten maken",
+    "web development",
+    "app development",
   ],
   alternates: { canonical: "https://dynique.nl/diensten/web" },
   openGraph: {
