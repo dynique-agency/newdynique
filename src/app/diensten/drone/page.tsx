@@ -4,8 +4,30 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useEffect } from "react";
+import { ProcessStyles } from "@/components/processen/Visuals";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
 
 const ACCENT = "#d4a574";
+
+const FAQ = [
+  {
+    q: "Wat kost een dronevideo of -shoot?",
+    a: "Dat hangt af van de opdracht: duur, locatie, aantal shots en de bewerking achteraf. We geven na een kort gesprek een concreet voorstel met prijsindicatie, zodat je vooraf weet waar je aan toe bent.",
+  },
+  {
+    q: "Hebben jullie een vergunning om met een drone te vliegen?",
+    a: "Ja, we vliegen volgens de geldende regelgeving en houden rekening met vluchtzones en vergunningen die per locatie kunnen gelden.",
+  },
+  {
+    q: "Kan de video ook direct verwerkt worden in mijn website of marketing?",
+    a: "Dat is precies waar we sterk in zijn: de footage combineren met je website of marketingcampagne, zodat de video niet los blijft staan maar ook echt bezoekers en aanvragen oplevert.",
+  },
+  {
+    q: "Werken jullie ook buiten Limburg?",
+    a: "Ja, we vliegen door heel Nederland en België — overleg gewoon even wat mogelijk is voor jouw locatie.",
+  },
+];
 
 export default function DroneDienst() {
   useEffect(() => {
@@ -46,8 +68,11 @@ export default function DroneDienst() {
     { label: "Gewicht", value: "< 249g (geen vergunning)" },
   ];
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
       <main className="relative bg-[#070707] overflow-hidden">
@@ -247,9 +272,13 @@ export default function DroneDienst() {
             </div>
           </div>
         </section>
+
+        <SocialProofSection accent={ACCENT} />
+        <FaqSection faq={FAQ} accent={ACCENT} heading="Voor je begint." />
       </main>
 
       <Footer />
+      <ProcessStyles />
 
       <style jsx global>{`
         @keyframes fadeInUp {

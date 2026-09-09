@@ -4,6 +4,28 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { openWhatsApp } from "@/lib/openWhatsApp";
+import { ProcessStyles } from "@/components/processen/Visuals";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
+
+const FAQ = [
+  {
+    q: "Wat kost het om mijn website te laten vervangen?",
+    a: "Dat hangt af van de omvang en of we vanaf nul beginnen of grotendeels kunnen hergebruiken. Reken op een vergelijkbare investering als een nieuwe website — vanaf €3.500 — met een concreet voorstel na de intake.",
+  },
+  {
+    q: "Verlies ik mijn huidige Google-rankings bij een redesign?",
+    a: "Niet als het goed wordt aangepakt. We analyseren eerst wat er al werkt (welke pagina's en zoektermen al bezoekers trekken) en bouwen daar bewust op voort — inclusief de juiste redirects, zodat je geen SEO-waarde kwijtraakt bij de overstap.",
+  },
+  {
+    q: "Kan mijn bestaande content en tekst overgezet worden?",
+    a: "Ja, in de meeste gevallen wel. We kijken samen wat nog klopt en wat aan een update toe is — je hoeft niet alles opnieuw te laten schrijven.",
+  },
+  {
+    q: "Hoe lang duurt een redesign?",
+    a: "Meestal binnen 7 tot 14 dagen live, afhankelijk van de omvang. Na de intake krijg je een realistisch tijdspad.",
+  },
+];
 
 export default function Vervanging() {
   const [wantsAppointment, setWantsAppointment] = useState(false);
@@ -61,8 +83,11 @@ export default function Vervanging() {
     openWhatsApp(message);
   };
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <main className="relative bg-[#050505]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Header */}
       <Header variant="light" />
 
@@ -550,8 +575,12 @@ export default function Vervanging() {
         </div>
       </section>
 
+      <SocialProofSection accent="#d4a574" />
+      <FaqSection faq={FAQ} accent="#d4a574" heading="Voor je begint." />
+
       {/* Footer */}
       <Footer />
+      <ProcessStyles />
 
       {/* Inline Keyframes */}
       <style jsx>{`

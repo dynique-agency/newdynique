@@ -4,6 +4,28 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { openWhatsApp } from "@/lib/openWhatsApp";
+import { ProcessStyles } from "@/components/processen/Visuals";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
+
+const FAQ = [
+  {
+    q: "Wat kost een eerste website?",
+    a: "Een gemiddelde website begint bij ons rond de €3.500 — de uiteindelijke investering hangt af van omvang en functionaliteit. Je weet dit na de intake, niet pas bij de factuur.",
+  },
+  {
+    q: "Ik weet nog niet precies wat ik wil — is dat een probleem?",
+    a: "Nee, dat is juist normaal bij een eerste website. In het intakegesprek helpen we je scherp krijgen wat je nodig hebt, in plaats van dat je zelf al met een compleet plan moet komen.",
+  },
+  {
+    q: "Hoe lang duurt het voordat mijn website live staat?",
+    a: "Een eerste website staat meestal binnen 7 tot 14 dagen live, afhankelijk van de omvang. Je krijgt na de intake een realistisch tijdspad.",
+  },
+  {
+    q: "En als ik later meer nodig heb dan alleen een website?",
+    a: "Dat groeit gewoon mee. Van een eerste website tot een webshop, klantportaal of maatwerk bedrijfssoftware — je begint hier, en breidt uit zodra dat nodig is.",
+  },
+];
 
 export default function EersteWebsite() {
   const [wantsAppointment, setWantsAppointment] = useState(false);
@@ -61,8 +83,11 @@ export default function EersteWebsite() {
     openWhatsApp(message);
   };
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <main className="relative bg-[#050505]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Header */}
       <Header variant="light" />
 
@@ -566,8 +591,12 @@ export default function EersteWebsite() {
         </div>
       </section>
 
+      <SocialProofSection accent="#d4a574" />
+      <FaqSection faq={FAQ} accent="#d4a574" heading="Voor je begint." />
+
       {/* Footer */}
       <Footer />
+      <ProcessStyles />
 
       {/* Inline Keyframes */}
       <style jsx>{`
