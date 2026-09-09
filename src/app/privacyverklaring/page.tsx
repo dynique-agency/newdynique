@@ -252,8 +252,14 @@ function ContentNL() {
         Onze website wordt gehost via Cloudflare Pages. Zoals bij vrijwel elke website worden bij een
         paginabezoek technische gegevens verwerkt (zoals IP-adres, apparaat- en browsertype en tijdstip
         van bezoek), uitsluitend voor beveiliging, misbruikpreventie en het goed laten functioneren van de
-        website. Wij gebruiken op dit moment <strong>geen</strong> Google Analytics, Meta Pixel of
-        vergelijkbare trackingtools op dynique.nl.
+        website.
+      </p>
+      <p>
+        Daarnaast gebruiken wij <strong>Google Analytics 4</strong> om te begrijpen hoe bezoekers onze
+        website gebruiken (bijvoorbeeld welke pagina&apos;s bezocht worden), zodat we de site kunnen
+        verbeteren. Dit gebeurt <strong>alleen na jouw expliciete toestemming</strong> via de cookiebanner
+        — zie hoofdstuk 6. IP-adressen worden hierbij geanonimiseerd. Wij gebruiken geen Meta Pixel of
+        andere trackingtools op dynique.nl.
       </p>
 
       <h2 id="rechtsgrondslag">4. Rechtsgrondslag</h2>
@@ -316,12 +322,22 @@ function ContentNL() {
 
       <h2 id="cookies">6. Cookies</h2>
       <p>
-        Dynique.nl gebruikt op dit moment <strong>geen</strong> tracking-, marketing- of
-        analytics-cookies. Er worden alleen technische gegevens verwerkt die strikt noodzakelijk zijn om de
-        website te laten functioneren; hiervoor is op grond van de Telecommunicatiewet geen
-        toestemmingsbanner vereist. Mocht dit in de toekomst wijzigen — bijvoorbeeld door het plaatsen van
-        een Meta Pixel voor het meten van advertentieresultaten — dan passen wij deze verklaring aan en
-        vragen we je vooraf via een cookiebanner om toestemming, zoals de wet vereist.
+        Dynique.nl gebruikt twee soorten cookies:
+      </p>
+      <ul>
+        <li><strong>Strikt noodzakelijke cookies</strong> — uitsluitend technisch, nodig om de website te
+          laten functioneren. Hiervoor is op grond van de Telecommunicatiewet geen toestemming vereist.</li>
+        <li><strong>Analytics-cookies (Google Analytics 4)</strong> — niet strikt noodzakelijk, worden
+          alleen geplaatst als je hier expliciet toestemming voor geeft via de cookiebanner die bij je
+          eerste bezoek verschijnt. Je kunt kiezen voor &quot;Accepteren&quot; of &quot;Weigeren&quot;; bij
+          weigeren wordt er geen enkele analytics-cookie geplaatst en verandert er verder niets aan je
+          bezoek. Je toestemming wordt lokaal in je browser onthouden (niet gedeeld met derden) en kun je
+          op elk moment intrekken door je browsergegevens voor dynique.nl te wissen.</li>
+      </ul>
+      <p>
+        Mocht dit in de toekomst wijzigen — bijvoorbeeld door het plaatsen van een Meta Pixel voor het
+        meten van advertentieresultaten — dan passen wij deze verklaring aan en vragen we je ook daarvoor
+        vooraf toestemming via dezelfde cookiebanner.
       </p>
 
       <h2 id="bewaartermijnen">7. Bewaartermijnen</h2>
@@ -503,8 +519,13 @@ function ContentEN() {
       <p>
         Our website is hosted via Cloudflare Pages. As with virtually any website, technical data is
         processed when you visit a page (such as IP address, device and browser type, and time of visit),
-        solely for security, abuse prevention, and to keep the website functioning properly. We currently
-        do <strong>not</strong> use Google Analytics, Meta Pixel, or similar tracking tools on dynique.nl.
+        solely for security, abuse prevention, and to keep the website functioning properly.
+      </p>
+      <p>
+        We also use <strong>Google Analytics 4</strong> to understand how visitors use our website (for
+        example, which pages are visited), so we can improve the site. This only happens
+        <strong> after your explicit consent</strong> via the cookie banner — see chapter 6. IP addresses
+        are anonymized. We do not use Meta Pixel or other tracking tools on dynique.nl.
       </p>
 
       <h2 id="legal-basis">4. Legal basis</h2>
@@ -562,12 +583,21 @@ function ContentEN() {
       </p>
 
       <h2 id="cookies-en">6. Cookies</h2>
+      <p>Dynique.nl uses two types of cookies:</p>
+      <ul>
+        <li><strong>Strictly necessary cookies</strong> — purely technical, required to make the website
+          function. No consent is required for these under Dutch telecommunications law.</li>
+        <li><strong>Analytics cookies (Google Analytics 4)</strong> — not strictly necessary, only placed if
+          you explicitly consent via the cookie banner shown on your first visit. You can choose
+          &quot;Accept&quot; or &quot;Decline&quot;; if you decline, no analytics cookies are placed and
+          nothing else about your visit changes. Your choice is remembered locally in your browser (not
+          shared with third parties) and can be withdrawn at any time by clearing your browser data for
+          dynique.nl.</li>
+      </ul>
       <p>
-        Dynique.nl currently does <strong>not</strong> use tracking, marketing, or analytics cookies. Only
-        technical data that is strictly necessary to make the website function is processed; under Dutch
-        telecommunications law, no consent banner is required for this. Should this change in the future —
-        for example by placing a Meta Pixel to measure advertising results — we will update this policy and
-        ask for your consent beforehand via a cookie banner, as required by law.
+        Should this change in the future — for example by placing a Meta Pixel to measure advertising
+        results — we will update this policy and ask for your consent for that too, via the same cookie
+        banner.
       </p>
 
       <h2 id="retention">7. Retention periods</h2>
