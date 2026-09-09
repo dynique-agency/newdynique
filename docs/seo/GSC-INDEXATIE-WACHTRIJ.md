@@ -2,6 +2,23 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-09 (nog later) — belangrijkste: dubbele BreadcrumbList gefixt
+
+`/diensten/processen/limburg` had tot nu toe een dubbele, botsende BreadcrumbList (structurele bug, zie `docs/PROJECT-LOG.md`) — dit is de pagina met het hoogste vertoningsaantal van de site (579), dus deze herindexatie is de belangrijkste van deze hele lijst:
+
+- [ ] `/diensten/processen/limburg`
+  ```
+  https://dynique.nl/diensten/processen/limburg
+  ```
+- [ ] `/diensten/drone`
+  ```
+  https://dynique.nl/diensten/drone
+  ```
+- [ ] `/locaties` (dubbele breadcrumb ook hier gefixt)
+  ```
+  https://dynique.nl/locaties
+  ```
+
 ## Batch 2026-09-09 (later) — inhoudelijk gewijzigde pagina's, geen nieuwe URL's
 
 Geen nieuwe pagina's, maar deze kregen substantieel nieuwe content (FAQ, social proof, interne links) — de moeite waard om opnieuw te laten crawlen:

@@ -24,6 +24,24 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later, vijfde deel) — Zelf gevonden fouten uit de strenge analyse gecorrigeerd + systemische JSON-LD-bug ontdekt
+
+**Aanleiding:** expliciet gevraagd om streng te analyseren wat ik nog beter kon doen — geen zelfrelativering, met bewijs. Vier concrete bevindingen, alle vier vandaag zelf geïntroduceerd, alle vier hersteld.
+
+**1. Drone-FAQ sprak de eigen site tegen.** Mijn net toegevoegde antwoord op "hebben jullie een vergunning nodig?" zei "Ja, we vliegen volgens de geldende regelgeving" — terwijl de pagina zelf al langer een technische spec toont: "Gewicht: < 249g (**geen vergunning**)". Herschreven naar een eerlijk antwoord dat uitlegt waarom (EU-dronewetgeving, lichtste categorie), i.p.v. een vergunning te suggereren die niet nodig is. `areaServed` in `diensten/drone/layout.tsx` uitgebreid met België (stond alleen op Limburg/Nederland — hetzelfde gat dat ik bij `diensten/web` al vond, hier zelf opnieuw gemaakt met de nieuwe FAQ die wél NL+BE claimde).
+
+**2. `/diensten/processen/limburg` — de pagina met verreweg het hoogste vertoningsaantal van de site (579, positie 16,4) — kreeg alsnog de volledige behandeling:** FAQ (prijs, welke plaatsen, klein-vs-groot-bedrijf, eerlijk "wat als maatwerk niet past") en ingebedde social proof. Deze pagina was twee sessies lang alleen van interne links voorzien, nooit zelf versterkt.
+
+**3. Industry-chip-links (gisteren toegevoegd) waren visueel niet te onderscheiden van platte tekst** — zelfde CSS-klasse voor link en span. Gefixt: gekoppelde chips krijgen nu de accentkleur (rand + tekst) plus een pijltje, geverifieerd via computed styles in de browser.
+
+**4. Grootste vondst — een systemische bug, niet eerder opgemerkt:** `layout.tsx`-bestanden die een `<script>` (JSON-LD) renderen wrappen in Next.js ook alle **child-routes**, niet alleen hun eigen pagina. Dit gaf op `/diensten/processen/limburg` een dubbele, botsende `BreadcrumbList` (één van de ouder-pagina `/diensten/processen`, één van de pagina zelf) — geïntroduceerd toen ik `diensten/processen/layout.tsx` eerder deze sessie een breadcrumb gaf zonder te beseffen dat die layout een child-route (`/limburg`) heeft. Een systematische scan van alle `layout.tsx`-bestanden met child-`page.tsx`'s vond een **tweede, identieke instantie**: `locaties/layout.tsx` (10 child-locatiepagina's), zelf pas gisteren gebouwd voor de `/locaties`-hub.
+
+**Fix, structureel:** in beide gevallen is de JSON-LD verplaatst van `layout.tsx` (die child-routes wrapt) naar de eigen `page.tsx` van die route (die dat niet doet, want pagina's zijn bladknopen). `layout.tsx` bevat nu alleen nog metadata + een kale `{children}`-wrapper, met een commentaar dat uitlegt waarom. Een scan over de hele `src/app`-boom bevestigt: geen overige instanties.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige build schoon. Live gecontroleerd op `/diensten/processen/limburg`, `/locaties/genk` en `/locaties` zelf: precies één BreadcrumbList per pagina, geen duplicaten meer. (Zijstap: `npm run build` naast een actieve `next dev`-server corrumpeerde tijdelijk de webpack-chunk-cache — bekend, `.next` verwijderd en dev-server herstart, geen inhoudelijk gevolg.)
+
+---
+
 ## 2026-09-09 (later, vierde deel) — `/eerste-website`, `/vervanging` en `/diensten/drone` verstevigd
 
 **Aanleiding:** "zoek nog meer, en verstevig ook de andere zwakke pagina's" — de GSC-data was inmiddels na 3 scans grotendeels uitgeput (zie hieronder), dus de nadruk lag op het tweede deel: overige pagina's zonder FAQ/social-proof controleren.
