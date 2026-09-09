@@ -4,8 +4,29 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useEffect } from "react";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import { ProcessStyles } from "@/components/processen/Visuals";
 
 const ACCENT = "#d4a574";
+
+const FAQ = [
+  {
+    q: "Doen jullie ook social media beheer, of alleen advertenties?",
+    a: "Beide. We plaatsen en beheren social media-content (Instagram, LinkedIn, Facebook) én draaien betaalde campagnes. Jij levert de input en het verhaal, wij zorgen dat het consistent en op de juiste momenten online komt.",
+  },
+  {
+    q: "Wat kost marketing- of SEO-begeleiding?",
+    a: "Dat hangt af van de omvang: alleen SEO-optimalisatie van je bestaande site is anders dan doorlopend social media-beheer plus advertentiecampagnes. In het gratis strategiegesprek brengen we in kaart wat past bij jouw doelen en budget, en krijg je een concreet voorstel.",
+  },
+  {
+    q: "Is SEO iets aparts, of zit dat bij de website inbegrepen?",
+    a: "Een nieuwe website die we bouwen is technisch al SEO-ready (snelheid, structuur, metadata). Doorlopende SEO — contentstrategie, linkbuilding, blijven ranken op de juiste zoektermen — is een aparte, doorlopende dienst, omdat dat nu eenmaal doorlopende aandacht vraagt in plaats van een eenmalige bouwklus.",
+  },
+  {
+    q: "Kunnen jullie ook alleen social media doen, zonder advertentiebudget?",
+    a: "Ja. Social media-beheer en betaalde advertenties zijn twee losse knoppen — je kunt met alleen consistent, goed beheerd social media beginnen en later pas advertentiebudget toevoegen als dat past.",
+  },
+];
 
 export default function MarketingDienst() {
   useEffect(() => {
@@ -56,8 +77,11 @@ export default function MarketingDienst() {
 
   const tools = ["Claude API", "GPT-4o", "Midjourney", "Meta Ads", "Google Ads", "Google Search Console", "Mailchimp", "Maatwerk integraties"];
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
       <main className="relative bg-[#070707] overflow-hidden">
@@ -216,6 +240,8 @@ export default function MarketingDienst() {
           </div>
         </section>
 
+        <FaqSection faq={FAQ} accent={ACCENT} heading="Voor je begint." />
+
         {/* CTA */}
         <section className="relative px-6 lg:px-12 py-24 lg:py-32 border-t border-white/[0.06] overflow-hidden">
           <div className="absolute inset-0 pointer-events-none"
@@ -259,6 +285,7 @@ export default function MarketingDienst() {
       </main>
 
       <Footer />
+      <ProcessStyles />
 
       <style jsx global>{`
         @keyframes fadeInUp {

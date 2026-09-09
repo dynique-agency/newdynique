@@ -167,6 +167,34 @@ export default function CityPage({ data }: { data: CityData }) {
         </div>
       </section>
 
+      {/* WAT KUNNEN WE VOOR JE BOUWEN — duidelijke routing naar de juiste dienst */}
+      <section className="relative py-16 lg:py-20 border-t border-white/5">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-[10px] tracking-[0.5em] font-light uppercase mb-8 anim" style={{ color: data.accent }}>
+              Wat kunnen we voor je bouwen in {data.city}?
+            </p>
+            <div className="grid sm:grid-cols-3 gap-px bg-white/5">
+              {[
+                { t: "Website of web app", d: "Bedrijfswebsite, webshop of maatwerk web app.", href: "/diensten/web" },
+                { t: "Bedrijfssoftware op maat", d: "Systemen die met jouw processen meewerken.", href: "#analyse" },
+                { t: "Marketing, SEO & social media", d: "Zichtbaarheid en beheer, uitbesteed of samen.", href: "/diensten/marketing" },
+              ].map((s, i) => (
+                <Link key={s.href} href={s.href}
+                  className="group bg-[#050505] p-6 lg:p-7 anim relative overflow-hidden" style={{ transitionDelay: `${i * 0.06}s` }}>
+                  <div className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700" style={{ background: data.accent }} />
+                  <h3 className="text-white text-sm font-light tracking-wide mb-2">{s.t}</h3>
+                  <p className="text-white/45 text-xs font-light leading-relaxed tracking-wide">{s.d}</p>
+                </Link>
+              ))}
+            </div>
+            <p className="mt-5 anim delay-1 text-white/35 text-xs font-light tracking-wide">
+              Niet zeker wat je nodig hebt? Dat bepalen we samen tijdens een gratis, vrijblijvend gesprek.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* HIGHLIGHTS — wat we voor je doen in deze stad */}
       <section className="relative py-24 lg:py-32 border-t border-white/5">
         <div className="container mx-auto px-6 lg:px-12">

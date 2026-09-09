@@ -4,6 +4,14 @@ export const metadata: Metadata = {
   title: "Website & Web App laten maken | Dynique",
   description:
     "Professionele websites, webshops en web apps op maat. Mobile-first, razendsnel en SEO-ready, gebouwd in Next.js. Van portfolio tot e-commerce — binnen 7 tot 14 dagen live.",
+  keywords: [
+    "website laten maken",
+    "web app laten maken",
+    "maatwerk web app",
+    "webapplicatie op maat",
+    "app laten maken",
+    "webshop laten maken",
+  ],
   alternates: { canonical: "https://dynique.nl/diensten/web" },
   openGraph: {
     title: "Website & Web App laten maken | Dynique",
@@ -43,7 +51,7 @@ const jsonLd = {
       "@type": "Service",
       serviceType: "Website & Web App Development",
       provider: { "@type": "Organization", name: "Dynique", url: "https://dynique.nl" },
-      areaServed: ["Limburg", "Nederland"],
+      areaServed: ["Limburg", "Nederland", "België"],
       description:
         "Professionele websites, webshops en web apps op maat, gebouwd in Next.js. Mobile-first, snel en SEO-ready.",
     },

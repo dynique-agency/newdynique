@@ -4,8 +4,31 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useEffect } from "react";
+import { ProcessStyles } from "@/components/processen/Visuals";
+import FaqSection, { faqJsonLd } from "@/components/FaqSection";
+import SocialProofSection from "@/components/SocialProofSection";
+import LeadFormSection from "@/components/LeadFormSection";
 
 const ACCENT = "#d4a574";
+
+const FAQ = [
+  {
+    q: "Wat kost een website of web app?",
+    a: "Een gemiddelde website begint rond de €3.500 — afhankelijk van omvang en functionaliteit; een webshop start hoger. Een web app (klantportaal, boekingssysteem, dashboard) is meer maatwerk en varieert sterker: reken op €4.000 voor een kleine, gerichte tool tot €15.000–€35.000 of meer voor een uitgebreider systeem. Na de intake krijg je een concreet voorstel met een vaste prijs.",
+  },
+  {
+    q: "Bouwen jullie ook apps, of alleen websites?",
+    a: "We bouwen voornamelijk web apps: software die in de browser draait en op elk device — ook mobiel — perfect werkt, zonder dat iemand iets hoeft te installeren via een app store. Voor de meeste klantportalen, boekingssystemen en interne tools is dat sneller te bouwen, makkelijker te onderhouden en net zo prettig in gebruik als een native app. Twijfel je of dat bij jouw idee past? Dat bespreken we gewoon eerlijk in het intakegesprek.",
+  },
+  {
+    q: "Hoe snel staat mijn website of web app live?",
+    a: "Een website staat meestal binnen 7 tot 14 dagen live. Een web app met meer functionaliteit — koppelingen, gebruikersrollen, een klantportaal — vraagt meer tijd; na de intake krijg je een realistisch tijdspad, geen slag in de lucht.",
+  },
+  {
+    q: "Kunnen jullie koppelen met systemen die we al gebruiken?",
+    a: "In veel gevallen wel. We kijken tijdens de intake naar wat je al gebruikt (boekhouding, CRM, betaalproviders) en bouwen de koppeling mee, zodat je niet met twee systemen naast elkaar werkt.",
+  },
+];
 
 export default function WebDienst() {
   useEffect(() => {
@@ -44,8 +67,11 @@ export default function WebDienst() {
     { step: "04", title: "Live & doorontwikkeling", desc: "Online binnen 7–14 dagen. Daarna blijven we beschikbaar voor updates en uitbreiding." },
   ];
 
+  const jsonLd = faqJsonLd(FAQ);
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header variant="light" />
 
       <main className="relative bg-[#070707] overflow-hidden">
@@ -81,7 +107,7 @@ export default function WebDienst() {
                 className="text-white/55 text-lg lg:text-xl font-extralight tracking-wide max-w-2xl mb-12 leading-relaxed"
                 style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
               >
-                Van visitekaartje tot volwaardige webapplicatie, gebouwd in Next.js, live binnen 7 tot 14 dagen.
+                Van visitekaartje tot een web app laten maken op maat — klantportalen, boekingssystemen, dashboards — gebouwd in Next.js, live binnen 7 tot 14 dagen.
               </p>
               <div
                 className="flex flex-col sm:flex-row gap-4"
@@ -172,42 +198,17 @@ export default function WebDienst() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="relative px-6 lg:px-12 py-24 lg:py-32 border-t border-white/[0.06] overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: `radial-gradient(ellipse at 80% 30%, ${ACCENT}14 0%, transparent 55%)` }} />
-          <div className="container mx-auto relative text-center">
-            <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] mb-6 animate-on-scroll">
-              Klaar om te starten?
-            </h2>
-            <p className="text-white/50 font-light tracking-wide mb-10 max-w-xl mx-auto animate-on-scroll delay-100">
-              Vertel ons over je project en we reageren binnen 24 uur.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
-              <Link
-                href="/#contact"
-                className="group inline-flex items-center justify-center gap-3 px-12 py-4 text-black text-[11px] tracking-[0.25em] font-medium transition-all duration-300"
-                style={{ background: ACCENT }}
-              >
-                GRATIS OFFERTE
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <a
-                href="https://wa.me/31624572572"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-12 py-4 border border-white/15 text-white/70 text-[11px] tracking-[0.25em] font-light hover:border-white/40 hover:text-white transition-all duration-300"
-              >
-                WHATSAPP
-              </a>
-            </div>
-          </div>
-        </section>
+        <SocialProofSection accent={ACCENT} />
+        <FaqSection faq={FAQ} accent={ACCENT} heading="Voor je begint." />
+        <LeadFormSection
+          accent={ACCENT}
+          openingLine="Hi! Ik wil graag een website of web app laten maken en hoor graag wat de mogelijkheden zijn."
+          messagePrompt="Wat voor website of web app heb je in gedachten?"
+        />
       </main>
 
       <Footer />
+      <ProcessStyles />
 
       <style jsx global>{`
         @keyframes fadeInUp {
