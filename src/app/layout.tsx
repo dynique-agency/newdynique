@@ -92,7 +92,7 @@ export const metadata: Metadata = {
     canonical: 'https://dynique.nl',
     languages: {
       'nl-NL': 'https://dynique.nl',
-      'nl-BE': 'https://dynique.nl',
+      'x-default': 'https://dynique.nl',
     },
   },
   // Zet je Search Console-token in .env.local als NEXT_PUBLIC_GSC_VERIFICATION

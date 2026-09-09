@@ -4,7 +4,7 @@ import CityPage, { CityData } from "@/components/CityPage";
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Hasselt | Dynique",
   description: "Maatwerk software en webdesign voor bedrijven in Hasselt en Belgisch Limburg. Grensoverschrijdend werken vanuit Vaals, heldere btw-afspraken, vaste prijs. Gratis kennismaking.",
-  alternates: { canonical: "https://dynique.nl/locaties/hasselt" },
+  alternates: { canonical: "https://dynique.nl/locaties/hasselt", languages: { "nl-BE": "https://dynique.nl/locaties/hasselt" } },
   openGraph: {
     title: "Maatwerk software & webdesign Hasselt | Dynique",
     description: "Grensoverschrijdend webdesign en maatwerk software voor Hasselt en Belgisch Limburg. Snel, persoonlijk, vaste prijs.",

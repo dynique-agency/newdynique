@@ -4,7 +4,7 @@ import CityPage, { CityData } from "@/components/CityPage";
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Sint-Truiden | Dynique",
   description: "Maatwerk software en webdesign voor bedrijven in Sint-Truiden en de Limburgse fruitstreek. Grensoverschrijdend werken vanuit Vaals, heldere btw-afspraken, vaste prijs. Gratis kennismaking.",
-  alternates: { canonical: "https://dynique.nl/locaties/sint-truiden" },
+  alternates: { canonical: "https://dynique.nl/locaties/sint-truiden", languages: { "nl-BE": "https://dynique.nl/locaties/sint-truiden" } },
   openGraph: {
     title: "Maatwerk software & webdesign Sint-Truiden | Dynique",
     description: "Grensoverschrijdend webdesign en maatwerk software voor Sint-Truiden en de Limburgse fruitstreek. Snel, persoonlijk, vaste prijs.",

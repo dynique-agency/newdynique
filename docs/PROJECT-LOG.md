@@ -24,6 +24,22 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later) — Hreflang gecorrigeerd na vraag over .nl-domein en Belgische rankings
+
+**Aanleiding:** "maakt het niet uit dat we een .nl domein hebben voor de belgische landingspagina's?" — geverifieerd via WebSearch i.p.v. op geheugen vertrouwd, want Google's geotargeting-mechanismen zijn sinds 2022 veranderd (Search Console's handmatige landinstelling is toen volledig verwijderd, werkte voor ccTLD's als `.nl` sowieso al nooit).
+
+**Antwoord, vastgelegd in `docs/seo/STRATEGY.md` §2a (nieuw):** het `.nl`-domein is wel degelijk een sterk nadeel-signaal voor brede, ongekwalificeerde Belgische zoekopdrachten, maar veel minder relevant voor stad-specifieke termen ("maatwerk software genk") — waar de geo-intentie al in de zoekopdracht zelf zit en Google zwaarder op pagina-relevantie leunt. Dat is precies waarom de gekozen long-tail-aanpak hier al deels tegen bestand is, niet toevallig.
+
+**Concreet gefixt:**
+- **`src/app/layout.tsx`** — de hreflang-claim dat de homepage zowel nl-NL als nl-BE was (dezelfde URL voor beide, communiceerde niets) gecorrigeerd naar `nl-NL` + `x-default`.
+- **Alle 5 Belgische stadspagina's** (`hasselt`, `genk`, `tongeren`, `maasmechelen`, `sint-truiden`) — eigen, correcte `hreflang="nl-BE"`-zelfverwijzing toegevoegd (was op geen enkele pagina aanwezig).
+
+**Ook vastgelegd, geen actie:** een eigen `.be`-domein zou het ccTLD-nadeel volledig wegnemen, maar dat is een bedrijfsbeslissing (kosten, redirect-strategie, merk over twee domeinen) die niet past bij het huidige stadium — België is nog een bescheiden tweede-orde uitbreiding, geen bewezen genoeg vraag om te investeren. Expliciet als "later, met meetdata" genoteerd i.p.v. te negeren.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige build schoon. Gecontroleerd in de export-output dat `<link rel="alternate" hreflang="nl-BE" ...>` daadwerkelijk gegenereerd wordt op alle 5 pagina's, en de homepage nu correct `nl-NL` + `x-default` toont.
+
+---
+
 ## 2026-09-09 — 3 nieuwe sectorpagina's (horeca, detailhandel, agrarisch) + sector-specifieke social proof
 
 **Aanleiding:** "meer, beter" — na de vorige sessie's eigen aanbeveling om eerst te meten voordat er nieuwe pagina's bijkomen. Transparant hier vastgelegd: die aanbeveling is deze keer niet gevolgd — de eigenaar gaf expliciet opdracht om door te bouwen. Om het risico te beperken is gekozen voor **sectorpagina's, niet nog meer steden** — sectoren zijn de categorie die `STRATEGY.md` zelf altijd als veilig heeft bestempeld (elk een echt ander onderwerp, geen naam-swap-risico), in tegenstelling tot verdere stad-uitbreiding.

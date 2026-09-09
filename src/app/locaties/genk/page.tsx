@@ -4,7 +4,7 @@ import CityPage, { CityData } from "@/components/CityPage";
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Genk | Dynique",
   description: "Maatwerk software en webdesign voor bedrijven in Genk en Belgisch Limburg. Grensoverschrijdend werken vanuit Vaals, heldere btw-afspraken, vaste prijs. Gratis kennismaking.",
-  alternates: { canonical: "https://dynique.nl/locaties/genk" },
+  alternates: { canonical: "https://dynique.nl/locaties/genk", languages: { "nl-BE": "https://dynique.nl/locaties/genk" } },
   openGraph: {
     title: "Maatwerk software & webdesign Genk | Dynique",
     description: "Grensoverschrijdend webdesign en maatwerk software voor Genk en Belgisch Limburg. Snel, persoonlijk, vaste prijs.",

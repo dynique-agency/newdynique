@@ -4,7 +4,7 @@ import CityPage, { CityData } from "@/components/CityPage";
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Maasmechelen | Dynique",
   description: "Maatwerk software en webdesign voor bedrijven in Maasmechelen en Belgisch Limburg. Grensoverschrijdend werken vanuit Vaals, heldere btw-afspraken, vaste prijs. Gratis kennismaking.",
-  alternates: { canonical: "https://dynique.nl/locaties/maasmechelen" },
+  alternates: { canonical: "https://dynique.nl/locaties/maasmechelen", languages: { "nl-BE": "https://dynique.nl/locaties/maasmechelen" } },
   openGraph: {
     title: "Maatwerk software & webdesign Maasmechelen | Dynique",
     description: "Grensoverschrijdend webdesign en maatwerk software voor Maasmechelen en Belgisch Limburg. Snel, persoonlijk, vaste prijs.",

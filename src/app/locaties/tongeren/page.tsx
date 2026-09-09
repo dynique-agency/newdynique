@@ -4,7 +4,7 @@ import CityPage, { CityData } from "@/components/CityPage";
 export const metadata: Metadata = {
   title: "Maatwerk software & webdesign Tongeren | Dynique",
   description: "Maatwerk software en webdesign voor bedrijven in Tongeren en Belgisch Limburg. Grensoverschrijdend werken vanuit Vaals, heldere btw-afspraken, vaste prijs. Gratis kennismaking.",
-  alternates: { canonical: "https://dynique.nl/locaties/tongeren" },
+  alternates: { canonical: "https://dynique.nl/locaties/tongeren", languages: { "nl-BE": "https://dynique.nl/locaties/tongeren" } },
   openGraph: {
     title: "Maatwerk software & webdesign Tongeren | Dynique",
     description: "Grensoverschrijdend webdesign en maatwerk software voor Tongeren en Belgisch Limburg. Snel, persoonlijk, vaste prijs.",
