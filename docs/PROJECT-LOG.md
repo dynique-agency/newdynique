@@ -24,6 +24,24 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later, zesde deel) — Google Analytics 4 gebouwd, AVG-conform met cookiebanner
+
+**Aanleiding:** "wat kunnen we nog doen? jij bent specialist" — het grootste, herhaaldelijk genoemde maar nooit opgeloste gat was analytics: geen enkel zicht op gedrag ná een klik, ondanks alle SEO-werk deze sessie. Gevraagd welke variant; gekozen: **GA4**.
+
+**Zelf gevonden vóór de bouw:** de privacyverklaring (`/privacyverklaring`, NL én EN) zei expliciet en met nadruk "Wij gebruiken op dit moment **geen** Google Analytics" en beloofde een cookiebanner zodra dat zou veranderen. GA4 zomaar toevoegen zonder dit aan te passen had de site in directe tegenspraak met haar eigen juridische pagina gezet.
+
+**Uitgevoerd:**
+- **`src/components/CookieConsent.tsx`** (nieuw) — banner (Accepteren/Weigeren) die alleen verschijnt als `NEXT_PUBLIC_GA_MEASUREMENT_ID` is ingesteld. GA4 (`gtag.js`) wordt pas dynamisch geladen ná "Accepteren", met `anonymize_ip: true`. Keuze wordt onthouden in `localStorage`, banner verschijnt daarna nooit meer. Zonder env var: volledige no-op, geen banner, geen enkel script — veilig om te shippen vóórdat de eigenaar een GA4-property heeft.
+- **`src/app/layout.tsx`** — component ingeplugd in de body.
+- **`src/app/privacyverklaring/page.tsx`** (NL + EN) — §3.5 en §6 herschreven om de nieuwe, echte situatie te beschrijven: GA4 wordt gebruikt, uitsluitend na toestemming via de cookiebanner, IP-adressen geanonimiseerd, geen Meta Pixel.
+- **`docs/GA4-SETUP.md`** (nieuw) — stappen voor de eigenaar: GA4-property aanmaken (kan ik niet namens hem, accountaanmaak), Measurement ID als `NEXT_PUBLIC_GA_MEASUREMENT_ID` in Cloudflare Pages zetten, met de kanttekening dat dit een build-time variabele is (nieuwe deploy nodig, gebeurt vanzelf bij de eerstvolgende push).
+
+**Geverifieerd, uitgebreid:** lokaal getest met een tijdelijke test-Measurement-ID (`G-TEST12345`, niet gecommit) — banner verschijnt correct, "Accepteren" laadt het GA4-script met het juiste ID en onthoudt de keuze, "Weigeren" laadt nooit iets, herladen na een keuze toont de banner niet opnieuw. `npx tsc --noEmit` en volledige build schoon.
+
+**Nog te doen (eigenaar):** GA4-property aanmaken en het Measurement ID instellen — zie `docs/GA4-SETUP.md`. Tot die tijd verandert er niets op de live site.
+
+---
+
 ## 2026-09-09 (later, vijfde deel) — Zelf gevonden fouten uit de strenge analyse gecorrigeerd + systemische JSON-LD-bug ontdekt
 
 **Aanleiding:** expliciet gevraagd om streng te analyseren wat ik nog beter kon doen — geen zelfrelativering, met bewijs. Vier concrete bevindingen, alle vier vandaag zelf geïntroduceerd, alle vier hersteld.
