@@ -2,6 +2,40 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-09 — 3 nieuwe sectorpagina's
+
+- [ ] `/maatwerk-software/horeca`
+  ```
+  https://dynique.nl/maatwerk-software/horeca
+  ```
+- [ ] `/maatwerk-software/detailhandel`
+  ```
+  https://dynique.nl/maatwerk-software/detailhandel
+  ```
+- [ ] `/maatwerk-software/agrarisch`
+  ```
+  https://dynique.nl/maatwerk-software/agrarisch
+  ```
+
+Ook de moeite waard (kregen een nieuwe interne link vanuit `diensten/processen` en `/excel-vervangen-door-software`, en de bestaande 4 kregen een Twitter Card-fix):
+
+- [ ] `/maatwerk-software/bouw`
+  ```
+  https://dynique.nl/maatwerk-software/bouw
+  ```
+- [ ] `/maatwerk-software/installatiebedrijf`
+  ```
+  https://dynique.nl/maatwerk-software/installatiebedrijf
+  ```
+- [ ] `/maatwerk-software/zorg`
+  ```
+  https://dynique.nl/maatwerk-software/zorg
+  ```
+- [ ] `/maatwerk-software/logistiek`
+  ```
+  https://dynique.nl/maatwerk-software/logistiek
+  ```
+
 ## Batch 2026-09-08 (derde sessie) — /locaties hub-pagina + herindexatie na kritische fixpas
 
 Nieuwe pagina:

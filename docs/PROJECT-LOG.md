@@ -24,6 +24,26 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 — 3 nieuwe sectorpagina's (horeca, detailhandel, agrarisch) + sector-specifieke social proof
+
+**Aanleiding:** "meer, beter" — na de vorige sessie's eigen aanbeveling om eerst te meten voordat er nieuwe pagina's bijkomen. Transparant hier vastgelegd: die aanbeveling is deze keer niet gevolgd — de eigenaar gaf expliciet opdracht om door te bouwen. Om het risico te beperken is gekozen voor **sectorpagina's, niet nog meer steden** — sectoren zijn de categorie die `STRATEGY.md` zelf altijd als veilig heeft bestempeld (elk een echt ander onderwerp, geen naam-swap-risico), in tegenstelling tot verdere stad-uitbreiding.
+
+**Sectorkeuze, met reden:** Horeca (sterkste keuze — Dynique heeft daadwerkelijk 3 echte horeca-klanten: Chefs Connect, IJssalon Italia, Auwt Aelse), Detailhandel (brede, herkenbare MKB-sector), Agrarisch (sluit thematisch aan bij de net toegevoegde Sint-Truiden-fruitstreek-pagina).
+
+**Uitgevoerd via een Workflow** (3 parallelle agents, ultracode aan): elke agent kreeg de volledige inhoud (pijnpunten, features, FAQ) al kant-en-klaar aangeleverd — geen creatieve vrijheid over feiten, alleen assembleren volgens het bestaande `bouw`-sjabloon. Dit hield het fabricatierisico laag ondanks delegatie.
+
+- **`src/app/maatwerk-software/{horeca,detailhandel,agrarisch}/{page,layout}.tsx`** (nieuw) — zelfde structuur als de bestaande 4 sectoren, elk met een eigen `layout.tsx` (metadata + volledige Twitter Card + Service/BreadcrumbList JSON-LD).
+- **`src/components/SocialProofSection.tsx`** — uitgebreid met een `select`-prop en een `REVIEWS`-record van alle 4 echte reviews (was hardcoded op 2). **`src/components/SectorTemplate.tsx`** — nieuw optioneel `socialProofSelect`-veld op `SectorData`, doorgegeven aan `SocialProofSection`. Hierdoor toont `/maatwerk-software/horeca` nu de twee écht relevante reviews (IJssalon Italia + Auwt Aelse) i.p.v. de generieke standaard — lost een beperking op die bij de vorige 4 sectorpagina's nog gold ("geen sectorspecifieke cases beschikbaar", zie eerdere log-entry) voor precies de sector waar dat wél kon.
+- **Zelf gevonden, buiten de opdracht:** de bestaande 4 sectorpagina's (`bouw`, `installatiebedrijf`, `zorg`, `logistiek`) bleken een onvolledige Twitter Card te hebben (alleen `images`, geen `card`/`title`/`description`) — een gat dat de eerdere "volledige audit-fixpas" had moeten dekken maar miste (geen van de 6 toen ingezette fix-agents kreeg deze 4 bestanden toegewezen). Nu ook gefixt.
+- **Interne links**: nieuwe sectoren toegevoegd aan de "SECTOREN"-grid op `diensten/processen` en de "SECTOREN"-grid op `/excel-vervangen-door-software`.
+- **`sitemap.ts`** bijgewerkt met de 3 nieuwe URL's.
+
+**Dedup-check (grep, geen indruk):** alle `pains`/FAQ-teksten zijn uniek over alle 7 sectorpagina's — geen herhaling van de fout die eerder op de locatiepagina's gevonden werd.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon (53 routes, was 50). Live gecontroleerd: horeca-pagina toont IJssalon Italia + Auwt Aelse als social proof, JSON-LD zonder conflicten.
+
+---
+
 ## 2026-09-08 (later, derde sessie) — Kritische zelf-audit van de locatiepagina's + `/locaties`-hub-pagina
 
 **Aanleiding:** expliciet gevraagd om de locatiepagina en de gebruikte tactiek kritisch te analyseren en met concrete verbetervoorstellen te komen. Zelf, met grep, geverifieerd — geen indruk maar bewijs. Bevindingen (zie ook `docs/seo/LEAD-PLAN-2026-09.md` item 8):
