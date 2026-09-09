@@ -120,3 +120,29 @@ Op verzoek om bestaande, niet-gecoverde zoektermen te vinden is dezelfde `Zoekop
 **Uitgevoerd (2026-09-09):** `/diensten/web` kreeg dezelfde behandeling als eerder `diensten/processen` en de sectorpagina's — FAQ (incl. prijs en de "bouwen jullie ook apps"-vraag), ingebedde social proof, en "app laten maken"/"web app laten maken" explicieter in title/intro/keywords. `areaServed` uitgebreid met België (stond alleen op Limburg/Nederland, inconsistent met de rest van de site).
 
 **Nog niet gedaan, mogelijke vervolgstap:** een aparte, diepere pijnpunt-pillar specifiek over app-ontwikkeling (zelfde categorie als `/excel-vervangen-door-software`) zou hier gerechtvaardigd kunnen zijn gezien het volume — maar per de "verstevig eerst wat al werkt"-discipline (zie `STRATEGY.md` §8, de les over de Limburg-pagina) is nu bewust eerst de bestaande, al goed rankende pagina versterkt in plaats van meteen een nieuwe te bouwen. Pas heroverwegen ná een nieuwe GSC-meting.
+
+---
+
+## 10. Update 2026-09-09 (later) — nog een volledige herscan, op verzoek "zoek meer zoals deze"
+
+Dezelfde `Zoekopdrachten.csv`, nu volledig doorgesorteerd op positie (niet alleen gefilterd op ≥20 vertoningen) om niets te missen. Resultaat, met wat al bekend was eruit gefilterd:
+
+| Zoekterm | Vertoningen | Positie | Duiding |
+|---|---|---|---|
+| web development | 19 | **9** | Engelse variant, klein volume maar sterke positie — zelfde pagina (`/diensten/web`) als "mobile app development" |
+| software agency limburg | 16 | 13,1 | Rijdt vermoedelijk mee op dezelfde pagina als "maatwerk software limburg" (`/diensten/processen/limburg`) — geen aparte actie nodig |
+| transport maatwerk software | 13 | 14,6 | Exacte-frase-match met de titel van `/maatwerk-software/logistiek` ("Maatwerk software voor logistiek & transport") |
+| app development | 14 | 18,2 | Bevestigt de app-kans uit sectie 9 verder |
+| maatwerk software voor logistiek | 23 | 23,1 | Zelfde pagina als hierboven |
+| maatwerk software voor zorg | 22 | 22,9 | Exacte-frase-match met de titel van `/maatwerk-software/zorg` |
+| software bedrijven limburg | 13 | 26,3 | Zelfde cluster als "software agency limburg" |
+| start-up branding eindhoven | 24 | 20,5 | Matcht de bestaande "Tech & Startups"-highlight op de Eindhoven-pagina, maar te weinig volume voor een aparte actie |
+| reclamebureau geleen | 23 | 22,3 | Marketing-gerelateerd (Dynique Digital), Geleen-specifiek — geen aparte pagina waard, zou de stad×dienst-matrix heropenen |
+
+**De belangrijkste, direct bruikbare vondst:** "maatwerk software voor de zorg" en "maatwerk software voor logistiek/transport" zijn **letterlijke frase-matches met titels die al bestaan** (`/maatwerk-software/zorg`, `/maatwerk-software/logistiek`) — de content is er, de relevantie klopt, maar de pagina's stonden op positie 15-23 in plaats van pagina 1. Zelfde patroon als de Limburg-pagina eerder: goede content, te weinig interne links.
+
+**Concreet gefixt:** de "industries"-chips op alle 10 locatiepagina's (`CityPage.tsx`) waren platte tekst, terwijl 7 van de gebruikte labels (Bouw, Installatie, Zorg, Logistiek, Horeca, Retail, Landbouw) exact overeenkomen met een bestaande sectorpagina. Die chips zijn nu links geworden — een `SECTOR_LINKS`-mapping in `CityPage.tsx` koppelt elk label aan zijn sectorpagina waar dat bestaat. Resultaat: **7 nieuwe interne links naar Bouw, 8 naar Zorg, 7 naar Horeca, 7 naar Retail/Detailhandel, 5 naar Logistiek, 1 naar Installatiebedrijf, 1 naar Agrarisch** — in één keer, via het gedeelde component. Duitse/Engelse labels (op de Aken-pagina) zijn bewust niet gelinkt, want de sectorpagina's zijn Nederlandstalig.
+
+**Ook gefixt:** "web development" en "app development" toegevoegd aan de `keywords` van `/diensten/web/layout.tsx`.
+
+**Bewust niet opgepakt:** "start-up branding eindhoven" en "reclamebureau geleen" — te weinig volume, en een aparte pagina zou opnieuw de stad×dienst-matrix openen die steeds is vermeden.

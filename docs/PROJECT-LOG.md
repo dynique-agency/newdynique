@@ -24,6 +24,22 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later, derde deel) — Industries-chips op locatiepagina's gelinkt naar bestaande sectorpagina's
+
+**Aanleiding:** "zoek nog meer onbenutte zoektermen zoals deze" — volledige herscan van dezelfde GSC-export (`Zoekopdrachten.csv`), nu gesorteerd op positie i.p.v. alleen gefilterd op volume, om niets te missen.
+
+**Belangrijkste vondst:** "maatwerk software voor de zorg" (positie 22,9) en "maatwerk software voor logistiek/transport" (positie 14,6-23,1) zijn **letterlijke frase-matches** met de titels van `/maatwerk-software/zorg` en `/maatwerk-software/logistiek`, die al bestaan. Zelfde patroon als eerder bij de Limburg-pagina: goede, relevante content, maar te weinig interne links om over de streep naar pagina 1 te trekken.
+
+**Concreet gefixt:** de "industries"-chips op alle 10 locatiepagina's (`src/components/CityPage.tsx`) waren platte tekst. 7 van de gebruikte labels (Bouw, Installatie, Zorg, Logistiek, Horeca, Retail, Landbouw) matchen exact een bestaande sectorpagina — nu gekoppeld via een nieuwe `SECTOR_LINKS`-mapping. Resultaat, geteld via grep: 7 nieuwe links naar Bouw, 8 naar Zorg, 7 naar Horeca, 7 naar Retail/Detailhandel, 5 naar Logistiek, 1 naar Installatiebedrijf, 1 naar Agrarisch — in één component-wijziging. Duitse/Engelse industry-labels (Aken-pagina) bewust ongelinkt gelaten, want de sectorpagina's zijn Nederlandstalig.
+
+**Ook:** "web development" en "app development" toegevoegd aan `diensten/web/layout.tsx`'s keywords (bevestigt de eerder gevonden app-kans verder, klein volume maar sterke positie).
+
+**Bewust niet opgepakt:** "start-up branding eindhoven" en "reclamebureau geleen" — te weinig volume, en een aparte pagina zou de stad×dienst-matrix heropenen die steeds bewust vermeden is.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige build schoon. Live gecontroleerd dat de chips daadwerkelijk als link renderen (bijv. Maastricht → Horeca/Retail/Zorg).
+
+---
+
 ## 2026-09-09 (later, tweede deel) — `/diensten/web` verstevigd (herontdekte "app laten maken"-kans) + duidelijke dienst-routing op locatiepagina's
 
 **Aanleiding, twee delen:**
