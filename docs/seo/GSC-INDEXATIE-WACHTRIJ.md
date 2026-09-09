@@ -2,6 +2,32 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-09 (later) — inhoudelijk gewijzigde pagina's, geen nieuwe URL's
+
+Geen nieuwe pagina's, maar deze kregen substantieel nieuwe content (FAQ, social proof, interne links) — de moeite waard om opnieuw te laten crawlen:
+
+- [ ] `/diensten/web`
+  ```
+  https://dynique.nl/diensten/web
+  ```
+- [ ] `/diensten/marketing`
+  ```
+  https://dynique.nl/diensten/marketing
+  ```
+- [ ] `/diensten/drone`
+  ```
+  https://dynique.nl/diensten/drone
+  ```
+- [ ] `/eerste-website`
+  ```
+  https://dynique.nl/eerste-website
+  ```
+- [ ] `/vervanging`
+  ```
+  https://dynique.nl/vervanging
+  ```
+- [ ] Alle 10 locatiepagina's (nieuwe "wat kunnen we bouwen"-blok + gelinkte sector-chips) — zie de batch hieronder voor de losse URL's.
+
 ## Batch 2026-09-09 — 3 nieuwe sectorpagina's
 
 - [ ] `/maatwerk-software/horeca`

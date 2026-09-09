@@ -24,6 +24,23 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-09 (later, vierde deel) — `/eerste-website`, `/vervanging` en `/diensten/drone` verstevigd
+
+**Aanleiding:** "zoek nog meer, en verstevig ook de andere zwakke pagina's" — de GSC-data was inmiddels na 3 scans grotendeels uitgeput (zie hieronder), dus de nadruk lag op het tweede deel: overige pagina's zonder FAQ/social-proof controleren.
+
+**Herscan van `Pagina's.csv` (niet eerder zo bekeken):** `/eerste-website` (14 vertoningen, **positie 6**) en `/vervanging` (6 vertoningen, **positie 5,5**) bleken opvallend goed te ranken — beter dan bijna alles anders op de site — met 0 kliks en, zoals de rest van de site tot voor kort, geen FAQ of social proof. Zelfde "goede positie, geen vertrouwenselementen"-patroon als eerder bij `/diensten/web`.
+
+**Uitgevoerd:**
+- **`src/app/eerste-website/page.tsx`** — FAQ toegevoegd (prijs, "ik weet nog niet wat ik wil" — expliciet gerustgesteld want dit is een eerste-website-doelgroep, doorlooptijd, groeipad naar meer), plus ingebedde social proof. Bestaand leadformulier (met afspraak-datum/tijd-kiezer) ongemoeid gelaten, alleen toegevoegd vóór de footer.
+- **`src/app/vervanging/page.tsx`** — FAQ toegevoegd, met een eerlijk antwoord op de meest voor de hand liggende zorg bij een redesign: "verlies ik mijn Google-rankings?" (nee, mits goed aangepakt — bestaande content/URL's worden bekeken, redirects waar nodig).
+- **`src/app/diensten/drone/page.tsx`** — miste nog de hele FAQ/social-proof-behandeling die `web` en `marketing` al hadden. FAQ toegevoegd, **bewust geen prijs verzonnen** (in tegenstelling tot de software-/website-prijzen heeft de eigenaar geen dronetarief gegeven) — het antwoord zegt eerlijk dat de prijs van de opdracht afhangt en na een gesprek volgt, geen "vanaf €X" verzonnen.
+
+**Ook gecheckt, bewust niets aan gedaan:** `/diensten` (index) is al een zuivere doorverwijspagina naar de 4 dienstpagina's, heeft geen eigen FAQ nodig. `/investering` bestaat al specifiek om de prijsvraag te beantwoorden — een aparte FAQ zou zichzelf herhalen. `/gratis-checklist` is een opt-in-pagina (ander doel dan een zoekgerichte landingspagina), lagere prioriteit.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige build schoon. Live gecontroleerd op alle 3 pagina's: FAQ's tonen correct, geen JSON-LD-conflicten.
+
+---
+
 ## 2026-09-09 (later, derde deel) — Industries-chips op locatiepagina's gelinkt naar bestaande sectorpagina's
 
 **Aanleiding:** "zoek nog meer onbenutte zoektermen zoals deze" — volledige herscan van dezelfde GSC-export (`Zoekopdrachten.csv`), nu gesorteerd op positie i.p.v. alleen gefilterd op volume, om niets te missen.
