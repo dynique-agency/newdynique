@@ -26,7 +26,7 @@ const data: CityData = {
   vibe: "Brainport heeft een eigen taal: pragmatisch, design-gedreven en internationaal. Eindhovense ondernemers verwachten geen poespas maar wel kwaliteit en snelheid. Wij snappen die mentaliteit. Of het nu gaat om een tech-startup, een design-studio op Strijp, een scale-up rond Flight Forum of een gevestigde MKB-onderneming: we bouwen sites die passen bij de Brainport-cultuur.",
   accent: "#d4a574",
   postal: "5611 — 5658",
-  travelTime: "Sittard 40 min · Maastricht 65 min",
+  travelTime: "Vaals ± 1u20",
   highlights: [
     { n: "01", title: "Tech & Startups", desc: "Snelle, modern ogende sites voor tech startups, scale-ups en spin-offs in Brainport en op High Tech Campus." },
     { n: "02", title: "Design & Creatief", desc: "Award-winning sites voor design studio's, creatieve bureaus en culturele instellingen op Strijp-S en in het centrum." },
@@ -37,7 +37,7 @@ const data: CityData = {
   faq: [
     { q: "Werken jullie ook voor tech-startups?", a: "Ja, regelmatig. We snappen lean product development, MVP-thinking en de behoefte aan snelle iteratie. Vaak werken we met startups in fases: eerst een landing page, dan een product site, dan een volledig platform." },
     { q: "Kunnen jullie volledig in het Engels werken?", a: "Absoluut. Veel van onze Eindhovense klanten communiceren standaard in het Engels. Alle projectcommunicatie, documentatie en oplevering kan in het Engels." },
-    { q: "Hoe ver is Eindhoven vanaf jullie standplaats?", a: "Eindhoven ligt op 40–65 minuten rijden vanaf onze Limburgse basis. Voor de intake komen we graag langs op High Tech Campus, Strijp-S of waar je werkt." },
+    { q: "Hoe ver is Eindhoven vanaf jullie standplaats?", a: "Vanaf ons kantoor in Vaals is dat ongeveer 1u20 rijden. Voor een website of een gerichte tool werken we volledig op afstand. Bij een groter maatwerktraject starten we digitaal en plannen we, zodra dat voor het project zinvol is, een bezoek op High Tech Campus, Strijp-S of waar je werkt." },
     { q: "Hebben jullie ervaring met internationale klanten?", a: "Ja. We bouwen regelmatig sites voor klanten met klanten in heel Europa of wereldwijd. Engelstalig, soms meertalig (NL/EN/DE), altijd met aandacht voor internationale conventies." },
   ],
 };

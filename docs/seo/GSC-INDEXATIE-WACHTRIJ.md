@@ -2,6 +2,34 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-09 (nog later, tweede deel) — 3 nieuwe stadspagina's (Breda/Vlissingen/Goes) + Eindhoven-herpositionering
+
+Evidence-based selectie (zie `docs/seo/GSC-FINDINGS-2026-09.md` §11 en `STRATEGY.md` §2b) — geen blanket-dekking van Limburg/Brabant/Zeeland, alleen de 3 steden met een meetbaar GSC-signaal:
+
+- [ ] `/locaties/breda`
+  ```
+  https://dynique.nl/locaties/breda
+  ```
+- [ ] `/locaties/vlissingen`
+  ```
+  https://dynique.nl/locaties/vlissingen
+  ```
+- [ ] `/locaties/goes`
+  ```
+  https://dynique.nl/locaties/goes
+  ```
+
+Inhoudelijk gewijzigd (reistijd-metadata en FAQ herschreven naar het digitale-intake/op-afstand-model — geen nieuwe URL, wel de moeite van herindexatie):
+
+- [ ] `/locaties/eindhoven`
+  ```
+  https://dynique.nl/locaties/eindhoven
+  ```
+- [ ] `/locaties` (nieuwe "Verder in Nederland"-sectie + herziene FAQ)
+  ```
+  https://dynique.nl/locaties
+  ```
+
 ## Batch 2026-09-09 (nog later) — belangrijkste: dubbele BreadcrumbList gefixt
 
 `/diensten/processen/limburg` had tot nu toe een dubbele, botsende BreadcrumbList (structurele bug, zie `docs/PROJECT-LOG.md`) — dit is de pagina met het hoogste vertoningsaantal van de site (579), dus deze herindexatie is de belangrijkste van deze hele lijst:
@@ -213,7 +241,7 @@ Ook de moeite waard (kreeg voor het eerst interne links naar binnen toe):
   ```
   https://dynique.nl/investering
   ```
-- [ ] `/diensten/processen`
+- [x] `/diensten/processen`
   ```
   https://dynique.nl/diensten/processen
   ```

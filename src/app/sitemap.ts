@@ -61,6 +61,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/locaties/tongeren`,     lastModified: now, changeFrequency: 'monthly', priority: 0.68 },
     { url: `${base}/locaties/maasmechelen`, lastModified: now, changeFrequency: 'monthly', priority: 0.68 },
     { url: `${base}/locaties/sint-truiden`, lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
+    { url: `${base}/locaties/breda`,        lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
+    { url: `${base}/locaties/goes`,         lastModified: now, changeFrequency: 'monthly', priority: 0.62 },
+    { url: `${base}/locaties/vlissingen`,   lastModified: now, changeFrequency: 'monthly', priority: 0.62 },
 
     // ── Overige landingspagina's ──
     { url: `${base}/eerste-website`,  lastModified: now, changeFrequency: 'monthly', priority: 0.78 },

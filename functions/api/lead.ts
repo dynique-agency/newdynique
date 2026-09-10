@@ -15,6 +15,7 @@ const SOURCE_LABELS: Record<string, string> = {
   homepage: "de homepage",
   contact: "de contactpagina",
   checklist: "de gratis checklist",
+  landingspagina: "een landingspagina",
 };
 
 function esc(v?: string): string {

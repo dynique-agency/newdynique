@@ -207,7 +207,7 @@ export function CostIcon({ k }: { k: string }) {
 }
 
 export function Field({
-  label, value, onChange, placeholder, type = "text", required = false,
+  label, value, onChange, placeholder, type = "text", required = false, autoComplete,
 }: {
   label: string;
   value: string;
@@ -215,6 +215,7 @@ export function Field({
   placeholder?: string;
   type?: string;
   required?: boolean;
+  autoComplete?: string;
 }) {
   const id = useId();
   return (
@@ -227,6 +228,7 @@ export function Field({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        autoComplete={autoComplete}
         className="w-full bg-black/40 border border-white/10 text-white/90 text-sm font-light tracking-wide px-4 py-3 rounded outline-none focus:border-white/30 transition-colors duration-300 placeholder:text-white/25"
       />
     </div>

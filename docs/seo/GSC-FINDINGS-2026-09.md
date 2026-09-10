@@ -145,4 +145,41 @@ Dezelfde `Zoekopdrachten.csv`, nu volledig doorgesorteerd op positie (niet allee
 
 **Ook gefixt:** "web development" en "app development" toegevoegd aan de `keywords` van `/diensten/web/layout.tsx`.
 
+---
+
+## 11. Update 2026-09-09 (nog later) — evidence-check op "bouw landingspagina's voor heel Limburg, Brabant, Zeeland"
+
+**Aanleiding:** verzoek van de eigenaar om kwalitatieve landingspagina's te bouwen "voor in heel Limburg, Brabant, Zeeland etc., allemaal steden, regio's, vang al het zoekvolume op ook waar de concurrentie nog niet zit." Voordat dit werd uitgevoerd, eerst gecheckt of `Zoekopdrachten.csv` en `Paginas.csv` dit daadwerkelijk onderbouwen — een blanket-aanpak zonder die check zou precies het scaled-content-risico uit `STRATEGY.md` §5 herhalen, nu op grotere schaal.
+
+**Wat de data laat zien:**
+
+| Stad/regio | Vertoningen | Positie | Duiding |
+|---|---|---|---|
+| Eindhoven (bestaande pagina) | 6.555 (som van ~40 queries) | 40–90 | Vrijwel uitsluitend brede "webdesign/website laten maken eindhoven"-termen — een oververzadigde markt met gevestigde lokale bureaus. **0 clicks** op de hele pagina (7.794 vertoningen, positie 61,76) — dit is het patroon dat een blanket-aanpak zou herhalen, niet oplossen. |
+| Breda | 35 | 59,2 | Alleen op de nauwere term "maatwerk software breda" — geen enkele brede "webdesign/website"-query, in tegenstelling tot Eindhoven |
+| Vlissingen | 11 | 39,6 | "maatwerk software vlissingen" — kleine, maar reële en relatief goed geplaatste vraag |
+| Goes | 8 | 37,25 | "maatwerk software goes" — zelfde patroon |
+| Tilburg, 's-Hertogenbosch, Middelburg, Terneuzen, Roosendaal, Helmond, Oss | 0 | — | Geen enkele query in de export, voor geen enkele variant. "Brabant" en "Zeeland" als kale provincienaam: ook 0. |
+| Kerkrade | 16 | 46,3 | Enige NL-Limburgse stad buiten de bestaande 10 met een meetbaar signaal, maar zwakker dan Breda/Vlissingen/Goes |
+| Geleen | ~10 queries, 90–100 vertoningen elk | **15,6–37,98** | Sterk signaal, maar valt al onder de bestaande `/locaties/sittard`-pagina (title/intro noemen Geleen al expliciet) — geen nieuwe pagina nodig, al gedekt |
+
+**Conclusie, en wat dat betekent voor de scope:** een blanket "alle steden in Limburg/Brabant/Zeeland" is met deze data niet te onderbouwen — voor het overgrote deel van de mogelijke steden bestaat schlicht geen zoekvraag om op te bouwen, en het enige bestaande precedent op die afstand (Eindhoven) laat 0 clicks zien ondanks 7.794 vertoningen. **Wel gebouwd, op basis van echt signaal:** `/locaties/breda`, `/locaties/vlissingen`, `/locaties/goes` — de enige drie steden buiten de bestaande 10 met een meetbare, reële zoekvraag. Zie `STRATEGY.md` §2b voor de volledige afweging en de repositionering (digitale intake / op-afstand-model) die deze steden en Eindhoven meekregen.
+
 **Bewust niet opgepakt:** "start-up branding eindhoven" en "reclamebureau geleen" — te weinig volume, en een aparte pagina zou opnieuw de stad×dienst-matrix openen die steeds is vermeden.
+
+---
+
+## 12. Update 2026-09-10 — nieuwe export gecheckt: te vroeg voor een echte meting, en dat klopt ook
+
+**Bron:** tweede export door de eigenaar aangeleverd op 2026-09-10, ruwe bestanden in [`data/gsc-export-2026-09-10/`](./data/gsc-export-2026-09-10/). Filter dit keer "Afgelopen 3 maanden" i.p.v. "Afgelopen 6 maanden" bij de eerste export — dat klinkt als een groter verschil dan het is: `Diagram.csv` start in **beide** exports op exact dezelfde datum (2026-06-17), dus het werkelijke databereik wordt niet door die instelling bepaald maar door wanneer Search Console voor `dynique.nl` is gaan meten. Met andere woorden: dit is in de praktijk hetzelfde rollende venster, nu simpelweg 1 dag verder (laatste datapunt 2026-09-06 → 2026-09-07).
+
+**Volledige regel-voor-regel diff tussen beide exports gedraaid** (`Zoekopdrachten.csv`, `Paginas.csv`, `Landen.csv`) — bevindingen:
+
+- **Geen enkele nieuwe zoekterm.** Elke rij in de diff is een term die al in de vorige export stond, nu met een paar vertoningen meer of minder (ruis van één extra/verschoven dag in een 90-dagen-venster). Geen "Breda"/"Vlissingen"/"Goes"/"Genk"/"Tongeren"/"Maasmechelen"-term komt nieuw voor.
+- **Geen van de nieuwe locatiepagina's staat in `Paginas.csv`** (Top-pagina's, ~29 rijen) — logisch: die pagina's zijn <24 uur voor deze export live gegaan. Zoekmachine-effecten van nieuwe/gewijzigde pagina's zijn typisch pas na dagen tot weken zichtbaar in Search Console, nooit binnen uren.
+- **Eindhoven blijft het bekende patroon volgen, nu met meer volume:** 7.794 → 8.114 vertoningen, positie nagenoeg gelijk (61,76 → 61,71), **nog steeds 0 clicks.** Bevestigt sectie 11 eerder dan dat het iets nieuws zegt.
+- **"maatwerk software limburg" stabiel:** 288 → 291 vertoningen, positie 12,72 → 12,71 — binnen ruis, geen trend zichtbaar op 1 dag.
+- **Homepage licht positief, binnen ruis:** CTR 15,7% → 16,38%, positie 3,48 → 3,45. Te klein en te vroeg om als signaal te lezen.
+- **Nederland/België-totalen nagenoeg ongewijzigd:** NL 29→30 clicks / 12.034→12.483 vertoningen / positie 52,6→52,65; België 11→12 clicks / 275→278 vertoningen / positie 8,17→8,12.
+
+**Conclusie: dit bevestigt vooral dat er niets kapot is gegaan, niet dat er al iets gewerkt heeft.** Dat is een goed, geen slecht resultaat — precies zoals verwacht bij een venster van 1 dag na livegang. Geen wijziging aan `STRATEGY.md`'s inhoudelijke conclusies nodig; wél het al langer openstaande advies bevestigd: **een echte meting (heeft Breda/Vlissingen/Goes vertoningen? is Eindhovens 0-click-patroon doorbroken door de eerlijkere op-afstand-boodschaging?) is pas zinvol over 2-4 weken**, niet nu. Deze export is als provenance gearchiveerd, geen actie ondernomen op basis van "nieuwe" bevindingen — er zijn er geen.

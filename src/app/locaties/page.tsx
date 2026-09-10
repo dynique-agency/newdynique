@@ -26,9 +26,15 @@ const BE = [
   { city: "Sint-Truiden", href: "/locaties/sint-truiden", region: "Limburgse fruitstreek", hook: "Fruitteelt, verwerking en handel in het hart van Haspengouw." },
 ];
 
+const VERDER_NL = [
+  { city: "Breda", href: "/locaties/breda", region: "West-Brabant", hook: "Logistiek, agrofood en de robotica-cluster op Slingerweg." },
+  { city: "Goes", href: "/locaties/goes", region: "Zuid-Beveland", hook: "Regionaal centrum met agrifood en fruitteelt als ruggengraat." },
+  { city: "Vlissingen", href: "/locaties/vlissingen", region: "Zeeland", hook: "Scheepsbouw, industrie en logistiek rond North Sea Port." },
+];
+
 const FAQ = [
   {
-    q: "Werken jullie ook buiten deze 10 locaties?",
+    q: "Werken jullie ook buiten deze locaties?",
     a: "Deze pagina's zijn plekken waar we al aantoonbaar actief zijn of een concreet, onderbouwd verhaal hebben — geen volledige dekkingskaart. Buiten deze lijst werken we net zo goed, in heel Nederland en België; overleg gewoon even wat voor jouw locatie mogelijk is.",
   },
   {
@@ -37,7 +43,11 @@ const FAQ = [
   },
   {
     q: "Komen jullie ook op locatie langs?",
-    a: "Ja, altijd — de gratis procesanalyse gebeurt het liefst op de plek waar het werk gebeurt, of dat nu in Maastricht, Aken of Genk is. Vanuit Vaals is dat voor al deze locaties goed te doen.",
+    a: "In Zuid-Limburg, de Euregio en Belgisch Limburg komen we voor de gratis procesanalyse het liefst gewoon langs — dat is voor ons vanuit Vaals een kwestie van minuten tot ruim een uur. Voor Brabant en Zeeland werken we andersom: we starten digitaal, en zodra een project groot genoeg is om een bezoek te rechtvaardigen plannen we die graag in.",
+  },
+  {
+    q: "En als ik verder weg zit, in Brabant of Zeeland bijvoorbeeld?",
+    a: "Voor een website of een gerichte tool maakt dat niets uit — dat traject doen we volledig op afstand, van intake tot oplevering. Bij een groter maatwerktraject beginnen we ook digitaal; blijkt het project groot genoeg, dan komen we na de intake alsnog persoonlijk langs.",
   },
 ];
 
@@ -93,9 +103,10 @@ export default function LocatiesPage() {
               </h1>
               <p className="mt-10 max-w-2xl text-white/55 text-base lg:text-xl font-light leading-[1.85] tracking-wide anim delay-2">
                 Dynique is gevestigd in Vaals, op het drielandenpunt van Nederland, België en Duitsland — en dat merk je
-                aan waar we werken. Geen callcenter-vestigingen of nepadressen: elke locatie hieronder is een plek waar
-                we daadwerkelijk komen, met een eigen verhaal over de sector, de mensen en de manier van zakendoen die
-                er hoort.
+                aan waar we werken. Geen callcenter-vestigingen of nepadressen: elke locatie hieronder heeft een eigen
+                verhaal over de sector, de mensen en de manier van zakendoen die er hoort. In Zuid-Limburg, de Euregio
+                en Belgisch Limburg komen we het liefst gewoon langs; verderop in Nederland werken we net zo graag voor
+                je, met een digitale intake als vertrekpunt.
               </p>
             </div>
           </div>
@@ -139,6 +150,37 @@ export default function LocatiesPage() {
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
               {BE.map((c, i) => (
+                <Link key={c.href} href={c.href}
+                  className="group bg-[#050505] p-8 lg:p-10 anim relative overflow-hidden" style={{ transitionDelay: `${i * 0.06}s` }}>
+                  <div className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700" style={{ background: ACCENT }} />
+                  <p className="text-white/35 text-[10px] tracking-[0.3em] font-light uppercase mb-3">{c.region}</p>
+                  <h2 className="text-white text-2xl font-extralight tracking-wide mb-4">{c.city}</h2>
+                  <p className="text-white/50 text-sm font-light leading-relaxed tracking-wide mb-6">{c.hook}</p>
+                  <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.3em] font-light" style={{ color: ACCENT }}>
+                    BEKIJK
+                    <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* VERDER IN NEDERLAND */}
+        <section className="relative py-20 lg:py-28 border-t border-white/5">
+          <div className="container mx-auto px-6 lg:px-12">
+            <p className="text-[10px] tracking-[0.5em] font-light uppercase mb-6 anim" style={{ color: ACCENT }}>
+              Verder in Nederland
+            </p>
+            <p className="max-w-2xl text-white/50 text-sm font-light leading-relaxed tracking-wide mb-10 anim delay-1">
+              Deze steden liggen twee tot ruim twee uur rijden van Vaals — te ver om standaard fysiek langs te komen bij
+              elk traject. Voor een website of een gerichte tool werken we daarom volledig op afstand. Bij een groter
+              maatwerktraject starten we digitaal en plannen we een bezoek zodra dat voor het project zinvol is.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+              {VERDER_NL.map((c, i) => (
                 <Link key={c.href} href={c.href}
                   className="group bg-[#050505] p-8 lg:p-10 anim relative overflow-hidden" style={{ transitionDelay: `${i * 0.06}s` }}>
                   <div className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700" style={{ background: ACCENT }} />

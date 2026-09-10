@@ -6,6 +6,95 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-10 (later, tweede deel) — Alle 10 bevindingen uit de kritische scan van de laatste 3 homepage-secties opgelost
+
+**Aanleiding:** na de kritische scan van Statement Strip/Contact/FAQ (zie vorige entry) — "verbeter het volledig."
+
+**1+2. Lead-capture had geen gegarandeerd afleverpad.** `functions/api/lead.ts` kreeg een `landingspagina`-source-label. **`src/components/LeadFormSection.tsx`** — het gedeelde leadformulier op alle 13 stads- en 7 sectorpagina's plus 6 losse pagina's (26 plekken totaal) — had helemaal geen `/api/lead`-aanroep, alleen WhatsApp. Nu toegevoegd (fire-and-forget, blokkeert de WhatsApp-flow niet), en `TELEFOON` is verplicht gemaakt zodat de API's contact-eis (e-mail óf telefoon) altijd gehaald wordt.
+
+**3. Geen zichtbare bevestiging na versturen.** Homepage-contactformulier (`src/app/page.tsx`) redirect nu, net als `/gratis-checklist`, na 600ms naar `/bedankt?name=...` — zelfde patroon, live geverifieerd. `LeadFormSection.tsx` (blijft op dezelfde pagina, WhatsApp opent apart) toont nu een inline bevestigingskaart ("Bericht klaargezet.") in plaats van stilzwijgend niets te doen — live geverifieerd op `/locaties/breda`.
+
+**4. Geen prijsindicatie-FAQ op de homepage.** Toegevoegd aan `faqs` in `page.tsx`, exact dezelfde formulering als de gedeelde `PRICE_FAQ` op alle stads-/sectorpagina's.
+
+**5. FAQ-rich-results bestaan niet meer sinds mei 2026.** Geverifieerd via web search: Google heeft de `FAQPage`-rich-result op 7 mei 2026 volledig uit Search gehaald. `STRATEGY.md` (§4, FAQ-bullet) bijgewerkt met deze correctie — de JSON-LD blijft staan (onschadelijk, mogelijk nog relevant voor AI-antwoorden), maar de "rich snippet in SERP"-aanname is niet meer waar.
+
+**6. `#contact` en `#faq` hadden geen `scroll-margin`.** Bij een anchor-sprong (`START JE PROJECT` → `#contact`) verdween de sectiekop deels achter de fixed header. `scroll-mt-24` toegevoegd aan beide secties (zelfde waarde als `LeadFormSection.tsx`'s `#analyse` al gebruikte) — live geverifieerd: kop nu volledig vrij van de header.
+
+**7. Geen social proof vlak bij het formulier.** Compacte vertrouwensregel toegevoegd boven "Vertel ons over je project" (5.0 · geverifieerde reviews, 30+ klanten — bestaande, al elders gebruikte cijfers, niets nieuws verzonnen).
+
+**8. "Fysiek" zonder afstandscontext.** Conditionele hint toegevoegd onder de afsprakenkeuze zodra "Fysiek" gekozen wordt, met dezelfde digitale-intake-boodschap als de nieuwe locatiepagina's.
+
+**9. Geen `autoComplete`-attributen.** Toegevoegd aan alle naam/e-mail/bedrijf/telefoon-velden op de homepage én in `LeadFormSection.tsx` (via een nieuwe optionele prop op de gedeelde `Field`-component in `processen/Visuals.tsx`).
+
+**10. Vage WERKGEBIED-regel.** Herschreven naar "Heel Nederland & België — op locatie in Zuid-Limburg, digitale intake voor de rest", consistent met de Breda/Vlissingen/Goes-positionering van gisteren.
+
+**Geverifieerd:** `npx tsc --noEmit` en volledige `npm run build` schoon. Homepage-formulier end-to-end getest in de browser (invullen → versturen → redirect naar `/bedankt?name=...`). `LeadFormSection`-bevestiging getest op `/locaties/breda` (WhatsApp-popup gestubd om de test niet te laten navigeren — in een echte browser met een vertrouwde klik gebeurt dat niet). Scroll-margin op `#contact`/`#faq` bevestigd via `getComputedStyle` (96px, > headerhoogte).
+
+**Nog niet gepusht** — samen met al het overige werk van deze sessie staat dit nog lokaal, geen commits richting `origin/main`.
+
+---
+
+## 2026-09-10 (later) — Tweede GSC-export gecheckt: bevestigt stabiliteit, nog geen meetbaar effect
+
+**Aanleiding:** eigenaar leverde een nieuwe Search Console-export aan (`/Users/john/Downloads/dynique-2/`), gevraagd om de SEO-documentatie bij te werken.
+
+**Uitgevoerd:** export gearchiveerd in `docs/seo/data/gsc-export-2026-09-10/`, volledige regel-voor-regel diff gedraaid tegen de vorige export (2026-09-08) op `Zoekopdrachten.csv`, `Paginas.csv` en `Landen.csv`. Bevindingen vastgelegd in `docs/seo/GSC-FINDINGS-2026-09.md` §12.
+
+**Kern van de bevinding:** dit is in de praktijk hetzelfde rollende 90-dagen-venster als de vorige export, nu 1 dag verder — geen nieuwe zoektermen, geen van de nieuwe locatiepagina's (Breda/Vlissingen/Goes) al zichtbaar in de top-pagina's, Eindhoven's 0-click-patroon ongewijzigd (nu 8.114 vertoningen i.p.v. 7.794, nog steeds 0 clicks). Dat is een verwacht, geen zorgwekkend resultaat: de pagina's/fixes van gisteren (2026-09-09/10) zijn te vers om al in Search Console te zien. Geen wijziging aan `STRATEGY.md` nodig — het bevestigt het al langer openstaande advies om over 2-4 weken pas een echte meting te doen.
+
+---
+
+## 2026-09-10 — Diensten-dropdown in de header klapte in voordat je 'm kon bereiken
+
+**Aanleiding:** gebruiker meldde: "als ik met mijn muis over de header ga op diensten kan ik niks selecteren van die vier in de dropdown want als ik met mijn muis daarnaartoe wil gaan klapt die weer in."
+
+**Root cause:** `src/components/Header.tsx` — de dropdown onder "DIENSTEN" gebruikte `mt-4` (margin) om een zichtbare tussenruimte te maken tussen de trigger en het dropdown-paneel. Omdat het paneel `position: absolute` is (dus buiten de normale flow van de omringende `onMouseEnter`/`onMouseLeave`-wrapper valt), telt die 16px tussenruimte niet mee als onderdeel van een hoverbaar element — zodra de muis daar doorheen beweegt op weg naar de dropdown, vuurt `onMouseLeave` op de wrapper en sluit het menu, vóórdat de cursor een item kan bereiken. Klassieke "dead zone"-bug bij hover-dropdowns.
+
+**Fix:** `mt-4` (margin, buiten het element) vervangen door `pt-4` (padding, binnen het element) op de buitenste positioneringsdiv, met de zichtbare styling (witte achtergrond/rand/schaduw) verplaatst naar een binnenste div. Resultaat: dezelfde visuele 16px-marge, maar nu een onzichtbare "brug" die gewoon tot de hoverbare box van het element behoort — de muis blijft continu binnen een afstammeling van de wrapper, dus `onMouseLeave` vuurt niet meer voortijdig.
+
+**Geverifieerd:** live in de browser op 1440px breedte — hover op DIENSTEN → dropdown opent → muis bewegen naar "Web & Platformen" (een item in het midden, dus de muis moet echt door de tussenruimte) → dropdown blijft open, item highlight't correct → klik navigeert naar `/diensten/web`. `npx tsc --noEmit` schoon.
+
+---
+
+## 2026-09-09 (nog later, achtste deel) — Volledige mobiel+desktop scan met Playwright CLI
+
+**Aanleiding:** "scan en debug de hele website voor mobiel en desktop met playwright cli." `@playwright/test` toegevoegd als devDependency (was nog niet in het project); een script (niet gecommit, leefde in de scratchpad) bezocht alle 46 routes op 390×844 (mobiel) en 1440×900 (desktop) — 104 checks — en verzamelde console-/netwerkfouten, horizontale overflow, `h1`-aantal, ontbrekende `alt`-teksten en te kleine tik-doelen, plus een full-page screenshot per combinatie.
+
+**Automatische resultaten:** nul horizontale overflow op alle 104 combinaties, nul ontbrekende `alt`-teksten. Twee echte bevindingen, allebei gefixt:
+- **Footer-links (Diensten/Ontdek/Locaties, op élke pagina) hadden maar ~20px tikhoogte** — ruim onder de WCAG 2.2 AA-minimumnorm (24px). Gefixt in `src/components/Footer.tsx`: elke link kreeg `py-1.5`, nu ~32px.
+- **Homepage had 2 `h1`'s** tijdens de eerste 2,2 seconden (de intro-splash bij een nieuw sessiebezoek, `sessionStorage`-gated) — de splash toonde zelf ook een `<h1>DYNIQUE</h1>` naast de bedoelde, sr-only "echte" H1 verderop. Gefixt in `src/app/page.tsx`: splash-tekst is nu een `aria-hidden`-`<div>`, geen `h1`.
+
+**Ontbrekende paginacoverage gevonden en gedicht:** er bleek helemaal **geen custom 404-pagina** te bestaan (`src/app/not-found.tsx` ontbrak) — een kapotte/oude link toonde de kale, ongestylede standaard Next.js-foutpagina zonder header, footer of terugknop. Nieuw `src/app/not-found.tsx` gebouwd, zelfde visuele taal als de rest van de site (Header/Footer, "Deze pagina bestaat niet (meer)."-boodschap, CTA's naar home/portfolio), `robots: noindex`.
+
+**Visuele audit via een 8-agent Workflow** (screenshots van alle 52 routes, mobiel+desktop) meldde 6× "high severity": bijna alle content onder de hero op meerdere locatiepagina's (Goes, Hasselt, Heerlen, Maasmechelen, Maastricht, Sint-Truiden, Sittard) zou onzichtbaar blijven. **Voordat dit als bug werd behandeld: zelf geverifieerd, want alle locatiepagina's draaien op exact dezelfde `CityPage.tsx` — als het een echte bug was zou die overal moeten optreden, niet bij een deel.** Bevestigd via een los diagnostisch Playwright-script met een realistische scroll-door-de-pagina: tegen de **dev-server** (`next dev`) was het resultaat inderdaad instabiel/flaky (soms 0 van de 32 `.anim`-elementen kregen `animate-in`). Tegen een **echte productie-build** (`npm run build` + statisch geserveerd) was het resultaat **9 van de 9 keer perfect stabiel** (37 van de 40 elementen onthuld, geen enkele afwijking). Conclusie: dit is een **React `reactStrictMode: true`-artefact dat alleen in dev optreedt** (dubbele effect-invocatie rond de `IntersectionObserver`-opzet in `CityPage.tsx`) — **geen echte bug, niet aanwezig op de live site.** Geen codewijziging nodig; wel hier vastgelegd zodat een volgende sessie dit niet opnieuw hoeft uit te zoeken als het in `next dev` weer opduikt.
+
+**Bewust niet aangepakt:** de portfolio-video's (`preview.mp4`) lieten in de scan een paar "aborted request"-meldingen zien (met name `/portfolio/auwt-aelse`) — nader onderzocht (`CaseStudyTemplate.tsx`'s `ScrollAwareVideo`) en dit is een verwacht gevolg van Playwright's full-page-screenshot die snel door de pagina scrolt (video komt in/uit beeld, play()/pause() wisselen elkaar af) — geen echte productiebug. Tik-doelen van het DYNIQUE-logo (32px) en de MENU-knop (31px) zitten onder mijn eigen, strengere interne testdrempel (40px) maar ruim boven de daadwerkelijke WCAG AA-norm (24px) — bewust niet verder aangepast.
+
+**Geverifieerd:** `npx tsc --noEmit` schoon, volledige `npm run build` schoon (alle routes, incl. `/locaties/{breda,goes,vlissingen}` en de nieuwe `not-found`-route). Tijdelijke scanscripts en de productie-testserver zijn opgeruimd, niet gecommit.
+
+---
+
+## 2026-09-09 (nog later, zevende deel) — Breda/Vlissingen/Goes op basis van echt signaal, geen blanket Limburg/Brabant/Zeeland
+
+**Aanleiding:** "kan je nog meer kwalitatieve landingspagina's maken voor in heel limburg brabant zeeland etc, allemaal steden, regio's, vang al het zoekvolume op ook waar de concurrentie nog niet zit." Vóór uitvoering eerst gecheckt of dit door de eigen GSC-data wordt onderbouwd (zie `docs/seo/GSC-FINDINGS-2026-09.md` §11) — een blanket-aanpak zou het scaled-content-risico uit `STRATEGY.md` §5 herhalen op een grotere schaal, en de bestaande Eindhoven-pagina (7.794 vertoningen, positie 61,76, **0 clicks**) is al het levende bewijs dat "meer steden, verder weg" zonder onderliggend signaal niet werkt.
+
+**Wat de data wél liet zien:** van alle Brabantse/Zeeuwse steden hebben alleen Breda (35 vertoningen, positie 59,2), Vlissingen (11, positie 39,6) en Goes (8, positie 37,25) een meetbaar signaal — allemaal op de smallere term "maatwerk software [stad]", niet op de brede, verzadigde "webdesign"-termen die Eindhoven laten mislukken. Tilburg, 's-Hertogenbosch, Middelburg, Terneuzen, Roosendaal, Helmond, Oss en de kale provincienamen: nul vertoningen.
+
+**Aan de eigenaar voorgelegd en beantwoord:** gevraagd of er een zakelijke reden was voor Brabant/Zeeland specifiek. Antwoord: bij grotere maatwerktrajecten start altijd een digitale intake, bezoek pas daarna als het project dat rechtvaardigt; kleinere trajecten (website, gerichte tool) kunnen volledig op afstand. Dit loste het geografische bezwaar (reisafstand 188-223km, geverifieerd via afstand.net) op — niet door de afstand te negeren, maar door de pitch eerlijk aan te passen. Tweede vraag beantwoord: losse stadspagina's per stad (i.p.v. één regiopagina), dus toegepast op de 3 steden met signaal.
+
+**Uitgevoerd:**
+- **`src/app/locaties/{breda,vlissingen,goes}/page.tsx`** (nieuw, 3 bestanden) — zelfde `CityPage.tsx`-patroon als de bestaande 10, elk met geverifieerde, echte regionale content: Breda (logistiek/agrofood, Slingerweg-robotica-cluster, Creative District De Strip — bron: gemeentelijke economische visie), Vlissingen (Damen-scheepswerven, North Sea Port, ~200 havenbedrijven, energietransitie), Goes (regiofunctie Zuid-Beveland, Landbouwcentrum Zeeland, fruitteelt 15% van het NL-totaal). Nieuwe accentkleuren (#6366f1, #22d3ee, #4ade80) om overlap met bestaande stadspagina's te vermijden. FAQ's verwoorden expliciet het digitale-intake/op-afstand-model in plaats van de fysiek-bezoek-belofte te forceren.
+- **`src/app/locaties/eindhoven/page.tsx`** — `travelTime` gecorrigeerd van "Sittard 40 min · Maastricht 65 min" (afstand vanaf Eindhoven tót andere Limburgse steden — misleidend, verhulde de eigen reisafstand) naar `Vaals ± 1u20` (geverifieerd, 104km). FAQ "Hoe ver is Eindhoven..." herschreven met dezelfde eerlijke digitale-intake/op-afstand-boodschap.
+- **`src/app/locaties/page.tsx`** — nieuwe sectie "Verder in Nederland" (Breda/Goes/Vlissingen, met eigen intro die het op-afstand-model uitlegt), hero-paragraaf genuanceerd (niet meer "elke locatie is een plek waar we altijd komen"), FAQ uitgebreid met een aparte vraag over verder-weg-gelegen locaties, "10 locaties" → "deze locaties" (klopte niet meer bij 13).
+- **`src/components/Footer.tsx`**, **`src/app/sitemap.ts`** — 3 nieuwe locaties toegevoegd aan de respectievelijke lijsten.
+- **`docs/seo/GSC-FINDINGS-2026-09.md`** §11, **`docs/seo/STRATEGY.md`** §2b (nieuw) en §5-tabel, **`docs/seo/GSC-INDEXATIE-WACHTRIJ.md`** — volledige onderbouwing en indexatie-batch vastgelegd.
+
+**Bewust niet gedaan:** Kerkrade (16 vertoningen, positie 46 — zwakker signaal dan de 3 gebouwde steden) en elke stad zonder GSC-signaal (Tilburg, 's-Hertogenbosch, Middelburg, Terneuzen, Roosendaal, Helmond, Oss). Geleen kreeg geen eigen pagina — valt al onder de bestaande `/locaties/sittard` (die Geleen al expliciet noemt) en heeft daar al een sterk signaal (positie 15,6-38).
+
+**Geverifieerd:** alle 3 nieuwe pagina's en de gewijzigde Eindhoven/`/locaties`-pagina's lokaal gecontroleerd via `next dev` (content, reistijd-metadata, geen consolefouten). Nog te doen: `npx tsc --noEmit` en volledige `npm run build` vóór deploy.
+
+---
+
 ## 2026-09-08 (later) — Eigen lead-plan: FAQ + prijsindicatie + social proof op 5 pagina's
 
 **Aanleiding:** na het afwegen (en afwijzen, zie hieronder) van betaalde backlink-diensten: *"laten we dan voor nu even ons eigen plan trekken en zorgen dat we daarmee zoveel mogelijk aanvragen krijgen."* Nieuw document `docs/seo/LEAD-PLAN-2026-09.md` legt dit vast als expliciet op *aanvragen* geoptimaliseerd (niet alleen rankings) — de eerste actie daarin overlapt bewust met `STRATEGY.md` Fase 1, omdat dezelfde verdieping (FAQ/prijs/social proof) zowel de SEO-concurrentiegaten als de conversiegaten sluit.

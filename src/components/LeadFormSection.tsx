@@ -11,24 +11,44 @@ export default function LeadFormSection({
   accent,
   openingLine,
   messagePrompt = "Waar loopt het vast? (optioneel)",
+  source = "landingspagina",
 }: {
   accent: string;
   openingLine: string;
   messagePrompt?: string;
+  /** Herkenbare bron voor de e-mailmelding aan Dynique zelf — verschijnt niet aan de bezoeker. */
+  source?: string;
 }) {
   const [form, setForm] = useState({ name: "", company: "", phone: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Fire-and-forget: dit is een aanvullende e-mailmelding, geen blokkade voor de WhatsApp-flow
+    // hieronder (die werkt altijd, ook zonder dat Resend is geconfigureerd — zie LEADCAPTURE-SETUP.md).
+    fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        source,
+        name: form.name,
+        phone: form.phone,
+        company: form.company,
+        description: form.message ? `${messagePrompt}\n${form.message}` : undefined,
+      }),
+    }).catch(() => {});
+
     let m = `${openingLine}\n\n`;
     m += `👤 Naam: ${form.name || "(niet ingevuld)"}\n`;
     if (form.company) m += `🏢 Bedrijf: ${form.company}\n`;
     if (form.phone) m += `📞 Telefoon: ${form.phone}\n`;
     if (form.message) m += `\n📋 ${messagePrompt}\n${form.message}\n`;
     openWhatsApp(m);
+    setSubmitted(true);
   };
 
   return (
@@ -64,13 +84,33 @@ export default function LeadFormSection({
           </div>
 
           <div className="lg:col-span-7 anim delay-1">
+            {submitted ? (
+              <div className="relative p-8 lg:p-10 rounded-lg border border-white/[0.1] bg-white/[0.015] text-center"
+                style={{ boxShadow: `0 40px 90px -50px ${accent}55` }}>
+                <div className="w-12 h-12 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ background: `${accent}22` }}>
+                  <svg className="w-6 h-6" fill="none" stroke={accent} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-white text-xl font-light tracking-wide mb-3">Bericht klaargezet.</h3>
+                <p className="text-white/60 text-sm font-light leading-relaxed tracking-wide max-w-sm mx-auto">
+                  Je WhatsApp-bericht staat klaar in een nieuwe tab — stuur 'm daar nog even af. We reageren meestal dezelfde werkdag.
+                </p>
+                <p className="mt-6 text-white/40 text-xs font-light tracking-wide">
+                  Geen tab geopend?{" "}
+                  <a href="https://wa.me/31624572572" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">Open WhatsApp opnieuw</a>
+                  {" "}of mail{" "}
+                  <a href="mailto:info@dynique.nl" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">info@dynique.nl</a>
+                </p>
+              </div>
+            ) : (
             <form onSubmit={submit}
               className="relative p-8 lg:p-10 rounded-lg border border-white/[0.1] bg-white/[0.015]"
               style={{ boxShadow: `0 40px 90px -50px ${accent}55` }}>
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="NAAM *" value={form.name} onChange={set("name")} placeholder="Je naam" required />
-                <Field label="BEDRIJF" value={form.company} onChange={set("company")} placeholder="Bedrijfsnaam" />
-                <Field label="TELEFOON" value={form.phone} onChange={set("phone")} placeholder="06 ..." type="tel" />
+                <Field label="NAAM *" value={form.name} onChange={set("name")} placeholder="Je naam" required autoComplete="name" />
+                <Field label="BEDRIJF" value={form.company} onChange={set("company")} placeholder="Bedrijfsnaam" autoComplete="organization" />
+                <Field label="TELEFOON *" value={form.phone} onChange={set("phone")} placeholder="06 ..." type="tel" required autoComplete="tel" />
                 <div className="hidden sm:block" />
               </div>
               <div className="mt-5">
@@ -94,6 +134,7 @@ export default function LeadFormSection({
                 <a href="mailto:info@dynique.nl" className="text-white/70 hover:text-white underline underline-offset-4 transition-colors">info@dynique.nl</a>
               </p>
             </form>
+            )}
           </div>
         </div>
       </div>

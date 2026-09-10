@@ -168,25 +168,31 @@ export default function Header({ variant = 'dark' }: HeaderProps) {
                   </svg>
                   <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#d4a574] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
+                {/* pt-4 (not mt-4) keeps the gap to the trigger inside this element's own hoverable
+                    box — with a margin instead, that gap belongs to no element, the wrapper's
+                    onMouseLeave fires while crossing it, and the dropdown closes before the
+                    pointer ever reaches it. */}
                 <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-72 bg-white border border-black/10 shadow-2xl transition-all duration-300 ${dienstenOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+                  className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 w-72 transition-all duration-300 ${dienstenOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                   aria-hidden={!dienstenOpen}
                 >
-                  {dienstenItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      tabIndex={dienstenOpen ? undefined : -1}
-                      className="group/item relative block overflow-hidden px-6 py-4 border-b border-black/5 last:border-0 hover:bg-black/[0.025] transition-colors duration-200"
-                    >
-                      <span className="absolute left-0 top-0 bottom-0 w-0 group-hover/item:w-[3px] transition-all duration-300" style={{ background: "#d4a574" }} />
-                      <div className="flex items-center gap-2 mb-1">
-                        {item.primary && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#d4a574" }} />}
-                        <div className="text-xs tracking-[0.2em] font-light text-black uppercase">{item.label}</div>
-                      </div>
-                      <div className="text-xs text-black/55 font-light tracking-wide">{item.desc}</div>
-                    </Link>
-                  ))}
+                  <div className="bg-white border border-black/10 shadow-2xl">
+                    {dienstenItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        tabIndex={dienstenOpen ? undefined : -1}
+                        className="group/item relative block overflow-hidden px-6 py-4 border-b border-black/5 last:border-0 hover:bg-black/[0.025] transition-colors duration-200"
+                      >
+                        <span className="absolute left-0 top-0 bottom-0 w-0 group-hover/item:w-[3px] transition-all duration-300" style={{ background: "#d4a574" }} />
+                        <div className="flex items-center gap-2 mb-1">
+                          {item.primary && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#d4a574" }} />}
+                          <div className="text-xs tracking-[0.2em] font-light text-black uppercase">{item.label}</div>
+                        </div>
+                        <div className="text-xs text-black/55 font-light tracking-wide">{item.desc}</div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
               {[

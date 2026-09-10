@@ -29,6 +29,9 @@ export default function Footer() {
     { label: "Tongeren", href: "/locaties/tongeren" },
     { label: "Maasmechelen", href: "/locaties/maasmechelen" },
     { label: "Sint-Truiden", href: "/locaties/sint-truiden" },
+    { label: "Breda", href: "/locaties/breda" },
+    { label: "Goes", href: "/locaties/goes" },
+    { label: "Vlissingen", href: "/locaties/vlissingen" },
   ];
 
   return (
@@ -52,13 +55,13 @@ export default function Footer() {
 
             {/* Diensten links */}
             <div className="md:col-span-3">
-              <p className="text-black/30 text-xs tracking-[0.25em] font-light mb-5 uppercase">Diensten</p>
-              <div className="space-y-3">
+              <p className="text-black/30 text-xs tracking-[0.25em] font-light mb-3 uppercase">Diensten</p>
+              <div className="-my-1.5">
                 {diensten.map((d) => (
                   <Link
                     key={d.href}
                     href={d.href}
-                    className="block text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
+                    className="block py-1.5 text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
                   >
                     {d.label}
                   </Link>
@@ -68,13 +71,13 @@ export default function Footer() {
 
             {/* Ontdek links */}
             <div className="md:col-span-2">
-              <p className="text-black/30 text-xs tracking-[0.25em] font-light mb-5 uppercase">Ontdek</p>
-              <div className="space-y-3">
+              <p className="text-black/30 text-xs tracking-[0.25em] font-light mb-3 uppercase">Ontdek</p>
+              <div className="-my-1.5">
                 {ontdek.map((d) => (
                   <Link
                     key={d.href}
                     href={d.href}
-                    className="block text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
+                    className="block py-1.5 text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
                   >
                     {d.label}
                   </Link>
@@ -84,13 +87,13 @@ export default function Footer() {
 
             {/* Locaties links */}
             <div className="md:col-span-3">
-              <Link href="/locaties" className="block text-black/30 hover:text-black/60 text-xs tracking-[0.25em] font-light mb-5 uppercase transition-colors duration-300">Locaties</Link>
-              <div className="space-y-3">
+              <Link href="/locaties" className="block text-black/30 hover:text-black/60 text-xs tracking-[0.25em] font-light mb-3 uppercase transition-colors duration-300">Locaties</Link>
+              <div className="-my-1.5">
                 {locaties.map((d) => (
                   <Link
                     key={d.href}
                     href={d.href}
-                    className="block text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
+                    className="block py-1.5 text-black/60 hover:text-black text-sm font-light tracking-wide transition-colors duration-300"
                   >
                     {d.label}
                   </Link>
