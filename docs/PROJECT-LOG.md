@@ -6,6 +6,22 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-11 (nog later) — Beroeps-/nichewebsites onderzocht (6/6 afgeraden), pijnpuntcontent gecheckt, eigenaar-takenlijst
+
+**Aanleiding:** "Maar wie zegt dat jij alleen naar de gsc data moet zoeken? je mag gewoon overal kijken" — terechte tegenwerping op de eerdere sector-verkenning, die vooral op GSC leunde. GSC kan per definitie niets laten zien over niches waar de site nog nooit voor verscheen.
+
+**Uitgevoerd:** Google Trends (NL, 12 maanden) gecheckt voor een paar termen (grotendeels vlak/geen signaal), en vervolgens een Workflow (6 agents) met WebSearch-concurrentieonderzoek voor 6 kandidaat-niches: fotografen, coaches/therapeuten, muzikanten/artiesten, bruiloftsleveranciers, zzp-bouw/klussenbedrijven, kappers/beauty. **Alle 6 AFRADEN.**
+
+**Kernbevinding, belangrijker dan de individuele afwijzingen:** "website laten maken voor [beroep]" is een goedkoop te produceren, industrieel SEO-paginatype — meerdere bureaus (flexamedia.nl, eigenwebsite.nl, websitessmaken.nl) hebben letterlijk tientallen bijna-identieke pagina's per beroep. Voor elke onderzochte niche: 15-25+ met naam genoemde concurrenten, vaak ook site-builder-templates (Wix/Squarespace) én gespecialiseerde boutique-bureaus. De rode draad in alle afwijzingen: Dynique heeft geen eigen portfolio-case in die niche, waardoor elke pagina zou verzanden in dezelfde generieke "mooie, snelle website"-tekst als de concurrentie — precies het naam-swap-risico dat deze hele sessie is vermeden.
+
+**Derde as gecheckt (GSC, direct):** pijnpunt-/vergelijkingspagina's (`excel-vervangen-door-software`, `maatwerk-software-vs-saas`, `wat-kost-maatwerk-software`, `low-code-vs-maatwerk-software`, `/investering`) staan niet eens in `Paginas.csv` — geen meetbare vertoningen. Geen falen (STRATEGY.md noemde dit altijd al "noodzakelijk, geen doorbraak verwacht"), maar ook geen as met nu beschikbaar volume.
+
+**Conclusie na in totaal 12 onderzochte kandidaten (6 sectoren + 6 niches), allemaal afgeraden:** contentuitbreiding is voor nu grotendeels uitgeput als hefboom. De grootste onaangeboorde winst ligt niet meer in content maar in autoriteit/vertrouwen — zie het nieuwe `docs/EIGENAAR-TAKEN.md`.
+
+**Nieuw: `docs/EIGENAAR-TAKEN.md`** — alle eigenaar-only acties uit `STRATEGY.md` §9, `GA4-SETUP.md` en `LEADCAPTURE-SETUP.md` op één plek, geprioriteerd. Hoogste prioriteit: de leadcapture-backend (Resend/KV/env vars) — zonder die setup faalt de e-mailmelding van elk formulier nu stil, bij elke aanvraag.
+
+---
+
 ## 2026-09-11 (later) — Dorpen-voorstel afgewogen, 6-sector-verkenning (alle afgeraden), resterende reinforcements afgerond
 
 **Aanleiding:** "laten we landingspaginas bouwen voor dorpen in heel nederland" — voordat dit werd uitgevoerd, eerst getoetst aan de data (zie hieronder), wat leidde tot een andere richting.
