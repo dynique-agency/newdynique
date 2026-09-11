@@ -28,6 +28,10 @@ const FAQ = [
     q: "Kunnen jullie koppelen met systemen die we al gebruiken?",
     a: "In veel gevallen wel. We kijken tijdens de intake naar wat je al gebruikt (boekhouding, CRM, betaalproviders) en bouwen de koppeling mee, zodat je niet met twee systemen naast elkaar werkt.",
   },
+  {
+    q: "Doen jullie ook web application development door heel Nederland?",
+    a: "Ja. We werken vanuit Zuid-Limburg, maar bouwen web apps voor bedrijven door heel Nederland en België — bijvoorbeeld in Maastricht en Heerlen, en op afstand overal daarbuiten.",
+  },
 ];
 
 export default function WebDienst() {
@@ -55,7 +59,7 @@ export default function WebDienst() {
     { title: "Bedrijfswebsite", desc: "Professionele website die bezoekers overtuigt en converteert. Mobile-first, razendsnel, SEO-ready." },
     { title: "Portfolio website", desc: "Laat je werk spreken. Strak ontwerp, perfecte presentatie, gebouwd om indruk te maken." },
     { title: "Webshop / E-commerce", desc: "Verkoop online met een webshop die soepel werkt op elk device. Betaalkoppelingen inbegrepen." },
-    { title: "Web applicatie", desc: "Custom software in de browser. Klantportalen, boekingssystemen, interactieve dashboards." },
+    { title: "Web applicatie", desc: "Custom web application development in de browser. Klantportalen, boekingssystemen, interactieve dashboards." },
     { title: "Landingpages", desc: "Gerichte pagina's voor campagnes, ads of specifieke doelgroepen. Maximale conversie." },
     { title: "Redesign & migratie", desc: "Verouderde site? Wij bouwen hem volledig opnieuw: sneller, mooier, beter convertend." },
   ];

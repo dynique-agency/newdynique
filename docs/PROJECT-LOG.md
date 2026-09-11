@@ -6,6 +6,24 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-11 (later) — Dorpen-voorstel afgewogen, 6-sector-verkenning (alle afgeraden), resterende reinforcements afgerond
+
+**Aanleiding:** "laten we landingspaginas bouwen voor dorpen in heel nederland" — voordat dit werd uitgevoerd, eerst getoetst aan de data (zie hieronder), wat leidde tot een andere richting.
+
+**Dorpen-voorstel afgewogen en afgeraden, met bewijs:** de GSC-export bevat toevallig al vertoningen voor 19 losse dorpen verspreid over heel Nederland (Zeeland t/m Friesland, Brabant t/m Limburg) zonder dat daar ooit een pagina voor bestond — op 1 na (Nuenen) staan ze allemaal op positie 39-100. Een natuurlijk experiment dat laat zien dat er simpelweg geen zoekvolume op dorpsniveau bestaat, los van het reisafstand-argument. Bovendien exact het patroon van Google's Scaled Content Abuse-beleid. Eigenaar koos voor het alternatief: **focus op sectoren i.p.v. geografie.**
+
+**6-sector-verkenning (Workflow, 7 agents) — alle 6 AFRADEN:** schoonmaakbedrijven, hoveniers, autobedrijven, kinderopvang, fysiotherapie en makelaars onderzocht met dezelfde concurrentietoets als eerder bij installatiebedrijf/Heerlen-SEO. Vier hebben wettelijk/branchebreed gestandaardiseerde kernprocessen die het maatwerk-argument ondermijnen (NEN2075, RDW/APK, GGD/LRK/BKR, VECOZO/GDS) — precies waarom daar al 10-15+ gespecialiseerde SaaS-spelers bestaan. In 3 van de 6 bleek concurrent **Appfront** al een vrijwel identieke maatwerk-propositie te voeren. Geen nieuwe sectorpagina gebouwd — bewust geen "minst slechte optie" gekozen uit een zwakke lijst.
+
+**Eigenaar koos vervolgens: terug naar de resterende punten uit `CONTENT-UITBREIDING-2026-09-11.md` §B/§D.** Uitgevoerd:
+- `src/app/diensten/processen/page.tsx` — "bedrijfsapplicatie"/"maatwerk applicatie" verwerkt in de hero-paragraaf (stond op 0 vermeldingen).
+- `src/app/diensten/web/page.tsx` — "custom web application development" verwerkt in de service-omschrijving + nieuwe FAQ die linkt naar het feit dat we door heel Nederland werken (Maastricht/Heerlen als voorbeeld).
+- Belgische zoekopdrachten apart her-mined (§25): **geen enkele** Belgische plaatsnaam komt voor in de hele export, terwijl België wél de beste positie van alle landen heeft (8,12 vs. NL's 52,65) — Belgisch verkeer komt kennelijk via generieke termen, niet stad-specifiek. Geen actiepunt, wel vastgelegd voor de volgende meetronde.
+- Bouw/calculatie (§13) bevestigd als al voldoende gedekt — gesloten zonder wijziging.
+
+**Geverifieerd:** `npx tsc --noEmit` schoon. Volledige onderbouwing in `docs/seo/CONTENT-UITBREIDING-2026-09-11.md` (update van 2026-09-11 later).
+
+---
+
 ## 2026-09-11 — Strenge contentanalyse (30 voorstellen) + eerste 7 reinforcements doorgevoerd
 
 **Aanleiding:** "laten we verder bouwen aan kwalitatieve landingspagina's en zoekvolume dekken waar het nu nog niet opgevangen wordt door de grote spelers. maak een strenge analyse en kom met 30 concrete kwalitatieve voorstellen."

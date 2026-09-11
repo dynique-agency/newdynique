@@ -406,7 +406,8 @@ export default function ProcessenDienst() {
 
                 <p className="hv hv-3 text-white/55 text-lg lg:text-xl font-extralight tracking-wide leading-relaxed max-w-xl mb-12">
                   Je bedrijf groeit, maar achter de schermen gaat er nog steeds te veel tijd verloren.
-                  Wij bouwen maatwerk software voor bedrijven die vastlopen in standaardpakketten —
+                  Wij bouwen maatwerk software — of je het nu bedrijfssoftware, een bedrijfsapplicatie
+                  of een maatwerk applicatie noemt — voor bedrijven die vastlopen in standaardpakketten —
                   van MKB tot grotere bedrijven — gebouwd rondom hoe jullie écht werken.
                 </p>
 

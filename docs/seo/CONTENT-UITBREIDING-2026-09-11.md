@@ -68,3 +68,18 @@ Het "seo bureau/marketingbureau Heerlen"-cluster (325+186+226+129+128+63+57+29+2
 - **7 meet-/vervolgacties** (§D) — geen directe bouwacties, wel nodig om dit proces scherp te houden.
 
 **Geen van deze 30 punten vereist een volledig nieuwe stads- of sectorpagina** — dat is een bewuste uitkomst van de analyse, niet een keuze vooraf: de data ondersteunt dit keer vooral verdieping van wat er al staat, niet uitbreiding in aantal pagina's.
+
+---
+
+## Update 2026-09-11 (later) — resterende punten afgerond, 2 extra bevindingen
+
+**Uitgevoerd:**
+- **§12/§27 samengevoegd:** `/diensten/web` kreeg de Engelse term "custom web application development" verwerkt in de service-omschrijving + een nieuwe FAQ die expliciet linkt naar het feit dat we door heel Nederland werken (met Maastricht/Heerlen als concrete voorbeelden) — zodat de sterke "mobile app development"/"app development"-posities (142 resp. 14 vertoningen, positie 7,7 en 18,2) een natuurlijke doorverwijzing krijgen i.p.v. op zichzelf te blijven staan.
+- **§15:** `/diensten/processen` bevatte "bedrijfsapplicatie"/"maatwerk applicatie" nog nul keer (geverifieerd) — nu natuurlijk verwerkt in de hero-paragraaf.
+- **§13 (bouw/calculatie):** bevestigd dat dit al voldoende gedekt is (pains-array bevat al een expliciete "CALCULATIE"-regel) — geen wijziging nodig, punt gesloten.
+
+**§25 (Belgische her-mining) uitgevoerd — onverwachte bevinding:** in de volledige `Zoekopdrachten.csv` (257 rijen) komt **geen enkele** Belgische plaatsnaam voor (Genk, Hasselt, Tongeren, Maasmechelen, Sint-Truiden, Antwerpen, Brussel, Leuven, Luik: 0 treffers) — terwijl `Landen.csv` België op 12 clicks / 278 vertoningen / **positie 8,12** laat zien, verreweg de beste positie van alle landen op de site (NL: positie 52,65). **Conclusie:** het Belgische verkeer komt kennelijk vrijwel volledig via generieke termen binnen (niet via stad-specifieke zoekopdrachten), en converteert per vertoning veel efficiënter dan Nederlands verkeer. Dit is geen actiepunt maar wel een relevant gegeven: de 5 bestaande BE-stadspagina's (Genk/Hasselt/Tongeren/Maasmechelen/Sint-Truiden) laten nog geen stad-specifiek zoeksignaal zien in deze export — te vroeg (recent gebouwd) of Belgisch zoekgedrag is hier eenvoudigweg minder stad-specifiek dan Nederlands zoekgedrag. Bewaren voor de volgende meetronde.
+
+**Nog open, bewust niet opgepakt:** §16, §17, §18, §24, §26, §28, §29, §30 — stuk voor stuk expliciet "geen actie nu" of proces-/bewaakpunten, geen losse bouwacties (zie originele toelichting per punt hierboven).
+
+**Sectorverkenning (apart traject, zelfde dag):** 6 kandidaat-sectoren (schoonmaakbedrijven, hoveniers, autobedrijven, kinderopvang, fysiotherapie, makelaars) onderzocht met dezelfde concurrentietoets als bij installatiebedrijf/Heerlen-SEO — **alle zes AFRADEN.** Vier hebben wettelijk/branchebreed gestandaardiseerde kernprocessen (NEN2075, RDW/APK, GGD/LRK/BKR, VECOZO/GDS) die het maatwerk-argument ondermijnen; in 3 van de 6 bleek concurrent **Appfront** al een vrijwel identieke maatwerk-propositie te voeren (Hovenier, Fysiotherapie, breder vastgoed/PropTech). Geen nieuwe sectorpagina gebouwd. Volledige onderbouwing per sector in de sessie-transcript, niet apart gearchiveerd als los bestand.
