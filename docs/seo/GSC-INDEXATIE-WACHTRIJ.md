@@ -30,6 +30,26 @@ Actuele lijst van pagina's die nog handmatig geïndexeerd moeten worden via Sear
   ```
   https://dynique.nl/locaties/sint-truiden
   ```
+- [ ] `/locaties/kerkrade` (nieuw, 2026-09-11)
+  ```
+  https://dynique.nl/locaties/kerkrade
+  ```
+- [ ] `/locaties/landgraaf` (nieuw, 2026-09-11)
+  ```
+  https://dynique.nl/locaties/landgraaf
+  ```
+- [ ] `/locaties/brunssum` (nieuw, 2026-09-11)
+  ```
+  https://dynique.nl/locaties/brunssum
+  ```
+- [ ] `/locaties/heerlen` (FAQ herschreven — linkt nu naar de 3 nieuwe pagina's i.p.v. blanket-claim)
+  ```
+  https://dynique.nl/locaties/heerlen
+  ```
+- [ ] `/locaties` (3 nieuwe locaties toegevoegd aan het overzicht)
+  ```
+  https://dynique.nl/locaties
+  ```
 
 ---
 

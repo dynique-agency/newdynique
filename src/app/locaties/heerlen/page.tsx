@@ -35,7 +35,7 @@ const data: CityData = {
   ],
   industries: ["Zorg", "Bouw", "Installatie", "Technologie", "Retail", "Horeca", "Onderwijs", "Sport", "Mobiliteit", "Welzijn", "Vastgoed"],
   faq: [
-    { q: "Werken jullie voor bedrijven in heel Parkstad?", a: "Ja. We werken voor klanten in Heerlen, Kerkrade, Landgraaf, Brunssum en de omliggende gemeenten. De korte afstanden in Parkstad maken persoonlijk contact eenvoudig." },
+    { q: "Werken jullie voor bedrijven in heel Parkstad?", a: "Ja. We werken voor klanten in Heerlen en de hele regio — ook in Kerkrade, Landgraaf en Brunssum, die elk hun eigen pagina hebben. De korte afstanden in Parkstad maken persoonlijk contact eenvoudig." },
     { q: "Kennen jullie de zorgsector?", a: "Absoluut. We bouwen regelmatig websites voor zorgaanbieders, met aandacht voor toegankelijkheid (WCAG), AVG-compliance en heldere communicatie naar patiënten of cliënten." },
     { q: "Wat is de typische investering in Heerlen?", a: "Dat hangt af van de scope — een eenvoudige website is iets anders dan een webshop of maatwerk software. Bij het eerste gesprek krijg je een concreet voorstel met een vaste prijs, geen slag in de lucht." },
     { q: "Kunnen jullie ook ondersteunen bij subsidie-trajecten?", a: "We werken niet zelf in subsidies, maar denken graag mee als je aanspraak maakt op innovatiesubsidies of digitaliseringsregelingen in Limburg." },

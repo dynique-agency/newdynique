@@ -13,6 +13,9 @@ const ACCENT = "#d4a574";
 const NL_DE = [
   { city: "Maastricht", href: "/locaties/maastricht", region: "Zuid-Limburg", hook: "Horeca, retail en juridische dienstverlening rond Vrijthof en Wyck." },
   { city: "Heerlen", href: "/locaties/heerlen", region: "Parkstad Limburg", hook: "Zorgpraktijken en bedrijven op bedrijventerrein Avantis." },
+  { city: "Kerkrade", href: "/locaties/kerkrade", region: "Parkstad Limburg", hook: "De oudste mijnstad van Nederland en grensoverschrijdend Eurode." },
+  { city: "Landgraaf", href: "/locaties/landgraaf", region: "Parkstad Limburg", hook: "MKB op de bedrijventerreinen, plus Pinkpop en SnowWorld." },
+  { city: "Brunssum", href: "/locaties/brunssum", region: "Parkstad Limburg", hook: "Thuisbasis van NAVO-hoofdkwartier JFC Brunssum." },
   { city: "Sittard", href: "/locaties/sittard", region: "Westelijke Mijnstreek", hook: "Toeleveranciers rond Chemelot en retail in de binnenstad." },
   { city: "Eindhoven", href: "/locaties/eindhoven", region: "Brainport", hook: "Tech-startups en design-studio's rond Strijp-S en High Tech Campus." },
   { city: "Aken", href: "/locaties/aken", region: "Duitsland — Euregio", hook: "Meertalig (DE/NL/EN) voor bedrijven die de grens over werken." },

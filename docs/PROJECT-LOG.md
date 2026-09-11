@@ -6,6 +6,25 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-11 (nog later, tweede deel) — Kerkrade, Landgraaf, Brunssum: 3 nieuwe Parkstad-locatiepagina's
+
+**Aanleiding:** "ik denk dat er nog veel meer plaatselijke landingspaginas moeten maken, hoezo doen we dat niet, kerkrade, landgraaf, heerlen, brunssum" — terechte correctie op de eerder afgewezen "dorpen in heel Nederland". Deze 3 zijn geen willekeurige dorpen maar echte Parkstad-gemeenten (28k-46k inwoners) vlak naast de al bestaande, werkende Heerlen-pagina.
+
+**Data eerst gecheckt, dit keer met ander resultaat dan bij de dorpen:** Kerkrade heeft echt (bescheiden) GSC-signaal (17 vertoningen, positie 46). Landgraaf en Brunssum: geen GSC-signaal, maar WebSearch-concurrentiecheck (`webdesign kerkrade`, `webdesign landgraaf brunssum`) laat een klein, reëel lokaal marktje zien (6-8 bureaus per stad) — vergelijkbaar met het patroon dat destijds Genk/Tongeren/Maasmechelen rechtvaardigde, niet met de dorpen (die nul concurrentie én nul volume hadden).
+
+**Uitgevoerd — 3 nieuwe pagina's** (`src/app/locaties/{kerkrade,landgraaf,brunssum}/page.tsx`), elk met geverifieerde, unieke lokale content:
+- **Kerkrade** — oudste mijnstad van Nederland, Rolduc-abdij (900+ jaar, grootste/oudste abdijcomplex Benelux), Eurode (unieke formele grensoverschrijdende samenwerking met Herzogenrath sinds 1998).
+- **Landgraaf** — 3 bedrijventerreinen met 200+ bedrijven/4.750+ banen, Pinkpop (€12 miljoen economische spin-off), SnowWorld, Mondo Verde.
+- **Brunssum** — JFC Brunssum, één van de drie operationele NAVO-hoofdkwartieren, ~21 miljoen euro/jaar lokale bestedingen, internationale gemeenschap.
+
+Reisafstanden geverifieerd (afstand.net/WebSearch): Kerkrade 15 min, Landgraaf 24 min, Brunssum ± 27 min vanaf Vaals.
+
+**Ook bijgewerkt:** `sitemap.ts`, `Footer.tsx`, `/locaties`-hub (3 nieuwe kaarten in de Parkstad-cluster), en de Heerlen-FAQ die voorheen blanket claimde "we werken in Heerlen, Kerkrade, Landgraaf, Brunssum" — nu linkt die naar de eigen pagina's van elke gemeente i.p.v. de claim te herhalen zonder onderbouwing.
+
+**Geverifieerd:** alle 3 pagina's + de gewijzigde Heerlen/`/locaties`-pagina's live gecontroleerd via `next dev`, `npx tsc --noEmit` en volledige `npm run build` schoon (16 locatiepagina's totaal in de sitemap).
+
+---
+
 ## 2026-09-11 (nog later) — Beroeps-/nichewebsites onderzocht (6/6 afgeraden), pijnpuntcontent gecheckt, eigenaar-takenlijst
 
 **Aanleiding:** "Maar wie zegt dat jij alleen naar de gsc data moet zoeken? je mag gewoon overal kijken" — terechte tegenwerping op de eerdere sector-verkenning, die vooral op GSC leunde. GSC kan per definitie niets laten zien over niches waar de site nog nooit voor verscheen.

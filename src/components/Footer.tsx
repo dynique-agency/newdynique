@@ -32,6 +32,9 @@ export default function Footer() {
     { label: "Breda", href: "/locaties/breda" },
     { label: "Goes", href: "/locaties/goes" },
     { label: "Vlissingen", href: "/locaties/vlissingen" },
+    { label: "Kerkrade", href: "/locaties/kerkrade" },
+    { label: "Landgraaf", href: "/locaties/landgraaf" },
+    { label: "Brunssum", href: "/locaties/brunssum" },
   ];
 
   return (
