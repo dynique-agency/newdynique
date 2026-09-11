@@ -2,6 +2,39 @@
 
 Doorlopende lijst van nieuwe/gewijzigde pagina's om handmatig te laten indexeren via Search Console (**URL-inspectie → "Indexering aanvragen"** — GSC ondersteunt geen bulk-actie, dus dit blijft één-voor-één). Elke URL staat in een eigen blokje, zodat je 'm apart kunt kopiëren zonder de rest mee te selecteren. Vink af zodra je een URL hebt aangevraagd. Nieuwe pagina's worden hieronder toegevoegd zodra ze live staan, niet in een apart bestand.
 
+## Batch 2026-09-11 — reinforcement van 7 bestaande pagina's (geen nieuwe URL's)
+
+Uitvoering van de eerste 4 (§A) plus direct samenhangende (§B) voorstellen uit `CONTENT-UITBREIDING-2026-09-11.md` — allemaal wijzigingen aan bestaande, al geïndexeerde pagina's (title/FAQ/intro), geen nieuwe URL's. Wel de moeite van herindexatie, met name de 2 pagina's met een gewijzigde `<title>`:
+
+- [ ] `/maatwerk-software/installatiebedrijf` (title gewijzigd + montage-terminologie)
+  ```
+  https://dynique.nl/maatwerk-software/installatiebedrijf
+  ```
+- [ ] `/maatwerk-software/logistiek` (title gewijzigd naar "Ritplanning software...")
+  ```
+  https://dynique.nl/maatwerk-software/logistiek
+  ```
+- [ ] `/diensten/drone` (FAQ uitgebreid met Venlo/Weert/Roermond)
+  ```
+  https://dynique.nl/diensten/drone
+  ```
+- [ ] `/locaties/maastricht` (intro + nieuwe FAQ over apps/webapplicaties)
+  ```
+  https://dynique.nl/locaties/maastricht
+  ```
+- [ ] `/locaties/heerlen` (intro + nieuwe FAQ over apps/SEO/marketing)
+  ```
+  https://dynique.nl/locaties/heerlen
+  ```
+- [ ] `/locaties/sittard` (nieuwe FAQ over SEO/marketing)
+  ```
+  https://dynique.nl/locaties/sittard
+  ```
+- [ ] `/diensten/marketing` (nieuwe FAQ over lokale SEO Heerlen/Sittard-Geleen)
+  ```
+  https://dynique.nl/diensten/marketing
+  ```
+
 ## Batch 2026-09-09 (nog later, tweede deel) — 3 nieuwe stadspagina's (Breda/Vlissingen/Goes) + Eindhoven-herpositionering
 
 Evidence-based selectie (zie `docs/seo/GSC-FINDINGS-2026-09.md` §11 en `STRATEGY.md` §2b) — geen blanket-dekking van Limburg/Brabant/Zeeland, alleen de 3 steden met een meetbaar GSC-signaal:

@@ -39,6 +39,7 @@ const data: CityData = {
     { q: "Hebben jullie ervaring met B2B-industrie?", a: "Zeker. We bouwen technische B2B sites voor toeleveranciers en industriële dienstverleners. Helder, vakkundig en gericht op kwalitatieve leads." },
     { q: "Kunnen jullie ook meertalig bouwen voor Duitse klanten?", a: "Ja. Met VDL Nedcar en grensbedrijven is Duitse content vaak gewenst. We bouwen meertalig (NL/DE) of volledig Duits indien nodig." },
     { q: "Wat als ik al een website heb?", a: "We doen ook redesigns en migraties. We analyseren wat werkt, wat niet, en bouwen vanaf daar verder — zonder verlies van SEO-waarde." },
+    { q: "Doen jullie ook SEO of online marketing voor bedrijven in Sittard-Geleen?", a: "Ja. Via Dynique Digital verzorgen we ook SEO en online marketing — als losse dienst of als aanvulling op je website. Neem gerust contact op om te kijken wat past." },
   ],
   relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };

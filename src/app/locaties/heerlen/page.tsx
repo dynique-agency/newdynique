@@ -22,7 +22,7 @@ const data: CityData = {
   cityShort: "Heerlen",
   region: "Parkstad Limburg",
   tagline: "Maatwerk software en webdesign voor het hart van Parkstad.",
-  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen maatwerk software en websites die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector.",
+  intro: "Heerlen is in beweging: van industriestad naar creatieve hub. Wij bouwen maatwerk software, websites en web apps die meebewegen met die transformatie — voor zorgaanbieders, retailers in het centrum, technische bedrijven op Avantis en de groeiende creatieve sector. Naast bouwen kunnen we ook de zichtbaarheid ervan verzorgen: SEO en online marketing horen net zo goed bij wat we doen.",
   vibe: "Parkstad heeft karakter: nuchter, ondernemend en met een eigen identiteit. Geen poespas, wel kwaliteit. Onze klanten in Heerlen waarderen heldere afspraken, korte lijnen en een website die gewoon werkt. We kennen het verschil tussen het Schinkelkwartier, de Bongerd en Heerlerheide — en zorgen dat jouw website precies de juiste doelgroep aanspreekt.",
   accent: "#a78bfa",
   postal: "6411 — 6446",
@@ -39,6 +39,7 @@ const data: CityData = {
     { q: "Kennen jullie de zorgsector?", a: "Absoluut. We bouwen regelmatig websites voor zorgaanbieders, met aandacht voor toegankelijkheid (WCAG), AVG-compliance en heldere communicatie naar patiënten of cliënten." },
     { q: "Wat is de typische investering in Heerlen?", a: "Dat hangt af van de scope — een eenvoudige website is iets anders dan een webshop of maatwerk software. Bij het eerste gesprek krijg je een concreet voorstel met een vaste prijs, geen slag in de lucht." },
     { q: "Kunnen jullie ook ondersteunen bij subsidie-trajecten?", a: "We werken niet zelf in subsidies, maar denken graag mee als je aanspraak maakt op innovatiesubsidies of digitaliseringsregelingen in Limburg." },
+    { q: "Bouwen jullie ook apps, en doen jullie ook SEO of marketing voor Heerlense bedrijven?", a: "Ja, allebei. Naast websites en maatwerk software bouwen we ook web apps, en via Dynique Digital verzorgen we SEO en online marketing — als losse dienst of als aanvulling op je website." },
   ],
   relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Maatwerk software voor installatiebedrijven | Dynique",
+  title: "Software installatiebedrijven — planning & werkbonnen | Dynique",
   description:
     "Maatwerk software voor installatiebedrijven: mobiele werkbonnen, planning van monteurs en ploegen, onderhoudscontracten en voorraad. Gebouwd met code, rondom jullie werkwijze. Gratis procesanalyse op locatie.",
   keywords: [

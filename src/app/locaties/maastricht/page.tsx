@@ -22,7 +22,7 @@ const data: CityData = {
   cityShort: "Maastricht",
   region: "Zuid-Limburg",
   tagline: "Maatwerk software en webdesign in de hoofdstad van Limburg.",
-  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen maatwerk software en websites die die elegantie vertalen naar het digitale. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
+  intro: "Een stad waar erfgoed, gastronomie en internationale ondernemers samenkomen. Wij bouwen maatwerk software, websites en web apps die die elegantie vertalen naar het digitale — van een boekingssysteem voor een restaurant tot een klantportaal voor een kantoor. Van Wyck tot Sint Pieter, van Vrijthof tot Sphinxkwartier.",
   vibe: "Maastricht heeft een internationale uitstraling die je website verdient. We snappen de Bourgondische cultuur, de drukke toeristische seizoenen, en de subtiele balans tussen traditie en vernieuwing. Of je nu een restaurant runt aan de Maas, een boutique in Wyck, een advocatenkantoor aan de Maaskade of een internationaal bedrijf in Randwyck: wij vertalen jouw merk naar een website die past bij de stad én converteert.",
   accent: "#d4a574",
   postal: "6211 — 6229",
@@ -39,6 +39,7 @@ const data: CityData = {
     { q: "Spreken jullie ook Engels, Duits of Frans?", a: "Ja. Maastricht is een internationale stad en wij bouwen regelmatig meertalige websites. We werken samen met native vertalers voor professioneel resultaat in elke taal." },
     { q: "Kennen jullie de Maastrichtse markt?", a: "We werken al jaren voor ondernemers in Zuid-Limburg en kennen de bezoekersstromen, het seizoenseffect en de internationale doelgroep. Dat zie je terug in keuzes voor structuur, content en functionaliteit." },
     { q: "Hoe snel kan mijn website in Maastricht live?", a: "Dat hangt af van de scope — een eenvoudige website vraagt minder tijd dan een meertalig platform met koppelingen. Bij de intake krijg je een realistische planning met een vaste einddatum, geen slag in de lucht." },
+    { q: "Bouwen jullie ook apps of web-applicaties voor bedrijven in Maastricht?", a: "Ja. Naast websites bouwen we ook web apps — klantportalen, boekingssystemen, dashboards — voor bedrijven in en rond Maastricht. Vaak begint dat als uitbreiding op een bestaande website, soms als los traject." },
   ],
   relatedRegionLink: { label: "bekijk onze pagina over maatwerk software voor heel Limburg", href: "/diensten/processen/limburg" },
 };

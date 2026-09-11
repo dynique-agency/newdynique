@@ -26,6 +26,10 @@ const FAQ = [
     q: "Kunnen jullie ook alleen social media doen, zonder advertentiebudget?",
     a: "Ja. Social media-beheer en betaalde advertenties zijn twee losse knoppen — je kunt met alleen consistent, goed beheerd social media beginnen en later pas advertentiebudget toevoegen als dat past.",
   },
+  {
+    q: "Bieden jullie ook lokale SEO voor Heerlen of Sittard-Geleen?",
+    a: "Ja, dat kan. We zijn geen gespecialiseerd lokaal SEO-bureau — onze kracht zit in de combinatie van website, techniek en marketing onder één dak — maar voor klanten waarvoor we al de website bouwen, verzorgen we ook de lokale SEO en zichtbaarheid in Google.",
+  },
 ];
 
 export default function MarketingDienst() {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Maatwerk software voor logistiek & transport | Dynique",
+  title: "Ritplanning software voor logistiek & transport | Dynique",
   description:
     "Maatwerk software voor logistiek en transport: rit- en orderplanning op maat, realtime track & trace, voorraadoverzicht en koppelingen met je TMS. Gebouwd met code. Gratis procesanalyse op locatie.",
   keywords: [

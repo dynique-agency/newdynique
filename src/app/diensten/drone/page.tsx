@@ -25,7 +25,7 @@ const FAQ = [
   },
   {
     q: "Werken jullie ook buiten Limburg?",
-    a: "Ja, we vliegen door heel Nederland en België — overleg gewoon even wat mogelijk is voor jouw locatie.",
+    a: "Ja, we vliegen door heel Nederland en België — van Maastricht en Sittard tot Venlo, Weert en Roermond, en daarbuiten op aanvraag. Overleg gewoon even wat mogelijk is voor jouw locatie.",
   },
 ];
 

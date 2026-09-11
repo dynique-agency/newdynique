@@ -16,7 +16,7 @@ const data: SectorData = {
     </>
   ),
   intro:
-    "Van planning en werkbon tot onderhoudscontract — één systeem dat meebeweegt met je monteurs in het veld. Geen standaardpakket, maar software gebouwd rondom hoe jullie installeren en onderhouden.",
+    "Van planning en werkbon tot onderhoudscontract — één systeem dat meebeweegt met je monteurs of montageploegen in het veld. Geen standaardpakket, maar software gebouwd rondom hoe jullie installeren, monteren en onderhouden.",
   painHeadline: (
     <>
       Monteurs in het veld.

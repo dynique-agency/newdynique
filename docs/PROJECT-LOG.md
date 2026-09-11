@@ -6,6 +6,28 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-11 — Strenge contentanalyse (30 voorstellen) + eerste 7 reinforcements doorgevoerd
+
+**Aanleiding:** "laten we verder bouwen aan kwalitatieve landingspagina's en zoekvolume dekken waar het nu nog niet opgevangen wordt door de grote spelers. maak een strenge analyse en kom met 30 concrete kwalitatieve voorstellen."
+
+**Uitgevoerd:** volledige herscan van `Zoekopdrachten.csv` gesorteerd op positie, gecombineerd met concurrentie-onderzoek (WebSearch) per kansrijke cluster. Vastgelegd in `docs/seo/CONTENT-UITBREIDING-2026-09-11.md` (30 voorstellen: 4 concrete toevoegingen, 14 reinforcements, 5 bewuste afwijzingen met reden, 7 meet-/vervolgacties).
+
+**Belangrijkste bevinding:** het cluster "seo/marketingbureau Heerlen" (~1.190 vertoningen) leek eerst de grootste kans, maar concurrentie-onderzoek legde bloot dat 8+ gespecialiseerde SEO-bureaus hier al om vechten — zelfde patroon als Eindhoven, nu in een nichemarkt. Bewust géén nieuwe "SEO Heerlen"-pagina gebouwd, wel een bescheiden vermelding op de bestaande locatiepagina's. Het "werkbon/planning-installatiebedrijf"-cluster (86 vertoningen) doorstond de concurrentiecheck wél — daar zijn de concurrenten vooral SaaS-producten (Gripp, Robaws, Fieldly), niet maatwerk-bureaus.
+
+**Op verzoek ("ga door") de eerste 7 pagina's aangepast, geen nieuwe URL's:**
+- `src/app/maatwerk-software/installatiebedrijf/layout.tsx` — title → "Software installatiebedrijven — planning & werkbonnen"; `page.tsx` — "montage"/montageploegen toegevoegd aan de intro.
+- `src/app/maatwerk-software/logistiek/layout.tsx` — title → "Ritplanning software voor logistiek & transport".
+- `src/app/diensten/drone/page.tsx` — FAQ "Werken jullie ook buiten Limburg?" uitgebreid met Venlo, Weert en Roermond met naam (bewijs: 17 vertoningen verspreid over drone-Venlo-varianten, pagina noemde voorheen geen enkele NL-Limburgse stad).
+- `src/app/locaties/maastricht/page.tsx` en `src/app/locaties/heerlen/page.tsx` — "web apps"/"applicatie" toegevoegd aan intro + nieuwe FAQ (bewijs: "app laten maken maastricht" 31 vertoningen, "app ontwikkelen heerlen" 16 — beide pagina's noemden voorheen nul keer "app").
+- `src/app/locaties/heerlen/page.tsx` en `src/app/locaties/sittard/page.tsx` — bescheiden FAQ over SEO/marketing toegevoegd (niet als hoofdpositionering, zie hierboven waarom).
+- `src/app/diensten/marketing/page.tsx` — nieuwe FAQ "Bieden jullie ook lokale SEO voor Heerlen of Sittard-Geleen?", eerlijk antwoord zonder specialist-overclaim.
+
+**Geverifieerd:** alle 7 pagina's live gecontroleerd via `next dev` (titles, nieuwe FAQ-tekst zichtbaar en correct in de DOM), `npx tsc --noEmit` en volledige `npm run build` schoon.
+
+**Nog te doen (zie CONTENT-UITBREIDING-2026-09-11.md §B/§D):** de overige 7 reinforcement-punten (o.a. Duitstalige/Belgische her-mining) en de meetacties — bewust niet allemaal in één keer, om de gebruikelijke discipline (meten voor verder uitbreiden) aan te houden.
+
+---
+
 ## 2026-09-10 (later, tweede deel) — Alle 10 bevindingen uit de kritische scan van de laatste 3 homepage-secties opgelost
 
 **Aanleiding:** na de kritische scan van Statement Strip/Contact/FAQ (zie vorige entry) — "verbeter het volledig."
