@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StatusIndicator from "@/components/StatusIndicator";
 import SocialProofSection from "@/components/SocialProofSection";
+import { ProcessStyles, useBeforeAfterScrub } from "@/components/processen/Visuals";
 import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const ACCENT = "#d4a574";
@@ -38,6 +38,96 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
   return <video ref={ref} src={src} className={className} muted loop playsInline preload="metadata" />;
 }
 
+// Subtiele magnetische knop — volgt de cursor lichtjes binnen de eigen grenzen.
+// Directe DOM-manipulatie i.p.v. React state, zodat er geen re-render-vertraging is.
+function useMagnetic<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || window.matchMedia("(pointer: coarse)").matches) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translate(${x * 0.22}px, ${y * 0.32}px)`;
+    };
+    const onLeave = () => {
+      el.style.transform = "translate(0, 0)";
+    };
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+  return ref;
+}
+
+// Illustratief, geen echte klant — dezelfde abstractie-aanpak als BeforeScreen/AfterScreen
+// in processen/Visuals.tsx: een gecodeerde schets van "hoe het eruitziet", geen screenshot.
+function OldSiteScreen() {
+  return (
+    <div className="absolute inset-0 bg-[#e4ddc8] overflow-hidden select-none">
+      <div className="absolute top-0 left-0 right-0 h-10 bg-[#003366] flex items-center px-3 gap-4">
+        <span className="text-white text-[11px] font-bold" style={{ fontFamily: "Georgia, serif" }}>UwBedrijfNaam</span>
+        <span className="ml-auto flex gap-3 text-[9px] text-blue-200 underline">
+          <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+        </span>
+      </div>
+      <div className="absolute top-14 left-3 right-3 flex items-center justify-between">
+        <span className="text-[9px] text-red-700 font-bold" style={{ fontFamily: "Georgia, serif" }}>Laatst bijgewerkt: 14-03-2016</span>
+        <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border border-red-700">GRATIS OFFERTE!</span>
+      </div>
+      <div className="absolute top-24 left-3 w-[62%] space-y-1.5">
+        <div className="h-2.5 bg-[#003366]/70 rounded-sm w-[85%]" />
+        <div className="h-1.5 bg-black/25 rounded-sm w-full" />
+        <div className="h-1.5 bg-black/25 rounded-sm w-full" />
+        <div className="h-1.5 bg-black/25 rounded-sm w-[70%]" />
+        <div className="h-1.5 bg-black/25 rounded-sm w-full mt-3" />
+        <div className="h-1.5 bg-black/25 rounded-sm w-[60%]" />
+      </div>
+      <div className="absolute top-24 right-3 w-[28%] aspect-square bg-black/15 border border-black/20 flex items-center justify-center">
+        <span className="text-black/30 text-[7px]">IMG</span>
+      </div>
+      <div className="absolute bottom-3 left-3 right-3 h-6 border-t border-black/20 flex items-center justify-center">
+        <span className="text-[7px] text-black/35 tracking-wide">© 2011-2016 · Beste bekeken met Internet Explorer</span>
+      </div>
+    </div>
+  );
+}
+
+function NewSiteScreen() {
+  return (
+    <div className="absolute inset-0 bg-[#080b0a] overflow-hidden select-none">
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 30% 20%, ${ACCENT}1c 0%, transparent 60%)` }} />
+      <div className="relative flex items-center justify-between px-5 pt-5">
+        <span className="text-white/80 text-[10px] tracking-[0.25em] font-light">UWBEDRIJF</span>
+        <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[8px]" style={{ borderColor: `${ACCENT}55`, color: ACCENT }}>
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} /> LIVE
+        </span>
+      </div>
+      <div className="relative px-5 pt-8">
+        <div className="h-3.5 bg-white/85 rounded-sm w-[70%] mb-2.5" />
+        <div className="h-3.5 rounded-sm w-[40%] mb-5" style={{ background: `${ACCENT}` }} />
+        <div className="flex gap-2 mb-6">
+          <div className="px-3 py-1.5 rounded text-[8px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
+          <div className="px-3 py-1.5 rounded border border-white/20 text-white/50 text-[8px] font-light">BEKIJK WERK</div>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {[{ v: "98", l: "SNELHEID" }, { v: "100%", l: "MOBIEL" }, { v: "#1-3", l: "GOOGLE" }].map((s) => (
+            <div key={s.l} className="bg-white/[0.04] border border-white/[0.08] rounded-md p-2.5">
+              <p className="text-white text-[15px] font-extralight leading-none">{s.v}</p>
+              <p className="text-white/35 text-[7px] tracking-wide mt-1.5">{s.l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Zelfde 4 echte cases als homepage/portfolio — geen nieuwe content verzonnen.
 const projects = [
   { number: "01", title: "CHEFS CONNECT", category: "CULINAIR PLATFORM", summary: "Waar topchefs en premium keukens elkaar vinden.", video: "/rsc/chefsconnect/preview.mp4", url: "chefs-connect.nl", accent: "#ef4444", link: "/portfolio/chefs-connect" },
@@ -52,7 +142,27 @@ const STEPS = [
   { n: "03", t: "Bouwen & livegang", d: "We bouwen, jij checkt tussentijds mee via een preview-link, en binnen 7 tot 14 dagen staat je site live." },
 ];
 
+const MARQUEE_WORDS = ["VEROUDERD", "TRAAG", "ONVEILIG", "ONZICHTBAAR IN GOOGLE", "KOST KLANTEN"];
+
+function HeroWords({ text, className, delayStart = 0 }: { text: string; className?: string; delayStart?: number }) {
+  return (
+    <>
+      {text.split(" ").map((w, i) => (
+        <span key={i} className={`hero-word inline-block ${className ?? ""}`} style={{ animationDelay: `${delayStart + i * 0.09}s` }}>
+          {w}
+          {i < text.split(" ").length - 1 ? " " : ""}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function WebsitesShowcase() {
+  const scrubRef = useRef<HTMLDivElement>(null);
+  useBeforeAfterScrub(scrubRef);
+  const magneticPrimary = useMagnetic<HTMLButtonElement>();
+  const magneticFinal = useMagnetic<HTMLButtonElement>();
+
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
       document.querySelectorAll(".anim").forEach((el) => el.classList.add("animate-in"));
@@ -111,10 +221,9 @@ export default function WebsitesShowcase() {
                 <span className="inline-block w-8 h-[1px]" style={{ background: ACCENT }} />
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extralight text-white tracking-[0.01em] leading-[0.98] anim delay-1">
-                Zo bouwen wij
-                <br />
-                <span className="italic text-white/50">jouw website.</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extralight text-white tracking-[0.01em] leading-[0.98]">
+                <div className="overflow-hidden pb-2"><HeroWords text="Zo bouwen wij" delayStart={0.3} /></div>
+                <div className="overflow-hidden italic text-white/50"><HeroWords text="jouw website." delayStart={0.55} /></div>
               </h1>
 
               <p className="mt-10 max-w-2xl mx-auto text-white/55 text-base lg:text-xl font-light leading-[1.85] tracking-wide anim delay-2">
@@ -134,18 +243,91 @@ export default function WebsitesShowcase() {
 
               <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center anim delay-3">
                 <button
+                  ref={magneticPrimary}
                   onClick={startChat}
-                  className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-all duration-500"
+                  className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-[letter-spacing] duration-500"
+                  style={{ transition: "transform 0.2s ease-out, letter-spacing 0.5s" }}
                 >
                   STUUR TOM EEN BERICHT
                   <svg className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413" />
                   </svg>
                 </button>
-                <a href="#werk" className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-white/15 text-white text-xs tracking-[0.3em] font-light hover:bg-white/5 hover:border-white/30 transition-all duration-500">
-                  BEKIJK HET WERK
+                <a href="#vergelijk" className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-white/15 text-white text-xs tracking-[0.3em] font-light hover:bg-white/5 hover:border-white/30 transition-all duration-500">
+                  BEKIJK HET VERSCHIL
                 </a>
               </div>
+            </div>
+          </div>
+
+          {/* Scroll cue */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 anim delay-3">
+            <div className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5">
+              <div className="w-1 h-1.5 rounded-full bg-white/40 scroll-dot" />
+            </div>
+          </div>
+        </section>
+
+        {/* ─── MARQUEE — probleemstelling ─────────────────────── */}
+        <section className="relative py-6 border-y border-white/[0.06] overflow-hidden bg-[#0a0505]">
+          <div className="marquee-track flex items-center gap-10 whitespace-nowrap">
+            {[...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS].map((w, i) => (
+              <span key={i} className="flex items-center gap-10 text-red-400/60 text-sm tracking-[0.3em] font-light uppercase">
+                {w}
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500/40" />
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* ─── VEROUDERD VS VERNIEUWD ───────────────────────── */}
+        <section id="vergelijk" className="relative py-28 lg:py-36 border-b border-white/[0.06] overflow-hidden">
+          <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at 50% 0%, ${ACCENT}14 0%, transparent 65%)` }} />
+          <div className="container mx-auto px-6 lg:px-12 relative">
+            <div className="max-w-2xl mx-auto text-center mb-16 anim">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-6 uppercase" style={{ color: ACCENT }}>Een eerlijke vraag</p>
+              <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-8">
+                Verouderd. <br />
+                <span className="italic text-white/50">Of gewoon niet online.</span>
+              </h2>
+              <p className="text-white/50 text-base lg:text-lg font-light leading-[1.85] tracking-wide">
+                Een website die er niet meer bij hoort, kost je net zo veel klanten als geen website hebben.
+                Bezoekers beslissen binnen seconden of ze je serieus nemen.
+              </p>
+            </div>
+
+            <div className="max-w-[680px] mx-auto anim delay-1">
+              <div className="flex items-center justify-between max-w-[640px] mx-auto mb-4">
+                <span className="ba-label-before flex items-center gap-2 text-[10px] tracking-[0.3em] font-light text-red-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> VEROUDERD
+                </span>
+                <span className="ba-label-after flex items-center gap-2 text-[10px] tracking-[0.3em] font-light" style={{ color: ACCENT }}>
+                  VERNIEUWD <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+                </span>
+              </div>
+              <div ref={scrubRef} className="ba-window max-w-[640px] mx-auto">
+                <div className="flex items-center gap-2 px-4 h-9 border-b border-white/[0.07] bg-white/[0.02]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                  <span className="mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">jouwbedrijf.nl</span>
+                </div>
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+                  <OldSiteScreen />
+                  <div className="ba-after absolute inset-0"><NewSiteScreen /></div>
+                  <div className="ba-divider">
+                    <span className="ba-handle">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-white/30 text-[10px] tracking-[0.25em] font-light mt-4">
+                SCROLL OM TE ZIEN
+              </p>
             </div>
           </div>
         </section>
@@ -253,29 +435,6 @@ export default function WebsitesShowcase() {
           </div>
         </section>
 
-        {/* ─── TOM — PERSOONLIJKE HANDTEKENING ─────────────────── */}
-        <section className="relative py-24 lg:py-32 border-t border-white/[0.06]">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto text-center anim">
-              <div className="w-14 h-14 mx-auto mb-8 rounded-full flex items-center justify-center border border-white/15">
-                <span className="text-white/70 text-lg font-extralight tracking-wide">TC</span>
-              </div>
-              <p className="text-white/30 text-[10px] tracking-[0.5em] font-light uppercase mb-6">Even voorstellen</p>
-              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.15] mb-8">
-                Hoi, met Tom.
-              </h2>
-              <p className="text-white/55 text-base lg:text-lg font-light leading-[1.9] tracking-wide max-w-2xl mx-auto">
-                Head of Development bij Dynique. Ik bouw zelf mee aan elk project — van het eerste gesprek tot de dag
-                dat je site live gaat. Geen accountmanager die je project doorschuift naar een ontwikkelaar die je
-                nooit spreekt. Gewoon ik, rechtstreeks, met een vaste prijs en een heldere planning.
-              </p>
-              <p className="mt-8">
-                <StatusIndicator className="text-[#d4a574] text-sm font-light tracking-wide" />
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* ─── PROCES ───────────────────────────────────────── */}
         <section className="relative py-24 lg:py-32 border-t border-white/[0.06] overflow-hidden">
           <div aria-hidden className="orb-breathe-2 absolute -top-16 right-[-8%] w-[780px] h-[780px] rounded-full pointer-events-none"
@@ -328,14 +487,18 @@ export default function WebsitesShowcase() {
             <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-8 anim">
               Klaar om verder <span className="italic text-white/50">te praten?</span>
             </h2>
-            <p className="text-white/50 text-base lg:text-lg font-light tracking-wide mb-12 max-w-xl mx-auto anim delay-1">
+            <p className="text-white/50 text-base lg:text-lg font-light tracking-wide mb-4 max-w-xl mx-auto anim delay-1">
               Eén bericht is genoeg. Geen formulier, geen wachtrij — gewoon rechtstreeks bij mij.
+            </p>
+            <p className="text-white/25 text-[11px] tracking-[0.3em] font-light mb-12 anim delay-1">
+              — TOM CREEMERS, HEAD OF DEVELOPMENT
             </p>
             <div className="anim delay-2">
               <button
+                ref={magneticFinal}
                 onClick={startChat}
-                className="group inline-flex items-center justify-center gap-3 px-14 py-5 text-black text-xs tracking-[0.3em] font-medium transition-all duration-300"
-                style={{ background: ACCENT }}
+                className="group inline-flex items-center justify-center gap-3 px-14 py-5 text-black text-xs tracking-[0.3em] font-medium"
+                style={{ background: ACCENT, transition: "transform 0.2s ease-out" }}
               >
                 STUUR TOM EEN BERICHT
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -353,6 +516,7 @@ export default function WebsitesShowcase() {
       </main>
 
       <Footer />
+      <ProcessStyles />
 
       <style jsx global>{`
         @keyframes breathe1 {
@@ -376,24 +540,37 @@ export default function WebsitesShowcase() {
         .orb-breathe-2 { animation: breathe2 13s ease-in-out infinite; }
         .orb-breathe-3 { animation: breathe3 7s  ease-in-out infinite; }
 
-        .anim {
-          opacity: 0;
-          transform: translateY(32px);
-          transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-          will-change: opacity, transform;
+        @keyframes heroWordIn {
+          from { opacity: 0; transform: translateY(48px) skewY(4deg); }
+          to   { opacity: 1; transform: translateY(0) skewY(0deg); }
         }
-        .anim.animate-in { opacity: 1; transform: translateY(0); }
+        .hero-word {
+          opacity: 0;
+          animation: heroWordIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.3334%); }
+        }
+        .marquee-track {
+          animation: marquee 22s linear infinite;
+          width: max-content;
+        }
+
+        @keyframes scrollDot {
+          0%, 100% { transform: translateY(0); opacity: 0.4; }
+          50% { transform: translateY(8px); opacity: 1; }
+        }
+        .scroll-dot { animation: scrollDot 1.8s ease-in-out infinite; }
+
         .delay-1 { transition-delay: 0.12s; }
         .delay-2 { transition-delay: 0.26s; }
         .delay-3 { transition-delay: 0.42s; }
 
-        @media (max-width: 768px) {
-          .anim { transform: translateY(20px); transition-duration: 0.7s; }
-        }
         @media (prefers-reduced-motion: reduce) {
-          .anim { opacity: 1; transform: none; transition: none; }
-          .orb-breathe-1, .orb-breathe-2, .orb-breathe-3 { animation: none; }
+          .orb-breathe-1, .orb-breathe-2, .orb-breathe-3, .marquee-track, .scroll-dot { animation: none; }
+          .hero-word { opacity: 1; animation: none; }
         }
       `}</style>
     </>

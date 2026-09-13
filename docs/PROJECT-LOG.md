@@ -6,6 +6,23 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-13 (later) — `/websites` grondig herzien: minder "saai", meer "ultra next level"
+
+**Aanleiding:** "nee dit is te veel persoonlijk en te saai. het moet nog meer ultra next... ook over verouderde websites... zo'n scroll triggered slider van oud naar nieuw. Zoek nog meer inspiratie bij awwwards websites."
+
+**Research:** kort de huidige Awwwards-trends opgezocht (kinetic/split-text reveals, magnetische knoppen, scroll-gekoppelde interactie) — bewust géén nieuwe zware libraries (GSAP/Three.js) toegevoegd; alles gebouwd met de bestaande vanilla-CSS/IntersectionObserver-aanpak die de rest van de site al gebruikt.
+
+**Uitgevoerd (`src/app/websites/page.tsx`, volledig herschreven):**
+- **Ingekort:** de losstaande "Hoi, met Tom"-sectie (volledige alinea) is weg. Alleen nog een korte, stijlvolle handtekeningregel ("— TOM CREEMERS, HEAD OF DEVELOPMENT") vlak bij de finale CTA — minder "biografie", meer statement.
+- **Nieuw: kinetic hero-tekst** — de headline komt woord-voor-woord binnen met een skew/translateY-reveal (`heroWordIn`), i.p.v. één vlak blok tekst.
+- **Nieuw: magnetische CTA-knoppen** — de twee "STUUR TOM EEN BERICHT"-knoppen volgen de cursor licht binnen hun eigen grenzen (directe DOM-manipulatie, geen React-state, uitgeschakeld bij `prefers-reduced-motion` en op touch-apparaten).
+- **Nieuw: probleem-marquee** — een scrollende ticker ("VEROUDERD · TRAAG · ONVEILIG · ONZICHTBAAR IN GOOGLE · KOST KLANTEN") tussen hero en de nieuwe sectie hieronder.
+- **Nieuw: "Verouderd. Of gewoon niet online."-sectie** — precies de gevraagde scroll-getriggerde before/afterslider, ditmaal "oud → nieuw" i.p.v. software. Hergebruikt de bestaande, bewezen mechaniek (`useBeforeAfterScrub`, de `.ba-*`-CSS uit `ProcessStyles`) van de homepage/procespagina's — geen nieuwe interactie-logica verzonnen. Twee nieuwe, **illustratieve** (niet-echte, geen fabricatie) mockup-componenten: `OldSiteScreen` (gedateerde blauwe navbalk, "Laatst bijgewerkt: 14-03-2016", knullige "GRATIS OFFERTE!"-badge) en `NewSiteScreen` (schone Dynique-achtige UI met snelheid/mobiel/Google-scores) — zelfde abstractieniveau als de bestaande `BeforeScreen`/`AfterScreen` in `processen/Visuals.tsx`, dus geen screenshot van een echt bedrijf.
+
+**Geverifieerd:** live gecontroleerd via `next dev` (desktop + mobiel) — kinetic tekst, marquee en de scroll-scrub-slider (van volledig "verouderd" naar volledig "vernieuwd" tijdens scrollen) werken zoals bedoeld. `npx tsc --noEmit` en volledige `npm run build` schoon.
+
+---
+
 ## 2026-09-13 — `/websites`: persoonlijke showcase-pagina om naar leads te sturen
 
 **Aanleiding:** "Ik wil dat je een /website pagina maakt die perfect is om mee te sturen... na een bericht naar leads (ondertekend als Tom Creemers, Head of Development) wil ik dynique.nl/websites kunnen sturen." Ultra-premium, veel scroll-triggers zoals de homepage, "next level effortless."
