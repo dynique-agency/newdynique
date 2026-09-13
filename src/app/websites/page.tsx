@@ -252,9 +252,9 @@ function OldPhoneScreen() {
 
 function NewPhoneScreen() {
   return (
-    <div className="absolute inset-0 overflow-hidden select-none bg-[#080b0a]">
+    <div className="absolute inset-0 overflow-hidden select-none bg-[#080b0a] flex flex-col">
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 50% 0%, ${ACCENT}1c 0%, transparent 55%)` }} />
-      <div className="relative px-4 pt-7 flex items-center justify-between">
+      <div className="relative px-4 pt-7 flex items-center justify-between shrink-0">
         <span className="text-white/80 text-[9px] tracking-[0.2em] font-light">UWBEDRIJF</span>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-sm border" style={{ borderColor: `${ACCENT}55`, background: `${ACCENT}14` }}>
@@ -269,7 +269,7 @@ function NewPhoneScreen() {
           </div>
         </div>
       </div>
-      <div className="relative px-4 pt-6 text-center">
+      <div className="relative px-4 pt-6 text-center shrink-0">
         <div className="h-3 bg-white/85 rounded-sm w-[80%] mx-auto mb-1.5" />
         <div className="h-3 rounded-sm w-[55%] mx-auto mb-2" style={{ background: ACCENT }} />
         <div className="h-1 bg-white/20 rounded-sm w-[60%] mx-auto mb-4" />
@@ -282,6 +282,22 @@ function NewPhoneScreen() {
             </div>
           ))}
         </div>
+      </div>
+      {/* Portfolio-preview kaart — vult de resterende ruimte, mirror van het mediapaneel op desktop */}
+      <div className="relative px-4 mt-5 flex-1 min-h-0">
+        <div
+          className="w-full h-full rounded-xl border flex flex-col items-center justify-center gap-2"
+          style={{ borderColor: `${ACCENT}30`, background: `linear-gradient(160deg, ${ACCENT}14, transparent 70%)` }}
+        >
+          <span className="w-8 h-8 rounded-full flex items-center justify-center border" style={{ borderColor: `${ACCENT}55` }}>
+            <svg className="w-3 h-3 ml-0.5" fill={ACCENT} viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+          <span className="text-white/30 text-[6px] tracking-[0.2em]">BEKIJK PROJECT</span>
+        </div>
+      </div>
+      <div className="relative px-4 py-3 border-t border-white/[0.08] flex items-center justify-between shrink-0">
+        <span className="text-white/25 text-[6px] tracking-wide">© UWBEDRIJF</span>
+        <span className="text-white/25 text-[6px] tracking-wide">Gebouwd door Dynique</span>
       </div>
     </div>
   );
