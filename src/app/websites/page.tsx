@@ -260,16 +260,17 @@ const MARQUEE_WORDS = ["VEROUDERD", "TRAAG", "ONVEILIG", "ONZICHTBAAR IN GOOGLE"
 const SPOTLIGHT_REVIEWS = [REVIEWS.stacyKohnen, REVIEWS.chefsConnect, REVIEWS.ijssalonItalia, REVIEWS.auwtAelse];
 
 function HeroWords({ text, delayStart = 0 }: { text: string; delayStart?: number }) {
-  return (
-    <>
-      {text.split(" ").map((w, i) => (
-        <span key={i} className="hero-word inline-block" style={{ animationDelay: `${delayStart + i * 0.09}s` }}>
-          {w}
-          {i < text.split(" ").length - 1 ? " " : ""}
-        </span>
-      ))}
-    </>
-  );
+  const words = text.split(" ");
+  const children: React.ReactNode[] = [];
+  words.forEach((w, i) => {
+    children.push(
+      <span key={`w-${i}`} className="hero-word inline-block" style={{ animationDelay: `${delayStart + i * 0.09}s` }}>
+        {w}
+      </span>
+    );
+    if (i < words.length - 1) children.push(" ");
+  });
+  return <>{children}</>;
 }
 
 function BeforeAfterSlider({
