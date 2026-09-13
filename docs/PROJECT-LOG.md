@@ -6,6 +6,20 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-13 — `/websites`: persoonlijke showcase-pagina om naar leads te sturen
+
+**Aanleiding:** "Ik wil dat je een /website pagina maakt die perfect is om mee te sturen... na een bericht naar leads (ondertekend als Tom Creemers, Head of Development) wil ik dynique.nl/websites kunnen sturen." Ultra-premium, veel scroll-triggers zoals de homepage, "next level effortless."
+
+**Uitgevoerd:** `src/app/websites/{page,layout}.tsx` (nieuw). Zelfde visuele taal als de homepage-hero (3 ademende gradient-orbs, exacte `breathe1/2/3`-keyframes overgenomen) en dezelfde `.anim`-scrollreveal (IntersectionObserver, cubic-bezier-easing). Secties: hero met dubbele CTA, portfolio (dezelfde 4 echte cases met video als de homepage — Chefs Connect, Auwt Aelse, IJssalon Italia, Stacy Kohnen — in de "browser mockup"-kaartstijl), een persoonlijke "Hoi, met Tom"-sectie (Head of Development, geen fabricatie — "Creemers" staat al in de KVK-vermelding in de footer als eenmanszaak-eigenaar), een strak 3-stappenproces, alle 4 reviews, een eerlijke prijsindicatie (hergebruikt de bestaande formulering van `/diensten/web`), en een enkele, herhaalde WhatsApp-CTA i.p.v. een formulier — bewust "effortless": de lead zit al in een gesprek, dus de knop opent direct een voorgevuld WhatsApp-bericht naar Tom in plaats van een nieuw contactmoment te forceren.
+
+**Bewust `noindex`** (`src/app/websites/layout.tsx`) en **niet in `sitemap.ts`** — dit is een persoonlijke distributiepagina, geen SEO-landingspagina. `/diensten/web` blijft de publieke, geïndexeerde pagina voor dat onderwerp; geen risico op dubbele content of kannibalisatie tussen de twee.
+
+**Geverifieerd:** live gecontroleerd via `next dev` (desktop + mobiel), `npx tsc --noEmit` en volledige `npm run build` schoon. Video-preview toont zwart in de headless testbrowser — bevestigd dat dit een bestaand, bekend artefact van de testomgeving is (exact hetzelfde gebeurt op de al langer live homepage in dezelfde sessie), geen regressie.
+
+**Let op:** gebouwd op `/websites` (meervoud) — de eigenaar noemde eerst "/website" (enkelvoud) maar gaf daarna expliciet "dynique.nl/websites" als de URL die verstuurd zou worden; dat laatste is aangehouden. Zeg het als enkelvoud toch de bedoeling was, dan hernoem ik de route.
+
+---
+
 ## 2026-09-11 (nog later, tweede deel) — Kerkrade, Landgraaf, Brunssum: 3 nieuwe Parkstad-locatiepagina's
 
 **Aanleiding:** "ik denk dat er nog veel meer plaatselijke landingspaginas moeten maken, hoezo doen we dat niet, kerkrade, landgraaf, heerlen, brunssum" — terechte correctie op de eerder afgewezen "dorpen in heel Nederland". Deze 3 zijn geen willekeurige dorpen maar echte Parkstad-gemeenten (28k-46k inwoners) vlak naast de al bestaande, werkende Heerlen-pagina.
