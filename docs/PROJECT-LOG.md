@@ -6,6 +6,22 @@ Doorlopend logboek van alle werk aan de codebase: wat er is veranderd, waarom, e
 
 ---
 
+## 2026-09-13 (nog later) — `/websites`: prijssectie weg, reviews herbouwd, slider-mechaniek vervangen, nieuwe iPhone-slider
+
+**Aanleiding:** "doe wat kost het weg. verbeter de reviewsector, hier moet echt iets next level awwward winnnigs komen en verbeter en optimaliseer de begin en de eind van de slider, ben ultra kritisch. denk ook ultra kritisch na of er nog meer visual explainings zijn... misschien kan je zelf een iphone coderen en hier een before en after maken om te laten zien dat bij ons ook alles mobiel geoptimaliseerd is."
+
+**Uitgevoerd (`src/app/websites/page.tsx`):**
+- **Prijssectie volledig verwijderd** — geen "Wat kost het"/prijsindicatie meer op deze pagina; het gesprek met Tom bepaalt de prijs.
+- **Reviews-sectie volledig herbouwd** als "editorial spotlight": grote ghost-quote-achtergrond (`"`, ~opacity 0.08), alternerend links/rechts uitgelijnde blokken, genummerd (01-04), geverifieerd-badge, uitvergrote quote-typografie. Gebruikt de bestaande echte `REVIEWS`-data uit `SocialProofSection.tsx` (geen nieuwe/verzonnen quotes).
+- **Slider-mechaniek volledig vervangen:** de oude `useBeforeAfterScrub` (scroll-crossing-threshold, had "dode" scrollzones aan begin/eind) is vervangen door een nieuwe **pin-and-scrub**-hook (`usePinnedScrub`): een tall wrapper (`220vh`) met een `position: sticky`-kind, voortgang berekend als `-rect.top / (wrapperHeight - viewportHeight)` — nul dode zones, elke scrollpixel doet iets. Nieuwe boundary-state CSS (`data-p="start"/"done"`) geeft de slider-window een subtiele randkleur/glow bij begin (rood-ish) en eind (goud-glow).
+  - **Bijwerking gevonden en gefixt tijdens het bouwen:** `overflow-hidden` op `<main>` brak `position: sticky` (elke `overflow-hidden`-ancestor tussen een sticky element en zijn containing block breekt sticky). Verwijderd van `<main>`, met toelichtende comment — veilig omdat secties die zelf iets moeten clippen (hero, marquee, portfolio) dat al lokaal doen, en de decoratieve orbs al naar transparant faden vóór hun eigen randen.
+- **Nieuw: iPhone-slider ("En op je telefoon?").** Zelfgebouwd, pure-CSS iPhone-frame (`PhoneFrame` — bezel, dynamic island, zijknopjes) met een eigen before/after: `OldPhoneScreen` simuleert een niet-responsieve site (uitgezoomde desktop-layout, "PINCH OM TE LEZEN"-label), `NewPhoneScreen` toont een echte mobile-first stacked layout. Hergebruikt dezelfde `usePinnedScrub`-mechaniek via een nieuwe, generieke `BeforeAfterSlider`-wrapper-component (DRY — geen dubbele scroll-logica voor de twee sliders).
+- **Legibility-fix:** stat-cijfers ("98") renderden onduidelijk bij `font-extralight` op kleine formaten — verzwaard naar `font-light` in zowel `NewSiteScreen` als `NewPhoneScreen`.
+
+**Geverifieerd:** live gecontroleerd via `next dev`, zowel desktop als mobiel viewport (375×812). Beide sliders gecontroleerd op `--p`-waarde en `data-p`-state bij start (0.0000/"start"), midden, en eind (1.0000/"done") — visueel bevestigd op alle punten, inclusief de iPhone-slider op een mobiel scherm. Geen dode scrollzones meer. `npx tsc --noEmit` en volledige `npm run build` schoon; bevestigd dat "Wat kost het" nergens meer in de pagina-tekst voorkomt.
+
+---
+
 ## 2026-09-13 (later) — `/websites` grondig herzien: minder "saai", meer "ultra next level"
 
 **Aanleiding:** "nee dit is te veel persoonlijk en te saai. het moet nog meer ultra next... ook over verouderde websites... zo'n scroll triggered slider van oud naar nieuw. Zoek nog meer inspiratie bij awwwards websites."

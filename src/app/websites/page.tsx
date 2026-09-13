@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SocialProofSection from "@/components/SocialProofSection";
-import { ProcessStyles, useBeforeAfterScrub } from "@/components/processen/Visuals";
+import { REVIEWS } from "@/components/SocialProofSection";
+import { ProcessStyles } from "@/components/processen/Visuals";
 import { openWhatsApp } from "@/lib/openWhatsApp";
 
 const ACCENT = "#d4a574";
@@ -39,7 +39,6 @@ function PortfolioVideo({ src, className }: { src: string; className: string }) 
 }
 
 // Subtiele magnetische knop — volgt de cursor lichtjes binnen de eigen grenzen.
-// Directe DOM-manipulatie i.p.v. React state, zodat er geen re-render-vertraging is.
 function useMagnetic<T extends HTMLElement>() {
   const ref = useRef<T>(null);
   useEffect(() => {
@@ -65,7 +64,40 @@ function useMagnetic<T extends HTMLElement>() {
   return ref;
 }
 
-// Illustratief, geen echte klant — dezelfde abstractie-aanpak als BeforeScreen/AfterScreen
+// "Pin & scrub": de sticky child blijft vastzitten terwijl je door de hoge
+// wrapper scrollt, en --p loopt lineair van 0 naar 1 over de VOLLE scrollafstand.
+// Los van useBeforeAfterScrub (die animeert rond het moment dat een element de
+// viewport kruist) — hier is elke pixel scroll relevant, geen dode zone aan
+// begin of eind, wat bij de vorige versie het probleem was.
+function usePinnedScrub(wrapRef: React.RefObject<HTMLDivElement | null>, targetRef: React.RefObject<HTMLDivElement | null>) {
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const wrap = wrapRef.current;
+        const target = targetRef.current;
+        if (!wrap || !target) return;
+        const rect = wrap.getBoundingClientRect();
+        const scrollable = rect.height - window.innerHeight;
+        let p = scrollable > 0 ? -rect.top / scrollable : rect.top <= 0 ? 1 : 0;
+        p = Math.min(1, Math.max(0, p));
+        target.style.setProperty("--p", p.toFixed(4));
+        target.dataset.p = p >= 0.99 ? "done" : p <= 0.01 ? "start" : "mid";
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [wrapRef, targetRef]);
+}
+
+// Illustratief, geen echte klant — zelfde abstractie-aanpak als BeforeScreen/AfterScreen
 // in processen/Visuals.tsx: een gecodeerde schets van "hoe het eruitziet", geen screenshot.
 function OldSiteScreen() {
   return (
@@ -110,7 +142,7 @@ function NewSiteScreen() {
       </div>
       <div className="relative px-5 pt-8">
         <div className="h-3.5 bg-white/85 rounded-sm w-[70%] mb-2.5" />
-        <div className="h-3.5 rounded-sm w-[40%] mb-5" style={{ background: `${ACCENT}` }} />
+        <div className="h-3.5 rounded-sm w-[40%] mb-5" style={{ background: ACCENT }} />
         <div className="flex gap-2 mb-6">
           <div className="px-3 py-1.5 rounded text-[8px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
           <div className="px-3 py-1.5 rounded border border-white/20 text-white/50 text-[8px] font-light">BEKIJK WERK</div>
@@ -118,10 +150,90 @@ function NewSiteScreen() {
         <div className="grid grid-cols-3 gap-2">
           {[{ v: "98", l: "SNELHEID" }, { v: "100%", l: "MOBIEL" }, { v: "#1-3", l: "GOOGLE" }].map((s) => (
             <div key={s.l} className="bg-white/[0.04] border border-white/[0.08] rounded-md p-2.5">
-              <p className="text-white text-[15px] font-extralight leading-none">{s.v}</p>
+              <p className="text-white text-[15px] font-light leading-none">{s.v}</p>
               <p className="text-white/35 text-[7px] tracking-wide mt-1.5">{s.l}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Zelfde niet-responsieve site, nu geplet in een smal telefoonscherm — de klassieke
+// "uitgezoomd, moet knijpen om te lezen"-ervaring die iedereen herkent.
+function OldPhoneScreen() {
+  return (
+    <div className="absolute inset-0 bg-[#e4ddc8] overflow-hidden select-none">
+      <div className="absolute top-1 right-1.5 text-[6px] text-black/25 tracking-wide z-10">PINCH OM TE LEZEN</div>
+      <div style={{ transform: "scale(0.42)", transformOrigin: "top left", width: "238%" }}>
+        <div className="h-10 bg-[#003366] flex items-center px-3 gap-4">
+          <span className="text-white text-[11px] font-bold" style={{ fontFamily: "Georgia, serif" }}>UwBedrijfNaam</span>
+          <span className="ml-auto flex gap-3 text-[9px] text-blue-200 underline">
+            <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+          </span>
+        </div>
+        <div className="p-3 flex items-center justify-between">
+          <span className="text-[9px] text-red-700 font-bold" style={{ fontFamily: "Georgia, serif" }}>Laatst bijgewerkt: 14-03-2016</span>
+          <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border border-red-700 whitespace-nowrap">GRATIS OFFERTE!</span>
+        </div>
+        <div className="px-3 flex gap-3">
+          <div className="w-[60%] space-y-1.5">
+            <div className="h-2.5 bg-[#003366]/70 rounded-sm w-[85%]" />
+            <div className="h-1.5 bg-black/25 rounded-sm w-full" />
+            <div className="h-1.5 bg-black/25 rounded-sm w-full" />
+            <div className="h-1.5 bg-black/25 rounded-sm w-[70%]" />
+          </div>
+          <div className="w-[30%] aspect-square bg-black/15 border border-black/20 flex items-center justify-center flex-shrink-0">
+            <span className="text-black/30 text-[7px]">IMG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NewPhoneScreen() {
+  return (
+    <div className="absolute inset-0 bg-[#080b0a] overflow-hidden select-none">
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 50% 0%, ${ACCENT}1c 0%, transparent 55%)` }} />
+      <div className="relative px-4 pt-7 flex items-center justify-between">
+        <span className="text-white/80 text-[9px] tracking-[0.2em] font-light">UWBEDRIJF</span>
+        <div className="flex flex-col gap-[3px]">
+          <span className="block w-4 h-px bg-white/60" />
+          <span className="block w-4 h-px bg-white/60" />
+        </div>
+      </div>
+      <div className="relative px-4 pt-6 text-center">
+        <div className="h-3 bg-white/85 rounded-sm w-[80%] mx-auto mb-1.5" />
+        <div className="h-3 rounded-sm w-[55%] mx-auto mb-4" style={{ background: ACCENT }} />
+        <div className="inline-block px-4 py-2 rounded text-[8px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
+        <div className="grid grid-cols-3 gap-1.5 mt-5">
+          {[{ v: "98", l: "SNEL" }, { v: "100%", l: "MOBIEL" }, { v: "#1-3", l: "GOOGLE" }].map((s) => (
+            <div key={s.l} className="bg-white/[0.04] border border-white/[0.08] rounded-md p-1.5">
+              <p className="text-white text-[12px] font-light leading-none">{s.v}</p>
+              <p className="text-white/35 text-[6px] tracking-wide mt-1">{s.l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Zelf gecodeerd iPhone-frame — geen afbeelding, pure CSS.
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative mx-auto" style={{ width: "260px" }}>
+      <div className="relative rounded-[2.8rem] p-[10px] bg-[#0d0d0d] border border-white/10 shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]">
+        {/* Zijknoppen */}
+        <span className="absolute -left-[2px] top-[86px] w-[3px] h-7 bg-[#0d0d0d] rounded-l-sm" />
+        <span className="absolute -left-[2px] top-[122px] w-[3px] h-10 bg-[#0d0d0d] rounded-l-sm" />
+        <span className="absolute -right-[2px] top-[104px] w-[3px] h-14 bg-[#0d0d0d] rounded-r-sm" />
+        <div className="relative rounded-[2.2rem] overflow-hidden bg-black" style={{ aspectRatio: "9 / 19.5" }}>
+          {/* Dynamic island */}
+          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-[84px] h-[22px] bg-black rounded-full z-20" />
+          {children}
         </div>
       </div>
     </div>
@@ -144,22 +256,88 @@ const STEPS = [
 
 const MARQUEE_WORDS = ["VEROUDERD", "TRAAG", "ONVEILIG", "ONZICHTBAAR IN GOOGLE", "KOST KLANTEN"];
 
-function HeroWords({ text, className, delayStart = 0 }: { text: string; className?: string; delayStart?: number }) {
+// Echte, geverifieerde reviews — zelfde bron als overal elders op de site.
+const SPOTLIGHT_REVIEWS = [REVIEWS.stacyKohnen, REVIEWS.chefsConnect, REVIEWS.ijssalonItalia, REVIEWS.auwtAelse];
+
+function HeroWords({ text, delayStart = 0 }: { text: string; delayStart?: number }) {
   return (
     <>
       {text.split(" ").map((w, i) => (
-        <span key={i} className={`hero-word inline-block ${className ?? ""}`} style={{ animationDelay: `${delayStart + i * 0.09}s` }}>
+        <span key={i} className="hero-word inline-block" style={{ animationDelay: `${delayStart + i * 0.09}s` }}>
           {w}
-          {i < text.split(" ").length - 1 ? " " : ""}
+          {i < text.split(" ").length - 1 ? " " : ""}
         </span>
       ))}
     </>
   );
 }
 
+function BeforeAfterSlider({
+  wrapHeight,
+  labelBefore,
+  labelAfter,
+  before,
+  after,
+  urlLabel,
+  frameClassName,
+  children,
+}: {
+  wrapHeight: string;
+  labelBefore: string;
+  labelAfter: string;
+  before: React.ReactNode;
+  after: React.ReactNode;
+  urlLabel: string;
+  frameClassName?: string;
+  children?: React.ReactNode;
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
+  usePinnedScrub(wrapRef, targetRef);
+
+  return (
+    <div ref={wrapRef} className="relative" style={{ height: wrapHeight }}>
+      <div className="sticky top-[14vh] flex flex-col items-center justify-center">
+        <div className="flex items-center justify-between w-full max-w-[640px] mb-4 px-1">
+          <span className="ba-label-before flex items-center gap-2 text-[10px] tracking-[0.3em] font-light text-red-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> {labelBefore}
+          </span>
+          <span className="ba-label-after flex items-center gap-2 text-[10px] tracking-[0.3em] font-light" style={{ color: ACCENT }}>
+            {labelAfter} <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+          </span>
+        </div>
+        <div ref={targetRef} className={`ba-window ${frameClassName ?? "max-w-[640px] w-full"}`}>
+          {children ?? (
+            <>
+              <div className="flex items-center gap-2 px-4 h-9 border-b border-white/[0.07] bg-white/[0.02]">
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                <span className="mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">{urlLabel}</span>
+              </div>
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
+                {before}
+                <div className="ba-after absolute inset-0">{after}</div>
+                <div className="ba-divider">
+                  <span className="ba-handle">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <p className="text-center text-white/30 text-[10px] tracking-[0.25em] font-light mt-5">
+          SCROLL OM TE VERGELIJKEN
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function WebsitesShowcase() {
-  const scrubRef = useRef<HTMLDivElement>(null);
-  useBeforeAfterScrub(scrubRef);
   const magneticPrimary = useMagnetic<HTMLButtonElement>();
   const magneticFinal = useMagnetic<HTMLButtonElement>();
 
@@ -190,7 +368,10 @@ export default function WebsitesShowcase() {
     <>
       <Header variant="light" />
 
-      <main className="relative bg-[#070707] overflow-hidden">
+      {/* Geen overflow-hidden op <main>: de pin-and-scrub-sliders hieronder gebruiken
+          position:sticky, en elke overflow-hidden ancestor breekt dat. Secties die zelf
+          decoratieve orbs clippen, doen dat lokaal — zie hero/marquee/portfolio hieronder. */}
+      <main className="relative bg-[#070707]">
         {/* ─── HERO ─────────────────────────────────────────── */}
         <section className="relative min-h-screen w-full overflow-hidden flex items-center">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -231,7 +412,6 @@ export default function WebsitesShowcase() {
                 en waarom de bedrijven die al voor ons kozen, dat niet hebben beklaagd.
               </p>
 
-              {/* Trust pills */}
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3 anim delay-2">
                 {["Live binnen 7–14 dagen", "Vaste prijs, vooraf", "Rechtstreeks contact met de developer"].map((t) => (
                   <span key={t} className="inline-flex items-center gap-2 px-4 py-2 border border-white/12 text-white/55 text-[11px] tracking-[0.15em] font-light">
@@ -245,7 +425,7 @@ export default function WebsitesShowcase() {
                 <button
                   ref={magneticPrimary}
                   onClick={startChat}
-                  className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em] transition-[letter-spacing] duration-500"
+                  className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black text-xs tracking-[0.3em] font-light hover:tracking-[0.4em]"
                   style={{ transition: "transform 0.2s ease-out, letter-spacing 0.5s" }}
                 >
                   STUUR TOM EEN BERICHT
@@ -260,7 +440,6 @@ export default function WebsitesShowcase() {
             </div>
           </div>
 
-          {/* Scroll cue */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 anim delay-3">
             <div className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5">
               <div className="w-1 h-1.5 rounded-full bg-white/40 scroll-dot" />
@@ -280,12 +459,12 @@ export default function WebsitesShowcase() {
           </div>
         </section>
 
-        {/* ─── VEROUDERD VS VERNIEUWD ───────────────────────── */}
-        <section id="vergelijk" className="relative py-28 lg:py-36 border-b border-white/[0.06] overflow-hidden">
+        {/* ─── VEROUDERD VS VERNIEUWD — desktop + mobiel ────────── */}
+        <section id="vergelijk" className="relative py-28 lg:py-20 border-b border-white/[0.06]">
           <div aria-hidden className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] pointer-events-none"
             style={{ background: `radial-gradient(ellipse at 50% 0%, ${ACCENT}14 0%, transparent 65%)` }} />
           <div className="container mx-auto px-6 lg:px-12 relative">
-            <div className="max-w-2xl mx-auto text-center mb-16 anim">
+            <div className="max-w-2xl mx-auto text-center mb-8 anim">
               <p className="text-[10px] tracking-[0.5em] font-light mb-6 uppercase" style={{ color: ACCENT }}>Een eerlijke vraag</p>
               <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1] mb-8">
                 Verouderd. <br />
@@ -297,38 +476,43 @@ export default function WebsitesShowcase() {
               </p>
             </div>
 
-            <div className="max-w-[680px] mx-auto anim delay-1">
-              <div className="flex items-center justify-between max-w-[640px] mx-auto mb-4">
-                <span className="ba-label-before flex items-center gap-2 text-[10px] tracking-[0.3em] font-light text-red-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" /> VEROUDERD
-                </span>
-                <span className="ba-label-after flex items-center gap-2 text-[10px] tracking-[0.3em] font-light" style={{ color: ACCENT }}>
-                  VERNIEUWD <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
-                </span>
-              </div>
-              <div ref={scrubRef} className="ba-window max-w-[640px] mx-auto">
-                <div className="flex items-center gap-2 px-4 h-9 border-b border-white/[0.07] bg-white/[0.02]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-                  <span className="mx-auto text-[10px] tracking-[0.15em] text-white/35 font-light px-4 py-1 rounded bg-black/30">jouwbedrijf.nl</span>
-                </div>
-                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
-                  <OldSiteScreen />
-                  <div className="ba-after absolute inset-0"><NewSiteScreen /></div>
-                  <div className="ba-divider">
-                    <span className="ba-handle">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="text-center text-white/30 text-[10px] tracking-[0.25em] font-light mt-4">
-                SCROLL OM TE ZIEN
-              </p>
+            <BeforeAfterSlider
+              wrapHeight="220vh"
+              labelBefore="VEROUDERD"
+              labelAfter="VERNIEUWD"
+              before={<OldSiteScreen />}
+              after={<NewSiteScreen />}
+              urlLabel="jouwbedrijf.nl"
+            />
+
+            <div className="max-w-2xl mx-auto text-center mt-4 mb-4 anim">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5 uppercase" style={{ color: ACCENT }}>En op je telefoon?</p>
+              <h3 className="text-2xl lg:text-4xl font-extralight text-white tracking-[0.02em] leading-[1.2]">
+                Nog belangrijker — <span className="italic text-white/50">iedereen kijkt op mobiel.</span>
+              </h3>
             </div>
+
+            <BeforeAfterSlider
+              wrapHeight="200vh"
+              labelBefore="NIET RESPONSIEF"
+              labelAfter="MOBIEL PERFECT"
+              urlLabel="jouwbedrijf.nl"
+              before={<OldPhoneScreen />}
+              after={<NewPhoneScreen />}
+              frameClassName="!bg-transparent !border-none !shadow-none !rounded-none !overflow-visible"
+            >
+              <PhoneFrame>
+                <OldPhoneScreen />
+                <div className="ba-after absolute inset-0"><NewPhoneScreen /></div>
+                <div className="ba-divider">
+                  <span className="ba-handle">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M8 9l-4 3 4 3M16 9l4 3-4 3" />
+                    </svg>
+                  </span>
+                </div>
+              </PhoneFrame>
+            </BeforeAfterSlider>
           </div>
         </section>
 
@@ -353,7 +537,6 @@ export default function WebsitesShowcase() {
               </p>
             </div>
 
-            {/* Featured — eerste case groot */}
             {projects.slice(0, 1).map((p) => (
               <a key={p.number} href={p.link} className="group relative block mb-10 lg:mb-14 anim delay-1">
                 <span className="absolute -top-10 -left-2 lg:-left-4 text-[160px] lg:text-[220px] font-extralight text-white/[0.04] leading-none select-none pointer-events-none z-0 tracking-tighter">{p.number}</span>
@@ -397,7 +580,6 @@ export default function WebsitesShowcase() {
               </a>
             ))}
 
-            {/* Overige cases */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {projects.slice(1).map((p, i) => (
                 <a key={p.number} href={p.link} className="group relative block anim" style={{ transitionDelay: `${i * 0.1}s` }}>
@@ -459,22 +641,54 @@ export default function WebsitesShowcase() {
           </div>
         </section>
 
-        <SocialProofSection accent={ACCENT} select={["stacyKohnen", "chefsConnect", "ijssalonItalia", "auwtAelse"]} />
-
-        {/* ─── PRIJS ────────────────────────────────────────── */}
-        <section className="relative py-24 lg:py-32 border-t border-white/[0.06]">
+        {/* ─── REVIEWS — editorial spotlight, geen standaard grid ── */}
+        <section className="relative py-28 lg:py-36 border-t border-white/[0.06] overflow-hidden">
           <div className="container mx-auto px-6 lg:px-12">
-            <div className="max-w-2xl mx-auto text-center anim">
-              <p className="text-[10px] tracking-[0.5em] font-light mb-6 uppercase" style={{ color: ACCENT }}>Eerlijk vooraf</p>
-              <h2 className="text-3xl lg:text-5xl font-extralight text-white tracking-[0.02em] leading-[1.15] mb-8">
-                Wat kost het?
+            <div className="max-w-2xl mb-20 lg:mb-28 anim">
+              <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>GEVERIFIEERDE KLANTEN</p>
+              <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1]">
+                Niet onze woorden. <span className="italic text-white/50">De hunne.</span>
               </h2>
-              <p className="text-white/55 text-base lg:text-lg font-light leading-[1.9] tracking-wide">
-                Een gemiddelde website begint rond de <span className="text-white/85">€3.500</span> — een webshop start hoger.
-                Een web app (klantportaal, boekingssysteem, dashboard) is meer maatwerk: reken op{" "}
-                <span className="text-white/85">€4.000 tot €15.000</span>, soms meer bij complexere koppelingen. Na het
-                eerste gesprek weet je exact waar je aan toe bent — vaste prijs, geen verrassingen achteraf.
-              </p>
+            </div>
+
+            <div className="space-y-20 lg:space-y-28">
+              {SPOTLIGHT_REVIEWS.map((r, i) => {
+                const odd = i % 2 === 1;
+                return (
+                  <div key={r.name} className={`relative anim ${odd ? "lg:ml-auto lg:text-right" : ""}`} style={{ maxWidth: "820px" }}>
+                    <span
+                      aria-hidden
+                      className={`absolute -top-16 lg:-top-24 select-none pointer-events-none leading-none font-serif ${odd ? "-right-2 lg:right-0" : "-left-2 lg:-left-4"}`}
+                      style={{ fontSize: "clamp(120px, 18vw, 260px)", color: ACCENT, opacity: 0.08 }}
+                    >
+                      &rdquo;
+                    </span>
+                    <div className="relative">
+                      <div className={`flex items-center gap-3 mb-6 ${odd ? "lg:justify-end" : ""}`}>
+                        <span className="text-[11px] tracking-[0.4em] font-light" style={{ color: ACCENT }}>0{i + 1}</span>
+                        <span className="w-8 h-px bg-white/15" />
+                      </div>
+                      <p className="text-white/85 text-2xl sm:text-3xl lg:text-[2.6rem] font-extralight leading-[1.35] tracking-wide">
+                        &ldquo;{r.quote}&rdquo;
+                      </p>
+                      <div className={`mt-8 flex items-center gap-3 ${odd ? "lg:justify-end" : ""}`}>
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0" style={{ background: `${ACCENT}22`, color: ACCENT }}>
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.4} d="M5 13l4 4L19 7" /></svg>
+                        </span>
+                        <div>
+                          <p className="text-white/85 text-sm font-light tracking-wide">{r.name}</p>
+                          <p className="text-white/40 text-xs font-light tracking-wide">
+                            {r.role} ·{" "}
+                            <a href={r.verifyUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 decoration-white/20 hover:decoration-white/50 hover:text-white/70 transition-colors">
+                              {r.verifyLabel}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -563,6 +777,13 @@ export default function WebsitesShowcase() {
           50% { transform: translateY(8px); opacity: 1; }
         }
         .scroll-dot { animation: scrollDot 1.8s ease-in-out infinite; }
+
+        /* Sterkere afronding bij begin/eind van de scrub: een gloed die opbouwt naarmate
+           je dichter bij "vernieuwd" komt, zodat zelfs de rustpunten aan begin en eind
+           iets vertellen i.p.v. statisch aan te voelen. */
+        .ba-window { transition: box-shadow 0.15s linear, border-color 0.3s ease; }
+        .ba-window[data-p="start"] { border-color: rgba(239, 68, 68, 0.25); }
+        .ba-window[data-p="done"] { border-color: rgba(212, 165, 116, 0.45); }
 
         .delay-1 { transition-delay: 0.12s; }
         .delay-2 { transition-delay: 0.26s; }
