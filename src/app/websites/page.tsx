@@ -101,30 +101,49 @@ function usePinnedScrub(wrapRef: React.RefObject<HTMLDivElement | null>, targetR
 // in processen/Visuals.tsx: een gecodeerde schets van "hoe het eruitziet", geen screenshot.
 function OldSiteScreen() {
   return (
-    <div className="absolute inset-0 bg-[#e4ddc8] overflow-hidden select-none">
-      <div className="absolute top-0 left-0 right-0 h-10 bg-[#003366] flex items-center px-3 gap-4">
-        <span className="text-white text-[11px] font-bold" style={{ fontFamily: "Georgia, serif" }}>UwBedrijfNaam</span>
-        <span className="ml-auto flex gap-3 text-[9px] text-blue-200 underline">
-          <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+    <div
+      className="absolute inset-0 overflow-hidden select-none"
+      style={{
+        backgroundColor: "#e4ddc8",
+        backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 12px)",
+      }}
+    >
+      <div className="absolute top-0 left-0 right-0 h-9 bg-[#003366] border-b-4 border-[#ffcc00] flex items-center px-3 gap-3">
+        <span className="text-white text-[11px] font-bold shrink-0" style={{ fontFamily: "Georgia, serif" }}>UwBedrijfNaam</span>
+        <div className="ml-auto flex items-center gap-3 shrink-0">
+          <span className="hidden sm:flex items-center gap-3 text-[9px] text-blue-200 underline whitespace-nowrap">
+            <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+          </span>
+          <span className="flex items-center gap-1 px-1.5 py-0.5 bg-red-600 rounded-sm shrink-0">
+            <span className="w-1 h-1 rounded-full bg-white" />
+            <span className="text-white text-[6px] font-bold tracking-wide whitespace-nowrap">NIET BEVEILIGD</span>
+          </span>
+        </div>
+      </div>
+      <div className="absolute top-12 left-3 right-3 flex items-center justify-between">
+        <span className="text-[9px] text-red-700 font-bold" style={{ fontFamily: "Georgia, serif" }}>Laatst bijgewerkt: 14-03-2016</span>
+        <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border-2 border-dashed border-red-700">GRATIS OFFERTE!!!</span>
+      </div>
+      <div className="absolute top-[76px] left-3 right-3 text-center">
+        <span className="text-[14px] text-purple-800/80" style={{ fontFamily: "'Brush Script MT', cursive", textShadow: "1px 1px 0 rgba(0,0,0,0.15)" }}>
+          ~ Welkom op onze website! ~
         </span>
       </div>
-      <div className="absolute top-14 left-3 right-3 flex items-center justify-between">
-        <span className="text-[9px] text-red-700 font-bold" style={{ fontFamily: "Georgia, serif" }}>Laatst bijgewerkt: 14-03-2016</span>
-        <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border border-red-700">GRATIS OFFERTE!</span>
-      </div>
-      <div className="absolute top-24 left-3 w-[62%] space-y-1.5">
+      <div className="absolute top-[108px] left-3 w-[62%] space-y-1.5">
         <div className="h-2.5 bg-[#003366]/70 rounded-sm w-[85%]" />
         <div className="h-1.5 bg-black/25 rounded-sm w-full" />
         <div className="h-1.5 bg-black/25 rounded-sm w-full" />
         <div className="h-1.5 bg-black/25 rounded-sm w-[70%]" />
-        <div className="h-1.5 bg-black/25 rounded-sm w-full mt-3" />
-        <div className="h-1.5 bg-black/25 rounded-sm w-[60%]" />
       </div>
-      <div className="absolute top-24 right-3 w-[28%] aspect-square bg-black/15 border border-black/20 flex items-center justify-center">
+      <div className="absolute top-[108px] right-3 w-[28%] aspect-square bg-black/15 border border-black/20 flex items-center justify-center">
         <span className="text-black/30 text-[7px]">IMG</span>
       </div>
-      <div className="absolute bottom-3 left-3 right-3 h-6 border-t border-black/20 flex items-center justify-center">
-        <span className="text-[7px] text-black/35 tracking-wide">© 2011-2016 · Beste bekeken met Internet Explorer</span>
+      <div className="absolute bottom-2.5 left-3 flex items-center gap-1 px-1.5 py-[3px] bg-black rounded-sm">
+        <span className="w-1 h-1 rounded-full bg-green-400" />
+        <span className="text-green-400 text-[6px] tracking-wide" style={{ fontFamily: "monospace" }}>bezoekers: 004215</span>
+      </div>
+      <div className="absolute bottom-2.5 right-3">
+        <span className="text-[7px] text-black/35 tracking-wide">© 2011-2016 · Beste bekeken met IE</span>
       </div>
     </div>
   );
@@ -132,29 +151,46 @@ function OldSiteScreen() {
 
 function NewSiteScreen() {
   return (
-    <div className="absolute inset-0 bg-[#080b0a] overflow-hidden select-none">
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 30% 20%, ${ACCENT}1c 0%, transparent 60%)` }} />
-      <div className="relative flex items-center justify-between px-5 pt-5">
-        <span className="text-white/80 text-[10px] tracking-[0.25em] font-light">UWBEDRIJF</span>
-        <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[8px]" style={{ borderColor: `${ACCENT}55`, color: ACCENT }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} /> LIVE
-        </span>
-      </div>
-      <div className="relative px-5 pt-8">
-        <div className="h-3.5 bg-white/85 rounded-sm w-[70%] mb-2.5" />
-        <div className="h-3.5 rounded-sm w-[40%] mb-5" style={{ background: ACCENT }} />
-        <div className="flex gap-2 mb-6">
-          <div className="px-3 py-1.5 rounded text-[8px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
-          <div className="px-3 py-1.5 rounded border border-white/20 text-white/50 text-[8px] font-light">BEKIJK WERK</div>
+    <div className="absolute inset-0 overflow-hidden select-none bg-[#080b0a]">
+      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 25% 15%, ${ACCENT}1c 0%, transparent 60%)` }} />
+      <div className="absolute top-0 left-0 right-0 h-9 border-b border-white/[0.08] flex items-center px-4 gap-3">
+        <span className="text-white/90 text-[10px] tracking-[0.25em] font-light shrink-0">UWBEDRIJF</span>
+        <div className="ml-auto flex items-center gap-3 shrink-0">
+          <span className="hidden sm:flex items-center gap-3 text-[8px] text-white/40 tracking-[0.15em] font-light whitespace-nowrap">
+            <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+          </span>
+          <span className="flex items-center gap-1 px-1.5 py-0.5 rounded-sm border shrink-0" style={{ borderColor: `${ACCENT}55`, background: `${ACCENT}14` }}>
+            <svg className="w-2 h-2" fill="none" stroke={ACCENT} viewBox="0 0 24 24" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 10-8 0v4h8z" />
+            </svg>
+            <span className="text-[6px] font-bold tracking-wide whitespace-nowrap" style={{ color: ACCENT }}>BEVEILIGD</span>
+          </span>
         </div>
-        <div className="grid grid-cols-3 gap-2">
+      </div>
+      <div className="absolute top-12 left-3 w-[54%]">
+        <div className="h-3 bg-white/85 rounded-sm w-[85%] mb-1.5" />
+        <div className="h-3 rounded-sm w-[55%] mb-2.5" style={{ background: ACCENT }} />
+        <div className="h-1 bg-white/20 rounded-sm w-full mb-3" />
+        <div className="flex gap-1.5 mb-3">
+          <div className="px-2.5 py-1.5 rounded text-[7px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
+          <div className="px-2.5 py-1.5 rounded border border-white/20 text-white/50 text-[7px] font-light">BEKIJK WERK</div>
+        </div>
+        <div className="grid grid-cols-3 gap-1.5">
           {[{ v: "98", l: "SNELHEID" }, { v: "100%", l: "MOBIEL" }, { v: "#1-3", l: "GOOGLE" }].map((s) => (
-            <div key={s.l} className="bg-white/[0.04] border border-white/[0.08] rounded-md p-2.5">
-              <p className="text-white text-[15px] font-light leading-none">{s.v}</p>
-              <p className="text-white/35 text-[7px] tracking-wide mt-1.5">{s.l}</p>
+            <div key={s.l} className="bg-white/[0.04] border border-white/[0.08] rounded-md p-1.5">
+              <p className="text-white text-[13px] font-light leading-none">{s.v}</p>
+              <p className="text-white/35 text-[6px] tracking-wide mt-1">{s.l}</p>
             </div>
           ))}
         </div>
+      </div>
+      <div
+        className="absolute top-12 right-3 w-[34%] bottom-2.5 rounded-xl border flex items-center justify-center"
+        style={{ borderColor: `${ACCENT}30`, background: `linear-gradient(160deg, ${ACCENT}14, transparent 70%)` }}
+      >
+        <span className="w-7 h-7 rounded-full flex items-center justify-center border" style={{ borderColor: `${ACCENT}55` }}>
+          <svg className="w-2.5 h-2.5 ml-0.5" fill={ACCENT} viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+        </span>
       </div>
     </div>
   );
@@ -164,20 +200,35 @@ function NewSiteScreen() {
 // "uitgezoomd, moet knijpen om te lezen"-ervaring die iedereen herkent.
 function OldPhoneScreen() {
   return (
-    <div className="absolute inset-0 bg-[#e4ddc8] overflow-hidden select-none">
-      <div className="absolute top-1 right-1.5 text-[6px] text-black/25 tracking-wide z-10">PINCH OM TE LEZEN</div>
+    <div
+      className="absolute inset-0 overflow-hidden select-none"
+      style={{
+        backgroundColor: "#e4ddc8",
+        backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 12px)",
+      }}
+    >
+      <div className="absolute top-1 right-1.5 text-[6px] text-black/25 tracking-wide z-10 bg-[#e4ddc8]/80 px-1">PINCH OM TE LEZEN</div>
       <div style={{ transform: "scale(0.42)", transformOrigin: "top left", width: "238%" }}>
-        <div className="h-10 bg-[#003366] flex items-center px-3 gap-4">
+        <div className="h-10 bg-[#003366] border-b-4 border-[#ffcc00] flex items-center px-3 gap-3">
           <span className="text-white text-[11px] font-bold" style={{ fontFamily: "Georgia, serif" }}>UwBedrijfNaam</span>
-          <span className="ml-auto flex gap-3 text-[9px] text-blue-200 underline">
+          <span className="ml-auto flex gap-3 text-[9px] text-blue-200 underline whitespace-nowrap">
             <span>HOME</span><span>OVER ONS</span><span>CONTACT</span>
+          </span>
+          <span className="flex items-center gap-1 px-1.5 py-0.5 bg-red-600 rounded-sm whitespace-nowrap">
+            <span className="w-1 h-1 rounded-full bg-white" />
+            <span className="text-white text-[7px] font-bold">NIET BEVEILIGD</span>
           </span>
         </div>
         <div className="p-3 flex items-center justify-between">
           <span className="text-[9px] text-red-700 font-bold" style={{ fontFamily: "Georgia, serif" }}>Laatst bijgewerkt: 14-03-2016</span>
-          <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border border-red-700 whitespace-nowrap">GRATIS OFFERTE!</span>
+          <span className="px-2 py-1 bg-yellow-300 text-red-700 text-[8px] font-bold rotate-[-3deg] border-2 border-dashed border-red-700 whitespace-nowrap">GRATIS OFFERTE!!!</span>
         </div>
-        <div className="px-3 flex gap-3">
+        <div className="px-3 text-center">
+          <span className="text-[13px] text-purple-800/80" style={{ fontFamily: "'Brush Script MT', cursive", textShadow: "1px 1px 0 rgba(0,0,0,0.15)" }}>
+            ~ Welkom op onze website! ~
+          </span>
+        </div>
+        <div className="px-3 pt-2 flex gap-3">
           <div className="w-[60%] space-y-1.5">
             <div className="h-2.5 bg-[#003366]/70 rounded-sm w-[85%]" />
             <div className="h-1.5 bg-black/25 rounded-sm w-full" />
@@ -188,6 +239,12 @@ function OldPhoneScreen() {
             <span className="text-black/30 text-[7px]">IMG</span>
           </div>
         </div>
+        <div className="px-3 pt-3 pb-2">
+          <span className="inline-flex items-center gap-1 px-1.5 py-[3px] bg-black rounded-sm">
+            <span className="w-1 h-1 rounded-full bg-green-400" />
+            <span className="text-green-400 text-[6px] tracking-wide" style={{ fontFamily: "monospace" }}>bezoekers: 004215</span>
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -195,18 +252,27 @@ function OldPhoneScreen() {
 
 function NewPhoneScreen() {
   return (
-    <div className="absolute inset-0 bg-[#080b0a] overflow-hidden select-none">
+    <div className="absolute inset-0 overflow-hidden select-none bg-[#080b0a]">
       <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 50% 0%, ${ACCENT}1c 0%, transparent 55%)` }} />
       <div className="relative px-4 pt-7 flex items-center justify-between">
         <span className="text-white/80 text-[9px] tracking-[0.2em] font-light">UWBEDRIJF</span>
-        <div className="flex flex-col gap-[3px]">
-          <span className="block w-4 h-px bg-white/60" />
-          <span className="block w-4 h-px bg-white/60" />
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-sm border" style={{ borderColor: `${ACCENT}55`, background: `${ACCENT}14` }}>
+            <svg className="w-2 h-2" fill="none" stroke={ACCENT} viewBox="0 0 24 24" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 10-8 0v4h8z" />
+            </svg>
+            <span className="text-[6px] font-bold tracking-wide" style={{ color: ACCENT }}>VEILIG</span>
+          </div>
+          <div className="flex flex-col gap-[3px]">
+            <span className="block w-4 h-px bg-white/60" />
+            <span className="block w-4 h-px bg-white/60" />
+          </div>
         </div>
       </div>
       <div className="relative px-4 pt-6 text-center">
         <div className="h-3 bg-white/85 rounded-sm w-[80%] mx-auto mb-1.5" />
-        <div className="h-3 rounded-sm w-[55%] mx-auto mb-4" style={{ background: ACCENT }} />
+        <div className="h-3 rounded-sm w-[55%] mx-auto mb-2" style={{ background: ACCENT }} />
+        <div className="h-1 bg-white/20 rounded-sm w-[60%] mx-auto mb-4" />
         <div className="inline-block px-4 py-2 rounded text-[8px] font-light" style={{ background: ACCENT, color: "#06281f" }}>START JE PROJECT</div>
         <div className="grid grid-cols-3 gap-1.5 mt-5">
           {[{ v: "98", l: "SNEL" }, { v: "100%", l: "MOBIEL" }, { v: "#1-3", l: "GOOGLE" }].map((s) => (
@@ -648,7 +714,7 @@ export default function WebsitesShowcase() {
             <div className="max-w-2xl mb-20 lg:mb-28 anim">
               <p className="text-[10px] tracking-[0.5em] font-light mb-5" style={{ color: ACCENT }}>GEVERIFIEERDE KLANTEN</p>
               <h2 className="text-4xl lg:text-6xl font-extralight text-white tracking-[0.02em] leading-[1.1]">
-                Niet onze woorden. <span className="italic text-white/50">De hunne.</span>
+                Wij zeggen het niet. <span className="italic text-white/50">Zij wel.</span>
               </h2>
             </div>
 
